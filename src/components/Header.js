@@ -1,7 +1,7 @@
 import React from 'react';
-import './Header.css';
+import '../css/Header.css'
 
-function Header(props) {
+function Header() {
     return (
         <header>
             <section className="header-top">

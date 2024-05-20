@@ -1,0 +1,121 @@
+.promotion-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(12, 1fr); /* Use 12 columns grid for more control */
+    grid-template-rows: auto;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensure the image covers the entire grid cell */
+}
+
+.text {
+    padding: 10px;
+}
+
+.text p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Large item on the left */
+.large-item {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column; /* Set flex-direction to column */
+}
+
+.large-item img {
+    width: 100%; /* Adjust width to fit text below image */
+    margin-bottom: 10px; /* Space between image and text */
+}
+
+.large-item .text {
+    width: 100%;
+}
+
+/* Medium items on the right */
+.medium-item {
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+}
+
+.medium-item img {
+    margin-bottom: 10px; /* Space between image and text */
+}
+
+.medium-item:nth-of-type(2) {
+    grid-column: 7 / span 3;
+    grid-row: 1;
+}
+
+.medium-item:nth-of-type(3) {
+    grid-column: 10 / span 3;
+    grid-row: 1;
+}
+
+/* Small items below the large item on the left */
+.small-items-left {
+    grid-column: 1 / span 6;
+    grid-row: 2;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+}
+
+.small-item-left {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    gap: 10px; /* Space between image and text */
+}
+
+.small-item-left img {
+    width: 150px; /* Adjust the width */
+    height: 150px; /* Adjust the height */
+    object-fit: cover; /* Ensure the image covers the entire grid cell */
+}
+
+.small-item-left .text {
+    flex-grow: 1; /* Ensure text takes up remaining space */
+}
+
+/* Small items below the medium items on the right */
+.small-items-right {
+    grid-column: 7 / span 6;
+    grid-row: 2;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+}
+
+.small-item-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items horizontally */
+    text-align: center;
+}
+
+.small-item-right img {
+    width: 100px; /* Adjust the width to make them smaller */
+    height: 100px; /* Adjust the height to make them smaller */
+    object-fit: cover; /* Ensure the image covers the entire grid cell */
+    margin-bottom: 5px; /* Space between image and text */
+}
+
+.small-item-right .text {
+    padding: 5px;
+}

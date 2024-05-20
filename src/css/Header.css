@@ -3,7 +3,7 @@ header {
     flex-direction: column;
     align-items: center;
     background-color: #f8f9fa;
-    padding: 20px;
+    padding: 20px 20px; /* Only vertical padding */
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -13,7 +13,7 @@ header {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
+    padding: 0px 20px; /* Add padding to the sections */
     margin-bottom: 10px;
 }
 
