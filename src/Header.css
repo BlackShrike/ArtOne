@@ -1,0 +1,61 @@
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.header-top, .header-bottom {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 10px;
+}
+
+.header-top {
+    justify-content: flex-start;
+}
+
+.header-top h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.search-input {
+    width: 360px;  /* Set a fixed width for the input */
+    margin: 0 20px;
+    padding: 10px;
+    font-size: 0.75em;
+    background-color: #F1F1F1;
+    border: 0;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.header-links {
+    margin-left: auto;  /* Move the links to the right */
+    display: flex;
+    gap: 20px;
+}
+
+.header-bottom {
+    justify-content: flex-start; /* Align items to the left */
+    gap: 20px; /* Increase the gap between items */
+}
+
+.header-bottom span {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.separator {
+    margin: 0 10px;
+}
