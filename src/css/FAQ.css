@@ -1,0 +1,49 @@
+.faq-container {
+    display: flex;
+}
+
+.faq-sidebar {
+    width: 200px;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.faq-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.faq-sidebar ul li {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.faq-sidebar ul li.active {
+    color: red;
+    font-weight: bold;
+}
+
+.faq-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.contact-section h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.contact-row h2 {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.contact-details {
+    flex: 1;
+}
