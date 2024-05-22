@@ -1,3 +1,10 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+h2 {
+    display: flex;
+    justify-content: center;
+}
 .promotion-grid {
     display: grid;
     gap: 5px;
@@ -12,7 +19,6 @@
         "large large large large large large small-right3 small-right3 small-right3 small-right8 small-right8 small-right8"
         "small-left1 small-left1 small-left1 . . . small-right4 small-right4 small-right4 small-right9 small-right9 small-right9"
         "small-left2 small-left2 small-left2 . . . small-right5 small-right5 small-right5 small-right10 small-right10 small-right10";
-    max-width: 1200px;
     margin: auto;
     padding: 20px;
 }
@@ -200,4 +206,200 @@
 .small-item .text {
     text-align: left;
     font-size: 12px;
+}
+
+/* 새로운 그리드 섹션 */
+.new-grid {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.new-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    grid-template-rows: repeat(5,100px);
+    gap: 10px;
+    grid-template-areas: 
+        "item1 item2 item2 item3"
+        "item1 item2 item2 item3"
+        "item1 item2 item2 item4"
+        "item5 item6 item6 item7"
+        "item5 item6 item6 item7";
+    width: 1200px; /* 그리드의 최대 너비를 설정 */
+    margin:  auto; /* 그리드를 가로 중앙으로 정렬 */
+}
+
+.new-grid-item {
+    background-color: #eee;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.grid-item-1 { grid-area: item1; }
+.grid-item-2 { grid-area: item2; }
+.grid-item-3 { grid-area: item3; }
+.grid-item-4 { grid-area: item4; }
+.grid-item-5 { grid-area: item5; }
+.grid-item-6 { grid-area: item6; }
+.grid-item-7 { grid-area: item7; }
+
+.promotion-container {
+    width: 90%;
+    margin: auto;
+}
+
+.centered-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.best-section {
+    .slick-prev,
+    .slick-next {
+        z-index: 1;
+        background-color: transparent; /* 배경을 투명하게 설정 */
+        border: none; /* 테두리 제거 */
+        font-size: 0; /* 기본 텍스트 숨기기 */
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+        font-size: 30px;
+        color: #000; /* 화살표 색상 변경 */
+    }
+
+    .slick-dots {
+        bottom: -30px;
+
+        li button:before {
+            color: #000; /* 색상 변경 */
+        }
+    }
+}
+
+.best-item {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: #333;
+    height: 200px; /* 높이 설정 */
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.best-item img {
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.best-item .text {
+    text-align: left; /* 텍스트 좌측 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.best-item .text h3 {
+    margin: 0;
+}
+
+.best-item .text p {
+    margin: 0;
+}
+
+.price-cart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px; /* 간격 조정 */
+}
+
+.price-cart p {
+    margin: 0;
+}
+
+.price-cart .fa-cart-plus {
+    font-size: 18px;
+    color: #333; /* 아이콘 색상 변경 */
+}
+/* New Grid for 비대칭 그리드 */
+.asymmetric-grid {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.asymmetric-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: repeat(3, 150px);
+    gap: 10px;
+    grid-template-areas: 
+        "item1 item1 item2"
+        "item1 item1 item2"
+        "item1 item1 item3";
+    width: 90%;
+    margin: auto;
+}
+
+.asymmetric-grid-item {
+    background-color: #eee;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.grid-item-1 { grid-area: item1; }
+.grid-item-2 { grid-area: item2; }
+.grid-item-3 { grid-area: item3; }
+
+/* New Grid for 대칭 2열 그리드 */
+.symmetric-grid {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.symmetric-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    gap: 10px;
+    width: 90%;
+    margin: auto;
+}
+
+.symmetric-grid-item {
+    background-color: #eee;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.grid-item { flex: 1; }
+
+/* 텍스트 스타일 */
+.text-container {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.text-container p {
+    margin: 10px 0;
 }

@@ -3,31 +3,31 @@ header {
     flex-direction: column;
     align-items: center;
     background-color: #f8f9fa;
-    padding: 20px 20px; /* Only vertical padding */
+    padding: 20px 20px;
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 700;
     font-style: normal;
-}
-
-.header-top, .header-bottom {
+  }
+  
+  .header-top, .header-bottom {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 0px 20px; /* Add padding to the sections */
+    padding: 0px 20px;
     margin-bottom: 10px;
-}
-
-.header-top {
+  }
+  
+  .header-top {
     justify-content: flex-start;
-}
-
-.header-top h1 {
+  }
+  
+  .header-top h1 {
     margin: 0;
     font-size: 1.5em;
-}
-
-.search-input {
-    width: 360px;  /* Set a fixed width for the input */
+  }
+  
+  .search-input {
+    width: 360px;
     margin: 0 20px;
     padding: 10px;
     font-size: 0.75em;
@@ -36,26 +36,77 @@ header {
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 400;
     font-style: normal;
-}
-
-.header-links {
-    margin-left: auto;  /* Move the links to the right */
+  }
+  
+  .header-links {
+    margin-left: auto;
     display: flex;
     gap: 20px;
-}
-
-.header-bottom {
-    justify-content: flex-start; /* Align items to the left */
-    gap: 20px; /* Increase the gap between items */
-}
-
-.header-bottom span {
+  }
+  
+  .header-bottom {
+    justify-content: flex-start;
+    gap: 20px;
+    position: relative;
+  }
+  
+  .header-bottom span {
     margin: 0;
     padding: 0;
     font-size: 1em;
     cursor: pointer;
-}
-
-.separator {
+  }
+  
+  .separator {
     margin: 0 10px;
-}
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 10;
+    width: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+    justify-content: flex-start; /* Align items to the left */
+  }
+  
+  .dropdown-item {
+    width: 15%; /* Set a fixed width to ensure even spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+  }
+  
+  .dropdown-box {
+    width: 80px;
+    height: 80px;
+    background-color: #ccc;
+    margin-bottom: 5px;
+  }
+  
+  .dropdown-item a {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+  }
+  
+  .signature-menu .dropdown-item {
+    width: 15%; /* Set a fixed width to ensure even spacing */
+  }
+  
+  @media (max-width: 768px) {
+    .dropdown-item {
+      width: 45%; /* Two items per row on smaller screens */
+    }
+  
+    .signature-menu .dropdown-item {
+      width: 30%; /* Three items per row on smaller screens */
+    }
+  }
