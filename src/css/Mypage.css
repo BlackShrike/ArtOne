@@ -1,89 +1,330 @@
 body {
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-  
-  .mypage-container {
-    display: flex;
-    padding: 20px;
-  }
-  
-  .sidebar {
-    width: 200px;
-    margin-right: 20px;
-  }
-  
-  .sidebar h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .main-content {
-    flex-grow: 1;
-  }
-  
-  .user-info {
-    margin-bottom: 20px;
-  }
-  
-  .user-info-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: black;
-    color: white;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  .user-info-cards {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .user-info-card {
-    flex: 1;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    text-align: center;
-    margin-right: 10px;
-  }
-  
-  .user-info-card:last-child {
-    margin-right: 0;
-  }
-  
-  .order-status {
-    margin-bottom: 20px;
-  }
-  
-  .order-status h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .order-item {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
-  }
-  
-  .order-item p {
-    margin: 5px 0;
-  }
-  
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.mypage-container {
+  display: flex;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 200px;
+  margin-right: 20px;
+  border-right: #ccc 1px solid;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+.user-info {
+  margin-bottom: 20px;
+}
+
+.user-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.user-info-cards {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.user-info-card {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 40px 20px; /* Increased vertical padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-info-card:last-child {
+  margin-right: 0;
+}
+
+.user-info-card span:first-child {
+  font-weight: bold; /* Bold for title */
+  margin-bottom: 10px;
+}
+
+.order-status {
+  margin-bottom: 20px;
+}
+
+.order-status h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold; /* Bold for titles */
+}
+
+.order-item {
+  background-color: #f9f9f9;
+  padding: 30px 20px; /* Increased vertical padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.order-item h2 {
+  font-size: 18px;
+  font-weight: bold; /* Bold for h2 */
+  margin-bottom: 10px;
+}
+
+.order-item p {
+  margin: 5px 0;
+}
+
+.recent-viewed-container {
+  padding: 20px;
+}
+
+.recent-viewed-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.recent-viewed-table th,
+.recent-viewed-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.image-placeholder {
+  width: 60px;
+  height: 60px;
+  background-color: #eee;
+}
+
+.pay-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pay-button:hover {
+  background-color: #555;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.page-number {
+  cursor: pointer;
+}
+
+.page-number:hover {
+  text-decoration: underline;
+}
+
+
+/* Update Info Styles */
+.update-info-container {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.update-info-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.update-info-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-info-form label {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.update-info-form input,
+.update-info-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.update-info-form .phone-number,
+.update-info-form .birthday {
+  display: flex;
+  gap: 10px;
+}
+
+.update-info-form .phone-number input,
+.update-info-form .birthday input {
+  flex: 1;
+}
+
+.update-info-form .address {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.zip-code-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-address-button {
+  width: auto;
+  padding: 10px;
+  background-color: #ffeb3b;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.search-address-button:hover {
+  background-color: #fdd835;
+}
+
+.submit-button {
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 20px;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.submit-button:hover {
+  background-color: #e04a4e;
+}
+
+.coupon-container {
+  padding: 20px;
+}
+
+.coupon-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.coupon-form label {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.coupon-form .coupon-input-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.coupon-form input {
+  width: 75%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.coupon-form .coupon-register-button {
+  width: 20%;
+  background-color: #ff5a5f;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.coupon-form .coupon-register-button:hover {
+  background-color: #e04a4e;
+}
+
+.coupon-title {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.owned-coupons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.coupon {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.coupon span {
+  display: block;
+  font-size: 16px;
+}
+
+.coupon-info {
+  margin: auto;
+  width: 80%;
+  margin-top: 20px;
+  border: #ccc 1px solid;
+}
+
+.coupon-info h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.coupon-info p {
+  font-size: 14px;
+  color: #555;
+}

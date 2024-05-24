@@ -1,0 +1,52 @@
+.payment-result-container {
+  max-width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+
+.payment-result-container h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.thank-you-message {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.payment-details {
+  display: flex;
+  flex-direction: column;
+  border: #ccc 1px solid;
+}
+
+.section {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.section h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.image-placeholder {
+  width: 80px;
+  height: 80px;
+  background-color: #eee;
+  margin-top: 10px;
+}
+
+.delivery-notes {
+  margin-top: 20px;
+}
+
+.delivery-notes h3 {
+  margin-bottom: 10px;
+}
+
+.note {
+  color: #888;
+  margin: 5px 0;
+}

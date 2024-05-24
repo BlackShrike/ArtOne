@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/Header.css";
 
-function Header() {
+function Header({ isLoggedIn, onLogout }) {
   const [showSignatureMenu, setShowSignatureMenu] = useState(false);
   const [showOriginalMenu, setShowOriginalMenu] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,7 +36,7 @@ function Header() {
             </>
           ) : (
             <span>
-              <Link to="/">로그인</Link>
+              <Link to="/Login">로그인</Link>
             </span>
           )}
           <span>
