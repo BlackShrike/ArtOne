@@ -73,11 +73,11 @@ header {
     width: 100%;
     padding: 10px 0;
     box-sizing: border-box;
-    justify-content: flex-start; /* Align items to the left */
+    justify-content: flex-start;
   }
   
   .dropdown-item {
-    width: 15%; /* Set a fixed width to ensure even spacing */
+    width: calc(20% - 20px); /* Ensure each item takes up 20% of the width, with margins */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,15 +98,19 @@ header {
   }
   
   .signature-menu .dropdown-item {
-    width: 15%; /* Set a fixed width to ensure even spacing */
+    width: calc(25% - 20px); /* Ensure each item takes up 25% of the width, with margins */
   }
   
   @media (max-width: 768px) {
     .dropdown-item {
-      width: 45%; /* Two items per row on smaller screens */
+      width: calc(50% - 20px); /* Two items per row on smaller screens */
     }
   
     .signature-menu .dropdown-item {
-      width: 30%; /* Three items per row on smaller screens */
+      width: calc(33% - 20px); /* Three items per row on smaller screens */
     }
+  }
+  .logout-button {
+    cursor: pointer;
+    color: #333;
   }

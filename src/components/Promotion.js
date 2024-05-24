@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
 import "../css/Promotion.css";
 import promotion1 from "../img/Promotion1.jpg";
 import { FaCartPlus } from "react-icons/fa";
@@ -173,6 +174,9 @@ function Promotion(props) {
       </div>
       <div className="text-container">
         <p>열정적으로 작품 세계를 풀어가는 작가분들의 원화 작품입니다.</p>
+        <Link to="/MorePromotion" className="more-text">
+          더보기
+        </Link>
         <div className="symmetric-grid-container">
           <div className="symmetric-grid-item">
             작가명 작품소개작품소개, 제작년도

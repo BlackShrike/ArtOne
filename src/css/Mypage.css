@@ -1,0 +1,89 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  .mypage-container {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .sidebar {
+    width: 200px;
+    margin-right: 20px;
+  }
+  
+  .sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+  }
+  
+  .user-info {
+    margin-bottom: 20px;
+  }
+  
+  .user-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .user-info-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .user-info-card {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    margin-right: 10px;
+  }
+  
+  .user-info-card:last-child {
+    margin-right: 0;
+  }
+  
+  .order-status {
+    margin-bottom: 20px;
+  }
+  
+  .order-status h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .order-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .order-item p {
+    margin: 5px 0;
+  }
+  

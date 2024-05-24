@@ -1,0 +1,117 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  .login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .back-link {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .back-link a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .login-form input[type="text"],
+  .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .remember-me {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .checkbox-icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .links a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .social-login button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .kakao {
+    background-color: #ffeb3b;
+    color: black;
+  }
+  
+  .naver {
+    background-color: #2db400;
+    color: white;
+  }
+  
+  .google {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+  }
+  

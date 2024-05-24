@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/Header.css";
 
 function Header() {
   const [showSignatureMenu, setShowSignatureMenu] = useState(false);
   const [showOriginalMenu, setShowOriginalMenu] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
+  const handleSearch = (event) => {
+    if (event.key === "Enter") {
+      navigate(`/search-results?query=${searchTerm}`);
+    }
+  };
   return (
     <header>
       <section className="header-top">
@@ -13,20 +20,34 @@ function Header() {
         <input
           className="search-input"
           placeholder="아티스트, 장르, 스타일, 테마 등을 입력해보세요"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleSearch} // onKeyPress를 onKeyDown으로 변경
         />
         <nav className="header-links">
+          {isLoggedIn ? (
+            <>
+              <span>
+                <Link to="/mypage">마이페이지</Link>
+              </span>
+              <span onClick={onLogout} className="logout-button">
+                로그아웃
+              </span>
+            </>
+          ) : (
+            <span>
+              <Link to="/">로그인</Link>
+            </span>
+          )}
           <span>
-            <Link to="/login">로그인</Link>
-          </span>
-          <span>
-            <Link to="/signup">회원가입</Link>
+            <Link to="/SignUp">회원가입</Link>
           </span>
           <span>KR/EN</span>
         </nav>
       </section>
       <section className="header-bottom">
         <span>
-          <Link to="/promotion">프로모션</Link>
+          <Link to="/Promotion">프로모션</Link>
         </span>
         <span
           onMouseEnter={() => setShowSignatureMenu(true)}

@@ -403,3 +403,11 @@ h2 {
 .text-container p {
     margin: 10px 0;
 }
+.more-text {
+    position: relative;
+    top: 0;
+    left: 40%;
+    color: gray;
+    font-size: 12px;
+    cursor: pointer;
+  }
