@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaArrowDown } from "react-icons/fa";
 import "../css/Mypage.css"; // Ensure the path is correct
 
 function MyPage() {
   const [selectedSection, setSelectedSection] = useState("main");
+  const [membership, setMembership] = useState("White");
+
+  const handleMembershipClick = (level) => {
+    setMembership(level);
+  };
 
   const renderContent = () => {
     switch (selectedSection) {
@@ -152,13 +158,77 @@ function MyPage() {
             </div>
           </div>
         );
+      case "membership":
+        return (
+          <div className="membership-container">
+            <h2>아트멤버십 혜택</h2>
+            <p>현재, 정성민님은 {membership} 회원입니다</p>
+            <div className="membership-levels">
+              {["White", "Cian", "Magenta", "Yellow", "Black"].map(
+                (level, index) => (
+                  <div
+                    key={level}
+                    className={`membership-level ${
+                      membership === level ? "selected" : ""
+                    }`}
+                    onClick={() => handleMembershipClick(level)}
+                    style={{ marginTop: index * 10 }}
+                  >
+                    {level}
+                  </div>
+                )
+              )}
+            </div>
+            <div className="membership-benefits">
+              <div className="benefit">
+                <h3>White</h3>
+                <p>구매 누적금액 50만원 이상</p>
+                <p>10% 할인권 제공 (월간 적용금액 15만원 미만)</p>
+              </div>
+              <div className="benefit">
+                <h3>Cian</h3>
+                <p>구매 누적금액 100만원 이상</p>
+                <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+              </div>
+              <div className="benefit">
+                <h3>Magenta</h3>
+                <p>구매 누적금액 100만원 이상</p>
+                <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+                <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
+              </div>
+              <div className="benefit">
+                <h3>Yellow</h3>
+                <p>구매 누적금액 100만원 이상</p>
+                <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+                <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
+                <p>상시쿠폰 10% 할인/적용금액 15만원 미만)</p>
+              </div>
+              <div className="benefit">
+                <h3>Black</h3>
+                <p>구매 누적금액 100만원 이상</p>
+                <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+                <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
+                <p>상시쿠폰 10% 할인/적용금액 15만원 미만)</p>
+                <p>VIP 멤버쉽 선물 (연 4회 / 적립수 2회)</p>
+              </div>
+            </div>
+          </div>
+        );
       default:
         return (
           <>
-            <div className="user-info">
+            <div className="user-info" style={{ backgroundColor: membership }}>
               <div className="user-info-header">
-                <span>아트딜러명: BALCK</span>
-                <button></button>
+                <span>
+                  아트딜러명:{" "}
+                  <span
+                    className="clickable"
+                    onClick={() => setSelectedSection("membership")}
+                  >
+                    {membership}
+                  </span>
+                </span>
+                <FaArrowDown />
               </div>
               <div className="user-info-cards">
                 <div className="user-info-card">
