@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/Signup.css"; // Ensure the path is correct
+import "../css/Signup.module.css"; // Ensure the path is correct
 
 function Signup() {
   return (

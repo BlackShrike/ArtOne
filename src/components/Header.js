@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../css/Header.css";
+import styles from "../css/Header.module.css";
 
 function Header({ isLoggedIn, onLogout }) {
   const [showSignatureMenu, setShowSignatureMenu] = useState(false);
@@ -14,23 +14,23 @@ function Header({ isLoggedIn, onLogout }) {
     }
   };
   return (
-    <header>
-      <section className="header-top">
+    <header className={styles.header}>
+      <section className={styles.headerTop}>
         <h1>ARTKO</h1>
         <input
-          className="search-input"
+          className={styles.searchInput}
           placeholder="아티스트, 장르, 스타일, 테마 등을 입력해보세요"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleSearch} // onKeyPress를 onKeyDown으로 변경
         />
-        <nav className="header-links">
+        <nav className={styles.headerLinks}>
           {isLoggedIn ? (
             <>
               <span>
                 <Link to="/mypage">마이페이지</Link>
               </span>
-              <span onClick={onLogout} className="logout-button">
+              <span onClick={onLogout} className={styles.logoutButton}>
                 로그아웃
               </span>
             </>
@@ -45,7 +45,7 @@ function Header({ isLoggedIn, onLogout }) {
           <span>KR/EN</span>
         </nav>
       </section>
-      <section className="header-bottom">
+      <section className={styles.headerBottom}>
         <span>
           <Link to="/Promotion">프로모션</Link>
         </span>
@@ -53,9 +53,9 @@ function Header({ isLoggedIn, onLogout }) {
           onMouseEnter={() => setShowSignatureMenu(true)}
           onMouseLeave={() => setShowSignatureMenu(false)}
         >
-          시그니처
+          <Link to="/Signature">시그니처</Link>
           {showSignatureMenu && (
-            <div className="dropdown-menu signature-menu">
+            <div className={`${styles.dropdownMenu} ${styles.signatureMenu}`}>
               {[
                 "전체",
                 "인물",
@@ -69,8 +69,8 @@ function Header({ isLoggedIn, onLogout }) {
                 "드로잉",
                 "포스터",
               ].map((item) => (
-                <div className="dropdown-item" key={item}>
-                  <div className="dropdown-box"></div>
+                <div className={styles.dropdownItem} key={item}>
+                  <div className={styles.dropdownBox}></div>
                   <Link to={`/${item}`}>{item}</Link>
                 </div>
               ))}
@@ -83,17 +83,17 @@ function Header({ isLoggedIn, onLogout }) {
         >
           <Link to="/original">오리지널</Link>
           {showOriginalMenu && (
-            <div className="dropdown-menu">
+            <div className={styles.dropdownMenu}>
               {["전체", "인물", "풍경", "추상"].map((item) => (
-                <div className="dropdown-item" key={item}>
-                  <div className="dropdown-box"></div>
+                <div className={styles.dropdownItem} key={item}>
+                  <div className={styles.dropdownBox}></div>
                   <Link to={`/${item}`}>{item}</Link>
                 </div>
               ))}
             </div>
           )}
         </span>
-        <span className="separator">|</span>
+        <span className={styles.separator}>|</span>
         <span>아티스트</span>
         <span>비즈니스</span>
         <span>리뷰</span>

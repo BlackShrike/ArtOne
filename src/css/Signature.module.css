@@ -1,0 +1,89 @@
+.signature {
+    padding: 10px;
+  }
+  
+  .signature-back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .signature-header-submenu {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .signature-header-submenu-item {
+    cursor: pointer;
+    padding: 5px 5px;
+    font-size: 12px;
+  }
+  
+  .signature-header-submenu-item-selected {
+    color: red;
+    border-bottom: 2px solid red;
+  }
+  
+  .signature-grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 각 열마다 5개의 항목을 표시 */
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .signature-grid-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signature-grid-item img {
+    width: 100%;
+    background-color: #eee;
+    margin-bottom: 10px;
+  }
+  
+  .signature-grid-item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .signature-grid-item-text {
+    text-align: left;
+    flex-grow: 1;
+  }
+  
+  .signature-grid-item-icon {
+    text-align: right;
+  }
+  
+  .signature-grid-item-price {
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .signature-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .signature-page-number {
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  .signature-page-number-selected {
+    color: red;
+    font-weight: bold;
+  }

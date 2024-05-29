@@ -15,6 +15,7 @@ import MyPage from "./components/Mypage";
 import Checkout from "./components/Checkout";
 import Ordercheckout from "./components/Ordercheckout";
 import Paymentresult from "./components/Paymentresult";
+import Signature from "./components/Signature";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -31,6 +32,7 @@ function App() {
         <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
         <Routes>
           <Route path="/Promotion" element={<Promotion />} />
+          <Route path="/Signature" element={<Signature />} />
           <Route path="/Original" element={<Original />} />
           <Route path="/Login" element={<Login onLogin={handleLogin} />} />
           <Route path="/faq" element={<FAQ />} />

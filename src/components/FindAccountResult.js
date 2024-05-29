@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../css/FindAccountResult.css"; // Ensure the path is correct
+import styles from "../css/FindAccountResult.module.css"; // Ensure the path is correct
 
 function FindAccountResult({ type }) {
   return (
-    <div className="find-account-result-container">
-      <div className="back-link">
+    <div className={styles.findAccountResultContainer}>
+      <div className={styles.backLink}>
         <a href="/">← 뒤로가기</a>
       </div>
       <h2>홍길동님 {type === "id" ? "아이디" : "비밀번호"}</h2>
-      <div className="result">
+      <div className={styles.result}>
         {type === "id" ? (
           <>
             <p>sampleIDsampleID</p>
@@ -21,12 +21,12 @@ function FindAccountResult({ type }) {
           </>
         )}
       </div>
-      <div className="actions">
-        <Link to="/login" className="action-button">
+      <div className={styles.actions}>
+        <Link to="/login" className={styles.actionButton}>
           로그인 하기
         </Link>
         {type === "id" && (
-          <Link to="/find-account" className="action-button">
+          <Link to="/find-account" className={styles.actionButton}>
             비밀번호찾기
           </Link>
         )}

@@ -1,12 +1,16 @@
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
 
 h2 {
     display: flex;
     justify-content: center;
 }
-.promotion-grid {
-    display: grid;
+
+.sliderContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.promotionGrid {
+    display: grid !important;
     gap: 5px;
     grid-template-columns: repeat(12, 1fr); /* 12 columns */
     grid-template-rows: repeat(7, 100px); /* 7 rows */
@@ -31,17 +35,17 @@ h2 {
     font-family: "Noto Sans KR", sans-serif;
 }
 
-.large-item {
+.greyBox {
+    width: 100%;
+    height: 80%;
+    background-color: #ddd;
+}
+
+.largeItem {
     grid-area: large;
 }
 
-.large-item img {
-    width: 100%;
-    height: 80%;
-    object-fit: cover;
-}
-
-.large-item .text {
+.largeItem .text {
     text-align: left;
     height: 20%;
     display: flex;
@@ -49,39 +53,33 @@ h2 {
     justify-content: center;
 }
 
-.large-item .text p:first-child {
+.largeItem .text p:first-child {
     font-size: 24px; /* First line larger */
     font-weight: 700;
     margin: 0;
 }
 
-.large-item .text p:last-child {
+.largeItem .text p:last-child {
     font-size: 14px; /* Second line smaller */
     margin: 0;
 }
 
-.medium-item-1 {
+.mediumItem1 {
     grid-area: medium1;
 }
 
-.medium-item-2 {
+.mediumItem2 {
     grid-area: medium2;
 }
 
-.medium-item {
+.mediumItem {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.medium-item img {
-    width: 100%;
-    height: 80%;
-    object-fit: cover;
-}
-
-.medium-item .text {
+.mediumItem .text {
     text-align: left;
     height: 20%;
     display: flex;
@@ -89,18 +87,18 @@ h2 {
     justify-content: center;
 }
 
-.medium-item .text p:first-child {
+.mediumItem .text p:first-child {
     font-size: 24px; /* First line larger */
     font-weight: 700;
     margin: 0;
 }
 
-.medium-item .text p:last-child {
+.mediumItem .text p:last-child {
     font-size: 12px; /* Second line smaller */
     margin: 0;
 }
 
-.small-item-left-1 {
+.smallItemLeft1 {
     grid-area: small-left1;
     display: flex;
     flex-direction: row;
@@ -108,7 +106,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-left-2 {
+.smallItemLeft2 {
     grid-area: small-left2;
     display: flex;
     flex-direction: row;
@@ -116,7 +114,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-1 {
+.smallItemRight1 {
     grid-area: small-right1;
     display: flex;
     flex-direction: row;
@@ -124,7 +122,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-2 {
+.smallItemRight2 {
     grid-area: small-right2;
     display: flex;
     flex-direction: row;
@@ -132,7 +130,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-3 {
+.smallItemRight3 {
     grid-area: small-right3;
     display: flex;
     flex-direction: row;
@@ -140,7 +138,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-4 {
+.smallItemRight4 {
     grid-area: small-right4;
     display: flex;
     flex-direction: row;
@@ -148,7 +146,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-5 {
+.smallItemRight5 {
     grid-area: small-right5;
     display: flex;
     flex-direction: row;
@@ -156,7 +154,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-6 {
+.smallItemRight6 {
     grid-area: small-right6;
     display: flex;
     flex-direction: row;
@@ -164,7 +162,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-7 {
+.smallItemRight7 {
     grid-area: small-right7;
     display: flex;
     flex-direction: row;
@@ -172,7 +170,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-8 {
+.smallItemRight8 {
     grid-area: small-right8;
     display: flex;
     flex-direction: row;
@@ -180,7 +178,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-9 {
+.smallItemRight9 {
     grid-area: small-right9;
     display: flex;
     flex-direction: row;
@@ -188,7 +186,7 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item-right-10 {
+.smallItemRight10 {
     grid-area: small-right10;
     display: flex;
     flex-direction: row;
@@ -196,25 +194,42 @@ h2 {
     justify-content: flex-start;
 }
 
-.small-item img {
+.smallItem .greyBox {
     width: 30%;
     height: 90%;
-    object-fit: cover;
     margin-right: 10px;
 }
 
-.small-item .text {
+.smallItem .text {
     text-align: left;
     font-size: 12px;
 }
-
+.bestItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .bestGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  
+  .centeredHeading {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
 /* 새로운 그리드 섹션 */
-.new-grid {
+.newGrid {
     margin-top: 40px;
     text-align: center;
 }
 
-.new-grid-container {
+.newGridContainer {
     display: grid;
     grid-template-columns: repeat(4, 300px);
     grid-template-rows: repeat(5,100px);
@@ -229,7 +244,7 @@ h2 {
     margin:  auto; /* 그리드를 가로 중앙으로 정렬 */
 }
 
-.new-grid-item {
+.newGridItem {
     background-color: #eee;
     padding: 20px;
     display: flex;
@@ -238,109 +253,22 @@ h2 {
     font-size: 14px;
 }
 
-.grid-item-1 { grid-area: item1; }
-.grid-item-2 { grid-area: item2; }
-.grid-item-3 { grid-area: item3; }
-.grid-item-4 { grid-area: item4; }
-.grid-item-5 { grid-area: item5; }
-.grid-item-6 { grid-area: item6; }
-.grid-item-7 { grid-area: item7; }
+.gridItem1 { grid-area: item1; }
+.gridItem2 { grid-area: item2; }
+.gridItem3 { grid-area: item3; }
+.gridItem4 { grid-area: item4; }
+.gridItem5 { grid-area: item5; }
+.gridItem6 { grid-area: item6; }
+.gridItem7 { grid-area: item7; }
 
-.promotion-container {
-    width: 90%;
-    margin: auto;
-}
 
-.centered-heading {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.best-section {
-    .slick-prev,
-    .slick-next {
-        z-index: 1;
-        background-color: transparent; /* 배경을 투명하게 설정 */
-        border: none; /* 테두리 제거 */
-        font-size: 0; /* 기본 텍스트 숨기기 */
-    }
-
-    .slick-prev:before,
-    .slick-next:before {
-        font-size: 30px;
-        color: #000; /* 화살표 색상 변경 */
-    }
-
-    .slick-dots {
-        bottom: -30px;
-
-        li button:before {
-            color: #000; /* 색상 변경 */
-        }
-    }
-}
-
-.best-item {
-    background-color: #f0f0f0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 14px;
-    color: #333;
-    height: 200px; /* 높이 설정 */
-    padding: 10px;
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.best-item img {
-    width: 100%;
-    height: auto;
-    max-height: 100px;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.best-item .text {
-    text-align: left; /* 텍스트 좌측 정렬 */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-}
-
-.best-item .text h3 {
-    margin: 0;
-}
-
-.best-item .text p {
-    margin: 0;
-}
-
-.price-cart {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 5px; /* 간격 조정 */
-}
-
-.price-cart p {
-    margin: 0;
-}
-
-.price-cart .fa-cart-plus {
-    font-size: 18px;
-    color: #333; /* 아이콘 색상 변경 */
-}
 /* New Grid for 비대칭 그리드 */
-.asymmetric-grid {
+.asymmetricGrid {
     margin-top: 40px;
     text-align: center;
 }
 
-.asymmetric-grid-container {
+.asymmetricGridContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
     grid-template-rows: repeat(3, 150px);
@@ -353,7 +281,7 @@ h2 {
     margin: auto;
 }
 
-.asymmetric-grid-item {
+.asymmetricGridItem {
     background-color: #eee;
     padding: 20px;
     display: flex;
@@ -362,17 +290,17 @@ h2 {
     font-size: 14px;
 }
 
-.grid-item-1 { grid-area: item1; }
-.grid-item-2 { grid-area: item2; }
-.grid-item-3 { grid-area: item3; }
+.gridItem1 { grid-area: item1; }
+.gridItem2 { grid-area: item2; }
+.gridItem3 { grid-area: item3; }
 
 /* New Grid for 대칭 2열 그리드 */
-.symmetric-grid {
+.symmetricGrid {
     margin-top: 40px;
     text-align: center;
 }
 
-.symmetric-grid-container {
+.symmetricGridContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 200px);
@@ -381,7 +309,7 @@ h2 {
     margin: auto;
 }
 
-.symmetric-grid-item {
+.symmetricGridItem {
     background-color: #eee;
     padding: 20px;
     display: flex;
@@ -390,24 +318,25 @@ h2 {
     font-size: 14px;
 }
 
-.grid-item { flex: 1; }
+.gridItem { flex: 1; }
 
 /* 텍스트 스타일 */
-.text-container {
+.textContainer {
     text-align: center;
     margin-top: 40px;
     font-size: 18px;
     font-weight: bold;
 }
 
-.text-container p {
+.textContainer p {
     margin: 10px 0;
 }
-.more-text {
+
+.moreText {
     position: relative;
     top: 0;
     left: 40%;
     color: gray;
     font-size: 12px;
     cursor: pointer;
-  }
+}

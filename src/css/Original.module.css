@@ -1,0 +1,99 @@
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leftAlign {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.filterBox {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.filterHeader {
+  background-color: black;
+  height: 10px; /* 검은색 바의 높이 설정 */
+  margin-bottom: 10px;
+}
+
+.centerAlign {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 요소를 좌측 정렬 */
+}
+
+.filterCategory {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* 버튼을 좌측 정렬 */
+  margin-bottom: 10px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  width: 120px; /* 모든 버튼의 너비를 동일하게 설정 */
+  text-align: center;
+}
+
+button.active {
+  background-color: black;
+  color: white;
+}
+
+.selectedFilters {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.filterTag {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.filterTag button {
+  background: none;
+  border: none;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.resetButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.recentKeywords {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.keywordTag {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+  padding: 5px 10px;
+}

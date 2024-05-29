@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "../css/FindAccount.css"; // Ensure the path is correct
+import styles from "../css/FindAccount.module.css"; // Ensure the path is correct
 
 function FindAccount() {
   const [authMethod, setAuthMethod] = useState("phone");
@@ -26,48 +26,48 @@ function FindAccount() {
   };
 
   return (
-    <div className="find-account-container">
-      <div className="back-link">
+    <div className={styles.findAccountContainer}>
+      <div className={styles.backLink}>
         <a href="/">← 뒤로가기</a>
       </div>
-      <div className="find-tabs">
+      <div className={styles.findTabs}>
         <button
-          className={isFindId ? "active" : ""}
+          className={isFindId ? styles.active : ""}
           onClick={() => toggleFindMode(true)}
         >
           아이디찾기
         </button>
         <button
-          className={!isFindId ? "active" : ""}
+          className={!isFindId ? styles.active : ""}
           onClick={() => toggleFindMode(false)}
         >
           비밀번호찾기
         </button>
       </div>
       <h2>본인확인</h2>
-      <div className="auth-methods">
+      <div className={styles.authMethods}>
         <div onClick={() => toggleAuthMethod("phone")}>
           {authMethod === "phone" ? (
-            <FaCheckCircle className="checkbox-icon" />
+            <FaCheckCircle className={styles.checkboxIcon} />
           ) : (
-            <FaRegCircle className="checkbox-icon" />
+            <FaRegCircle className={styles.checkboxIcon} />
           )}
           <label>휴대폰인증</label>
         </div>
         <div onClick={() => toggleAuthMethod("email")}>
           {authMethod === "email" ? (
-            <FaCheckCircle className="checkbox-icon" />
+            <FaCheckCircle className={styles.checkboxIcon} />
           ) : (
-            <FaRegCircle className="checkbox-icon" />
+            <FaRegCircle className={styles.checkboxIcon} />
           )}
           <label>이메일인증</label>
         </div>
       </div>
-      <form className="find-form" onSubmit={handleSubmit}>
+      <form className={styles.findForm} onSubmit={handleSubmit}>
         <input type="text" placeholder="이름" required />
         {isFindId ? (
           authMethod === "phone" ? (
-            <div className="phone-input">
+            <div className={styles.phoneInput}>
               <input type="text" placeholder="010" maxLength="3" required />
               <input type="text" placeholder="1234" maxLength="4" required />
               <input type="text" placeholder="5678" maxLength="4" required />
@@ -79,7 +79,7 @@ function FindAccount() {
           <>
             <input type="text" placeholder="아이디" required />
             {authMethod === "phone" ? (
-              <div className="phone-input">
+              <div className={styles.phoneInput}>
                 <input type="text" placeholder="010" maxLength="3" required />
                 <input type="text" placeholder="1234" maxLength="4" required />
                 <input type="text" placeholder="5678" maxLength="4" required />
@@ -89,7 +89,7 @@ function FindAccount() {
             )}
           </>
         )}
-        <button type="submit" className="confirm-button">
+        <button type="submit" className={styles.confirmButton}>
           확인
         </button>
       </form>

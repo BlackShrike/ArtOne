@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../css/Checkout.css"; // Ensure the path is correct
+import styles from "../css/Checkout.module.css"; // Ensure the path is correct
 
 function Checkout() {
   const [selectedItems, setSelectedItems] = useState([]);
@@ -42,13 +42,13 @@ function Checkout() {
   };
 
   return (
-    <div className="checkout-container">
-      <div className="checkout-header">
+    <div className={styles.checkoutContainer}>
+      <div className={styles.checkoutHeader}>
         <h2>장바구니</h2>
       </div>
-      <div className="checkout-content">
-        <div className="checkout-items-container">
-          <div className="checkout-item-header">
+      <div className={styles.checkoutContent}>
+        <div className={styles.checkoutItemsContainer}>
+          <div className={styles.checkoutItemHeader}>
             <label>
               <input
                 type="checkbox"
@@ -64,34 +64,35 @@ function Checkout() {
               <span>선택삭제</span>
             </label>
           </div>
-          <section className="checkout-items-section">
+          <section className={styles.checkoutItemsSection}>
             {items.map((item) => (
-              <div className="checkout-item-container" key={item.id}>
+              <div className={styles.checkoutItemContainer} key={item.id}>
                 <input
                   type="checkbox"
-                  className="item-checkbox"
+                  className={styles.itemCheckbox}
                   checked={selectedItems.includes(item.id)}
                   onChange={() => handleSelectItem(item.id)}
                 />
-                <div className="checkout-item">
-                  <div className="item-details">
-                    <p className="item-name">{item.name}</p>
-                    <p className="item-price">{item.price}</p>
+                <div className={styles.checkoutItem}>
+                  <div className={styles.itemDetails}>
+                    <p className={styles.itemName}>{item.name}</p>
+                    <p className={styles.itemPrice}>{item.price}</p>
                     {item.options.map((option, index) => (
-                      <p key={index} className="item-option">
+                      <p key={index} className={styles.itemOption}>
                         {option}
                       </p>
                     ))}
                   </div>
-                  <div className="image-placeholder"></div>
+                  <div className={styles.imagePlaceholder}></div>
                 </div>
               </div>
             ))}
           </section>
         </div>
-        <div className="checkout-summary">
-          <span className="checkout-step">
-            <span className="red-text">장바구니</span> → 주문/결제 → 결제완료
+        <div className={styles.checkoutSummary}>
+          <span className={styles.checkoutStep}>
+            <span className={styles.redText}>장바구니</span> → 주문/결제 →
+            결제완료
           </span>
           <h3>주문 예상 금액</h3>
           <p>
@@ -116,7 +117,7 @@ function Checkout() {
               .toLocaleString()}
             원
           </h3>
-          <Link to="/OrderCheckout" className="purchase-button">
+          <Link to="/OrderCheckout" className={styles.purchaseButton}>
             구매하기
           </Link>
         </div>

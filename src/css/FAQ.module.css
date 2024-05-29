@@ -1,49 +1,49 @@
-.faq-container {
+.faqContainer {
     display: flex;
-}
-
-.faq-sidebar {
+  }
+  
+  .faqSidebar {
     width: 200px;
     padding: 20px;
     border-right: 1px solid #ccc;
-}
-
-.faq-sidebar ul {
+  }
+  
+  .faqSidebar ul {
     list-style-type: none;
     padding: 0;
-}
-
-.faq-sidebar ul li {
+  }
+  
+  .faqSidebar ul li {
     padding: 10px 0;
     cursor: pointer;
-}
-
-.faq-sidebar ul li.active {
+  }
+  
+  .faqSidebar ul li.active {
     color: red;
     font-weight: bold;
-}
-
-.faq-content {
+  }
+  
+  .faqContent {
     flex: 1;
     padding: 20px;
-}
-
-.contact-section h1 {
+  }
+  
+  .contactSection h1 {
     text-align: center;
     margin-bottom: 20px;
-}
-
-.contact-row {
+  }
+  
+  .contactRow {
     display: flex;
     align-items: flex-start;
     margin-bottom: 20px;
-}
-
-.contact-row h2 {
+  }
+  
+  .contactRow h2 {
     width: 100px;
     margin-right: 20px;
-}
-
-.contact-details {
+  }
+  
+  .contactDetails {
     flex: 1;
-}
+  }

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import "../css/Ordercheckout.css"; // Ensure the path is correct
+import styles from "../css/Ordercheckout.module.css"; // Ensure the path is correct
 
 function OrderCheckout() {
   const [sameAsMemberInfo, setSameAsMemberInfo] = useState(false);
   const [newAddress, setNewAddress] = useState(false);
   const navigate = useNavigate();
+
   const handleSameAsMemberInfo = () => {
     setSameAsMemberInfo(!sameAsMemberInfo);
     if (newAddress && !sameAsMemberInfo) {
@@ -20,28 +20,30 @@ function OrderCheckout() {
       setSameAsMemberInfo(false);
     }
   };
+
   const handlePayment = () => {
     navigate("/Paymentresult");
   };
 
   return (
-    <div className="order-checkout-container">
-      <div className="order-header">
-        <div className="order-info-header">
+    <div className={styles.orderCheckoutContainer}>
+      <div className={styles.orderHeader}>
+        <div className={styles.orderInfoHeader}>
           <h3>배송 정보</h3>
-          <label className="delete-selection">
+          <label className={styles.deleteSelection}>
             <input type="checkbox" />
             <span>선택삭제</span>
           </label>
-          <span className="checkout-step">
-            장바구니 → <span className="red-text">주문/결제</span> → 결제완료
+          <span className={styles.checkoutStep}>
+            장바구니 → <span className={styles.redText}>주문/결제</span> →
+            결제완료
           </span>
         </div>
       </div>
-      <div className="order-content">
-        <div className="order-form">
+      <div className={styles.orderContent}>
+        <div className={styles.orderForm}>
           <h3>주문자</h3>
-          <div className="order-section">
+          <div className={styles.orderSection}>
             <label>
               주문자 이름
               <input type="text" />
@@ -60,9 +62,9 @@ function OrderCheckout() {
               </select>
             </label>
           </div>
-          <div className="order-section">
+          <div className={styles.orderSection}>
             <h3>배송지</h3>
-            <div className="checkbox-container">
+            <div className={styles.checkboxContainer}>
               <label>
                 <input
                   type="checkbox"
@@ -108,7 +110,7 @@ function OrderCheckout() {
               <input type="text" />
             </label>
           </div>
-          <div className="order-section">
+          <div className={styles.orderSection}>
             <h3>쿠폰/할인</h3>
             <label>
               쿠폰
@@ -125,7 +127,7 @@ function OrderCheckout() {
             </label>
           </div>
         </div>
-        <div className="order-summary">
+        <div className={styles.orderSummary}>
           <h3>주문 예상 금액</h3>
           <p>총 상품금액: 120,000원</p>
           <p>총 배송비: 0원</p>
@@ -137,18 +139,30 @@ function OrderCheckout() {
               본인은 웹사이트 이용 약관을(를) 읽었으며 이에 동의합니다
             </span>
           </label>
-          <div className="payment-buttons">
-            <button className="pay-button card" onClick={handlePayment}>
+          <div className={styles.paymentButtons}>
+            <button
+              className={`${styles.payButton} ${styles.card}`}
+              onClick={handlePayment}
+            >
               카드 결제
             </button>
-            <div className="small-buttons">
-              <button className="pay-button kakaopay" onClick={handlePayment}>
+            <div className={styles.smallButtons}>
+              <button
+                className={`${styles.payButton} ${styles.kakaopay}`}
+                onClick={handlePayment}
+              >
                 카카오페이 결제
               </button>
-              <button className="pay-button naverpay" onClick={handlePayment}>
+              <button
+                className={`${styles.payButton} ${styles.naverpay}`}
+                onClick={handlePayment}
+              >
                 네이버페이 결제
               </button>
-              <button className="pay-button paypal" onClick={handlePayment}>
+              <button
+                className={`${styles.payButton} ${styles.paypal}`}
+                onClick={handlePayment}
+              >
                 PayPal 결제
               </button>
             </div>

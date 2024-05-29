@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/SearchResults.css"; // Ensure the path is correct
+import "../css/SearchResults.module.css"; // Ensure the path is correct
 
 function SearchResults() {
   const items = Array.from({ length: 50 }).map((_, index) => ({
