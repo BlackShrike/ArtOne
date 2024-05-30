@@ -1,118 +1,117 @@
 body {
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-  
-  .signup-container {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .back-link {
-    text-align: left;
-    margin-bottom: 20px;
-  }
-  
-  .back-link a {
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-  }
-  
-  .signup-form .form-group {
-    width: 100%;
-    text-align: left;
-  }
-  
-  .signup-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .signup-form input[type="text"],
-  .signup-form input[type="password"],
-  .signup-form input[type="email"],
-  .signup-form input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .phone-input,
-  .birthdate-input {
-    display: flex;
-    gap: 5px;
-    width: 100%;
-  }
-  
-  .phone-input input,
-  .birthdate-input input {
-    flex: 1;
-  }
-  
-  .address-search-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .terms {
-    text-align: left;
-    width: 100%;
-  }
-  
-  .term {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .term label {
-    margin-left: 5px;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .optional-terms {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .signup-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.signupContainer {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.backLink {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.backLink a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.signupForm .formGroup {
+  width: 100%;
+  text-align: left;
+}
+
+.signupForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.signupForm input[type="text"],
+.signupForm input[type="password"],
+.signupForm input[type="email"],
+.signupForm input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.phoneInput,
+.birthdateInput {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+}
+
+.phoneInput input,
+.birthdateInput input {
+  flex: 1;
+}
+
+.addressSearchButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.terms {
+  text-align: left;
+  width: 100%;
+}
+
+.term {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.term label {
+  margin-left: 5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.optionalTerms {
+  display: flex;
+  gap: 10px;
+}
+
+.signupButton {
+  width: 100%;
+  padding: 15px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}

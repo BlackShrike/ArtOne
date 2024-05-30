@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import "../css/Signature.module.css"; // Ensure the path is correct
+import styles from "../css/Signature.module.css";
+import BackButton from "../components/BackButton";
 
 function Signature() {
   const [selectedMenu, setSelectedMenu] = useState("전체");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 50; // 한 페이지에 50개 항목 표시
 
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
@@ -28,28 +28,28 @@ function Signature() {
     "드로잉",
     "포스터",
   ];
-  const totalItems = 45; // Example total items
+
+  const totalItems = 200; // 예시로 총 200개의 항목이 있다고 가정
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const renderItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const items = Array.from({ length: totalItems }).slice(
-      startIndex,
-      startIndex + itemsPerPage
+    const items = Array.from({ length: itemsPerPage }).map(
+      (_, index) => startIndex + index + 1
     );
 
-    return items.map((_, index) => (
-      <div key={index} className="signature-grid-item">
-        <img src="https://via.placeholder.com/200" alt="Artwork" />
-        <div className="signature-grid-item-details">
-          <div className="signature-grid-item-text">
-            <div>제목제목제목</div>
-            <div>연출내용내용내용</div>
-            <div className="signature-grid-item-price">120,000원</div>
+    return items.map((item) => (
+      <div key={item} className={styles.gridItem}>
+        <div className={styles.imagePlaceholder}></div>
+        <div className={styles.itemDetails}>
+          <div>
+            <p>
+              <span className={styles.headtext}>제목 {item}</span>
+            </p>
+            <p>캡션내용 {item}</p>
+            <p>05. 2024</p>
           </div>
-          <div className="signature-grid-item-icon">
-            <FaCartPlus />
-          </div>
+          <FaCartPlus />
         </div>
       </div>
     ));
@@ -57,9 +57,9 @@ function Signature() {
 
   const renderPagination = () => {
     return (
-      <div className="signature-pagination">
+      <div className={styles.pagination}>
         <span
-          className="signature-page-number"
+          className={styles.pageArrow}
           onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
         >
           &lt;
@@ -67,8 +67,10 @@ function Signature() {
         {Array.from({ length: totalPages }).map((_, index) => (
           <span
             key={index}
-            className={`signature-page-number ${
-              currentPage === index + 1 ? "signature-page-number-selected" : ""
+            className={`${styles.pageNumber} ${
+              currentPage === index + 1
+                ? styles["signature-page-number-selected"]
+                : ""
             }`}
             onClick={() => handlePageChange(index + 1)}
           >
@@ -76,7 +78,7 @@ function Signature() {
           </span>
         ))}
         <span
-          className="signature-page-number"
+          className={styles.pageArrow}
           onClick={() =>
             handlePageChange(Math.min(totalPages, currentPage + 1))
           }
@@ -88,14 +90,14 @@ function Signature() {
   };
 
   return (
-    <div className="signature">
-      <div className="signature-header-submenu">
+    <div className={styles.signature}>
+      <div className={styles["signature-header-submenu"]}>
         {menus.map((menu) => (
           <div
             key={menu}
-            className={`signature-header-submenu-item ${
+            className={`${styles["signature-header-submenu-item"]} ${
               selectedMenu === menu
-                ? "signature-header-submenu-item-selected"
+                ? styles["signature-header-submenu-item-selected"]
                 : ""
             }`}
             onClick={() => handleMenuClick(menu)}
@@ -104,11 +106,11 @@ function Signature() {
           </div>
         ))}
       </div>
-      <Link to="/" className="signature-back-button">
-        &lt; 뒤로가기
-      </Link>
-      <div className="signature-grid-container">{renderItems()}</div>
-      {renderPagination()}
+      <BackButton />
+      <div className={styles.gridPage}>
+        <div className={styles.gridContainer}>{renderItems()}</div>
+        {renderPagination()}
+      </div>
     </div>
   );
 }

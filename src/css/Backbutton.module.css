@@ -1,0 +1,10 @@
+.backLink {
+    align-self: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .backLink a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+  }

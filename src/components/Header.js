@@ -81,7 +81,7 @@ function Header({ isLoggedIn, onLogout }) {
           onMouseEnter={() => setShowOriginalMenu(true)}
           onMouseLeave={() => setShowOriginalMenu(false)}
         >
-          <Link to="/original">오리지널</Link>
+          <Link to="/Original">오리지널</Link>
           {showOriginalMenu && (
             <div className={styles.dropdownMenu}>
               {["전체", "인물", "풍경", "추상"].map((item) => (
@@ -94,7 +94,7 @@ function Header({ isLoggedIn, onLogout }) {
           )}
         </span>
         <span className={styles.separator}>|</span>
-        <span>아티스트</span>
+        <Link to="/Artist"> 아티스트</Link>
         <span>비즈니스</span>
         <span>리뷰</span>
         <span>

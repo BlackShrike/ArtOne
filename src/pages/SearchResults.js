@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/SearchResults.module.css"; // Ensure the path is correct
-
+import BackButton from "../components/BackButton";
 function SearchResults() {
   const items = Array.from({ length: 50 }).map((_, index) => ({
     id: index,
@@ -11,9 +11,7 @@ function SearchResults() {
 
   return (
     <div className="search-results-container">
-      <div className="back-link">
-        <a href="/">← 뒤로가기</a>
-      </div>
+      <BackButton />
       <div className="results-header">
         <span>0000 검색결과 000건</span>
       </div>

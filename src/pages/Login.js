@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/Login.module.css"; // Ensure the path is correct
-
+import BackButton from "../components/BackButton";
 function Login({ onLogin }) {
   const [remember, setRemember] = useState(false);
   const navigate = useNavigate();
@@ -19,9 +19,7 @@ function Login({ onLogin }) {
 
   return (
     <div className={styles.loginContainer} onSubmit={handleSubmit}>
-      <div className={styles.backLink}>
-        <a href="/">← 뒤로가기</a>
-      </div>
+      <BackButton />
       <h2>LOGIN</h2>
       <form className={styles.loginForm}>
         <input type="text" placeholder="아이디" />

@@ -1,46 +1,100 @@
 .filterContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100%;
 }
 
 .leftAlign {
   display: flex;
   justify-content: flex-start;
+  margin: auto;
+  padding: 0;
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  margin-left: 20px;
+}
+
+.leftAlign button {
+  cursor: pointer;
+  padding: 5px 5px;
+  font-size: 12px;
+  border: none;
+  background: none;
+  margin-right: 15px;
+}
+
+.leftAlign button.active {
+  color: red;
+  border-bottom: 2px solid red;
+}
+.MiddleBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+.recentKeywords {
+  display: flex;
+  align-items: center;
+  width: 80%;
   margin-bottom: 20px;
-  border-bottom: 1px solid #ccc;
+  font-size: 12px;
+  justify-content: flex-end;
+}
+
+.recentKeywords span {
+  margin-right: 5px;
+}
+
+.recentKeywords .keywordTag {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+  padding: 2px 5px;
+  font-size: 12px;
+}
+
+.recentKeywords img {
+  margin-left: 5px;
+  width: 12px;
+  height: 12px;
 }
 
 .filterBox {
   border: 1px solid #ccc;
-  padding: 20px;
   margin-top: 20px;
   background-color: #f9f9f9;
-  width: 50%;
+  width: 80%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .filterHeader {
   background-color: black;
   height: 10px; /* 검은색 바의 높이 설정 */
+  width: 80%;
   margin-bottom: 10px;
 }
 
 .centerAlign {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 요소를 좌측 정렬 */
+  align-items: flex-start;
 }
 
 .filterCategory {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* 버튼을 좌측 정렬 */
+  justify-content: center;
   margin-bottom: 10px;
 }
 
-button {
+.typeButton,
+.styleButton,
+.priceButton {
   margin: 5px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -50,14 +104,18 @@ button {
   text-align: center;
 }
 
-button.active {
-  background-color: black;
-  color: white;
+.typeButton.active,
+.styleButton.active,
+.priceButton.active {
+  color: black;
+  font-weight: bold;
+  border-color: black; /* 추가 */
 }
 
 .selectedFilters {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-top: 10px;
 }
 
@@ -82,18 +140,72 @@ button.active {
   border: none;
   cursor: pointer;
   margin-left: 10px;
+  display: flex;
+  align-items: center;
 }
 
-.recentKeywords {
+.gridPage {
+  padding: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개의 항목 */
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.gridItem {
+  padding: 20px;
   display: flex;
-  justify-content: flex-start;
-  margin-top: 20px;
+  flex-direction: column;
+  text-align: end;
+
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 200px;
+  background-color: #ddd;
   margin-bottom: 10px;
 }
 
-.keywordTag {
-  background-color: #eee;
-  border: 1px solid #ccc;
-  margin: 0 5px;
+.headtext {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.itemDetails{
+  border-right: 3px solid #111;
+}
+.itemDetails p {
+  margin: 0px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pageNumber,
+.pageArrow {
+  cursor: pointer;
   padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.pageNumber:hover,
+.pageArrow:hover {
+  background-color: #f1f1f1;
+}
+
+.activePageNumber {
+  color: red;
+  border-bottom: 2px solid red;
 }

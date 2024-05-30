@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/FindAccount.module.css"; // Ensure the path is correct
-
+import BackButton from "../components/BackButton";
 function FindAccount() {
   const [authMethod, setAuthMethod] = useState("phone");
   const [isFindId, setIsFindId] = useState(true);
@@ -27,9 +27,7 @@ function FindAccount() {
 
   return (
     <div className={styles.findAccountContainer}>
-      <div className={styles.backLink}>
-        <a href="/">← 뒤로가기</a>
-      </div>
+      <BackButton />
       <div className={styles.findTabs}>
         <button
           className={isFindId ? styles.active : ""}

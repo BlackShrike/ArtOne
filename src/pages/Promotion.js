@@ -5,7 +5,20 @@ import Slider from "react-slick";
 import { FaCartPlus } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const settings = {
+
+const mainSettings = {
+  dots: true,
+  infinite: true,
+  speed: 1000, // 천천히 넘어가는 슬라이드 전환 속도
+  slidesToShow: 1,
+  slidesToScroll: 1, // 한 번에 하나씩 슬라이드 이동
+  arrows: true,
+  autoplay: false,
+  centerMode: false,
+  centerPadding: "0px",
+};
+
+const bestSettings = {
   dots: true,
   infinite: true,
   speed: 500,
@@ -16,7 +29,6 @@ const settings = {
   centerMode: false,
   centerPadding: "0px",
 };
-
 function Promotion(props) {
   const promotionMain = Array.from({ length: 8 }, (_, index) => (
     <div key={index} className={styles.promotionGridWrapper}>
@@ -131,14 +143,16 @@ function Promotion(props) {
   ));
   const bestItems = Array.from({ length: 20 }, (_, index) => (
     <div key={index} className={styles.bestItem}>
-      <div className={styles.greyBox}></div>
-      <div className={styles.text}>
+      <div className={`${styles.greyBox} ${styles.bestGreyBox}`}></div>
+      <div className={styles.besttext}>
         <h3>제목 {index + 1}</h3>
-        <p>설명설명설명설명</p>
-        <div className={styles.priceCart}>
-          <p>120,000</p>
-          <FaCartPlus />
-        </div>
+        <p className={styles.middletext}>
+          설명설명설명설명{" "}
+          <div className={styles.priceCart}>
+            <FaCartPlus />
+          </div>
+        </p>
+        <p>120,000원</p>
       </div>
     </div>
   ));
@@ -146,10 +160,11 @@ function Promotion(props) {
     <div>
       (
       <div className={styles.sliderContainer}>
-        <Slider {...settings}>{promotionMain}</Slider>
+        <Slider {...mainSettings}>{promotionMain}</Slider>
       </div>
+      <h2 className={styles.centeredHeading}>BEST</h2>
       <div className={styles.bestSliderContainer}>
-        <Slider {...settings}>
+        <Slider {...bestSettings}>
           <div className={styles.bestGrid}>{bestItems.slice(0, 10)}</div>
           <div className={styles.bestGrid}>{bestItems.slice(10, 20)}</div>
         </Slider>

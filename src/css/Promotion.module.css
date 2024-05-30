@@ -213,14 +213,33 @@ h2 {
   }
   
   .bestGrid {
-    display: grid;
+    display: grid !important;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
   }
   
+  .besttext {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .besttext > * {
+    margin: 0px; /* 원하는 간격으로 조정 */
+  }
+  .middletext{
+    display: flex;
+    margin: 0;
+  }
+  .priceCart {
+    margin-left: 50px; /* 아이콘과 텍스트 사이의 간격 조정 */
+  }
   .centeredHeading {
     text-align: center;
     margin: 20px 0;
+  }
+  .bestGreyBox {
+    height: 150px;
   }
   
 /* 새로운 그리드 섹션 */

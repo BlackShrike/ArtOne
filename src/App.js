@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Promotion from "./components/Promotion";
-import Original from "./components/Original";
-import FAQ from "./components/FAQ";
-import MorePromotion from "./components/MorePromotion";
-import Login from "./components/Login";
-import SearchResults from "./components/SearchResults";
-import FindAccount from "./components/FindAccount";
-import FindAccountResult from "./components/FindAccountResult";
-import Signup from "./components/Singup";
-import MyPage from "./components/Mypage";
-import Checkout from "./components/Checkout";
-import Ordercheckout from "./components/Ordercheckout";
-import Paymentresult from "./components/Paymentresult";
-import Signature from "./components/Signature";
+import Promotion from "./pages/Promotion";
+import Original from "./pages/Original";
+import FAQ from "./pages/FAQ";
+import MorePromotion from "./pages/MorePromotion";
+import Login from "./pages/Login";
+import SearchResults from "./pages/SearchResults";
+import FindAccount from "./pages/FindAccount";
+import FindAccountResult from "./pages/FindAccountResult";
+import Signup from "./pages/Singup";
+import MyPage from "./pages/Mypage";
+import Checkout from "./pages/Checkout";
+import Ordercheckout from "./pages/Ordercheckout";
+import Paymentresult from "./pages/Paymentresult";
+import Signature from "./pages/Signature";
+import Artist from "./pages/Artist";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/Promotion" element={<Promotion />} />
           <Route path="/Signature" element={<Signature />} />
           <Route path="/Original" element={<Original />} />
+          <Route path="/Artist" element={<Artist />} />
           <Route path="/Login" element={<Login onLogin={handleLogin} />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/MorePromotion" element={<MorePromotion />} />

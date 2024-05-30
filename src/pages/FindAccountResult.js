@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/FindAccountResult.module.css"; // Ensure the path is correct
-
+import BackButton from "../components/BackButton";
 function FindAccountResult({ type }) {
   return (
     <div className={styles.findAccountResultContainer}>
-      <div className={styles.backLink}>
-        <a href="/">← 뒤로가기</a>
-      </div>
+      <BackButton />
       <h2>홍길동님 {type === "id" ? "아이디" : "비밀번호"}</h2>
       <div className={styles.result}>
         {type === "id" ? (

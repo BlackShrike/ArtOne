@@ -9,9 +9,8 @@
 }
 
 .gridItem {
-  border: 1px solid #ccc;
   padding: 10px;
-  background-color: #f9f9f9;
+  text-align: left;
 }
 
 .imagePlaceholder {
@@ -20,11 +19,14 @@
   background-color: #ddd;
   margin-bottom: 10px;
 }
-
-.itemDetails {
-  text-align: center;
+.headtext{
+  font-weight: bold;
 }
 
+
+.itemDetails p{
+  font-size: 10px;
+}
 .pagination {
   display: flex;
   justify-content: center;
