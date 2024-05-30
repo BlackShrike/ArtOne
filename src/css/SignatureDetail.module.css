@@ -1,0 +1,171 @@
+.detailPage {
+    padding: 20px;
+  }
+  
+  .detailContainer {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .imageSection {
+    flex: 1;
+  }
+  
+  .mainImagePlaceholder {
+    width: 100%;
+    height: 400px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .thumbnailContainer {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .thumbnailPlaceholder {
+    width: 50px;
+    height: 50px;
+    background-color: #ddd;
+  }
+  
+  .infoSection {
+    flex: 1;
+  }
+  
+  .itemName, .itemTitle, .itemPrice {
+    margin: 10px 0;
+  }
+  
+  .optionSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .colors, .sizeSelect {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .colorOption {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .buyButton, .reviewButton {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sectionTitle {
+    margin-top: 40px;
+    font-size: 24px;
+  }
+  
+  .similarItemsContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  
+  .similarItem {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .similarImagePlaceholder {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modalContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+  }
+  
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .modalBody {
+    margin-top: 20px;
+  }
+  
+  .titleInput, .reviewTextarea {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .imageUpload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .imagePlaceholder {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd;
+  }
+  
+  .submitButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .modalTabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tabButton {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .tabButton.active {
+    font-weight: bold;
+  }
+  
+  .modalBody {
+    max-height: 400px;
+    overflow-y: auto;
+  }

@@ -1,35 +1,42 @@
 .artistContainer {
-    padding: 20px;
-  }
-  
-  .alphabetContainer {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .letter {
-    margin: 0 10px;
-    text-decoration: none;
-    color: black;
-    font-size: 14px; /* Reduced font size */
-  }
-  
-  .artistSection {
-    margin-bottom: 40px;
-  }
-  
-  .letterHeader {
-    font-size: 18px; /* Reduced font size */
-  }
-  
-  .artistList {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .artistName {
-    margin: 5px 10px;
-    text-decoration: none;
-    color: black;
-  }
+  padding: 20px;
+}
+
+.alphabetContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.letter {
+  margin: 0 10px;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.activeLetter {
+  color: red;
+  font-weight: bold;
+}
+
+.artistSection {
+  margin-bottom: 40px;
+}
+
+.letterHeader {
+  font-size: 18px;
+}
+
+.artistList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.artistName {
+  margin: 5px 10px;
+  text-decoration: none;
+  color: black;
+}

@@ -1,0 +1,104 @@
+.reviewPage {
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  .headerDivider {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .searchLabel {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .searchInput {
+    padding: 10px;
+    width: 200px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .searchButton {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    font-weight: lighter;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  
+  .gridItem {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  .imagePlaceholder {
+    width: 100%;
+    height: 150px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+  .itemDetails h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .itemDetails p {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pageNumber,
+  .pageArrow {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .pageNumber:hover,
+  .pageArrow:hover {
+    background-color: #f1f1f1;
+  }
+  

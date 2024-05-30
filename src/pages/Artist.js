@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Artist.module.css"; // Ensure this path is correct based on your project structure
 import BackButton from "../components/BackButton";
@@ -47,32 +47,38 @@ const artists = {
 };
 
 function Artist() {
+  const [selectedLetter, setSelectedLetter] = useState("ㄱ");
+
   return (
     <div className={styles.artistContainer}>
       <BackButton />
       <div className={styles.alphabetContainer}>
         {Object.keys(artists).map((letter) => (
-          <a key={letter} href={`#${letter}`} className={styles.letter}>
+          <button
+            key={letter}
+            className={`${styles.letter} ${
+              selectedLetter === letter ? styles.active : ""
+            }`}
+            onClick={() => setSelectedLetter(letter)}
+          >
             {letter}
-          </a>
+          </button>
         ))}
       </div>
-      {Object.keys(artists).map((letter) => (
-        <div key={letter} id={letter} className={styles.artistSection}>
-          <h2 className={styles.letterHeader}>{letter}</h2>
-          <div className={styles.artistList}>
-            {artists[letter].map((artist, index) => (
-              <Link
-                key={index}
-                to={`/artistdetail`}
-                className={styles.artistName}
-              >
-                {artist}
-              </Link>
-            ))}
-          </div>
+      <div className={styles.artistSection}>
+        <h2 className={styles.letterHeader}>{selectedLetter}</h2>
+        <div className={styles.artistList}>
+          {artists[selectedLetter].map((artist, index) => (
+            <Link
+              key={index}
+              to={`/artistdetail`}
+              className={styles.artistName}
+            >
+              {artist}
+            </Link>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }

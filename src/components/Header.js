@@ -95,8 +95,8 @@ function Header({ isLoggedIn, onLogout }) {
         </span>
         <span className={styles.separator}>|</span>
         <Link to="/Artist"> 아티스트</Link>
-        <span>비즈니스</span>
-        <span>리뷰</span>
+        <Link to="/Business"> 비즈니스</Link>
+        <Link to="/Review">리뷰</Link>
         <span>
           <Link to="/faq">FAQ</Link>
         </span>

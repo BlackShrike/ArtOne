@@ -17,6 +17,9 @@ import Ordercheckout from "./pages/Ordercheckout";
 import Paymentresult from "./pages/Paymentresult";
 import Signature from "./pages/Signature";
 import Artist from "./pages/Artist";
+import ArtistDetail from "./pages/ArtistDetail";
+import Business from "./pages/Business";
+import Review from "./pages/Review";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -36,6 +39,9 @@ function App() {
           <Route path="/Signature" element={<Signature />} />
           <Route path="/Original" element={<Original />} />
           <Route path="/Artist" element={<Artist />} />
+          <Route path="/ArtistDetail" element={<ArtistDetail />} />
+          <Route path="/Business" element={<Business />} />
+          <Route path="/Review" element={<Review />} />
           <Route path="/Login" element={<Login onLogin={handleLogin} />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/MorePromotion" element={<MorePromotion />} />
