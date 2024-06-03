@@ -20,6 +20,7 @@ import Artist from "./pages/Artist";
 import ArtistDetail from "./pages/ArtistDetail";
 import Business from "./pages/Business";
 import Review from "./pages/Review";
+import SignatureDetail from "./pages/SignatureDetail";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,6 +38,7 @@ function App() {
         <Routes>
           <Route path="/Promotion" element={<Promotion />} />
           <Route path="/Signature" element={<Signature />} />
+          <Route path="/SignatureDetail" element={<SignatureDetail />} />
           <Route path="/Original" element={<Original />} />
           <Route path="/Artist" element={<Artist />} />
           <Route path="/ArtistDetail" element={<ArtistDetail />} />

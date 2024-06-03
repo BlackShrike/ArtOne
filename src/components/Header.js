@@ -16,7 +16,9 @@ function Header({ isLoggedIn, onLogout }) {
   return (
     <header className={styles.header}>
       <section className={styles.headerTop}>
-        <h1>ARTKO</h1>
+        <Link to="/">
+          <h1>ARTKO</h1>
+        </Link>
         <input
           className={styles.searchInput}
           placeholder="아티스트, 장르, 스타일, 테마 등을 입력해보세요"

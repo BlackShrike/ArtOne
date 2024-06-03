@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import styles from "../css/Signature.module.css";
 import BackButton from "../components/BackButton";
@@ -39,7 +40,7 @@ function Signature() {
     );
 
     return items.map((item) => (
-      <div key={item} className={styles.gridItem}>
+      <Link to={`/SignatureDetail/`} key={item} className={styles.gridItem}>
         <div className={styles.imagePlaceholder}></div>
         <div className={styles.itemDetails}>
           <div>
@@ -51,7 +52,7 @@ function Signature() {
           </div>
           <FaCartPlus />
         </div>
-      </div>
+      </Link>
     ));
   };
 
