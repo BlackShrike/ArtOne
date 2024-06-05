@@ -363,29 +363,11 @@
   justify-content: center; /* 중앙 정렬 */
 }
 
-.membershipLevel.white {
-  background-color: white;
-}
-
-.membershipLevel.cian {
-  background-color: #00bfff;
-}
-
-.membershipLevel.magenta {
-  background-color: #ff00ff;
-}
-
-.membershipLevel.yellow {
-  background-color: #ffff00;
-}
-
-.membershipLevel.black {
-  background-color: black;
-  color: white;
-}
 
 .membershipLevel.selected {
   border: 2px solid #333;
+  background-color: black;
+  color: white;
 }
 
 .membershipLevel.black.selected {

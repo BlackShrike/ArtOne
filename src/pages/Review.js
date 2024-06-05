@@ -34,7 +34,7 @@ function Review() {
             <div className={styles.itemDetails}>
               <h3>{review.title}</h3>
               <p>{review.description}</p>
-              <p>⭐️ {review.rating}</p>
+              <p>Rating: {review.rating}</p>
               <p>{review.author}</p>
               <p>댓글 {review.comments}</p>
             </div>

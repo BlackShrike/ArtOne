@@ -35,6 +35,7 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
 .details h1,
 .details h2,
 .details p {
@@ -46,6 +47,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .selectionRow {
   display: flex;
   flex-direction: column;
@@ -65,7 +67,6 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-
 }
 
 .colors {
@@ -110,7 +111,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-
 }
 
 .reviewNotice {
@@ -122,12 +122,14 @@
   border-bottom: 1px solid #ccc;
   padding: 5px;
 }
+
 .writeReviewButton {
   border: none;
   background-color: transparent;
   font-size: 20px;
   font-weight: bold;
 }
+
 .reviewList {
   width: 100%;
   margin-top: 10px;
@@ -136,6 +138,7 @@
 .reviewItem {
   padding: 10px 0;
 }
+
 .reviewImagePlaceholder {
   width: 15%;
   height: 120px;
@@ -152,8 +155,13 @@
 }
 
 .reviewContent {
-  margin-top: 5px;
-  color: #666;
+  width: 90%; /* 넓이를 내용과 동일하게 맞춤 */
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  height: 100px;
 }
 
 .reviewSeparator {
@@ -219,6 +227,7 @@
   padding: 20px;
   border-radius: 5px;
   position: relative;
+  width: 400px; /* 원하는 너비로 설정 */
 }
 
 .closeIcon {
@@ -238,7 +247,7 @@
 .uploadIcon {
   font-size: 100px;
   cursor: pointer;
-  transform: scale(0.5,0.5);
+  transform: scale(0.5, 0.5);
 }
 
 .imageUploadPlaceholder {

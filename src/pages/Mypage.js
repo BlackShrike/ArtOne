@@ -186,23 +186,18 @@ function MyPage() {
             <div className={styles.membershipLevels}>
               {["White", "Cian", "Magenta", "Yellow", "Black"].map(
                 (level, index) => {
-                  const isBlackSelected =
-                    level === "Black" && membership === level;
-                  const levelColor = isBlackSelected ? "white" : "black";
+                  const isSelected = membership === level;
                   return (
                     <div
                       key={level}
                       className={`${styles.membershipLevel} ${
-                        membership === level ? styles.selected : ""
+                        isSelected ? styles.selected : ""
                       } ${styles[level.toLowerCase()]}`}
                       onClick={() => handleMembershipClick(level)}
                       style={{
                         height: `${50 + index * 20}px`,
-                        color: levelColor,
-                        backgroundColor:
-                          membership === level
-                            ? getColor(level)
-                            : "transparent",
+                        color: isSelected ? "white" : "black",
+                        backgroundColor: isSelected ? "black" : "transparent",
                       }}
                     >
                       <div
@@ -267,7 +262,9 @@ function MyPage() {
                     {membership}
                   </span>
                 </span>
-                <FaArrowRight />
+                <FaArrowRight
+                  onClick={() => setSelectedSection("membership")}
+                />
               </div>
               <div className={styles.userInfoCards}>
                 <div className={styles.userInfoCard}>

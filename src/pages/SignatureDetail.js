@@ -2,6 +2,24 @@ import React, { useState } from "react";
 import styles from "../css/SignatureDetail.module.css";
 import BackButton from "../components/BackButton";
 import { FaTimes, FaCartPlus, FaPlus } from "react-icons/fa";
+const reviewTitles = [
+  "너무 좋아요!",
+  "괜찮아요.",
+  "별로에요.",
+  "최고에요!",
+  "추천합니다.",
+];
+
+const reviewContents = [
+  "디자인이 좋아서 구매했어요. 색감도 예쁘고 마음에 들어요!",
+  "사용해보니 괜찮습니다. 무난해요.",
+  "품질이 기대 이하입니다. 다시 구매하지 않을 것 같아요.",
+  "정말 최고입니다! 강력 추천해요.",
+  "친구에게도 추천할만한 제품입니다.",
+];
+function getRandomElement(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 function SignatureDetail() {
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -116,10 +134,12 @@ function SignatureDetail() {
           {Array.from({ length: 5 }).map((_, index) => (
             <div key={index} className={styles.reviewItem}>
               <p className={styles.reviewer}>ooo님</p>
-              <p className={styles.reviewTitle}>리뷰 제목 {index + 1}</p>
+              <p className={styles.reviewTitle}>
+                {getRandomElement(reviewTitles)}
+              </p>
               <div className={styles.reviewImagePlaceholder}></div>
               <p className={styles.reviewContent}>
-                리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용 리뷰 내용
+                {getRandomElement(reviewContents)}
               </p>
               <div className={styles.reviewSeparator}></div>
             </div>
@@ -149,11 +169,13 @@ function SignatureDetail() {
           <div className={styles.modalContent}>
             <FaTimes className={styles.closeIcon} onClick={toggleReviewModal} />
             <h2>리뷰 작성하기</h2>
-            <input
-              className={styles.reviewHead}
-              type="text"
-              placeholder="제목"
-            />
+            <select className={styles.reviewHead}>
+              <option>제목을 선택해 주세요</option>
+              <option>제품 감사합니다. 잘 받았어요.</option>
+              <option>집이 화사해 보여서 정말 좋아요!</option>
+              <option>작품이 너무 예뻐요. 추천합니다.</option>
+              <option>작품이 너무 마음에 들어요!</option>
+            </select>
             <textarea
               className={styles.reviewContent}
               placeholder="리뷰를 작성해 주세요."
