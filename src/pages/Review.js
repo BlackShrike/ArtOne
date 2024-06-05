@@ -2,10 +2,14 @@ import React from "react";
 import styles from "../css/Review.module.css";
 import BackButton from "../components/BackButton";
 
+function getRandomRating() {
+  return Math.floor(Math.random() * 5) + 1;
+}
+
 const reviews = Array.from({ length: 20 }).map((_, index) => ({
   title: "너무 좋아요!",
   description: "디자인이 좋아서 구매했어요. 색감도 예쁘고 마음에 들어요!",
-  rating: 5,
+  rating: getRandomRating(),
   author: "유저명",
   comments: 2,
 }));
@@ -34,7 +38,7 @@ function Review() {
             <div className={styles.itemDetails}>
               <h3>{review.title}</h3>
               <p>{review.description}</p>
-              <p>Rating: {review.rating}</p>
+              <p>{review.rating}</p>
               <p>{review.author}</p>
               <p>댓글 {review.comments}</p>
             </div>
