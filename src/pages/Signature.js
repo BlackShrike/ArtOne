@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, Routes, Route } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import styles from "../css/Signature.module.css";
 import BackButton from "../components/BackButton";
+import SignatureDetail from "./SignatureDetail";
 
 function Signature() {
+  const { id } = useParams();
+
+  if (id) {
+    return <SignatureDetail />;
+  }
+
   const [selectedMenu, setSelectedMenu] = useState("전체");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 50; // 한 페이지에 50개 항목 표시
+  const itemsPerPage = 50;
 
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
-    setCurrentPage(1); // Reset to first page on menu change
+    setCurrentPage(1);
   };
 
   const handlePageChange = (pageNumber) => {
@@ -30,7 +37,7 @@ function Signature() {
     "포스터",
   ];
 
-  const totalItems = 200; // 예시로 총 200개의 항목이 있다고 가정
+  const totalItems = 200;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const renderItems = () => {
@@ -40,7 +47,7 @@ function Signature() {
     );
 
     return items.map((item) => (
-      <Link to={`/SignatureDetail/`} key={item} className={styles.gridItem}>
+      <Link to={`/Signature/${item}`} key={item} className={styles.gridItem}>
         <div className={styles.imagePlaceholder}></div>
         <div className={styles.itemDetails}>
           <div>

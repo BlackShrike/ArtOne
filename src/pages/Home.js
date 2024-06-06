@@ -29,10 +29,11 @@ const bestSettings = {
   centerMode: false,
   centerPadding: "0px",
 };
-function Promotion(props) {
-  const promotionMain = Array.from({ length: 8 }, (_, index) => (
-    <div key={index} className={styles.promotionGridWrapper}>
-      <div className={styles.promotionGrid}>
+
+function Home(props) {
+  const homeMain = Array.from({ length: 8 }, (_, index) => (
+    <div key={index} className={styles.homeGridWrapper}>
+      <div className={styles.homeGrid}>
         <div className={`${styles.item} ${styles.largeItem}`}>
           <div className={styles.greyBox}></div>
           <div className={styles.text}>
@@ -157,10 +158,9 @@ function Promotion(props) {
     </div>
   ));
   return (
-    <div>
-      (
+    <div className={styles.homeContainer}>
       <div className={styles.sliderContainer}>
-        <Slider {...mainSettings}>{promotionMain}</Slider>
+        <Slider {...mainSettings}>{homeMain}</Slider>
       </div>
       <h2 className={styles.centeredHeading}>BEST</h2>
       <div className={styles.bestSliderContainer}>
@@ -231,4 +231,4 @@ function Promotion(props) {
   );
 }
 
-export default Promotion;
+export default Home;

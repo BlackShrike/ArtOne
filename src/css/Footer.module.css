@@ -1,26 +1,42 @@
 .footer {
-    font-family: "Noto Sans KR", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    background-color: #f8f9fa;
-    padding: 20px 0;
-    text-align: center;
-    border-top: 1px solid #f0f0f0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+}
+
+.footerLogo {
+  font-weight: 900;
+  margin-bottom: 10px;
+  font-size: 26px;
+  color: #777777;
+}
+
+.footerInfo {
+  font-size: 14px;
+  color: #666666;
+}
+
+.footerInfo p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.footerToggle {
+  cursor: pointer;
+  font-size: 16px;
+  color: #777777;
+  display: none; /* 기본적으로 숨김 */
+}
+
+@media (max-width: 767px) {
+  .footerToggle {
+    display: block; /* 모바일 화면에서는 보이게 */
   }
-  
-  .footerLogo {
-    font-weight: 900;
-    margin-bottom: 10px;
-    font-size: 26px;
-    color: #777777;
+  .footerInfo.visible {
+    display: block; /* 모바일에서 토글 시 보이게 */
   }
-  
-  .footerInfo {
-    font-size: 14px;
-    color: #666666;
-  }
-  
-  .footerInfo p {
-    margin: 5px 0;
-    line-height: 1.5;
-  }
+}

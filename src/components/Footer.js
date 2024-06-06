@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../css/Footer.module.css";
 
 function Footer(props) {
+  const [isInfoVisible, setIsInfoVisible] = useState(false);
+
+  const toggleInfoVisibility = () => {
+    setIsInfoVisible(!isInfoVisible);
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footerLogo}>
         <span>©ARTKO</span>
       </div>
-      <div className={styles.footerInfo}>
+      <div className={styles.footerToggle} onClick={toggleInfoVisibility}>
+        {isInfoVisible ? "∧" : "∨"}
+      </div>
+      <div className={`${styles.footerInfo} ${isInfoVisible ? "visible" : ""}`}>
         <p>
           contemporaryk | 대표자명: 박준호 | 사업자번호: 446-33-01334 |
           통신판매신고번호: 제 2024-인천연수구-1067 호 (사업자 정보 확인) |

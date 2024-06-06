@@ -1,6 +1,6 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
-import styles from "../css/PromotionDetail.module.css"; // Ensure the path is correct
+import { useParams } from "react-router-dom";
+import styles from "../css/PromotionDetail.module.css";
 import BackButton from "../components/BackButton";
 import { FaCartPlus } from "react-icons/fa";
 

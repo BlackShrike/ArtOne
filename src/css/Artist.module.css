@@ -9,11 +9,14 @@
 }
 
 .letter {
-  margin: 0 10px;
+  margin: 0px;
   text-decoration: none;
   color: black;
+  background-color: transparent;
   font-size: 14px;
   cursor: pointer;
+  border: 0px;
+  font-weight: bold;
 }
 
 .activeLetter {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import styles from "../css/Artist.module.css"; // Ensure this path is correct based on your project structure
 import BackButton from "../components/BackButton";
 
@@ -45,7 +45,6 @@ const artists = {
   Y: ["Yasmine", "Yvonne", "Yvette", "Yves", "Yvette"],
   Z: ["Zachary", "Zane", "Zara", "Zelda", "Zoey"],
 };
-
 function Artist() {
   const [selectedLetter, setSelectedLetter] = useState("ㄱ");
 
@@ -57,7 +56,7 @@ function Artist() {
           <button
             key={letter}
             className={`${styles.letter} ${
-              selectedLetter === letter ? styles.active : ""
+              selectedLetter === letter ? styles.activeLetter : ""
             }`}
             onClick={() => setSelectedLetter(letter)}
           >
@@ -71,7 +70,7 @@ function Artist() {
           {artists[selectedLetter].map((artist, index) => (
             <Link
               key={index}
-              to={`/artistdetail`}
+              to={`/artist/${artist}`}
               className={styles.artistName}
             >
               {artist}
@@ -79,6 +78,7 @@ function Artist() {
           ))}
         </div>
       </div>
+      <Outlet />
     </div>
   );
 }

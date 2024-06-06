@@ -1,5 +1,4 @@
-
-h2 {
+.homeContainer h2 {
     display: flex;
     justify-content: center;
 }
@@ -9,7 +8,7 @@ h2 {
     margin: 0 auto;
 }
 
-.promotionGrid {
+.homeGrid {
     display: grid !important;
     gap: 5px;
     grid-template-columns: repeat(12, 1fr); /* 12 columns */
@@ -204,43 +203,44 @@ h2 {
     text-align: left;
     font-size: 12px;
 }
+
 .bestItem {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-  }
+}
   
-  .bestGrid {
+.bestGrid {
     display: grid !important;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-  }
+}
   
-  .besttext {
+.besttext {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-  }
+}
   
-  .besttext > * {
+.besttext > * {
     margin: 0px; /* 원하는 간격으로 조정 */
-  }
-  .middletext{
+}
+.middletext {
     display: flex;
     margin: 0;
-  }
-  .priceCart {
+}
+.priceCart {
     margin-left: 50px; /* 아이콘과 텍스트 사이의 간격 조정 */
-  }
-  .centeredHeading {
+}
+.centeredHeading {
     text-align: center;
     margin: 20px 0;
-  }
-  .bestGreyBox {
+}
+.bestGreyBox {
     height: 150px;
-  }
+}
   
 /* 새로운 그리드 섹션 */
 .newGrid {
@@ -251,7 +251,7 @@ h2 {
 .newGridContainer {
     display: grid;
     grid-template-columns: repeat(4, 300px);
-    grid-template-rows: repeat(5,100px);
+    grid-template-rows: repeat(5, 100px);
     gap: 10px;
     grid-template-areas: 
         "item1 item2 item2 item3"
@@ -260,7 +260,7 @@ h2 {
         "item5 item6 item6 item7"
         "item5 item6 item6 item7";
     width: 1200px; /* 그리드의 최대 너비를 설정 */
-    margin:  auto; /* 그리드를 가로 중앙으로 정렬 */
+    margin: auto; /* 그리드를 가로 중앙으로 정렬 */
 }
 
 .newGridItem {
@@ -279,7 +279,6 @@ h2 {
 .gridItem5 { grid-area: item5; }
 .gridItem6 { grid-area: item6; }
 .gridItem7 { grid-area: item7; }
-
 
 /* New Grid for 비대칭 그리드 */
 .asymmetricGrid {

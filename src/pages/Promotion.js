@@ -1,17 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import styles from "../css/Promotion.module.css"; // Ensure the path is correct
+import { Link, useParams } from "react-router-dom";
+import styles from "../css/Promotion.module.css";
 import BackButton from "../components/BackButton";
+import PromotionDetail from "./PromotionDetail";
 
-function Promotion(props) {
+function Promotion() {
+  const { id } = useParams();
+
+  if (id) {
+    return <PromotionDetail />;
+  }
+
   return (
     <div className={styles.gridPage}>
       <BackButton />
       <div className={styles.gridContainer}>
-        {Array.from({ length: 8 }).map((_, index) => (
+        {Array.from({ length: 20 }).map((_, index) => (
           <Link
             key={index}
-            to={`/promotion/${index + 1}`}
+            to={`/Promotion/${index + 1}`}
             className={styles.gridItem}
           >
             <div className={styles.imagePlaceholder}></div>

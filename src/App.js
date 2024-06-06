@@ -9,17 +9,17 @@ import Login from "./pages/Login";
 import SearchResults from "./pages/SearchResults";
 import FindAccount from "./pages/FindAccount";
 import FindAccountResult from "./pages/FindAccountResult";
-import Signup from "./pages/Singup";
+import Signup from "./pages/Signup";
 import MyPage from "./pages/Mypage";
 import Checkout from "./pages/Checkout";
 import Ordercheckout from "./pages/Ordercheckout";
 import Paymentresult from "./pages/Paymentresult";
 import Signature from "./pages/Signature";
+import SignatureDetail from "./pages/SignatureDetail";
 import Artist from "./pages/Artist";
 import ArtistDetail from "./pages/ArtistDetail";
 import Business from "./pages/Business";
 import Review from "./pages/Review";
-import SignatureDetail from "./pages/SignatureDetail";
 import Promotion from "./pages/Promotion";
 import PromotionDetail from "./pages/PromotionDetail";
 
@@ -33,25 +33,26 @@ function App() {
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
+
   return (
     <BrowserRouter>
       <div className="App">
         <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Promotion" element={<Promotion />} />
+          <Route path="/promotion" element={<Promotion />} />
           <Route path="/promotion/:id" element={<PromotionDetail />} />
-          <Route path="/Signature" element={<Signature />} />
-          <Route path="/SignatureDetail" element={<SignatureDetail />} />
-          <Route path="/Original" element={<Original />} />
-          <Route path="/Artist" element={<Artist />} />
-          <Route path="/ArtistDetail" element={<ArtistDetail />} />
-          <Route path="/Business" element={<Business />} />
-          <Route path="/Review" element={<Review />} />
-          <Route path="/Login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/signature" element={<Signature />} />
+          <Route path="/signature/:id" element={<SignatureDetail />} />
+          <Route path="/original" element={<Original />} />
+          <Route path="/artist" element={<Artist />} />
+          <Route path="/artist/:artistName" element={<ArtistDetail />} />
+          <Route path="/business" element={<Business />} />
+          <Route path="/review" element={<Review />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/Search-Results" element={<SearchResults />} />
-          <Route path="/FindAccount" element={<FindAccount />} />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/findaccount" element={<FindAccount />} />
           <Route
             path="/find-account-result-id"
             element={<FindAccountResult type="id" />}
@@ -60,22 +61,22 @@ function App() {
             path="/find-account-result-pw"
             element={<FindAccountResult type="pw" />}
           />
-          <Route path="/SignUp" element={<Signup />} />
-          <Route path="/Mypage" element={<MyPage />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/mypage" element={<MyPage />} />
           <Route
-            path="/Checkout"
+            path="/checkout"
             element={
               isLoggedIn ? <Checkout /> : <Login onLogin={handleLogin} />
             }
           />
           <Route
-            path="/Ordercheckout"
+            path="/ordercheckout"
             element={
               isLoggedIn ? <Ordercheckout /> : <Login onLogin={handleLogin} />
             }
           />
           <Route
-            path="/Paymentresult"
+            path="/paymentresult"
             element={
               isLoggedIn ? <Paymentresult /> : <Login onLogin={handleLogin} />
             }

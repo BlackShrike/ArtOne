@@ -1,3 +1,4 @@
+/* Header.module.css */
 .header {
   display: flex;
   flex-direction: column;
@@ -9,7 +10,8 @@
   font-style: normal;
 }
 
-.headerTop, .headerBottom {
+.headerTop,
+.headerBottom {
   display: flex;
   align-items: center;
   width: 100%;
@@ -61,32 +63,50 @@
   margin: 0 10px;
 }
 
+.link {
+  color: black;
+  text-decoration: none;
+  padding-bottom: 5px;
+  transition: all 0.3s;
+}
+
+.link:hover {
+  border-bottom: 2px solid red;
+}
+
+.link.active {
+  color: red;
+  border-bottom: 2px solid red;
+}
+
 .dropdownMenu {
   position: absolute;
   top: 100%;
   left: 0;
   background-color: white;
   border: 1px solid #ccc;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* Adjust to have 6 items per row */
   z-index: 10;
   width: 100%;
-  padding: 10px 0;
+  padding-top: 10px;
+  padding-right: 40%;
   box-sizing: border-box;
-  justify-content: flex-start;
+  gap: 10px;
 }
 
 .dropdownItem {
-  width: calc(20%); /* Ensure each item takes up 20% of the width, with margins */
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .dropdownBox {
-  width: 80px;
-  height: 80px;
+  width: 125px;
+  height: 125px;
   background-color: #ccc;
   margin-bottom: 5px;
 }
@@ -97,21 +117,78 @@
   text-align: center;
 }
 
-.signatureMenu .dropdownItem {
-  width: calc(14%); /* Ensure each item takes up 25% of the width, with margins */
-}
-
-@media (max-width: 768px) {
-  .dropdownItem {
-    width: calc(54%); /* Two items per row on smaller screens */
-  }
-
-  .signatureMenu .dropdownItem {
-    width: calc(30%); /* Three items per row on smaller screens */
-  }
-}
-
 .logoutButton {
   cursor: pointer;
   color: #333;
+}
+
+.hamburgerMenu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburgerLines {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 4px 0;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+.mobileMenuLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.mobileMenuLinks span,
+.mobileMenuLinks a {
+  font-size: 1.2em;
+  padding: 10px 0;
+  width: 100%;
+  text-align: left;
+}
+
+.mobileMenuLinks .separator {
+  display: none;
+}
+
+.show {
+  display: block !important;
+}
+
+@media (max-width: 768px) {
+  .headerBottom {
+    display: none;
+  }
+
+  .hamburgerMenu {
+    display: block;
+  }
+
+  .dropdownMenu {
+    grid-template-columns: repeat(2, 1fr);
+    padding-right: 0;
+  }
+
+  .dropdownItem {
+    width: auto;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border: 1px solid #ccc;
+    z-index: 10;
+  }
 }

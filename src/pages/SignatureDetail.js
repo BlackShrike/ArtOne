@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import styles from "../css/SignatureDetail.module.css";
 import BackButton from "../components/BackButton";
 import { FaTimes, FaCartPlus, FaPlus } from "react-icons/fa";
+
 const reviewTitles = [
   "너무 좋아요!",
   "괜찮아요.",
@@ -17,11 +19,13 @@ const reviewContents = [
   "정말 최고입니다! 강력 추천해요.",
   "친구에게도 추천할만한 제품입니다.",
 ];
+
 function getRandomElement(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function SignatureDetail() {
+  const { id } = useParams();
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
@@ -42,22 +46,16 @@ function SignatureDetail() {
           </div>
         </div>
         <div className={styles.details}>
-          <h1>Frank Chouteau Brown(작가이름)</h1>
-          <h2>Linen Like Hard Twist Cotton 1 (작품명)</h2>
+          <h1>작품명 {id}</h1>
+          <h2>작품 설명</h2>
           <p>
-            1980년대 미니멀리즘 작품{" "}
-            <span className={styles.price}>270,000원</span>
+            설명내용 <span className={styles.price}>270,000원</span>
           </p>
-          <p>
-            프랭크 쇼트 브라운(Frank Chouteau Brown)은 미네소타주
-            미니애폴리스(Minneapolis)에서 태어나 미니애폴리스
-            미술학교(Minneapolis School of Fine Arts), 보스턴 아트 클럽(Boston
-            Art Club) 등 유럽에서 교육을 받은 미국인 건축가 입니다.
-          </p>
+          <p>작가 설명</p>
           <div className={styles.selectionRow}>
             <div className={styles.colorSelection}>
               <p>
-                COLOR{" "}
+                COLOR
                 <div className={styles.colors}>
                   <span
                     className={styles.color}
@@ -96,7 +94,7 @@ function SignatureDetail() {
             </div>
             <div className={styles.sizeSelection}>
               <p>
-                SIZE{" "}
+                SIZE
                 <select>
                   <option>옵션을 선택해 주세요</option>
                   <option>30 x 30 mm</option>
