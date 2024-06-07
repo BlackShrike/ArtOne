@@ -20,26 +20,35 @@
         "large large large large large large small-right1 small-right1 small-right1 small-right6 small-right6 small-right6"
         "large large large large large large small-right2 small-right2 small-right2 small-right7 small-right7 small-right7"
         "large large large large large large small-right3 small-right3 small-right3 small-right8 small-right8 small-right8"
-        "small-left1 small-left1 small-left1 . . . small-right4 small-right4 small-right4 small-right9 small-right9 small-right9"
-        "small-left2 small-left2 small-left2 . . . small-right5 small-right5 small-right5 small-right10 small-right10 small-right10";
+        "small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-right4 small-right4 small-right4 small-right9 small-right9 small-right9"
+        "small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-right5 small-right5 small-right5 small-right10 small-right10 small-right10";
     margin: auto;
-    padding: 20px;
+    padding: 10px;
 }
-
+.homePrice {
+    font-weight: bold;
+}
 .item {
-    display: flex;
+    display: flex; 
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
     font-family: "Noto Sans KR", sans-serif;
 }
-
+.item p {
+    margin: 5px 5px;
+}
 .greyBox {
     width: 100%;
     height: 80%;
     background-color: #ddd;
 }
 
+.smallGreyBox {
+    width: 80px;
+    height: 100px;
+    background-color: #ddd;
+}
 .largeItem {
     grid-area: large;
 }

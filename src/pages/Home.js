@@ -37,106 +37,118 @@ function Home(props) {
         <div className={`${styles.item} ${styles.largeItem}`}>
           <div className={styles.greyBox}></div>
           <div className={styles.text}>
-            <p>Large Item</p>
-            <p>Description for large item</p>
+            <p>[NEW IN]건강 챙기는 선물이 최고, 프리미엄 꿀 브랜드</p>
+            <p>건강 선물도 고급스럽게 - 신규 F&B브랜드 워커비를 소개합니다.</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.mediumItem1}`}>
           <div className={styles.greyBox}></div>
           <div className={styles.text}>
-            <p>Medium Item 1</p>
-            <p>Description for medium item 1</p>
+            <p>FRESH BAKE, 따끈한 입고소식</p>
+            <p>프린트베이커리에 새로 입고한 따끈따끈한 신상품 모아보기</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.mediumItem2}`}>
           <div className={styles.greyBox}></div>
           <div className={styles.text}>
-            <p>Medium Item 2</p>
-            <p>Description for medium item 2</p>
+            <p>FRESH BAKE, 따끈한 입고소식</p>
+            <p>프린트베이커리에 새로 입고한 따끈따끈한 신상품 모아보기</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemLeft1}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Left 1</p>
-            <p>Description for small left 1</p>
+            <p>툴프레스 Toolpress</p>
+            <p>[PB ONLY]Print Bakery 한지 엽서</p>
+            <p className={styles.homePrice}>7,500원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemLeft2}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Left 2</p>
-            <p>Description for small left 2</p>
+            <p>호랑 HORANG</p>
+            <p>실버 디지트 커트러티 SET</p>
+            <p className={styles.homePrice}>42,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight1}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 1</p>
-            <p>Description for small right 1</p>
+            <p>워커비 WORKERBEE</p>
+            <p>허니 로열 젤리</p>
+            <p className={styles.homePrice}>228,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight2}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 2</p>
-            <p>Description for small right 2</p>
+            <p>워커비 WORKERBEE</p>
+            <p>워커비 스페셜 허니 박스</p>
+            <p className={styles.homePrice}>152,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight3}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 3</p>
-            <p>Description for small right 3</p>
+            <p>워커비 WORKERBEE</p>
+            <p>허니 미니 차 GIFT SET - 3개입</p>
+            <p className={styles.homePrice}>14,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight4}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 4</p>
-            <p>Description for small right 4</p>
+            <p>워커비 WORKERBEE</p>
+            <p>허니 로열 젤리</p>
+            <p className={styles.homePrice}>228,000</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight5}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 5</p>
-            <p>Description for small right 5</p>
+            <p>워커비 WORKERBEE</p>
+            <p>워커비 스페셜 허니 박스</p>
+            <p className={styles.homePrice}>152,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight6}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 6</p>
-            <p>Description for small right 6</p>
+            <p>워커비 WORKERBEE</p>
+            <p>허니 로열 젤리</p>
+            <p className={styles.homePrice}>228,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight7}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 7</p>
-            <p>Description for small right 7</p>
+            <p>워커비 WORKERBEE</p>
+            <p>워커비 스페셜 허니 박스</p>
+            <p className={styles.homePrice}>152,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight8}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 8</p>
-            <p>Description for small right 8</p>
+            <p>워커비 WORKERBEE</p>
+            <p>허니 미니 차 GIFT SET - 3개입</p>
+            <p className={styles.homePrice}>14,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight9}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 9</p>
-            <p>Description for small right 9</p>
+            <p>워커비 WORKERBEE</p>
+            <p>허니 로열 젤리</p>
+            <p className={styles.homePrice}>228,000원</p>
           </div>
         </div>
         <div className={`${styles.item} ${styles.smallItemRight10}`}>
-          <div className={styles.greyBox}></div>
+          <div className={styles.smallGreyBox}></div>
           <div className={styles.text}>
-            <p>Small Right 10</p>
-            <p>Description for small right 10</p>
+            <p>워커비 WORKERBEE</p>
+            <p>워커비 스페셜 허니 박스</p>
+            <p className={styles.homePrice}>152,000원</p>
           </div>
         </div>
       </div>
@@ -197,7 +209,7 @@ function Home(props) {
       </div>
       <div className={styles.textContainer}>
         <p>열정적으로 작품 세계를 풀어가는 작가분들의 원화 작품입니다.</p>
-        <Link to="/MorePromotion" className={styles.moreText}>
+        <Link to="/Promotion" className={styles.moreText}>
           더보기
         </Link>
         <div className={styles.symmetricGridContainer}>

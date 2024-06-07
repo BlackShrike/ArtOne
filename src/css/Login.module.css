@@ -1,4 +1,6 @@
 .loginContainer {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
@@ -58,7 +60,7 @@ h2 {
   padding: 10px;
   background-color: #ff6b6b;
   color: white;
-  border: none;
+  border: 1px solid #222;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
@@ -86,13 +88,13 @@ h2 {
 .socialLogin button {
   width: 100%;
   padding: 10px;
-  border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid #222;
 }
 
 .kakao {
@@ -108,5 +110,4 @@ h2 {
 .google {
   background-color: white;
   color: black;
-  border: 1px solid #ccc;
 }

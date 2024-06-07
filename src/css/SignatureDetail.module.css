@@ -8,7 +8,7 @@
 }
 
 .imageSection {
-  flex: 1;
+  flex: 2;
 }
 
 .imagePlaceholder {
@@ -30,22 +30,20 @@
 }
 
 .details {
+  flex: 1;
   display: flex;
-  flex: 1 1;
   flex-direction: column;
-  align-items: flex-start;
 }
 
-.details h1,
-.details h2,
-.details p {
-  width: 100%;
-  margin: 10px;
-  padding-bottom: 10px;
+.details h2 {
+  margin: 10px 0;
+  font-size: 24px;
   border-bottom: 1px solid #ccc;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+}
+
+.details p {
+  margin: 10px 0;
+  font-size: 16px;
 }
 
 .selectionRow {
@@ -53,25 +51,25 @@
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
-  width: 100%;
 }
 
-.selectionItem {
+.colorSelection p,
+.sizeSelection p,
+.quantity,
+.totalPrice,
+.purchaseRow {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
   width: 100%;
-}
-
-.colorSelection,
-.sizeSelection {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+  padding: 10px 0;
 }
 
 .colors {
-  display: flex;
-  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 5px;
 }
 
 .color {
@@ -81,36 +79,54 @@
   border: 1px solid #000;
 }
 
-.price {
+.sizeSelection select {
+  width: 80%;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  color: #666;
+}
+
+.quantity span {
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.totalPrice .price {
   font-size: 24px;
   font-weight: bold;
-  margin-top: 10px;
 }
 
-.totalPrice {
-  width: 100%;
+.purchaseRow {
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  width: 100%;
 }
 
-.purchaseButton,
-.reviewButton {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
+.basketButton {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.purchaseButton {
+  width: 80%;
   background-color: #000;
   color: #fff;
   border: none;
+  border-radius: 10px;
   cursor: pointer;
+  padding: 10px;
 }
 
 .reviews {
   margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
 }
 
 .reviewNotice {
@@ -133,6 +149,7 @@
 .reviewList {
   width: 100%;
   margin-top: 10px;
+  text-align: left;
 }
 
 .reviewItem {
@@ -152,16 +169,24 @@
 .reviewTitle {
   font-weight: bold;
   margin-top: 10px;
-}
-
-.reviewContent {
-  width: 90%; /* 넓이를 내용과 동일하게 맞춤 */
   padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  font-size: 20px;
+}
+.reviewHead {
+  width: 90%;
+  height: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bolder;
+}
+.reviewHead option:checked {
+  background-color: #000;
+  color: #fff;
+}
+.reviewContent {
+  width: 90%;
+  padding: 0px 10px;
   resize: none;
-  height: 100px;
 }
 
 .reviewSeparator {
@@ -221,20 +246,39 @@
   justify-content: center;
   align-items: center;
 }
-
+.reviewmodalContent {
+  width: 90%;
+  height: 200px;
+  resize: none;
+}
 .modalContent {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   position: relative;
-  width: 400px; /* 원하는 너비로 설정 */
+  width: 400px;
+}
+
+.modalHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.modalTitle {
+  flex: 1;
+  text-align: center;
 }
 
 .closeIcon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   cursor: pointer;
+  justify-self: flex-end;
 }
 
 .imageUpload {
@@ -245,9 +289,8 @@
 }
 
 .uploadIcon {
-  font-size: 100px;
+  font-size: 25px;
   cursor: pointer;
-  transform: scale(0.5, 0.5);
 }
 
 .imageUploadPlaceholder {
@@ -255,13 +298,16 @@
   height: 100px;
   background-color: #ddd;
   margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .submitButton {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background-color: #000;
+  background-color: #E95762;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -298,5 +344,7 @@
 }
 
 .activeTab {
-  color: red;
+  color: #000;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
 }

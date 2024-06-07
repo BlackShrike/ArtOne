@@ -10,13 +10,17 @@ function Footer(props) {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerLogo}>
-        <span>©ARTKO</span>
+      <div className={styles.footerHeader}>
+        <span className={styles.footerLogo}>©ARTKO</span>
+        <div className={styles.footerToggle} onClick={toggleInfoVisibility}>
+          {isInfoVisible ? "∧" : "∨"}
+        </div>
       </div>
-      <div className={styles.footerToggle} onClick={toggleInfoVisibility}>
-        {isInfoVisible ? "∧" : "∨"}
-      </div>
-      <div className={`${styles.footerInfo} ${isInfoVisible ? "visible" : ""}`}>
+      <div
+        className={`${styles.footerInfo} ${
+          isInfoVisible ? styles.visible : ""
+        }`}
+      >
         <p>
           contemporaryk | 대표자명: 박준호 | 사업자번호: 446-33-01334 |
           통신판매신고번호: 제 2024-인천연수구-1067 호 (사업자 정보 확인) |

@@ -23,19 +23,22 @@ function Header({ isLoggedIn, onLogout }) {
       : styles.link;
   };
 
+  const toggleSignatureMenu = () => {
+    setShowSignatureMenu(!showSignatureMenu);
+    navigate("/signature"); // 이동
+  };
+
+  const toggleOriginalMenu = () => {
+    setShowOriginalMenu(!showOriginalMenu);
+    navigate("/original"); // 이동
+  };
+
   return (
     <header className={styles.header}>
       <section className={styles.headerTop}>
         <Link to="/">
           <h1>ARTKO</h1>
         </Link>
-        <input
-          className={styles.searchInput}
-          placeholder="아티스트, 장르, 스타일, 테마 등을 입력해보세요"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={handleSearch}
-        />
         <nav className={styles.headerLinks}>
           {isLoggedIn ? (
             <>
@@ -69,13 +72,10 @@ function Header({ isLoggedIn, onLogout }) {
             프로모션
           </Link>
         </span>
-        <span
-          onMouseEnter={() => setShowSignatureMenu(true)}
-          onMouseLeave={() => setShowSignatureMenu(false)}
-        >
-          <Link to="/signature" className={getLinkClass("/signature")}>
-            시그니처
-          </Link>
+        <span onClick={toggleSignatureMenu}>
+          <div className={getLinkClass("/signature")}>
+            시그니처 {showSignatureMenu ? "∧" : "∨"}
+          </div>
           {showSignatureMenu && (
             <div className={`${styles.dropdownMenu} ${styles.signatureMenu}`}>
               {[
@@ -99,13 +99,10 @@ function Header({ isLoggedIn, onLogout }) {
             </div>
           )}
         </span>
-        <span
-          onMouseEnter={() => setShowOriginalMenu(true)}
-          onMouseLeave={() => setShowOriginalMenu(false)}
-        >
-          <Link to="/original" className={getLinkClass("/original")}>
-            오리지널
-          </Link>
+        <span onClick={toggleOriginalMenu}>
+          <div className={getLinkClass("/original")}>
+            오리지널 {showOriginalMenu ? "∧" : "∨"}
+          </div>
           {showOriginalMenu && (
             <div className={styles.dropdownMenu}>
               {["전체", "인물", "풍경", "추상"].map((item) => (
@@ -127,14 +124,12 @@ function Header({ isLoggedIn, onLogout }) {
         <Link to="/review" className={getLinkClass("/review")}>
           리뷰
         </Link>
-        <span>
-          <Link to="/faq" className={getLinkClass("/faq")}>
-            FAQ
-          </Link>
-        </span>
+        <Link to="/faq" className={getLinkClass("/faq")}>
+          FAQ
+        </Link>
       </section>
       {showMobileMenu && (
-        <section className={styles.mobileMenu}>
+        <section className={`${styles.mobileMenu} ${styles.show}`}>
           <nav className={styles.mobileMenuLinks}>
             {isLoggedIn ? (
               <>
@@ -153,13 +148,12 @@ function Header({ isLoggedIn, onLogout }) {
             <span>
               <Link to="/signup">회원가입</Link>
             </span>
-            <span>KR/EN</span>
             <span>
               <Link to="/promotion">프로모션</Link>
             </span>
             <span>
-              <div onClick={() => setShowSignatureMenu(!showSignatureMenu)}>
-                시그니처
+              <div onClick={toggleSignatureMenu}>
+                시그니처 {showSignatureMenu ? "∧" : "∨"}
               </div>
               {showSignatureMenu && (
                 <div>
@@ -177,21 +171,21 @@ function Header({ isLoggedIn, onLogout }) {
                     "포스터",
                   ].map((item) => (
                     <div key={item}>
-                      <Link to={`/${item}`}>{item}</Link>
+                      <Link to={`/promotion`}>{item}</Link>
                     </div>
                   ))}
                 </div>
               )}
             </span>
             <span>
-              <div onClick={() => setShowOriginalMenu(!showOriginalMenu)}>
-                오리지널
+              <div onClick={toggleOriginalMenu}>
+                오리지널 {showOriginalMenu ? "∧" : "∨"}
               </div>
               {showOriginalMenu && (
                 <div>
                   {["전체", "인물", "풍경", "추상"].map((item) => (
                     <div key={item}>
-                      <Link to={`/${item}`}>{item}</Link>
+                      <Link to={`/Original`}>{item}</Link>
                     </div>
                   ))}
                 </div>
@@ -209,6 +203,7 @@ function Header({ isLoggedIn, onLogout }) {
             <span>
               <Link to="/faq">FAQ</Link>
             </span>
+            <span>KR/EN</span>
           </nav>
         </section>
       )}
