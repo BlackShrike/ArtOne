@@ -25,12 +25,16 @@ function Header({ isLoggedIn, onLogout }) {
 
   const toggleSignatureMenu = () => {
     setShowSignatureMenu(!showSignatureMenu);
-    navigate("/signature"); // 이동
+    if (window.innerWidth <= 768) {
+      navigate("/signature"); // 모바일에서만 이동
+    }
   };
 
   const toggleOriginalMenu = () => {
     setShowOriginalMenu(!showOriginalMenu);
-    navigate("/original"); // 이동
+    if (window.innerWidth <= 768) {
+      navigate("/original"); // 모바일에서만 이동
+    }
   };
 
   return (
@@ -72,10 +76,13 @@ function Header({ isLoggedIn, onLogout }) {
             프로모션
           </Link>
         </span>
-        <span onClick={toggleSignatureMenu}>
-          <div className={getLinkClass("/signature")}>
-            시그니처 {showSignatureMenu ? "∧" : "∨"}
-          </div>
+        <span
+          onMouseEnter={() => setShowSignatureMenu(true)}
+          onMouseLeave={() => setShowSignatureMenu(false)}
+        >
+          <Link to="/signature" className={getLinkClass("/signature")}>
+            시그니처
+          </Link>
           {showSignatureMenu && (
             <div className={`${styles.dropdownMenu} ${styles.signatureMenu}`}>
               {[
@@ -99,10 +106,13 @@ function Header({ isLoggedIn, onLogout }) {
             </div>
           )}
         </span>
-        <span onClick={toggleOriginalMenu}>
-          <div className={getLinkClass("/original")}>
-            오리지널 {showOriginalMenu ? "∧" : "∨"}
-          </div>
+        <span
+          onMouseEnter={() => setShowOriginalMenu(true)}
+          onMouseLeave={() => setShowOriginalMenu(false)}
+        >
+          <Link to="/original" className={getLinkClass("/original")}>
+            오리지널
+          </Link>
           {showOriginalMenu && (
             <div className={styles.dropdownMenu}>
               {["전체", "인물", "풍경", "추상"].map((item) => (
@@ -152,7 +162,7 @@ function Header({ isLoggedIn, onLogout }) {
               <Link to="/promotion">프로모션</Link>
             </span>
             <span>
-              <div onClick={toggleSignatureMenu}>
+              <div onClick={() => setShowSignatureMenu(!showSignatureMenu)}>
                 시그니처 {showSignatureMenu ? "∧" : "∨"}
               </div>
               {showSignatureMenu && (
@@ -171,21 +181,21 @@ function Header({ isLoggedIn, onLogout }) {
                     "포스터",
                   ].map((item) => (
                     <div key={item}>
-                      <Link to={`/promotion`}>{item}</Link>
+                      <Link to={`/${item}`}>{item}</Link>
                     </div>
                   ))}
                 </div>
               )}
             </span>
             <span>
-              <div onClick={toggleOriginalMenu}>
+              <div onClick={() => setShowOriginalMenu(!showOriginalMenu)}>
                 오리지널 {showOriginalMenu ? "∧" : "∨"}
               </div>
               {showOriginalMenu && (
                 <div>
                   {["전체", "인물", "풍경", "추상"].map((item) => (
                     <div key={item}>
-                      <Link to={`/Original`}>{item}</Link>
+                      <Link to={`/${item}`}>{item}</Link>
                     </div>
                   ))}
                 </div>

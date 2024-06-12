@@ -4,7 +4,7 @@
 }
 
 .sliderContainer {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -225,6 +225,8 @@
     display: grid !important;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
+  
+
 }
   
 .besttext {
@@ -252,6 +254,7 @@
 }
   
 /* 새로운 그리드 섹션 */
+/* 새로운 그리드 섹션 */
 .newGrid {
     margin-top: 40px;
     text-align: center;
@@ -259,8 +262,8 @@
 
 .newGridContainer {
     display: grid;
-    grid-template-columns: repeat(4, 300px);
-    grid-template-rows: repeat(5, 100px);
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(5,1fr);
     gap: 10px;
     grid-template-areas: 
         "item1 item2 item2 item3"
@@ -268,18 +271,32 @@
         "item1 item2 item2 item4"
         "item5 item6 item6 item7"
         "item5 item6 item6 item7";
-    width: 1200px; /* 그리드의 최대 너비를 설정 */
-    margin: auto; /* 그리드를 가로 중앙으로 정렬 */
+        max-width: 1400px;
+    margin: 0 auto; /* 그리드를 가로 중앙으로 정렬 */
 }
 
 .newGridItem {
     background-color: #eee;
     padding: 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     font-size: 14px;
+    color: white;
+
 }
+.newGridItem p{
+    margin: 2px;
+}
+.newGridItem1 { grid-area: item1; }
+.newGridItem2 { grid-area: item2; }
+.newGridItem3 { grid-area: item3; }
+.newGridItem4 { grid-area: item4; }
+.newGridItem5 { grid-area: item5; }
+.newGridItem6 { grid-area: item6; }
+.newGridItem7 { grid-area: item7; }
+
 
 .gridItem1 { grid-area: item1; }
 .gridItem2 { grid-area: item2; }

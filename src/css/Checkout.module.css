@@ -92,11 +92,27 @@
   background-color: #eee;
 }
 
-.checkoutSummary {
+.checkoutSummaryContainer {
   width: 35%; /* Adjusted width */
   padding: 20px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+}
+
+.checkoutStepContainer {
+  text-align: right; /* Align steps to the right */
+}
+
+.checkoutStep {
+  margin-bottom: 10px;
+}
+
+.redText {
+  color: red; /* Make the "장바구니" text red */
+  font-weight: bold;
+}
+
+.checkoutSummary {
+  border: 1px solid #ccc;  
+  padding: 20px;
 }
 
 .checkoutSummary h3 {
@@ -110,7 +126,8 @@
 }
 
 .purchaseButton {
-  width: 100%;
+  display: flex;
+  width: 90%;
   padding: 10px;
   background-color: #ff5a5f;
   color: white;
@@ -125,12 +142,8 @@
   background-color: #e04a4e;
 }
 
-.checkoutStep {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.redText {
-  color: red; /* Make the "장바구니" text red */
-  font-weight: bold;
+.amountContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
 }

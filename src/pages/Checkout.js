@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Checkout.module.css"; // Ensure the path is correct
-
+import BackButton from "../components/BackButton";
 function Checkout() {
   const [selectedItems, setSelectedItems] = useState([]);
   const items = [
@@ -43,9 +43,7 @@ function Checkout() {
 
   return (
     <div className={styles.checkoutContainer}>
-      <div className={styles.checkoutHeader}>
-        <h2>장바구니</h2>
-      </div>
+      <BackButton />
       <div className={styles.checkoutContent}>
         <div className={styles.checkoutItemsContainer}>
           <div className={styles.checkoutItemHeader}>
@@ -89,37 +87,49 @@ function Checkout() {
             ))}
           </section>
         </div>
-        <div className={styles.checkoutSummary}>
-          <span className={styles.checkoutStep}>
-            <span className={styles.redText}>장바구니</span> → 주문/결제 →
-            결제완료
-          </span>
-          <h3>주문 예상 금액</h3>
-          <p>
-            총 상품금액:{" "}
-            {items
-              .reduce(
-                (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
-                0
-              )
-              .toLocaleString()}
-            원
-          </p>
-          <p>총 배송비: 0원</p>
-          <p>총 할인금액: 0원</p>
-          <h3>
-            합계:{" "}
-            {items
-              .reduce(
-                (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
-                0
-              )
-              .toLocaleString()}
-            원
-          </h3>
-          <Link to="/OrderCheckout" className={styles.purchaseButton}>
-            구매하기
-          </Link>
+        <div className={styles.checkoutSummaryContainer}>
+          <div className={styles.checkoutStepContainer}>
+            <span className={styles.checkoutStep}>
+              <span className={styles.redText}>장바구니</span> → 주문/결제 →
+              결제완료
+            </span>
+          </div>
+          <div className={styles.checkoutSummary}>
+            <h3>주문 예상 금액</h3>
+            <div className={styles.amountContainer}>
+              <p>총 상품금액</p>
+              <p>
+                {items
+                  .reduce(
+                    (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
+                    0
+                  )
+                  .toLocaleString()}
+                원
+              </p>
+            </div>
+            <div className={styles.amountContainer}>
+              <span>총 할인</span>
+              <span className={styles.redText}>-0</span>
+            </div>
+            <div className={styles.amountContainer}>
+              <p>총 배송액</p>
+              <p>0원</p>
+            </div>
+            <h3>
+              합계:{" "}
+              {items
+                .reduce(
+                  (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
+                  0
+                )
+                .toLocaleString()}
+              원
+            </h3>
+            <Link to="/OrderCheckout" className={styles.purchaseButton}>
+              구매하기
+            </Link>
+          </div>
         </div>
       </div>
     </div>

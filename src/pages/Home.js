@@ -154,6 +154,15 @@ function Home(props) {
       </div>
     </div>
   ));
+  const newGridItems = Array.from({ length: 7 }, (_, index) => (
+    <div
+      key={index}
+      className={`${styles.newGridItem} ${styles[`newGridItem${index + 1}`]}`}
+    >
+      <p>작품설명 작품설명 작품설명</p>
+      <p>작품설명 작품설명 작품설명</p>
+    </div>
+  ));
   const bestItems = Array.from({ length: 20 }, (_, index) => (
     <div key={index} className={styles.bestItem}>
       <div className={`${styles.greyBox} ${styles.bestGreyBox}`}></div>
@@ -174,25 +183,18 @@ function Home(props) {
       <div className={styles.sliderContainer}>
         <Slider {...mainSettings}>{homeMain}</Slider>
       </div>
+      <div className={styles.newGrid}>
+        <h2>미술사에서 검증된 작품을 부담없이 소장해 보세요 :)</h2>
+        <div className={styles.newGridContainer}>{newGridItems}</div>
+      </div>
       <h2 className={styles.centeredHeading}>BEST</h2>
-      <div className={styles.bestSliderContainer}>
+      <div className={styles.sliderContainer}>
         <Slider {...bestSettings}>
           <div className={styles.bestGrid}>{bestItems.slice(0, 10)}</div>
           <div className={styles.bestGrid}>{bestItems.slice(10, 20)}</div>
         </Slider>
       </div>
-      <div className={styles.newGrid}>
-        <h2>미술사에서 검증된 작품을 부담없이 소장해 보세요 :)</h2>
-        <div className={styles.newGridContainer}>
-          <div className={`${styles.newGridItem} ${styles.gridItem1}`}></div>
-          <div className={`${styles.newGridItem} ${styles.gridItem2}`}></div>
-          <div className={`${styles.newGridItem} ${styles.gridItem3}`}></div>
-          <div className={`${styles.newGridItem} ${styles.gridItem4}`}></div>
-          <div className={`${styles.newGridItem} ${styles.gridItem5}`}></div>
-          <div className={`${styles.newGridItem} ${styles.gridItem6}`}></div>
-          <div className={`${styles.newGridItem} ${styles.gridItem7}`}></div>
-        </div>
-      </div>
+
       <div className={styles.textContainer}>
         <p>인터리어에 잘 어울리는 모던한 풍경 사진은 어떠세요 ?</p>
         <div className={styles.asymmetricGridContainer}>
