@@ -33,7 +33,7 @@
   margin: 0 20px;
   padding: 10px;
   font-size: 0.75em;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   border: 0;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 400;
@@ -86,7 +86,7 @@
   background-color: white;
   border: 1px solid #ccc;
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* Adjust to have 6 items per row */
+  grid-template-columns: repeat(6, 1fr);
   z-index: 10;
   width: 100%;
   padding-top: 10px;
@@ -162,6 +162,14 @@
   display: block !important;
 }
 
+.desktopOnly {
+  display: block;
+}
+
+.mobileOnly {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .headerTop {
     justify-content: space-between;
@@ -175,7 +183,16 @@
     display: none;
   }
 
+  .desktopOnly {
+    display: none;
+  }
+
+  .mobileOnly {
+    display: block;
+  }
+
   .hamburgerMenu {
+    padding-left: 30px;
     display: block;
   }
 

@@ -7,6 +7,7 @@ import Original from "./pages/Original";
 import FAQ from "./pages/FAQ";
 import Login from "./pages/Login";
 import SearchResults from "./pages/SearchResults";
+import Search from "./pages/Search";
 import FindAccount from "./pages/FindAccount";
 import FindAccountResult from "./pages/FindAccountResult";
 import Signup from "./pages/Signup";
@@ -22,6 +23,7 @@ import Business from "./pages/Business";
 import Review from "./pages/Review";
 import Promotion from "./pages/Promotion";
 import PromotionDetail from "./pages/PromotionDetail";
+import TermsOfService from "./pages/Termsofservice";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,6 +53,7 @@ function App() {
           <Route path="/review" element={<Review />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/search-results" element={<SearchResults />} />
           <Route path="/findaccount" element={<FindAccount />} />
           <Route
@@ -81,6 +84,7 @@ function App() {
               isLoggedIn ? <Paymentresult /> : <Login onLogin={handleLogin} />
             }
           />
+          <Route path="/Termsofservice" element={<TermsOfService />} />
         </Routes>
         <Footer />
       </div>

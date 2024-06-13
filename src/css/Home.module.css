@@ -46,6 +46,7 @@
 
 .smallGreyBox {
     width: 80px;
+    margin-right: 10px;
     height: 100px;
     background-color: #ddd;
 }
@@ -213,20 +214,19 @@
     font-size: 12px;
 }
 
+
+.bestGrid {
+    display: grid !important;
+  grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+  
+}
 .bestItem {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-}
-  
-.bestGrid {
-    display: grid !important;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-  
-
 }
   
 .besttext {
@@ -298,13 +298,6 @@
 .newGridItem7 { grid-area: item7; }
 
 
-.gridItem1 { grid-area: item1; }
-.gridItem2 { grid-area: item2; }
-.gridItem3 { grid-area: item3; }
-.gridItem4 { grid-area: item4; }
-.gridItem5 { grid-area: item5; }
-.gridItem6 { grid-area: item6; }
-.gridItem7 { grid-area: item7; }
 
 /* New Grid for 비대칭 그리드 */
 .asymmetricGrid {
@@ -312,7 +305,7 @@
     text-align: center;
 }
 
-.asymmetricGridContainer {
+.asymmetricGrid {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
     grid-template-rows: repeat(3, 150px);
@@ -340,11 +333,6 @@
 
 /* New Grid for 대칭 2열 그리드 */
 .symmetricGrid {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.symmetricGridContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 200px);
@@ -352,6 +340,7 @@
     width: 90%;
     margin: auto;
 }
+
 
 .symmetricGridItem {
     background-color: #eee;
@@ -365,6 +354,8 @@
 .gridItem { flex: 1; }
 
 /* 텍스트 스타일 */
+.asymmetricGridContainer,
+.symmetricGridContainer,
 .textContainer {
     text-align: center;
     margin-top: 40px;
@@ -384,3 +375,173 @@
     font-size: 12px;
     cursor: pointer;
 }
+.originalGridContainer {
+    display: none; /* 기본적으로 숨김 처리 */
+  }
+  /* Mobile Styles */
+  @media screen and (max-width: 768px) {
+    .homeGrid {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 200px);
+      grid-template-areas:
+        "large"
+        "small-left1"
+        "small-left2"
+        "small-right1";
+    }
+  
+    .homeGrid > div {
+      display: none;
+    }
+  
+    .homeGrid .largeItem,
+    .homeGrid .smallItemLeft1,
+    .homeGrid .smallItemLeft2,
+    .homeGrid .smallItemRight1 {
+      display: flex;
+    }
+  
+    .homeGrid .smallItemLeft1,
+    .homeGrid .smallItemLeft2,
+    .homeGrid .smallItemRight1 {
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+      justify-content: flex-start;
+    }
+  
+    .homeGrid .smallGreyBox {
+      width: 30%;
+      height: 100%;
+    }
+  
+    .bestGrid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    
+      .bestItem {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+      }
+      .bestGreyBox {
+        width: 95%;
+    }
+      
+      .besttext {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      .besttext > * {
+        margin: 0px;
+      }
+    
+      .middletext {
+        display: flex;
+        margin: 0;
+      }
+    
+      .priceCart {
+        margin-left: 10px;
+      }
+    .newGridContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .newGridItem {
+      background-color: #eee;
+    }
+  
+    .newGridItem1 {
+      height: 200px;
+    }
+    
+    .newGridItem2 {
+      height: 300px;
+    }
+    
+    .newGridItem3 {
+      height: 400px;
+    }
+    
+    .newGridItem4 {
+      height: 250px;
+    }
+    
+    .newGridItem5 {
+      height: 350px;
+    }
+    
+    .newGridItem6 {
+      height: 450px;
+    }
+    
+    .newGridItem7 {
+      height: 300px;
+    }
+    .newGridItem8 {
+        height: 200px;
+      }
+    .newGridItem p {
+      display: none;
+    }
+  
+    .asymmetricGrid {
+        display: flex;
+        flex-direction: column;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .asymmetricGrid p{
+        display: none;
+    }
+    .gridItem1,
+    .gridItem2,
+    .gridItem3 {
+        height: 300px;
+    }
+   
+    .textContainer {
+      display: none;
+    }
+    .originalGridContainer {
+      display: grid; /* 모바일에서만 보이도록 설정 */
+      margin-bottom: 40px;
+
+    }
+    
+
+  .originalGrid {
+    display: flex !important;
+    
+    gap: 20px;
+  }
+  
+  .originalGridItem {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .originalGreyBox {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .originalText {
+    text-align: left;
+  }
+   
+  }

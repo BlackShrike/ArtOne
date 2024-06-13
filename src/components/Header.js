@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import styles from "../css/Header.module.css";
 
 function Header({ isLoggedIn, onLogout }) {
@@ -46,22 +46,30 @@ function Header({ isLoggedIn, onLogout }) {
         <nav className={styles.headerLinks}>
           {isLoggedIn ? (
             <>
-              <span>
+              <span className={styles.desktopOnly}>
                 <Link to="/mypage">마이페이지</Link>
               </span>
-              <span onClick={onLogout} className={styles.logoutButton}>
+              <span
+                onClick={onLogout}
+                className={`${styles.logoutButton} ${styles.desktopOnly}`}
+              >
                 로그아웃
               </span>
             </>
           ) : (
-            <span>
+            <span className={styles.desktopOnly}>
               <Link to="/login">로그인</Link>
             </span>
           )}
-          <span>
+          <span className={styles.desktopOnly}>
             <Link to="/signup">회원가입</Link>
           </span>
-          <span>KR/EN</span>
+          <span className={styles.desktopOnly}>KR/EN</span>
+          <span className={styles.mobileOnly}>
+            <Link to="/search">
+              <FaSearch />
+            </Link>
+          </span>
         </nav>
         <div
           className={styles.hamburgerMenu}
@@ -100,7 +108,7 @@ function Header({ isLoggedIn, onLogout }) {
               ].map((item) => (
                 <div className={styles.dropdownItem} key={item}>
                   <div className={styles.dropdownBox}></div>
-                  <Link to={`/${item}`}>{item}</Link>
+                  <Link to={`/signature}`}>{item}</Link>
                 </div>
               ))}
             </div>
@@ -118,7 +126,7 @@ function Header({ isLoggedIn, onLogout }) {
               {["전체", "인물", "풍경", "추상"].map((item) => (
                 <div className={styles.dropdownItem} key={item}>
                   <div className={styles.dropdownBox}></div>
-                  <Link to={`/${item}`}>{item}</Link>
+                  <Link to={"/original"}>{item}</Link>
                 </div>
               ))}
             </div>
