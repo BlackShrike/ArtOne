@@ -27,6 +27,11 @@
 .footerInfo {
   font-size: 14px;
   color: #666666;
+  display: none; /* 기본적으로 숨김 */
+}
+
+.footerInfo.visible {
+  display: block; /* 보이게 설정 */
 }
 
 .footerInfo p {
@@ -47,11 +52,5 @@
   }
   .footerToggle {
     display: block; /* 모바일 화면에서는 보이게 */
-  }
-  .footerInfo {
-    display: none; /* 모바일 화면에서는 숨김 */
-  }
-  .footerInfo.visible {
-    display: block; /* 모바일에서 토글 시 보이게 */
   }
 }

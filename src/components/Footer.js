@@ -1,20 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../css/Footer.module.css";
 
 function Footer(props) {
   const [isInfoVisible, setIsInfoVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 767) {
+        setIsMobile(true);
+        setIsInfoVisible(false); // 모바일 화면에서는 숨김
+      } else {
+        setIsMobile(false);
+        setIsInfoVisible(true); // 웹 화면에서는 보임
+      }
+    };
+
+    handleResize(); // 초기 실행
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleInfoVisibility = () => {
-    setIsInfoVisible(!isInfoVisible);
+    if (isMobile) {
+      setIsInfoVisible(!isInfoVisible);
+    }
   };
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerHeader}>
+      <div className={styles.footerHeader} onClick={toggleInfoVisibility}>
         <span className={styles.footerLogo}>©ARTKO</span>
-        <div className={styles.footerToggle} onClick={toggleInfoVisibility}>
-          {isInfoVisible ? "∧" : "∨"}
-        </div>
+        {isMobile && (
+          <div className={styles.footerToggle}>{isInfoVisible ? "∧" : "∨"}</div>
+        )}
       </div>
       <div
         className={`${styles.footerInfo} ${

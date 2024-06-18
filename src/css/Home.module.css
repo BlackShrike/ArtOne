@@ -332,27 +332,44 @@
 .gridItem3 { grid-area: item3; }
 
 /* New Grid for 대칭 2열 그리드 */
-.symmetricGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 200px);
-    gap: 10px;
-    width: 90%;
-    margin: auto;
+.symmetricGridContainer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
+.symmetricGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 90%;
+  margin: auto;
+}
 
 .symmetricGridItem {
-    background-color: #eee;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
+  background-color: #eee;
+  height: 200px; /* 높이를 고정하여 일정한 크기로 유지 */
+  position: relative;
 }
 
-.gridItem { flex: 1; }
+.profilePlaceholder {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
 
+.profileIcon {
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  margin-right: 10px;
+}
+
+.itemText {
+  text-align: left;
+  font-size: 14px;
+}
 /* 텍스트 스타일 */
 .asymmetricGridContainer,
 .symmetricGridContainer,
@@ -414,7 +431,14 @@
       width: 30%;
       height: 100%;
     }
-  
+    .largeItem .text p:first-child {
+      font-size: 16px; /* First line larger */
+      font-weight: 700;
+      margin: 0;
+  }
+  .largeItem .text p:last-child {
+    display: none;
+}
     .bestGrid {
         display: flex;
         flex-direction: column;

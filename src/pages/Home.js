@@ -172,7 +172,12 @@ function Home(props) {
       </div>
     </div>
   ));
-
+  const Symmetricitems = Array.from({ length: 6 }, (_, index) => ({
+    id: index,
+    name: `작가명 ${index + 1}`,
+    description: "작품소개작품소개",
+    year: "제작년도",
+  }));
   return (
     <div className={styles.homeContainer}>
       <div className={styles.sliderContainer}>
@@ -217,54 +222,20 @@ function Home(props) {
           더보기
         </Link>
         <div className={styles.symmetricGrid}>
-          <div className={styles.symmetricGridItem}>
-            작가명 작품소개작품소개, 제작년도
-          </div>
-          <div className={styles.symmetricGridItem}>
-            작가명 작품소개작품소개, 제작년도
-          </div>
-          <div className={styles.symmetricGridItem}>
-            작가명 작품소개작품소개, 제작년도
-          </div>
-          <div className={styles.symmetricGridItem}>
-            작가명 작품소개작품소개, 제작년도
-          </div>
-          <div className={styles.symmetricGridItem}>
-            작가명 작품소개작품소개, 제작년도
-          </div>
-          <div className={styles.symmetricGridItem}>
-            작가명 작품소개작품소개, 제작년도
-          </div>
+          {Symmetricitems.map((item) => (
+            <div key={item.id}>
+              <div className={styles.symmetricGridItem}></div>
+              <div className={styles.profilePlaceholder}>
+                <div className={styles.profileIcon}></div>
+                <div className={styles.itemText}>
+                  <strong>{item.name}</strong> {item.description}, {item.year}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className={styles.originalGridContainer}>
-        <h2>오리지널 원화</h2>
-        <Slider {...originalSettings}>
-          <div className={styles.originalGrid}>
-            <div className={styles.originalGridItem}>
-              <div className={styles.originalGreyBox}></div>
-              <div className={styles.originalText}>
-                <p>작가명</p>
-                <p>작품소재작품소재, 제작년도</p>
-              </div>
-            </div>
-            <div className={styles.originalGridItem}>
-              <div className={styles.originalGreyBox}></div>
-              <div className={styles.originalText}>
-                <p>작가명</p>
-                <p>작품소재작품소재, 제작년도</p>
-              </div>
-            </div>
-            <div className={styles.originalGridItem}>
-              <div className={styles.originalGreyBox}></div>
-              <div className={styles.originalText}>
-                <p>작가명</p>
-                <p>작품소재작품소재, 제작년도</p>
-              </div>
-            </div>
-          </div>
-        </Slider>
-      </div>
+      );
       <div className={styles.textContainer}>
         <p>
           아름다움을 좋아하는 분들에게 감사를 전하기 좋은 날 더불어 좋은 작품과
