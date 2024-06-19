@@ -1,61 +1,81 @@
-/* src/pages/SearchPage.module.css */
 .searchPage {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .closeButton {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .searchContainer {
-    display: flex;
-    margin: 20px 0;
-  }
-  
-  .searchInput {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .searchButton {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .recentSearches,
-  .recommendedSearches {
-    margin: 20px 0;
-  }
-  
-  .searchTerm,
-  .recommendButton {
-    display: inline-block;
-    margin: 5px;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .removeButton {
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-  }
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  height: 100vh; /* Fill the entire viewport height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.searchContainer {
+  display: flex;
+  margin: 20px 0;
+}
+
+.searchInput {
+  background-color: #eee;
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.recentSearches,
+.recommendedSearches {
+  margin: 20px 0;
+}
+
+.searchTerms,
+.recommendButtons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.searchTerm,
+.recommendButton {
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none; /* Remove border for recommendButton */
+  background-color: transparent;
+}
+
+
+.recommendButton {
+  border: 1px solid #ccc; /* Add border for recommendButton */
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px; /* Add margin to separate the text and button */
+}

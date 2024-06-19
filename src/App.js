@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -24,6 +24,7 @@ import Review from "./pages/Review";
 import Promotion from "./pages/Promotion";
 import PromotionDetail from "./pages/PromotionDetail";
 import TermsOfService from "./pages/Termsofservice";
+import { LanguageProvider } from "./components/LanguageContext";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,58 +38,69 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/promotion" element={<Promotion />} />
-          <Route path="/promotion/:id" element={<PromotionDetail />} />
-          <Route path="/signature" element={<Signature />} />
-          <Route path="/signature/:id" element={<SignatureDetail />} />
-          <Route path="/original" element={<Original />} />
-          <Route path="/artist" element={<Artist />} />
-          <Route path="/artist/:artistName" element={<ArtistDetail />} />
-          <Route path="/business" element={<Business />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/search-results" element={<SearchResults />} />
-          <Route path="/findaccount" element={<FindAccount />} />
-          <Route
-            path="/find-account-result-id"
-            element={<FindAccountResult type="id" />}
+    <LanguageProvider>
+      <BrowserRouter>
+        <div className="App">
+          <RoutesWrapper
+            isLoggedIn={isLoggedIn}
+            onLogin={handleLogin}
+            onLogout={handleLogout}
           />
-          <Route
-            path="/find-account-result-pw"
-            element={<FindAccountResult type="pw" />}
-          />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route
-            path="/checkout"
-            element={
-              isLoggedIn ? <Checkout /> : <Login onLogin={handleLogin} />
-            }
-          />
-          <Route
-            path="/ordercheckout"
-            element={
-              isLoggedIn ? <Ordercheckout /> : <Login onLogin={handleLogin} />
-            }
-          />
-          <Route
-            path="/paymentresult"
-            element={
-              isLoggedIn ? <Paymentresult /> : <Login onLogin={handleLogin} />
-            }
-          />
-          <Route path="/Termsofservice" element={<TermsOfService />} />
-        </Routes>
-        <Footer />
-      </div>
-    </BrowserRouter>
+        </div>
+      </BrowserRouter>
+    </LanguageProvider>
+  );
+}
+
+function RoutesWrapper({ isLoggedIn, onLogin, onLogout }) {
+  const location = useLocation();
+  const isSearchPage = location.pathname.startsWith("/search");
+
+  return (
+    <>
+      {!isSearchPage && <Header isLoggedIn={isLoggedIn} onLogout={onLogout} />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/promotion" element={<Promotion />} />
+        <Route path="/promotion/:id" element={<PromotionDetail />} />
+        <Route path="/signature" element={<Signature />} />
+        <Route path="/signature/:id" element={<SignatureDetail />} />
+        <Route path="/original" element={<Original />} />
+        <Route path="/artist" element={<Artist />} />
+        <Route path="/artist/:artistName" element={<ArtistDetail />} />
+        <Route path="/business" element={<Business />} />
+        <Route path="/review" element={<Review />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/login" element={<Login onLogin={onLogin} />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/search-results" element={<SearchResults />} />
+        <Route path="/findaccount" element={<FindAccount />} />
+        <Route
+          path="/find-account-result-id"
+          element={<FindAccountResult type="id" />}
+        />
+        <Route
+          path="/find-account-result-pw"
+          element={<FindAccountResult type="pw" />}
+        />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route
+          path="/checkout"
+          element={isLoggedIn ? <Checkout /> : <Login onLogin={onLogin} />}
+        />
+        <Route
+          path="/ordercheckout"
+          element={isLoggedIn ? <Ordercheckout /> : <Login onLogin={onLogin} />}
+        />
+        <Route
+          path="/paymentresult"
+          element={isLoggedIn ? <Paymentresult /> : <Login onLogin={onLogin} />}
+        />
+        <Route path="/Termsofservice" element={<TermsOfService />} />
+      </Routes>
+      {!isSearchPage && <Footer />}
+    </>
   );
 }
 

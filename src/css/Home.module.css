@@ -339,6 +339,11 @@
   font-weight: bold;
 }
 
+.sliderContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .symmetricGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -348,7 +353,6 @@
 }
 
 .symmetricGridItem {
-  background-color: #eee;
   height: 200px; /* 높이를 고정하여 일정한 크기로 유지 */
   position: relative;
 }

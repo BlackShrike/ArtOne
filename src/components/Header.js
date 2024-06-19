@@ -1,21 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import styles from "../css/Header.module.css";
+import { useLanguage } from "./LanguageContext";
+
+const translations = {
+  KR: {
+    mypage: "마이페이지",
+    logout: "로그아웃",
+    login: "로그인",
+    signup: "회원가입",
+    promotion: "프로모션",
+    signature: "시그니처",
+    original: "오리지널",
+    artist: "아티스트",
+    business: "비즈니스",
+    review: "리뷰",
+    faq: "FAQ",
+    all: "전체",
+    person: "인물",
+    landscape: "풍경",
+    photo: "사진",
+    abstract: "추상",
+    oriental: "동양화",
+    sacred: "성화",
+    plant: "식물",
+    animal: "동물",
+    drawing: "드로잉",
+    poster: "포스터",
+  },
+  EN: {
+    mypage: "My Page",
+    logout: "Logout",
+    login: "Login",
+    signup: "Sign Up",
+    promotion: "Promotion",
+    signature: "Signature",
+    original: "Original",
+    artist: "Artist",
+    business: "Business",
+    review: "Review",
+    faq: "FAQ",
+    all: "All",
+    person: "Person",
+    landscape: "Landscape",
+    photo: "Photo",
+    abstract: "Abstract",
+    oriental: "Oriental",
+    sacred: "Sacred",
+    plant: "Plant",
+    animal: "Animal",
+    drawing: "Drawing",
+    poster: "Poster",
+  },
+};
 
 function Header({ isLoggedIn, onLogout }) {
   const [showSignatureMenu, setShowSignatureMenu] = useState(false);
   const [showOriginalMenu, setShowOriginalMenu] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const handleSearch = (event) => {
-    if (event.key === "Enter") {
-      navigate(`/search-results?query=${searchTerm}`);
-    }
-  };
+  const { language, toggleLanguage } = useLanguage(); // Use language context
 
   const getLinkClass = (path) => {
     return location.pathname.startsWith(path)
@@ -23,19 +69,26 @@ function Header({ isLoggedIn, onLogout }) {
       : styles.link;
   };
 
-  const toggleSignatureMenu = () => {
-    setShowSignatureMenu(!showSignatureMenu);
-    if (window.innerWidth <= 768) {
-      navigate("/signature"); // 모바일에서만 이동
-    }
-  };
+  const signatureItems = [
+    translations[language].all,
+    translations[language].person,
+    translations[language].landscape,
+    translations[language].photo,
+    translations[language].abstract,
+    translations[language].oriental,
+    translations[language].sacred,
+    translations[language].plant,
+    translations[language].animal,
+    translations[language].drawing,
+    translations[language].poster,
+  ];
 
-  const toggleOriginalMenu = () => {
-    setShowOriginalMenu(!showOriginalMenu);
-    if (window.innerWidth <= 768) {
-      navigate("/original"); // 모바일에서만 이동
-    }
-  };
+  const originalItems = [
+    translations[language].all,
+    translations[language].person,
+    translations[language].landscape,
+    translations[language].abstract,
+  ];
 
   return (
     <header className={styles.header}>
@@ -47,24 +100,26 @@ function Header({ isLoggedIn, onLogout }) {
           {isLoggedIn ? (
             <>
               <span className={styles.desktopOnly}>
-                <Link to="/mypage">마이페이지</Link>
+                <Link to="/mypage">{translations[language].mypage}</Link>
               </span>
               <span
                 onClick={onLogout}
                 className={`${styles.logoutButton} ${styles.desktopOnly}`}
               >
-                로그아웃
+                {translations[language].logout}
               </span>
             </>
           ) : (
             <span className={styles.desktopOnly}>
-              <Link to="/login">로그인</Link>
+              <Link to="/login">{translations[language].login}</Link>
             </span>
           )}
           <span className={styles.desktopOnly}>
-            <Link to="/signup">회원가입</Link>
+            <Link to="/signup">{translations[language].signup}</Link>
           </span>
-          <span className={styles.desktopOnly}>KR/EN</span>
+          <span className={styles.desktopOnly} onClick={toggleLanguage}>
+            KR / EN
+          </span>
           <span className={styles.mobileOnly}>
             <Link to="/search">
               <FaSearch />
@@ -81,7 +136,7 @@ function Header({ isLoggedIn, onLogout }) {
       <section className={styles.headerBottom}>
         <span>
           <Link to="/promotion" className={getLinkClass("/promotion")}>
-            프로모션
+            {translations[language].promotion}
           </Link>
         </span>
         <span
@@ -89,26 +144,14 @@ function Header({ isLoggedIn, onLogout }) {
           onMouseLeave={() => setShowSignatureMenu(false)}
         >
           <Link to="/signature" className={getLinkClass("/signature")}>
-            시그니처
+            {translations[language].signature}
           </Link>
           {showSignatureMenu && (
             <div className={`${styles.dropdownMenu} ${styles.signatureMenu}`}>
-              {[
-                "전체",
-                "인물",
-                "풍경",
-                "사진",
-                "추상",
-                "동양화",
-                "성화",
-                "식물",
-                "동물",
-                "드로잉",
-                "포스터",
-              ].map((item) => (
-                <div className={styles.dropdownItem} key={item}>
+              {signatureItems.map((item, i) => (
+                <div className={styles.dropdownItem} key={i}>
                   <div className={styles.dropdownBox}></div>
-                  <Link to={`/signature}`}>{item}</Link>
+                  <Link to="/signature">{item}</Link>
                 </div>
               ))}
             </div>
@@ -119,14 +162,14 @@ function Header({ isLoggedIn, onLogout }) {
           onMouseLeave={() => setShowOriginalMenu(false)}
         >
           <Link to="/original" className={getLinkClass("/original")}>
-            오리지널
+            {translations[language].original}
           </Link>
           {showOriginalMenu && (
             <div className={styles.dropdownMenu}>
-              {["전체", "인물", "풍경", "추상"].map((item) => (
-                <div className={styles.dropdownItem} key={item}>
+              {originalItems.map((item, i) => (
+                <div className={styles.dropdownItem} key={i}>
                   <div className={styles.dropdownBox}></div>
-                  <Link to={"/original"}>{item}</Link>
+                  <Link to="/original">{item}</Link>
                 </div>
               ))}
             </div>
@@ -134,16 +177,16 @@ function Header({ isLoggedIn, onLogout }) {
         </span>
         <span className={styles.separator}>|</span>
         <Link to="/artist" className={getLinkClass("/artist")}>
-          아티스트
+          {translations[language].artist}
         </Link>
         <Link to="/business" className={getLinkClass("/business")}>
-          비즈니스
+          {translations[language].business}
         </Link>
         <Link to="/review" className={getLinkClass("/review")}>
-          리뷰
+          {translations[language].review}
         </Link>
         <Link to="/faq" className={getLinkClass("/faq")}>
-          FAQ
+          {translations[language].faq}
         </Link>
       </section>
       {showMobileMenu && (
@@ -152,44 +195,33 @@ function Header({ isLoggedIn, onLogout }) {
             {isLoggedIn ? (
               <>
                 <span>
-                  <Link to="/mypage">마이페이지</Link>
+                  <Link to="/mypage">{translations[language].mypage}</Link>
                 </span>
                 <span onClick={onLogout} className={styles.logoutButton}>
-                  로그아웃
+                  {translations[language].logout}
                 </span>
               </>
             ) : (
               <span>
-                <Link to="/login">로그인</Link>
+                <Link to="/login">{translations[language].login}</Link>
               </span>
             )}
             <span>
-              <Link to="/signup">회원가입</Link>
+              <Link to="/signup">{translations[language].signup}</Link>
             </span>
             <span>
-              <Link to="/promotion">프로모션</Link>
+              <Link to="/promotion">{translations[language].promotion}</Link>
             </span>
             <span>
               <div onClick={() => setShowSignatureMenu(!showSignatureMenu)}>
-                시그니처 {showSignatureMenu ? "∧" : "∨"}
+                {translations[language].signature}{" "}
+                {showSignatureMenu ? "∧" : "∨"}
               </div>
               {showSignatureMenu && (
                 <div>
-                  {[
-                    "전체",
-                    "인물",
-                    "풍경",
-                    "사진",
-                    "추상",
-                    "동양화",
-                    "성화",
-                    "식물",
-                    "동물",
-                    "드로잉",
-                    "포스터",
-                  ].map((item) => (
-                    <div key={item}>
-                      <Link to={`/${item}`}>{item}</Link>
+                  {signatureItems.map((item, i) => (
+                    <div key={i}>
+                      <Link to="/signature">{item}</Link>
                     </div>
                   ))}
                 </div>
@@ -197,31 +229,31 @@ function Header({ isLoggedIn, onLogout }) {
             </span>
             <span>
               <div onClick={() => setShowOriginalMenu(!showOriginalMenu)}>
-                오리지널 {showOriginalMenu ? "∧" : "∨"}
+                {translations[language].original} {showOriginalMenu ? "∧" : "∨"}
               </div>
               {showOriginalMenu && (
                 <div>
-                  {["전체", "인물", "풍경", "추상"].map((item) => (
-                    <div key={item}>
-                      <Link to={`/${item}`}>{item}</Link>
+                  {originalItems.map((item, i) => (
+                    <div key={i}>
+                      <Link to="/original">{item}</Link>
                     </div>
                   ))}
                 </div>
               )}
             </span>
             <span>
-              <Link to="/artist">아티스트</Link>
+              <Link to="/artist">{translations[language].artist}</Link>
             </span>
             <span>
-              <Link to="/business">비즈니스</Link>
+              <Link to="/business">{translations[language].business}</Link>
             </span>
             <span>
-              <Link to="/review">리뷰</Link>
+              <Link to="/review">{translations[language].review}</Link>
             </span>
             <span>
-              <Link to="/faq">FAQ</Link>
+              <Link to="/faq">{translations[language].faq}</Link>
             </span>
-            <span>KR/EN</span>
+            <span onClick={toggleLanguage}>KR / EN</span>
           </nav>
         </section>
       )}

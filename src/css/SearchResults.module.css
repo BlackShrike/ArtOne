@@ -68,9 +68,11 @@ body {
   margin: 0;
   font-size: 14px;
 }
+
 .item-price {
   margin-top: 20px;
 }
+
 .cart-icon {
   font-size: 20px;
   cursor: pointer;
@@ -94,4 +96,34 @@ body {
 .page-number:hover,
 .page-arrow:hover {
   background-color: #f1f1f1;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .image-placeholder {
+    height: 150px;
+  }
+
+  .item-title,
+  .item-description,
+  .item-price {
+    font-size: 16px;
+  }
+
+  .item-price {
+    margin-top: 10px;
+  }
+
+  .cart-icon {
+    font-size: 24px;
+  }
+
+  .search-results-container {
+    padding: 10px;
+  }
 }
