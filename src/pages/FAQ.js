@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../css/FAQ.module.css";
-import { useLanguage } from "./LanguageContext";
+import { useLanguage } from "../components/LanguageContext";
 
 const translations = {
   KR: {
