@@ -1,15 +1,40 @@
 import React from "react";
 import styles from "../css/Business.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
+import { useLanguage } from "../components/LanguageContext";
+
+const translations = {
+  KR: {
+    header: "기업 선물 제안",
+    subHeader: "기업 및 사업장등 대량 주문 생산이 가능합니다.",
+    contact: "문의: contemporaryk@naver.com",
+    title: "제목",
+    description: "작품 설명내용작품 설명내용작품 설명내용작품 설명내용",
+    price: "10,000,000원",
+  },
+  EN: {
+    header: "Corporate Gift Suggestions",
+    subHeader:
+      "Bulk orders and production for companies and businesses are possible.",
+    contact: "Inquiries: contemporaryk@naver.com",
+    title: "Title",
+    description:
+      "Artwork description content, artwork description content, artwork description content",
+    price: "$10,000.00",
+  },
+};
 
 function Business() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <div className={styles.gridPage}>
       <BackButton />
       <div className={styles.header}>
-        <h1>기업 선물 제안</h1>
-        <p>기업 및 사업장등 대량 주문 생산이 가능합니다.</p>
-        <p>문의: contemporaryk@naver.com</p>
+        <h1>{t.header}</h1>
+        <p>{t.subHeader}</p>
+        <p>{t.contact}</p>
       </div>
       <div className={styles.gridContainer}>
         {Array.from({ length: 30 }).map((_, index) => (
@@ -17,11 +42,11 @@ function Business() {
             <div className={styles.imagePlaceholder}></div>
             <div className={styles.itemDetails}>
               <p>
-                <span className={styles.headtext}>제목</span>
+                <span className={styles.headtext}>{t.title}</span>
               </p>
-              <p>작품 설명내용작품 설명내용작품 설명내용작품 설명내용</p>
-              <p>작품 설명내용작품 설명내용작품 설명내용작품 설명내용</p>
-              <p>10,000,000원</p>
+              <p>{t.description}</p>
+              <p>{t.description}</p>
+              <p>{t.price}</p>
             </div>
           </div>
         ))}

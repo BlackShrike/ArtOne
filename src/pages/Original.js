@@ -2,6 +2,62 @@ import React, { useState, useEffect } from "react";
 import styles from "../css/Original.module.css"; // Ensure this path is correct based on your project structure
 import BackButton from "../components/BackButton"; // Assuming there's a BackButton component
 import { TbRefresh } from "react-icons/tb";
+import { useLanguage } from "../components/LanguageContext";
+
+const translations = {
+  KR: {
+    all: "전체",
+    original: "원화",
+    print: "판화",
+    abstract: "추상",
+    portrait: "인물",
+    landscape: "풍경",
+    stillLife: "정물",
+    animal: "동물",
+    horizontal: "가로형",
+    vertical: "세로형",
+    square: "정사각형",
+    small: "10호 미만",
+    medium: "30호 미만",
+    large: "50호 미만",
+    xLarge: "70호 미만",
+    xxLarge: "100호 이상",
+    price1: "50만원 미만",
+    price2: "80만원 미만",
+    price3: "100만원 미만",
+    price4: "150만원 미만",
+    price5: "150만원 이상",
+    artist: "작가명",
+    techniqueSize: "제작기법 및 사이즈",
+    yearDescription: "제작년도 및 그의 작품 내용들",
+  },
+  EN: {
+    all: "All",
+    original: "Original",
+    print: "Print",
+    abstract: "Abstract",
+    portrait: "Portrait",
+    landscape: "Landscape",
+    stillLife: "Still Life",
+    animal: "Animal",
+    horizontal: "Horizontal",
+    vertical: "Vertical",
+    square: "Square",
+    small: "Less than 10",
+    medium: "Less than 30",
+    large: "Less than 50",
+    xLarge: "Less than 70",
+    xxLarge: "More than 100",
+    price1: "Less than 500,000 KRW",
+    price2: "Less than 800,000 KRW",
+    price3: "Less than 1,000,000 KRW",
+    price4: "Less than 1,500,000 KRW",
+    price5: "More than 1,500,000 KRW",
+    artist: "Artist",
+    techniqueSize: "Technique and Size",
+    yearDescription: "Year and Description",
+  },
+};
 
 function Original() {
   const [filters, setFilters] = useState({
@@ -15,6 +71,9 @@ function Original() {
     price3: localStorage.getItem("price3") || "",
     price4: localStorage.getItem("price4") || "",
   });
+
+  const { language } = useLanguage();
+  const t = translations[language];
 
   const itemsPerPage = 30; // 한 페이지당 30개 항목
   const totalItems = 300; // 총 항목 수
@@ -79,10 +138,10 @@ function Original() {
         <div className={styles.imagePlaceholder}></div>
         <div className={styles.itemDetails}>
           <p>
-            <span className={styles.headtext}>작가명</span>
+            <span className={styles.headtext}>{t.artist}</span>
           </p>
-          <p>제작기법 및 사이즈</p>
-          <p>제작년도 및 그의 작품 내용들</p>
+          <p>{t.techniqueSize}</p>
+          <p>{t.yearDescription}</p>
         </div>
       </div>
     ));
@@ -127,19 +186,19 @@ function Original() {
           className={`${filters.type === "전체" ? styles.active : ""}`}
           onClick={() => setFilters({ ...filters, type: "전체" })}
         >
-          전체
+          {t.all}
         </button>
         <button
           className={` ${filters.type === "원화" ? styles.active : ""}`}
           onClick={() => setFilters({ ...filters, type: "원화" })}
         >
-          원화
+          {t.original}
         </button>
         <button
           className={`${filters.type === "판화" ? styles.active : ""}`}
           onClick={() => setFilters({ ...filters, type: "판화" })}
         >
-          판화
+          {t.print}
         </button>
       </div>
       <BackButton />
@@ -154,7 +213,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("style1", "추상")}
               >
-                추상
+                {t.abstract}
               </button>
               <button
                 className={`${styles.styleButton} ${
@@ -162,7 +221,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("style1", "인물")}
               >
-                인물
+                {t.portrait}
               </button>
               <button
                 className={`${styles.styleButton} ${
@@ -170,7 +229,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("style1", "풍경")}
               >
-                풍경
+                {t.landscape}
               </button>
               <button
                 className={`${styles.styleButton} ${
@@ -178,7 +237,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("style1", "정물")}
               >
-                정물
+                {t.stillLife}
               </button>
               <button
                 className={`${styles.styleButton} ${
@@ -186,7 +245,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("style1", "동물")}
               >
-                동물
+                {t.animal}
               </button>
             </div>
             <div className={styles.filterCategory}>
@@ -196,7 +255,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("style2", "가로형")}
               >
-                가로형
+                {t.horizontal}
               </button>
               <button
                 className={`${styles.styleButton} ${
@@ -204,7 +263,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("style2", "세로형")}
               >
-                세로형
+                {t.vertical}
               </button>
               <button
                 className={`${styles.styleButton} ${
@@ -212,7 +271,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("style2", "정사각형")}
               >
-                정사각형
+                {t.square}
               </button>
             </div>
             <div className={styles.filterCategory}>
@@ -222,7 +281,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price1", "10호 미만")}
               >
-                10호 미만
+                {t.small}
               </button>
               <button
                 className={`${styles.priceButton} ${
@@ -230,7 +289,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price1", "30호 미만")}
               >
-                30호 미만
+                {t.medium}
               </button>
               <button
                 className={`${styles.priceButton} ${
@@ -238,7 +297,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price1", "50호 미만")}
               >
-                50호 미만
+                {t.large}
               </button>
               <button
                 className={`${styles.priceButton} ${
@@ -246,7 +305,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price1", "70호 미만")}
               >
-                70호 미만
+                {t.xLarge}
               </button>
               <button
                 className={`${styles.priceButton} ${
@@ -254,7 +313,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price1", "100호 이상")}
               >
-                100호 이상
+                {t.xxLarge}
               </button>
             </div>
             <div className={styles.filterCategory}>
@@ -264,7 +323,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price2", "50만원 미만")}
               >
-                50만원 미만
+                {t.price1}
               </button>
               <button
                 className={`${styles.priceButton} ${
@@ -272,7 +331,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price2", "80만원 미만")}
               >
-                80만원 미만
+                {t.price2}
               </button>
               <button
                 className={`${styles.priceButton} ${
@@ -280,7 +339,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price2", "100만원 미만")}
               >
-                100만원 미만
+                {t.price3}
               </button>
               <button
                 className={`${styles.priceButton} ${
@@ -288,7 +347,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price2", "150만원 미만")}
               >
-                150만원 미만
+                {t.price4}
               </button>
               <button
                 className={`${styles.priceButton} ${
@@ -296,7 +355,7 @@ function Original() {
                 }`}
                 onClick={() => toggleFilter("price2", "150만원 이상")}
               >
-                150만원 이상
+                {t.price5}
               </button>
             </div>
           </div>

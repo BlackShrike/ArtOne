@@ -2,8 +2,42 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Checkout.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
+import { useLanguage } from "../components/LanguageContext";
+
+const translations = {
+  KR: {
+    cart: "장바구니",
+    order: "주문/결제",
+    completed: "결제완료",
+    selectAll: "전체 선택",
+    deleteSelected: "선택삭제",
+    expectedOrderAmount: "주문 예상 금액",
+    totalAmount: "총 상품금액",
+    totalDiscount: "총 할인",
+    totalShipping: "총 배송액",
+    total: "합계",
+    purchase: "구매하기",
+  },
+  EN: {
+    cart: "Cart",
+    order: "Order/Payment",
+    completed: "Payment Completed",
+    selectAll: "Select All",
+    deleteSelected: "Delete Selected",
+    expectedOrderAmount: "Expected Order Amount",
+    totalAmount: "Total Product Amount",
+    totalDiscount: "Total Discount",
+    totalShipping: "Total Shipping",
+    total: "Total",
+    purchase: "Purchase",
+  },
+};
+
 function Checkout() {
   const [selectedItems, setSelectedItems] = useState([]);
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const items = [
     {
       id: 1,
@@ -54,12 +88,12 @@ function Checkout() {
                 onChange={handleSelectAll}
               />
               <span>
-                전체 선택({selectedItems.length}/{items.length})
+                {t.selectAll} ({selectedItems.length}/{items.length})
               </span>
             </label>
             <label>
               <input type="checkbox" />
-              <span>선택삭제</span>
+              <span>{t.deleteSelected}</span>
             </label>
           </div>
           <section className={styles.checkoutItemsSection}>
@@ -90,14 +124,14 @@ function Checkout() {
         <div className={styles.checkoutSummaryContainer}>
           <div className={styles.checkoutStepContainer}>
             <span className={styles.checkoutStep}>
-              <span className={styles.redText}>장바구니</span> → 주문/결제 →
-              결제완료
+              <span className={styles.redText}>{t.cart}</span> → {t.order} →{" "}
+              {t.completed}
             </span>
           </div>
           <div className={styles.checkoutSummary}>
-            <h3>주문 예상 금액</h3>
+            <h3>{t.expectedOrderAmount}</h3>
             <div className={styles.amountContainer}>
-              <p>총 상품금액</p>
+              <p>{t.totalAmount}</p>
               <p>
                 {items
                   .reduce(
@@ -109,15 +143,15 @@ function Checkout() {
               </p>
             </div>
             <div className={styles.amountContainer}>
-              <span>총 할인</span>
+              <span>{t.totalDiscount}</span>
               <span className={styles.redText}>-0</span>
             </div>
             <div className={styles.amountContainer}>
-              <p>총 배송액</p>
+              <p>{t.totalShipping}</p>
               <p>0원</p>
             </div>
             <h3>
-              합계:{" "}
+              {t.total}:{" "}
               {items
                 .reduce(
                   (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
@@ -127,7 +161,7 @@ function Checkout() {
               원
             </h3>
             <Link to="/OrderCheckout" className={styles.purchaseButton}>
-              구매하기
+              {t.purchase}
             </Link>
           </div>
         </div>

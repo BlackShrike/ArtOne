@@ -1,15 +1,46 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "../css/ArtistDetail.module.css"; // Ensure this path is correct based on your project structure
 import BackButton from "../components/BackButton";
+import { useLanguage } from "../components/LanguageContext";
+
+const translations = {
+  KR: {
+    artist: "작가",
+    description:
+      "설명작가 설명작가 설명작가 설명작가 설명작가 설명작가 설명작가",
+    additionalDescription:
+      "추가 설명작가 추가 설명작가 추가 설명작가 추가 설명작가",
+    showMore: "더보기",
+    showLess: "접기",
+    worksTitle: "의 작품",
+    title: "제목",
+    price: "120,000원",
+  },
+  EN: {
+    artist: "Artist",
+    description:
+      "Description of the artist, description of the artist, description of the artist",
+    additionalDescription:
+      "Additional description of the artist, additional description of the artist",
+    showMore: "Show More",
+    showLess: "Show Less",
+    worksTitle: "'s Works",
+    title: "Title",
+    price: "$120.00",
+  },
+};
 
 function ArtistDetail() {
   const { artistName } = useParams();
   const [showMore, setShowMore] = useState(false);
+  const { language } = useLanguage(); // Use language context
 
   const handleShowMore = () => {
     setShowMore(!showMore);
   };
+
+  const t = translations[language]; // Get the translations for the current language
 
   return (
     <div className={styles.gridPage}>
@@ -19,35 +50,30 @@ function ArtistDetail() {
         <div className={styles.artistDetails}>
           <h1 className={styles.artistName}>{artistName}</h1>
           <div className={styles.artistBio}>
-            <h2>작가</h2>
-            <p>
-              설명작가 설명작가 설명작가 설명작가 설명작가 설명작가 설명작가
-            </p>
-            <p>설명작가 설명작가 설명작가 설명작가 설명</p>
-            {showMore && (
-              <>
-                <p>추가 설명작가 추가 설명작가 추가 설명작가 추가 설명작가</p>
-                <p>추가 설명작가 추가 설명작가 추가 설명작가 추가 설명작가</p>
-              </>
-            )}
+            <h2>{t.artist}</h2>
+            <p>{t.description}</p>
+            {showMore && <p>{t.additionalDescription}</p>}
             <p className={styles.moretext} onClick={handleShowMore}>
-              {showMore ? "접기" : "더보기"}
+              {showMore ? t.showLess : t.showMore}
             </p>
           </div>
         </div>
       </div>
-      <h2 className={styles.sectionTitle}>{artistName}의 작품</h2>
+      <h2 className={styles.sectionTitle}>
+        {artistName}
+        {t.worksTitle}
+      </h2>
       <div className={styles.gridContainer}>
         {Array.from({ length: 30 }).map((_, index) => (
           <div key={index} className={styles.gridItem}>
             <div className={styles.imagePlaceholder}></div>
             <div className={styles.itemDetails}>
               <p>
-                <span className={styles.headtext}>제목</span>
+                <span className={styles.headtext}>{t.title}</span>
               </p>
-              <p>작품 설명내용작품 설명내용작품 설명내용작품 설명내용</p>
-              <p>작품 설명내용작품 설명내용작품 설명내용작품 설명내용</p>
-              <p>120,000원</p>
+              <p>{t.description}</p>
+              {showMore && <p>{t.additionalDescription}</p>}
+              <p>{t.price}</p>
             </div>
           </div>
         ))}

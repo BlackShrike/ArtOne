@@ -2,13 +2,32 @@ import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import styles from "../css/SearchResults.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
+import { useLanguage } from "../components/LanguageContext";
 
-function SearchResults() {
-  const items = Array.from({ length: 50 }).map((_, index) => ({
-    id: index,
-    title: "제목제목제목",
+const translations = {
+  KR: {
+    results: "검색결과",
+    title: "제목",
     description: "컨텐츠내용내용내용",
     price: "120,000원",
+  },
+  EN: {
+    results: "Search Results",
+    title: "Title",
+    description: "Content Description",
+    price: "$120.00",
+  },
+};
+
+function SearchResults() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const items = Array.from({ length: 50 }).map((_, index) => ({
+    id: index,
+    title: t.title,
+    description: t.description,
+    price: t.price,
   }));
 
   return (
@@ -17,7 +36,7 @@ function SearchResults() {
         <BackButton />
       </div>
       <div className={styles["results-header"]}>
-        <span>0000 검색결과 000건</span>
+        <span>0000 {t.results} 000건</span>
       </div>
       <div className={styles["grid-container"]}>
         {items.map((item) => (

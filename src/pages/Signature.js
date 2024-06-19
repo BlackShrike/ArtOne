@@ -1,18 +1,56 @@
 import React, { useState } from "react";
-import { Link, useParams, Routes, Route } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import styles from "../css/Signature.module.css";
 import BackButton from "../components/BackButton";
 import SignatureDetail from "./SignatureDetail";
+import { useLanguage } from "../components/LanguageContext";
+
+const translations = {
+  KR: {
+    menu: [
+      "전체",
+      "인물",
+      "풍경",
+      "사진",
+      "동양화",
+      "서양화",
+      "조각",
+      "드로잉",
+      "포스터",
+    ],
+    title: "제목",
+    caption: "캡션내용",
+    date: "05. 2024",
+  },
+  EN: {
+    menu: [
+      "All",
+      "Person",
+      "Landscape",
+      "Photo",
+      "Oriental",
+      "Western",
+      "Sculpture",
+      "Drawing",
+      "Poster",
+    ],
+    title: "Title",
+    caption: "Caption Content",
+    date: "May 2024",
+  },
+};
 
 function Signature() {
   const { id } = useParams();
+  const { language } = useLanguage();
+  const t = translations[language];
 
   if (id) {
     return <SignatureDetail />;
   }
 
-  const [selectedMenu, setSelectedMenu] = useState("전체");
+  const [selectedMenu, setSelectedMenu] = useState(t.menu[0]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 50;
 
@@ -24,18 +62,6 @@ function Signature() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  const menus = [
-    "전체",
-    "인물",
-    "풍경",
-    "사진",
-    "동양화",
-    "서양화",
-    "조각",
-    "드로잉",
-    "포스터",
-  ];
 
   const totalItems = 200;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -52,10 +78,14 @@ function Signature() {
         <div className={styles.itemDetails}>
           <div>
             <p>
-              <span className={styles.headtext}>제목 {item}</span>
+              <span className={styles.headtext}>
+                {t.title} {item}
+              </span>
             </p>
-            <p>캡션내용 {item}</p>
-            <p>05. 2024</p>
+            <p>
+              {t.caption} {item}
+            </p>
+            <p>{t.date}</p>
           </div>
           <FaCartPlus />
         </div>
@@ -100,7 +130,7 @@ function Signature() {
   return (
     <div className={styles.signature}>
       <div className={styles["signature-header-submenu"]}>
-        {menus.map((menu) => (
+        {t.menu.map((menu) => (
           <div
             key={menu}
             className={`${styles["signature-header-submenu-item"]} ${

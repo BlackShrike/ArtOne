@@ -4,9 +4,156 @@ import styles from "../css/SignatureDetail.module.css";
 import BackButton from "../components/BackButton";
 import { FaTimes, FaCartPlus, FaPlus } from "react-icons/fa";
 import { SlBasket } from "react-icons/sl";
+import { useLanguage } from "../components/LanguageContext";
+
+const translations = {
+  KR: {
+    artistName: "Frank Chouteau Brown(작가이름)",
+    artworkName: "Linen Like Hard Twist Cotton 1 (작품명)",
+    artworkInfo: "1980년대 미니멀리즘 작품",
+    price: "270,000원",
+    description:
+      "프랭크 쇼토 브라운(Frank Chouteau Brown)은 미네소타주 미니애폴리스(MinneaPolis)에서 태어나 미니애폴리 미술학교(Minneapolis School of Fine Arts), 보스턴 아트 클럽(Boston Art Club) 및 유럽에서 교육을 받은 미국인 건축가 입니다.",
+    colorLabel: "COLOR",
+    sizeLabel: "SIZE",
+    sizeOptions: [
+      "옵션을 선택해 주세요",
+      "30 x 30 mm",
+      "50 x 50 mm",
+      "70 x 70 mm",
+    ],
+    quantityText:
+      "Linen Like Hard Twits Cotton Yarn Woven resil 1 RED(알루미늄 액자) - 61X91",
+    totalText: "합계",
+    basketButton: "장바구니",
+    purchaseButton: "구매하기",
+    reviewsTitle: "전체 리뷰",
+    reviewNotice: "리뷰를 작성해주시면 5000원 할인쿠폰을 드립니다.",
+    writeReviewButton: "리뷰 작성하기",
+    similarWorksTitle: "비슷한 작품",
+    reviewModalTitle: "리뷰 작성하기",
+    reviewModalSelect: [
+      "제목을 선택해 주세요",
+      "제품 감사합니다. 잘 받았어요.",
+      "집이 화사해 보여서 정말 좋아요!",
+      "작품이 너무 예뻐요. 추천합니다.",
+      "작품이 너무 마음에 들어요!",
+    ],
+    reviewModalPlaceholder: "리뷰를 작성해 주세요.",
+    imageUploadText: "사진첨부",
+    submitButton: "등록하고 5,000원 할인쿠폰받기",
+    purchaseModalTitle: "구매안내",
+    tabs: ["배송안내", "교환 및 반품", "제품문의"],
+    tabContents: [
+      {
+        title: "1.내용",
+        content:
+          "-내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+      },
+      {
+        title: "2.내용",
+        content:
+          "-내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+      },
+      {
+        title: "1.내용",
+        content:
+          "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+      },
+      {
+        title: "2.내용",
+        content:
+          "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+      },
+      {
+        title: "1.내용",
+        content:
+          "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+      },
+      {
+        title: "2.내용",
+        content:
+          "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+      },
+    ],
+  },
+  EN: {
+    artistName: "Frank Chouteau Brown",
+    artworkName: "Linen Like Hard Twist Cotton 1",
+    artworkInfo: "1980s Minimalism Artwork",
+    price: "$270.00",
+    description:
+      "Frank Chouteau Brown was an American architect born in Minneapolis, Minnesota, who was educated at the Minneapolis School of Fine Arts, Boston Art Club, and in Europe.",
+    colorLabel: "COLOR",
+    sizeLabel: "SIZE",
+    sizeOptions: [
+      "Please select an option",
+      "30 x 30 mm",
+      "50 x 50 mm",
+      "70 x 70 mm",
+    ],
+    quantityText:
+      "Linen Like Hard Twits Cotton Yarn Woven resil 1 RED (Aluminum Frame) - 61X91",
+    totalText: "Total",
+    basketButton: "Add to Basket",
+    purchaseButton: "Purchase",
+    reviewsTitle: "All Reviews",
+    reviewNotice: "Write a review and receive a $5 discount coupon.",
+    writeReviewButton: "Write a Review",
+    similarWorksTitle: "Similar Works",
+    reviewModalTitle: "Write a Review",
+    reviewModalSelect: [
+      "Please select a title",
+      "Thank you for the product. I received it well.",
+      "It looks great at home!",
+      "The artwork is beautiful. I recommend it.",
+      "I love the artwork!",
+    ],
+    reviewModalPlaceholder: "Please write a review.",
+    imageUploadText: "Attach Photo",
+    submitButton: "Submit and Receive $5 Discount Coupon",
+    purchaseModalTitle: "Purchase Guide",
+    tabs: ["Shipping Information", "Returns & Exchanges", "Product Inquiry"],
+    tabContents: [
+      {
+        title: "1. Content",
+        content:
+          "-Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+      },
+      {
+        title: "2. Content",
+        content:
+          "-Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+      },
+      {
+        title: "1. Content",
+        content:
+          "Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+      },
+      {
+        title: "2. Content",
+        content:
+          "Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+      },
+      {
+        title: "1. Content",
+        content:
+          "Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+      },
+      {
+        title: "2. Content",
+        content:
+          "Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+      },
+    ],
+  },
+};
 
 function SignatureDetail() {
   const { id } = useParams();
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
@@ -31,24 +178,19 @@ function SignatureDetail() {
         </div>
         <div className={styles.details}>
           <h2>
-            Frank Chouteau Brown(작가이름)
+            {t.artistName}
             <br />
-            Linen Like Hard Twist Cotton 1 (작품명)
+            {t.artworkName}
           </h2>
           <p>
-            <span className={styles.greyText}>1980년대 미니멀리즘 작품</span>{" "}
-            <span className={styles.price}>270,000원</span>
+            <span className={styles.greyText}>{t.artworkInfo}</span>{" "}
+            <span className={styles.price}>{t.price}</span>
           </p>
-          <p>
-            프랭크 쇼토 브라운(Frank Chouteau Brown)은 미네소타주
-            미니애폴리스(MinneaPolis)에서 태어나 미니애폴리 미술학교(Minneapolis
-            School of Fine Arts), 보스턴 아트 클럽(Boston Art Club) 및 유럽에서
-            교육을 받은 미국인 건축가 입니다.
-          </p>
+          <p>{t.description}</p>
           <div className={styles.selectionRow}>
             <div className={styles.colorSelection}>
               <p>
-                COLOR
+                {t.colorLabel}
                 <div className={styles.colors}>
                   <span
                     className={styles.color}
@@ -103,20 +245,18 @@ function SignatureDetail() {
             </div>
             <div className={styles.sizeSelection}>
               <p>
-                SIZE
+                {t.sizeLabel}
                 <select>
-                  <option>옵션을 선택해 주세요</option>
-                  <option>30 x 30 mm</option>
-                  <option>50 x 50 mm</option>
-                  <option>70 x 70 mm</option>
+                  {t.sizeOptions.map((option, index) => (
+                    <option key={index}>{option}</option>
+                  ))}
                 </select>
               </p>
             </div>
           </div>
           <div className={styles.selectionRow}>
             <div className={styles.quantity}>
-              Linen Like Hard Twits Cotton Yarn Woven resil 1 RED(알루미늄 액자)
-              - 61X91
+              {t.quantityText}
               <span onClick={decreaseQuantity}>-</span>
               <span>{quantity}</span>
               <span onClick={increaseQuantity}>+</span>
@@ -124,7 +264,8 @@ function SignatureDetail() {
             </div>
             <div className={styles.totalPrice}>
               <p>
-                합계 <span className={styles.price}>{270000 * quantity}원</span>
+                {t.totalText}{" "}
+                <span className={styles.price}>{270000 * quantity}원</span>
               </p>
             </div>
           </div>
@@ -136,20 +277,20 @@ function SignatureDetail() {
               className={styles.purchaseButton}
               onClick={togglePurchaseModal}
             >
-              구매하기
+              {t.purchaseButton}
             </button>
           </div>
         </div>
       </div>
       <div className={styles.reviews}>
-        <h2>전체 리뷰</h2>
+        <h2>{t.reviewsTitle}</h2>
         <div className={styles.reviewNotice}>
-          리뷰를 작성해주시면 5000원 할인쿠폰을 드립니다.{" "}
+          {t.reviewNotice}{" "}
           <button
             className={styles.writeReviewButton}
             onClick={toggleReviewModal}
           >
-            리뷰 작성하기
+            {t.writeReviewButton}
           </button>
         </div>
         <div className={styles.reviewList}>
@@ -169,7 +310,7 @@ function SignatureDetail() {
         </div>
       </div>
       <div className={styles.similarWorks}>
-        <h2>비슷한 작품</h2>
+        <h2>{t.similarWorksTitle}</h2>
         <div className={styles.gridContainer}>
           {Array.from({ length: 20 }).map((_, index) => (
             <div key={index} className={styles.gridItem}>
@@ -190,32 +331,28 @@ function SignatureDetail() {
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div className={styles.modalHeader}>
-              <h2 className={styles.modalTitle}>리뷰 작성하기</h2>
+              <h2 className={styles.modalTitle}>{t.reviewModalTitle}</h2>
               <FaTimes
                 className={styles.closeIcon}
                 onClick={toggleReviewModal}
               />
             </div>
             <select className={styles.reviewHead}>
-              <option>제목을 선택해 주세요</option>
-              <option>제품 감사합니다. 잘 받았어요.</option>
-              <option>집이 화사해 보여서 정말 좋아요!</option>
-              <option>작품이 너무 예뻐요. 추천합니다.</option>
-              <option>작품이 너무 마음에 들어요!</option>
+              {t.reviewModalSelect.map((option, index) => (
+                <option key={index}>{option}</option>
+              ))}
             </select>
             <textarea
               className={styles.reviewmodalContent}
-              placeholder="리뷰를 작성해 주세요."
+              placeholder={t.reviewModalPlaceholder}
             ></textarea>
             <div className={styles.imageUpload}>
-              <span>사진첨부</span>
+              <span>{t.imageUploadText}</span>
               <div className={styles.imageUploadPlaceholder}>
                 <FaPlus className={styles.uploadIcon} />
               </div>
             </div>
-            <button className={styles.submitButton}>
-              등록하고 5,000원 할인쿠폰받기
-            </button>
+            <button className={styles.submitButton}>{t.submitButton}</button>
           </div>
         </div>
       )}
@@ -223,14 +360,14 @@ function SignatureDetail() {
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div className={styles.modalHeader}>
-              <h2 className={styles.modalTitle}>구매안내</h2>
+              <h2 className={styles.modalTitle}>{t.purchaseModalTitle}</h2>
               <FaTimes
                 className={styles.closeIcon}
                 onClick={togglePurchaseModal}
               />
             </div>
             <div className={styles.tabs}>
-              {["배송안내", "교환 및 반품", "제품문의"].map((tab, index) => (
+              {t.tabs.map((tab, index) => (
                 <span
                   key={index}
                   className={`${styles.tab} ${
@@ -242,44 +379,14 @@ function SignatureDetail() {
                 </span>
               ))}
             </div>
-            {activeTab === 0 && (
-              <>
-                <h3>1.내용</h3>
-                <p>
-                  -내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                  내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                </p>
-                <h3>2.내용</h3>
-                <p>
-                  -내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                  내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                </p>
-              </>
-            )}
-            {activeTab === 1 && (
-              <>
-                <h3>1.내용</h3>
-                <p>
-                  내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                </p>
-                <h3>2.내용</h3>
-                <p>
-                  내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                </p>
-              </>
-            )}
-            {activeTab === 2 && (
-              <>
-                <h3>1.내용</h3>
-                <p>
-                  내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                </p>
-                <h3>2.내용</h3>
-                <p>
-                  내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                </p>
-              </>
-            )}
+            {t.tabContents
+              .slice(activeTab * 2, activeTab * 2 + 2)
+              .map((content, index) => (
+                <React.Fragment key={index}>
+                  <h3>{content.title}</h3>
+                  <p>{content.content}</p>
+                </React.Fragment>
+              ))}
           </div>
         </div>
       )}
