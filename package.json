@@ -2,7 +2,6 @@
   "name": "artone",
   "version": "0.5.0",
   "private": true,
-  "homepage": "https://BlackShrike.github.io/ArtOne",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
