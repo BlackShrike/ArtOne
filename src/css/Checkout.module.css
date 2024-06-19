@@ -1,0 +1,149 @@
+.checkoutContainer {
+  padding: 20px;
+}
+
+.checkoutHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkoutHeader h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.checkoutContent {
+  display: flex;
+  width: 60%;
+  margin: auto;
+}
+
+.checkoutItemsContainer {
+  width: 60%;
+  margin-right: 20px;
+}
+
+.checkoutItemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.checkoutItemHeader label {
+  display: flex;
+  align-items: center;
+}
+
+.checkoutItemHeader input {
+  margin-right: 5px; /* Space between checkbox and text */
+}
+
+.checkoutItemsSection {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column layout */
+  gap: 10px; /* Space between grid items */
+  border: 1px solid #ccc; /* Add border around the section */
+  padding: 10px;
+}
+
+.checkoutItemContainer {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  border-bottom: 1px solid #ccc; /* Add bottom border to each item */
+}
+
+.itemCheckbox {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.checkoutItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* Set item width to 100% */
+}
+
+.itemDetails {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.itemName {
+  font-weight: bold;
+}
+
+.itemPrice {
+  margin: 10px 0;
+}
+
+.itemOption {
+  color: #555;
+}
+
+.imagePlaceholder {
+  width: 80px;
+  height: 80px;
+  background-color: #eee;
+}
+
+.checkoutSummaryContainer {
+  width: 35%; /* Adjusted width */
+  padding: 20px;
+}
+
+.checkoutStepContainer {
+  text-align: right; /* Align steps to the right */
+}
+
+.checkoutStep {
+  margin-bottom: 10px;
+}
+
+.redText {
+  color: red; /* Make the "장바구니" text red */
+  font-weight: bold;
+}
+
+.checkoutSummary {
+  border: 1px solid #ccc;  
+  padding: 20px;
+}
+
+.checkoutSummary h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.checkoutSummary p {
+  margin: 5px 0;
+}
+
+.purchaseButton {
+  display: flex;
+  width: 90%;
+  padding: 10px;
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.purchaseButton:hover {
+  background-color: #e04a4e;
+}
+
+.amountContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}

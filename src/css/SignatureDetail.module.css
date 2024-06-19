@@ -1,0 +1,350 @@
+.detailPage {
+  padding: 20px;
+}
+
+.detailContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.imageSection {
+  flex: 2;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 400px;
+  background-color: #ddd;
+}
+
+.imageThumbnails {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.thumbnailPlaceholder {
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+}
+
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.details h2 {
+  margin: 10px 0;
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+}
+
+.details p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.selectionRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.colorSelection p,
+.sizeSelection p,
+.quantity,
+.totalPrice,
+.purchaseRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.colors {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 5px;
+}
+
+.color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+
+.sizeSelection select {
+  width: 80%;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  color: #666;
+}
+
+.quantity span {
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.totalPrice .price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.purchaseRow {
+  display: flex;
+  width: 100%;
+}
+
+.basketButton {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.purchaseButton {
+  width: 80%;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.reviews {
+  margin-top: 20px;
+}
+
+.reviewNotice {
+  width: 100%;
+  font-size: 16px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+}
+
+.writeReviewButton {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.reviewList {
+  width: 100%;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.reviewItem {
+  padding: 10px 0;
+}
+
+.reviewImagePlaceholder {
+  width: 15%;
+  height: 120px;
+  background-color: #ddd;
+}
+
+.reviewer {
+  font-weight: bold;
+}
+
+.reviewTitle {
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 20px;
+}
+.reviewHead {
+  width: 90%;
+  height: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bolder;
+}
+.reviewHead option:hover {
+  background-color: #000;
+  color: #fff;
+}
+.reviewContent {
+  width: 90%;
+  padding: 0px 10px;
+  resize: none;
+}
+
+.reviewSeparator {
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.similarWorks {
+  margin-top: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.gridItem {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.gridImagePlaceholder {
+  width: 100%;
+  height: 150px;
+  background-color: #ddd;
+}
+
+.itemDetails {
+  margin-top: 10px;
+}
+
+.itemTitle {
+  font-weight: bold;
+}
+
+.itemDescription {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.cartIcon {
+  margin-left: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reviewmodalContent {
+  width: 90%;
+  height: 200px;
+  resize: none;
+}
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  width: 400px;
+}
+
+.modalHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.modalTitle {
+  flex: 1;
+  text-align: center;
+}
+
+.closeIcon {
+  cursor: pointer;
+  justify-self: flex-end;
+}
+
+.imageUpload {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.uploadIcon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.imageUploadPlaceholder {
+  width: 100px;
+  height: 100px;
+  background-color: #ddd;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #E95762;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.inputField {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.textArea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  height: 100px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+.activeTab {
+  color: #000;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+}

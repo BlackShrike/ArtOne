@@ -1,0 +1,54 @@
+.findAccountResultContainer {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.backLink {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.backLink a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.result {
+  margin: 20px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.result p {
+  margin: 10px 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.actionButton {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s;
+}
+
+.actionButton:hover {
+  background-color: #ececec;
+}

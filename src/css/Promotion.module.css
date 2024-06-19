@@ -1,0 +1,29 @@
+.gridPage {
+    padding: 20px;
+  }
+  
+  .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  
+  .gridItem {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .imagePlaceholder {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .headtext {
+    font-weight: bold;
+  }
+  
+  .itemDetails p {
+    font-size: 10px;
+  }

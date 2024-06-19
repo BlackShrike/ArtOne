@@ -1,0 +1,45 @@
+.artistContainer {
+  padding: 20px;
+}
+
+.alphabetContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.letter {
+  margin: 0px;
+  text-decoration: none;
+  color: black;
+  background-color: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  border: 0px;
+  font-weight: bold;
+}
+
+.activeLetter {
+  color: red;
+  font-weight: bold;
+}
+
+.artistSection {
+  margin-bottom: 40px;
+}
+
+.letterHeader {
+  font-size: 18px;
+}
+
+.artistList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.artistName {
+  margin: 5px 10px;
+  text-decoration: none;
+  color: black;
+}

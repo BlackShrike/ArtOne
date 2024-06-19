@@ -1,0 +1,389 @@
+.body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.mypageContainer {
+  display: flex;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 200px;
+  margin-right: 20px;
+  border-right: #ccc 1px solid;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.mainContent {
+  flex-grow: 1;
+}
+
+.userInfo {
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.userInfoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  border: #333 1px solid;
+}
+
+.userInfoCards {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.userInfoCard {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.userInfoCard:last-child {
+  margin-right: 0;
+}
+
+.userInfoCard span:first-child {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.orderStatus {
+  margin-bottom: 20px;
+}
+
+.orderStatus h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.orderItem {
+  background-color: #f9f9f9;
+  padding: 30px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.orderItem h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.orderItem p {
+  margin: 5px 0;
+}
+
+.recentViewedContainer {
+  padding: 20px;
+}
+
+.recentViewedTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.recentViewedTable th,
+.recentViewedTable td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.imagePlaceholder {
+  width: 60px;
+  height: 60px;
+  background-color: #eee;
+}
+
+.payButton {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.payButton:hover {
+  background-color: #555;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pageNumber {
+  cursor: pointer;
+}
+
+.pageNumber:hover {
+  text-decoration: underline;
+}
+
+/* Update Info Styles */
+.updateInfoContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.updateInfoContainer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.updateInfoForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateInfoForm label {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.updateInfoForm input,
+.updateInfoForm select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.updateInfoForm .phoneNumber,
+.updateInfoForm .birthday {
+  display: flex;
+  gap: 10px;
+}
+
+.updateInfoForm .phoneNumber input,
+.updateInfoForm .birthday input {
+  flex: 1;
+}
+
+.updateInfoForm .address {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.zipCodeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchAddressButton {
+  width: auto;
+  padding: 10px;
+  background-color: #ffeb3b;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.searchAddressButton:hover {
+  background-color: #fdd835;
+}
+
+.submitButton {
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 20px;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.submitButton:hover {
+  background-color: #e04a4e;
+}
+
+.couponContainer {
+  padding: 20px;
+}
+
+.couponForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.couponForm label {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.couponForm .couponInputRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.couponForm input {
+  width: 75%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.couponForm .couponRegisterButton {
+  width: 20%;
+  background-color: #ff5a5f;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.couponForm .couponRegisterButton:hover {
+  background-color: #e04a4e;
+}
+
+.couponTitle {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.ownedCoupons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.coupon {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.coupon span {
+  display: block;
+  font-size: 16px;
+}
+
+.couponInfo {
+  margin: auto;
+  width: 80%;
+  margin-top: 20px;
+  border: #ccc 1px solid;
+}
+
+.couponInfo h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.couponInfo p {
+  font-size: 14px;
+  color: #555;
+}
+
+.membershipContainer {
+  padding: 20px;
+}
+
+.membershipContainer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.membershipContainer p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.membershipLevels {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  align-items: flex-end;
+}
+.membershipLevel {
+  width: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  background-color: transparent; /* 기본 배경색 제거 */
+  display: flex;
+  flex-direction: row; /* 행 방향으로 정렬 */
+  align-items: flex-end;
+  justify-content: center; /* 중앙 정렬 */
+}
+
+
+.membershipLevel.selected {
+  border: 2px solid #333;
+  background-color: black;
+  color: white;
+}
+
+.membershipLevel.black.selected {
+  color: white;
+}
+.benefit {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.squareBox {
+  border: #333 1px solid;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  margin-bottom: 5px;
+}

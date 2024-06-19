@@ -1,0 +1,91 @@
+.signature {
+  padding: 10px;
+}
+
+.signature-back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.signature-header-submenu {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  padding:0;
+  border-bottom: 2px solid #ccc;
+}
+
+.signature-header-submenu-item {
+  cursor: pointer;
+  padding: 5px 5px;
+  font-size: 12px;
+}
+
+.signature-header-submenu-item-selected {
+  color: red;
+  border-bottom: 2px solid red;
+}
+
+.gridPage {
+  padding: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 각 행에 5개의 항목을 표시 */
+  gap: 10px;
+}
+
+.gridItem {
+  padding: 10px;
+  text-align: left;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 200px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+}
+
+.headtext {
+  font-weight: bold;
+}
+
+.itemDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemDetails p {
+  font-size: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pageNumber,
+.pageArrow {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pageNumber:hover,
+.pageArrow:hover {
+  background-color: #f1f1f1;
+}
+
+.signature-page-number-selected {
+  color: red;
+  font-weight: bold;
+}
