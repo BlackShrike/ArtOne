@@ -8,6 +8,7 @@
     margin: 0 auto;
 }
 
+
 .homeGrid {
     display: grid !important;
     gap: 5px;
@@ -433,7 +434,6 @@
   
     .homeGrid .smallGreyBox {
       width: 30%;
-      height: 100%;
     }
     .largeItem .text p:first-child {
       font-size: 16px; /* First line larger */
@@ -571,5 +571,12 @@
   .originalText {
     text-align: left;
   }
-   
+  .symmetricGridContainer{
+    font-size: 12px;
   }
+  .symmetricGridItem {
+    width: auto !important;
+    padding: 0 20px;
+  }
+  
+  } 

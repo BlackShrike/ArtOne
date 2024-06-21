@@ -6,6 +6,7 @@ import { FaCartPlus } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useLanguage } from "../components/LanguageContext";
+
 const mainSettings = {
   dots: true,
   infinite: false,
@@ -43,6 +44,7 @@ const bestSettings = {
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
+        variableWidth: true,
       },
     },
   ],
@@ -56,8 +58,16 @@ const symmetricSettings = {
   slidesToScroll: 1,
   arrows: true,
   autoplay: false,
+  variableWidth: true,
   centerMode: false,
-  centerPadding: "0px",
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        variableWidth: true,
+      },
+    },
+  ],
 };
 
 const translations = {
@@ -217,11 +227,11 @@ function Home(props) {
   const bestItems = Array.from({ length: 20 }, (_, index) => (
     <div key={index} className={styles.bestItem}>
       <div className={`${styles.greyBox} ${styles.bestGreyBox}`}></div>
-      <div className={styles.besttext}>
+      <div className={styles.bestText}>
         <h3>
           {translations[language].bestItem} {index + 1}
         </h3>
-        <p className={styles.middletext}>
+        <p className={styles.middleText}>
           {translations[language].bestDescription}
           <div className={styles.priceCart}>
             <FaCartPlus />
@@ -232,7 +242,7 @@ function Home(props) {
     </div>
   ));
 
-  const Symmetricitems = Array.from({ length: 6 }, (_, index) => ({
+  const symmetricItems = Array.from({ length: 6 }, (_, index) => ({
     id: index,
     name: `작가명 ${index + 1}`,
     description: translations[language].symmetricItem,
@@ -285,14 +295,16 @@ function Home(props) {
           {translations[language].moreText}
         </Link>
         {isMobile ? (
-          <Slider {...symmetricSettings}>
-            {Symmetricitems.map((item) => (
+          <Slider className={styles.specificSlider} {...symmetricSettings}>
+            {symmetricItems.map((item) => (
               <div key={item.id} className={styles.symmetricGridItem}>
                 <div className={styles.greyBox}></div>
                 <div className={styles.profilePlaceholder}>
                   <div className={styles.profileIcon}></div>
                   <div className={styles.itemText}>
-                    <strong>{item.name}</strong> {item.description}, {item.year}
+                    <strong>{item.name}</strong>
+                    <br />
+                    {item.description}, {item.year}
                   </div>
                 </div>
               </div>
@@ -300,13 +312,15 @@ function Home(props) {
           </Slider>
         ) : (
           <div className={styles.symmetricGrid}>
-            {Symmetricitems.map((item) => (
+            {symmetricItems.map((item) => (
               <div key={item.id} className={styles.symmetricGridItem}>
                 <div className={styles.greyBox}></div>
                 <div className={styles.profilePlaceholder}>
                   <div className={styles.profileIcon}></div>
                   <div className={styles.itemText}>
-                    <strong>{item.name}</strong> {item.description}, {item.year}
+                    <strong>{item.name}</strong>
+                    <br />
+                    {item.description}, {item.year}
                   </div>
                 </div>
               </div>
