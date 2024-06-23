@@ -27,20 +27,49 @@
   color: red;
   border-bottom: 2px solid red;
 }
-.MiddleBar {
+
+.MiddleBar.desktop {
+  width: 90%;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 20px;
+  align-content: center;
+  flex-wrap: wrap;
 }
+
+.MiddleBar.mobile {
+  display: none;
+}
+
+.mobileTabs {
+  display: flex;
+  border: 1px solid #ccc;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.mobileTabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.mobileTabs button.active {
+  font-weight: bold;
+  background-color: transparent;
+  border-top: 2px solid black;
+}
+
 .recentKeywords {
   display: flex;
   align-items: center;
-  width: 80%;
-  margin-bottom: 20px;
+  width: 100%;
   font-size: 12px;
   justify-content: flex-end;
+  background-color: #eee;
+  padding: 5px 0px;
 }
 
 .recentKeywords span {
@@ -48,11 +77,12 @@
 }
 
 .recentKeywords .keywordTag {
-  background-color: #eee;
+  background-color: #fefefe;
   border: 1px solid #ccc;
   margin-right: 5px;
   padding: 2px 5px;
   font-size: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
 
 .recentKeywords img {
@@ -63,8 +93,6 @@
 
 .filterBox {
   border: 1px solid #ccc;
-  margin-top: 20px;
-  background-color: #f9f9f9;
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -80,27 +108,31 @@
 }
 
 .centerAlign {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .filterCategory {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 10px;
+  justify-content: flex-start;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ccc;
 }
 
 .typeButton,
 .styleButton,
 .priceButton {
-  margin: 5px;
-  padding: 10px;
+  margin: 0px 2.5%;
+  padding: 5px 0px;
   border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
-  width: 120px; /* 모든 버튼의 너비를 동일하게 설정 */
+  width: 15%;
   text-align: center;
 }
 
@@ -160,7 +192,6 @@
   display: flex;
   flex-direction: column;
   text-align: end;
-
 }
 
 .imagePlaceholder {
@@ -175,9 +206,10 @@
   font-weight: bold;
 }
 
-.itemDetails{
+.itemDetails {
   border-right: 3px solid #111;
 }
+
 .itemDetails p {
   margin: 0px;
   padding-right: 10px;
@@ -208,4 +240,50 @@
 .activePageNumber {
   color: red;
   border-bottom: 2px solid red;
+}
+
+@media (max-width: 767px) {
+  .MiddleBar.desktop {
+    display: none;
+  }
+
+  .MiddleBar.mobile {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    margin: auto;
+    width: 100%;
+  }
+  .MiddleBar .centerAlign{
+    flex-direction: row;
+  }
+  .MiddleBar .filterBox {
+    width: 100%;
+    background-color: transparent;
+  }
+  .MiddleBar .styleButton {
+    font-size: 12px;
+    white-space: nowrap;
+    border: none;
+    background-color: transparent;
+    padding: 10px 0px;
+    margin: auto;
+  }
+  .MiddleBar .priceButton {
+    font-size: 12px;
+    white-space: nowrap;
+    border: none;
+    margin: 0;
+    padding: 10px 0px;
+    margin: auto;
+  }
+  .centerAlign {
+    align-items: center; /* 수평 중앙 정렬 */
+    justify-content: center; /* 수직 중앙 정렬 */
+    width: 100%; /* 필요에 따라 조정 */
+  }
+
+  .gridContainer {
+    grid-template-columns: repeat(1, 1fr); /* 한 줄에 2개의 항목 */
+  }
 }
