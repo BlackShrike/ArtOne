@@ -17,6 +17,14 @@
   font-size: 14px;
 }
 
+.label {
+  text-align: left;
+  width: 100%;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
 .findTabs {
   display: flex;
   justify-content: center;
@@ -57,6 +65,14 @@ h2 {
 .checkboxIcon {
   font-size: 20px;
   margin-right: 10px;
+  color: lightgray;
+}
+
+.checkbox.selected .checkboxIcon {
+  color: white;
+  background-color: #ff6b6b;
+  border-radius: 50%;
+  padding: 2px;
 }
 
 .findForm {
@@ -80,7 +96,11 @@ h2 {
 }
 
 .phoneInput input {
-  width: calc(33% - 10px);
+  width: calc(33.33%);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .confirmButton {
@@ -92,14 +112,6 @@ h2 {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-}
-
-.findAccountResultContainer {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
 }
 
 .result {

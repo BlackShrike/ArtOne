@@ -7,6 +7,19 @@
     max-width: 1400px;
     margin: 0 auto;
 }
+.slick-slide {
+  box-sizing: border-box; /* 박스 모델 설정 */
+}
+
+/* 슬라이더 아이템 스타일 */
+.sliderContainer .slick-slide {
+  margin: 0 10px; /* 패딩 적용 */
+}
+
+/* 중첩된 슬라이더에 대한 설정 */
+.sliderContainer .slick-list {
+  overflow: visible; /* 슬라이더 아이템이 잘리지 않도록 설정 */
+}
 
 
 .homeGrid {
@@ -39,6 +52,7 @@
 .item p {
     margin: 5px 5px;
 }
+
 .greyBox {
     width: 100%;
     height: 80%;
@@ -210,10 +224,7 @@
     margin-right: 10px;
 }
 
-.smallItem .text {
-    text-align: left;
-    font-size: 12px;
-}
+
 
 
 .bestGrid {
@@ -402,6 +413,9 @@
   }
   /* Mobile Styles */
   @media screen and (max-width: 768px) {
+    .homeGridWrapper{
+      margin: auto;
+    }
     .homeGrid {
       grid-template-columns: 1fr;
       grid-template-rows: repeat(4, 200px);
@@ -429,9 +443,14 @@
       flex-direction: row;
       align-items: center;
       text-align: left;
-      justify-content: flex-start;
+      justify-content: center;
     }
-  
+    
+  .homeGrid .smallItemLeft1 .text,
+  .homeGrid .smallItemLeft2 .text,
+  .homeGrid .smallItemRight1 .text {
+    max-width: 140px; /* 텍스트의 최대 너비를 지정 */
+  }
     .homeGrid .smallGreyBox {
       width: 30%;
     }
@@ -442,7 +461,8 @@
   }
   .largeItem .text p:last-child {
     display: none;
-}
+    }
+    
     .bestGrid {
         display: flex;
         flex-direction: column;

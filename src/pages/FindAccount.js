@@ -13,9 +13,7 @@ const translations = {
     phoneAuth: "휴대폰인증",
     emailAuth: "이메일인증",
     namePlaceholder: "이름",
-    phonePlaceholder1: "010",
-    phonePlaceholder2: "1234",
-    phonePlaceholder3: "5678",
+    phonePlaceholder: "휴대폰 번호",
     emailPlaceholder: "이메일",
     idPlaceholder: "아이디",
     confirmButton: "확인",
@@ -27,9 +25,7 @@ const translations = {
     phoneAuth: "Phone Authentication",
     emailAuth: "Email Authentication",
     namePlaceholder: "Name",
-    phonePlaceholder1: "010",
-    phonePlaceholder2: "1234",
-    phonePlaceholder3: "5678",
+    phonePlaceholder: "Phone Number",
     emailPlaceholder: "Email",
     idPlaceholder: "ID",
     confirmButton: "Confirm",
@@ -79,76 +75,62 @@ function FindAccount() {
       </div>
       <h2>{t.verification}</h2>
       <div className={styles.authMethods}>
-        <div onClick={() => toggleAuthMethod("phone")}>
-          {authMethod === "phone" ? (
-            <FaCheckCircle className={styles.checkboxIcon} />
-          ) : (
-            <FaRegCircle className={styles.checkboxIcon} />
-          )}
+        <div
+          onClick={() => toggleAuthMethod("phone")}
+          className={`${styles.checkbox} ${
+            authMethod === "phone" ? styles.selected : ""
+          }`}
+        >
+          <FaCheckCircle className={styles.checkboxIcon} />
           <label>{t.phoneAuth}</label>
         </div>
-        <div onClick={() => toggleAuthMethod("email")}>
-          {authMethod === "email" ? (
-            <FaCheckCircle className={styles.checkboxIcon} />
-          ) : (
-            <FaRegCircle className={styles.checkboxIcon} />
-          )}
+        <div
+          onClick={() => toggleAuthMethod("email")}
+          className={`${styles.checkbox} ${
+            authMethod === "email" ? styles.selected : ""
+          }`}
+        >
+          <FaCheckCircle className={styles.checkboxIcon} />
           <label>{t.emailAuth}</label>
         </div>
       </div>
       <form className={styles.findForm} onSubmit={handleSubmit}>
-        <input type="text" placeholder={t.namePlaceholder} required />
+        <p className={styles.label}>{t.namePlaceholder}</p>
+        <input type="text" required />
         {isFindId ? (
           authMethod === "phone" ? (
-            <div className={styles.phoneInput}>
-              <input
-                type="text"
-                placeholder={t.phonePlaceholder1}
-                maxLength="3"
-                required
-              />
-              <input
-                type="text"
-                placeholder={t.phonePlaceholder2}
-                maxLength="4"
-                required
-              />
-              <input
-                type="text"
-                placeholder={t.phonePlaceholder3}
-                maxLength="4"
-                required
-              />
-            </div>
+            <>
+              <p className={styles.label}>{t.phonePlaceholder}</p>
+              <div className={styles.phoneInput}>
+                <input type="text" maxLength="3" required />
+                <input type="text" maxLength="4" required />
+                <input type="text" maxLength="4" required />
+              </div>
+            </>
           ) : (
-            <input type="text" placeholder={t.emailPlaceholder} required />
+            <>
+              <p className={styles.label}>{t.idPlaceholder}</p>
+              <input type="text" required />
+            </>
           )
         ) : (
           <>
-            <input type="text" placeholder={t.idPlaceholder} required />
+            <p className={styles.label}>{t.idPlaceholder}</p>
+            <input type="text" required />
             {authMethod === "phone" ? (
-              <div className={styles.phoneInput}>
-                <input
-                  type="text"
-                  placeholder={t.phonePlaceholder1}
-                  maxLength="3"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder={t.phonePlaceholder2}
-                  maxLength="4"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder={t.phonePlaceholder3}
-                  maxLength="4"
-                  required
-                />
-              </div>
+              <>
+                <p className={styles.label}>{t.phonePlaceholder}</p>
+                <div className={styles.phoneInput}>
+                  <input type="text" maxLength="3" required />
+                  <input type="text" maxLength="4" required />
+                  <input type="text" maxLength="4" required />
+                </div>
+              </>
             ) : (
-              <input type="text" placeholder={t.emailPlaceholder} required />
+              <>
+                <p className={styles.label}>{t.emailPlaceholder}</p>
+                <input type="text" required />
+              </>
             )}
           </>
         )}

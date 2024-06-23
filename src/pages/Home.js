@@ -15,14 +15,13 @@ const mainSettings = {
   slidesToScroll: 1,
   arrows: true,
   autoplay: false,
-  centerMode: false,
-  centerPadding: "0px",
+  centerPadding: "50px",
   responsive: [
     {
       breakpoint: 768,
       settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        infinite: true,
+        centerMode: true,
       },
     },
   ],

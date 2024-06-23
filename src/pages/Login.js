@@ -69,8 +69,8 @@ function Login({ onLogin }) {
           {t.loginButton}
         </button>
         <div className={styles.links}>
-          <a href="/FindAccount">{t.findAccount}</a>
-          <a href="/">{t.signUp}</a>
+          <span onClick={() => navigate("/FindAccount")}>{t.findAccount}</span>
+          <span onClick={() => navigate("/")}>{t.signUp}</span>
         </div>
       </form>
       <div className={styles.socialLogin}>

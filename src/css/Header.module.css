@@ -173,6 +173,7 @@
 @media (max-width: 768px) {
   .header {
     width: 100%;
+    background-color: transparent;
   }
   .headerTop {
     justify-content: space-between;
@@ -234,5 +235,26 @@
     padding: 10px 0;
     width: 100%;
     text-align: left;
+  }
+
+  .mobileBottomBar {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    background-color: white;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    z-index: 1;
+  }
+
+  .mobileBottomBar a {
+    color: black;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 10px 0;
+  }
+
+  .mobileBottomBar a.active {
+    color: red;
   }
 }

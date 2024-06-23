@@ -16,7 +16,7 @@ const translations = {
     recentProducts: "최근 본 상품",
     cartItems: "장바구니",
     coupons: "쿠폰",
-    membershipCard: "아트딜러명함",
+    membershipCard: "아트멤버쉽",
     inDelivery: "배송중",
     delivered: "배송완료",
     title: "제목",
@@ -40,7 +40,7 @@ const translations = {
       recentProducts: "최근 본 상품",
       cartItems: "장바구니",
       coupons: "쿠폰",
-      membershipCard: "아트딜러명함",
+      membershipCard: "아트멤버쉽",
     },
     updateInfoForm: {
       username: "아이디",
@@ -237,7 +237,7 @@ function MyPage() {
                 </div>
               </label>
               <label>
-                {t.updateInfoForm.birthday}
+                {t.updateInfoForm.birthday.year}{" "}
                 <div className={styles.birthday}>
                   <input
                     type="text"
@@ -254,7 +254,7 @@ function MyPage() {
                 </div>
               </label>
               <label>
-                {t.updateInfoForm.address}
+                {t.updateInfoForm.address.zipCode}{" "}
                 <div className={styles.address}>
                   <div className={styles.zipCodeRow}>
                     <input
@@ -394,6 +394,7 @@ function MyPage() {
               <div
                 className={styles.userInfoHeader}
                 style={{ backgroundColor: selectedColor, color: textColor }}
+                onClick={() => setSelectedSection("membership")}
               >
                 <span>
                   {t.userInfoCards.membershipCard}:{" "}
@@ -409,19 +410,31 @@ function MyPage() {
                 />
               </div>
               <div className={styles.userInfoCards}>
-                <div className={styles.userInfoCard}>
+                <div
+                  className={styles.userInfoCard}
+                  onClick={() => setSelectedSection("recentViewed")}
+                >
                   <span>{t.userInfoCards.recentProducts}</span>
                   <span>14개</span>
                 </div>
-                <div className={styles.userInfoCard}>
+                <div
+                  className={styles.userInfoCard}
+                  onClick={() => setSelectedSection("cart")}
+                >
                   <span>{t.userInfoCards.cartItems}</span>
                   <span>14개</span>
                 </div>
-                <div className={styles.userInfoCard}>
+                <div
+                  className={styles.userInfoCard}
+                  onClick={() => setSelectedSection("coupon")}
+                >
                   <span>{t.userInfoCards.coupons}</span>
                   <span>2개</span>
                 </div>
-                <div className={styles.userInfoCard}>
+                <div
+                  className={styles.userInfoCard}
+                  onClick={() => setSelectedSection("membership")}
+                >
                   <span>{t.userInfoCards.membershipCard}</span>
                   <span>cmyk</span>
                 </div>
@@ -430,47 +443,62 @@ function MyPage() {
             <div className={styles.orderStatus}>
               <h3>{t.inDelivery}</h3>
               <div className={styles.orderItem}>
-                <h2>시그니처 헤더십</h2>
-                <p>
-                  작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                  작품명 작품명 작품명
-                </p>
-                <p>120,000원</p>
+                <div className={styles.imagePlaceholder}></div>
+                <div>
+                  <h2>시그니처 헤더십</h2>
+                  <p>
+                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
+                    작품명 작품명 작품명 작품명
+                  </p>
+                  <p className={styles.price}>120,000원</p>
+                </div>
               </div>
               <div className={styles.orderItem}>
-                <h2>시그니처 헤더십</h2>
-                <p>
-                  작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                  작품명 작품명 작품명
-                </p>
-                <p>120,000원</p>
+                <div className={styles.imagePlaceholder}></div>
+                <div>
+                  <h2>시그니처 헤더십</h2>
+                  <p>
+                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
+                    작품명 작품명 작품명 작품명
+                  </p>
+                  <p className={styles.price}>120,000원</p>
+                </div>
               </div>
             </div>
             <div className={styles.orderStatus}>
               <h3>{t.delivered}</h3>
               <div className={styles.orderItem}>
-                <h2>시그니처 헤더십</h2>
-                <p>
-                  작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                  작품명 작품명 작품명
-                </p>
-                <p>120,000원</p>
+                <div className={styles.imagePlaceholder}></div>
+                <div>
+                  <h2>시그니처 헤더십</h2>
+                  <p>
+                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
+                    작품명 작품명 작품명 작품명
+                  </p>
+                  <p className={styles.price}>120,000원</p>
+                </div>
               </div>
               <div className={styles.orderItem}>
-                <h2>시그니처 헤더십</h2>
-                <p>
-                  작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                  작품명 작품명 작품명
-                </p>
-                <p>120,000원</p>
+                <div className={styles.imagePlaceholder}></div>
+                <div>
+                  <h2>시그니처 헤더십</h2>
+                  <p>
+                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
+                    작품명 작품명 작품명 작품명
+                  </p>
+                  <p className={styles.price}>120,000원</p>
+                </div>
               </div>
               <div className={styles.orderItem}>
-                <h2>시그니처 헤더십</h2>
-                <p>
-                  작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                  작품명 작품명 작품명
-                </p>
-                <p>120,000원</p>
+                <div className={styles.imagePlaceholder}></div>
+                <div>
+                  <h2>시그니처 헤더십</h2>
+                  <p>
+                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
+                    작품명 작품명 작품명 작품명
+                  </p>
+                  <p className={styles.price}>120,000원</p>
+                </div>
               </div>
             </div>
           </>

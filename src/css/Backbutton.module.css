@@ -1,4 +1,5 @@
 .backLink {
+  display: flex;
   align-self: flex-start;
   margin-bottom: 20px;
 }
@@ -12,9 +13,4 @@
   cursor: pointer;
   padding: 0;
   font-family: inherit; /* Ensures the button text matches the surrounding text */
-}
-@media (max-width: 768px) {
-.backLink{
-  display: none;
-}
 }

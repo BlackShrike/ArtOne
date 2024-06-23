@@ -1,10 +1,14 @@
-.body {
-  font-family: 'Noto Sans KR', sans-serif;
+/* Ensure all elements use border-box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 .mypageContainer {
   display: flex;
   padding: 20px;
+  margin: auto;
 }
 
 .sidebar {
@@ -30,7 +34,7 @@
 }
 
 .mainContent {
-  flex-grow: 1;
+  width: 80%;
 }
 
 .userInfo {
@@ -42,11 +46,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
-  color: white;
   padding: 10px;
   border-radius: 4px;
   border: #333 1px solid;
+  background-color: white;
 }
 
 .userInfoCards {
@@ -57,7 +60,6 @@
 
 .userInfoCard {
   flex: 1;
-  background-color: #f9f9f9;
   padding: 40px 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -66,6 +68,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer; /* 클릭 가능하도록 커서 스타일 추가 */
 }
 
 .userInfoCard:last-child {
@@ -88,9 +91,10 @@
 }
 
 .orderItem {
-  background-color: #f9f9f9;
-  padding: 30px 20px;
+  display: flex;
+  align-items: center;
   border: 1px solid #ccc;
+  height: 130px;
   border-radius: 4px;
   margin-bottom: 10px;
 }
@@ -105,6 +109,19 @@
   margin: 5px 0;
 }
 
+.orderItem .imagePlaceholder {
+  width: 15%;
+  height: 100%;
+  background-color: #eee;
+  border: 1px solid#ccc;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.price {
+  text-align: right;
+  padding-right: 30px;
+  font-weight: bold;
+}
 .recentViewedContainer {
   padding: 20px;
 }
@@ -122,11 +139,6 @@
   text-align: left;
 }
 
-.imagePlaceholder {
-  width: 60px;
-  height: 60px;
-  background-color: #eee;
-}
 
 .payButton {
   background-color: #333;
@@ -299,7 +311,6 @@
 }
 
 .coupon {
-  background-color: #f9f9f9;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -343,12 +354,14 @@
   text-align: center;
   margin-bottom: 20px;
 }
+
 .membershipLevels {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
   align-items: flex-end;
 }
+
 .membershipLevel {
   width: 100px;
   padding: 10px;
@@ -363,7 +376,6 @@
   justify-content: center; /* 중앙 정렬 */
 }
 
-
 .membershipLevel.selected {
   border: 2px solid #333;
   background-color: black;
@@ -373,17 +385,77 @@
 .membershipLevel.black.selected {
   color: white;
 }
+
 .benefit {
-  background-color: #f9f9f9;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 10px;
 }
+
 .squareBox {
   border: #333 1px solid;
   width: 12px;
   height: 12px;
   background-color: currentColor;
   margin-bottom: 5px;
+}
+
+@media (max-width: 767px) {
+  .mypageContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mainContent {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .userInfoCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .userInfoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: white;
+    margin-bottom: 10px;
+  }
+
+  .userInfoCards {
+    width: 100%;
+  }
+
+  .userInfoCard {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+  }
+
+  .userInfoCard span:first-child {
+    margin-bottom: 0px;
+  }
+  .orderItem .imagePlaceholder {
+    width: 50%;
+    margin-right: 5px;
+  }
+  .orderItem {
+    font-size: 12px;
+  }
 }
