@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "../css/Promotion.module.css";
 import BackButton from "../components/BackButton";
 import PromotionDetail from "./PromotionDetail";
@@ -23,19 +23,24 @@ function Promotion() {
   const { language } = useLanguage();
   const t = translations[language];
   const { id } = useParams();
+  const navigate = useNavigate();
 
   if (id) {
     return <PromotionDetail />;
   }
+
+  const handleNavigation = (index) => {
+    navigate(`/Promotion/${index + 1}`);
+  };
 
   return (
     <div className={styles.gridPage}>
       <BackButton />
       <div className={styles.gridContainer}>
         {Array.from({ length: 20 }).map((_, index) => (
-          <Link
+          <div
             key={index}
-            to={`/Promotion/${index + 1}`}
+            onClick={() => handleNavigation(index)}
             className={styles.gridItem}
           >
             <div className={styles.imagePlaceholder}></div>
@@ -47,7 +52,7 @@ function Promotion() {
               <p>{t.promotionContent}</p>
               <p>{t.date}</p>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

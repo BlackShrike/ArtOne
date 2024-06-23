@@ -1,334 +1,439 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
-import { PiShoppingCart } from "react-icons/pi";
-import styles from "../css/Header.module.css";
-import { useLanguage } from "./LanguageContext";
+import React, { useState, useEffect } from "react";
+import styles from "../css/Original.module.css"; // Ensure this path is correct based on your project structure
+import BackButton from "../components/BackButton"; // Assuming there's a BackButton component
+import { TbRefresh } from "react-icons/tb";
+import { useLanguage } from "../components/LanguageContext";
 
 const translations = {
   KR: {
-    mypage: "마이페이지",
-    logout: "로그아웃",
-    login: "로그인",
-    signup: "회원가입",
-    promotion: "프로모션",
-    signature: "시그니처",
-    original: "오리지널",
-    artist: "아티스트",
-    business: "비즈니스",
-    review: "리뷰",
-    faq: "FAQ",
     all: "전체",
-    person: "인물",
-    landscape: "풍경",
-    photo: "사진",
+    original: "원화",
+    print: "판화",
     abstract: "추상",
-    oriental: "동양화",
-    sacred: "성화",
-    plant: "식물",
+    portrait: "인물",
+    landscape: "풍경",
+    stillLife: "정물",
     animal: "동물",
-    drawing: "드로잉",
-    poster: "포스터",
+    horizontal: "가로형",
+    vertical: "세로형",
+    square: "정사각형",
+    small: "10호 미만",
+    medium: "30호 미만",
+    large: "50호 미만",
+    xLarge: "70호 미만",
+    xxLarge: "100호 이상",
+    price1: "50만원 미만",
+    price2: "80만원 미만",
+    price3: "100만원 미만",
+    price4: "150만원 미만",
+    price5: "150만원 이상",
+    artist: "작가명",
+    techniqueSize: "제작기법 및 사이즈",
+    yearDescription: "제작년도 및 그의 작품 내용들",
   },
   EN: {
-    mypage: "My Page",
-    logout: "Logout",
-    login: "Login",
-    signup: "Sign Up",
-    promotion: "Promotion",
-    signature: "Signature",
-    original: "Original",
-    artist: "Artist",
-    business: "Business",
-    review: "Review",
-    faq: "FAQ",
     all: "All",
-    person: "Person",
-    landscape: "Landscape",
-    photo: "Photo",
+    original: "Original",
+    print: "Print",
     abstract: "Abstract",
-    oriental: "Oriental",
-    sacred: "Sacred",
-    plant: "Plant",
+    portrait: "Portrait",
+    landscape: "Landscape",
+    stillLife: "Still Life",
     animal: "Animal",
-    drawing: "Drawing",
-    poster: "Poster",
+    horizontal: "Horizontal",
+    vertical: "Vertical",
+    square: "Square",
+    small: "Less than 10",
+    medium: "Less than 30",
+    large: "Less than 50",
+    xLarge: "Less than 70",
+    xxLarge: "More than 100",
+    price1: "Less than 500,000 KRW",
+    price2: "Less than 800,000 KRW",
+    price3: "Less than 1,000,000 KRW",
+    price4: "Less than 1,500,000 KRW",
+    price5: "More than 1,500,000 KRW",
+    artist: "Artist",
+    techniqueSize: "Technique and Size",
+    yearDescription: "Year and Description",
   },
 };
 
-function Header({ isLoggedIn, onLogout }) {
-  const [showSignatureMenu, setShowSignatureMenu] = useState(false);
-  const [showOriginalMenu, setShowOriginalMenu] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { language, toggleLanguage } = useLanguage(); // Use language context
+function Original() {
+  const [filters, setFilters] = useState({
+    type: localStorage.getItem("type") || "전체",
+    style1: localStorage.getItem("style1") || "",
+    style2: localStorage.getItem("style2") || "",
+    style3: localStorage.getItem("style3") || "",
+    style4: localStorage.getItem("style4") || "",
+    price1: localStorage.getItem("price1") || "",
+    price2: localStorage.getItem("price2") || "",
+    price3: localStorage.getItem("price3") || "",
+    price4: localStorage.getItem("price4") || "",
+  });
 
-  const getLinkClass = (path) => {
-    return location.pathname.startsWith(path)
-      ? `${styles.active} ${styles.link}`
-      : styles.link;
+  const [recentFilters, setRecentFilters] = useState([]);
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const itemsPerPage = 30; // 한 페이지당 30개 항목
+  const totalItems = 300; // 총 항목 수
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [mobileTab, setMobileTab] = useState("category"); // 모바일 탭 상태
+
+  useEffect(() => {
+    localStorage.setItem("type", filters.type);
+    localStorage.setItem("style1", filters.style1);
+    localStorage.setItem("style2", filters.style2);
+    localStorage.setItem("style3", filters.style3);
+    localStorage.setItem("style4", filters.style4);
+    localStorage.setItem("price1", filters.price1);
+    localStorage.setItem("price2", filters.price2);
+    localStorage.setItem("price3", filters.price3);
+    localStorage.setItem("price4", filters.price4);
+  }, [filters]);
+
+  useEffect(() => {
+    const newRecentFilters = [
+      filters.style1,
+      filters.style2,
+      filters.style3,
+      filters.style4,
+      filters.price1,
+      filters.price2,
+      filters.price3,
+      filters.price4,
+    ].filter(Boolean);
+
+    if (newRecentFilters.length > 5) {
+      setRecentFilters(newRecentFilters.slice(-5));
+    } else {
+      setRecentFilters(newRecentFilters);
+    }
+  }, [filters]);
+
+  const toggleFilter = (category, value) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [category]: prevFilters[category] === value ? "" : value,
+    }));
   };
 
-  const handleNavigate = (path) => {
-    navigate(path);
+  const resetFilters = () => {
+    setFilters({
+      type: "전체",
+      style1: "",
+      style2: "",
+      style3: "",
+      style4: "",
+      price1: "",
+      price2: "",
+      price3: "",
+      price4: "",
+    });
+    localStorage.removeItem("type");
+    localStorage.removeItem("style1");
+    localStorage.removeItem("style2");
+    localStorage.removeItem("style3");
+    localStorage.removeItem("style4");
+    localStorage.removeItem("price1");
+    localStorage.removeItem("price2");
+    localStorage.removeItem("price3");
+    localStorage.removeItem("price4");
   };
 
-  const signatureItems = [
-    translations[language].all,
-    translations[language].person,
-    translations[language].landscape,
-    translations[language].photo,
-    translations[language].abstract,
-    translations[language].oriental,
-    translations[language].sacred,
-    translations[language].plant,
-    translations[language].animal,
-    translations[language].drawing,
-    translations[language].poster,
-  ];
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-  const originalItems = [
-    translations[language].all,
-    translations[language].person,
-    translations[language].landscape,
-    translations[language].abstract,
-  ];
+  const renderItems = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const items = Array.from({ length: totalItems }).slice(
+      startIndex,
+      startIndex + itemsPerPage
+    );
 
-  return (
-    <header className={styles.header}>
-      <section className={styles.headerTop}>
-        <h1 onClick={() => handleNavigate("/")}>ARTKO</h1>
-        <nav className={styles.headerLinks}>
-          {isLoggedIn ? (
-            <>
-              <span
-                className={styles.desktopOnly}
-                onClick={() => handleNavigate("/mypage")}
-              >
-                {translations[language].mypage}
-              </span>
-              <span
-                onClick={onLogout}
-                className={`${styles.logoutButton} ${styles.desktopOnly}`}
-              >
-                {translations[language].logout}
-              </span>
-            </>
-          ) : (
-            <span
-              className={styles.desktopOnly}
-              onClick={() => handleNavigate("/login")}
-            >
-              {translations[language].login}
-            </span>
-          )}
-          <span
-            className={styles.desktopOnly}
-            onClick={() => handleNavigate("/signup")}
-          >
-            {translations[language].signup}
-          </span>
-          <span className={styles.desktopOnly} onClick={toggleLanguage}>
-            KR / EN
-          </span>
-          <span
-            className={styles.mobileOnly}
-            onClick={() => handleNavigate("/search")}
-          >
-            <FaSearch />
-          </span>
-          <span onClick={() => handleNavigate("/search")}>
-            <PiShoppingCart />
-          </span>
-        </nav>
-        <div
-          className={styles.hamburgerMenu}
-          onClick={() => setShowMobileMenu(!showMobileMenu)}
-        >
-          {showMobileMenu ? <FaTimes /> : <FaBars />}
+    return items.map((_, index) => (
+      <div key={index} className={styles.gridItem}>
+        <div className={styles.imagePlaceholder}></div>
+        <div className={styles.itemDetails}>
+          <p>
+            <span className={styles.headtext}>{t.artist}</span>
+          </p>
+          <p>{t.techniqueSize}</p>
+          <p>{t.yearDescription}</p>
         </div>
-      </section>
-      <section className={styles.headerBottom}>
-        <span onClick={() => handleNavigate("/promotion")}>
-          <span className={getLinkClass("/promotion")}>
-            {translations[language].promotion}
-          </span>
-        </span>
+      </div>
+    ));
+  };
+
+  const renderPagination = () => {
+    return (
+      <div className={styles.pagination}>
         <span
-          onMouseEnter={() => setShowSignatureMenu(true)}
-          onMouseLeave={() => setShowSignatureMenu(false)}
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
         >
+          &lt;
+        </span>
+        {Array.from({ length: totalPages }).map((_, index) => (
           <span
-            onClick={() => handleNavigate("/signature")}
-            className={getLinkClass("/signature")}
+            key={index}
+            className={`${styles.pageNumber} ${
+              currentPage === index + 1 ? styles.activePageNumber : ""
+            }`}
+            onClick={() => handlePageChange(index + 1)}
           >
-            {translations[language].signature}
+            {index + 1}
           </span>
-          {showSignatureMenu && (
-            <div className={`${styles.dropdownMenu} ${styles.signatureMenu}`}>
-              {signatureItems.map((item, i) => (
-                <div className={styles.dropdownItem} key={i}>
-                  <div className={styles.dropdownBox}></div>
-                  <span onClick={() => handleNavigate("/signature")}>
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-        </span>
+        ))}
         <span
-          onMouseEnter={() => setShowOriginalMenu(true)}
-          onMouseLeave={() => setShowOriginalMenu(false)}
+          className={styles.pageArrow}
+          onClick={() =>
+            handlePageChange(Math.min(totalPages, currentPage + 1))
+          }
         >
-          <span
-            onClick={() => handleNavigate("/original")}
-            className={getLinkClass("/original")}
-          >
-            {translations[language].original}
-          </span>
-          {showOriginalMenu && (
-            <div className={styles.dropdownMenu}>
-              {originalItems.map((item, i) => (
-                <div className={styles.dropdownItem} key={i}>
-                  <div className={styles.dropdownBox}></div>
-                  <span onClick={() => handleNavigate("/original")}>
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-        </span>
-        <span className={styles.separator}>|</span>
-        <span
-          onClick={() => handleNavigate("/artist")}
-          className={getLinkClass("/artist")}
-        >
-          {translations[language].artist}
-        </span>
-        <span
-          onClick={() => handleNavigate("/business")}
-          className={getLinkClass("/business")}
-        >
-          {translations[language].business}
-        </span>
-        <span
-          onClick={() => handleNavigate("/review")}
-          className={getLinkClass("/review")}
-        >
-          {translations[language].review}
-        </span>
-        <span
-          onClick={() => handleNavigate("/faq")}
-          className={getLinkClass("/faq")}
-        >
-          {translations[language].faq}
-        </span>
-      </section>
-      {showMobileMenu && (
-        <section className={`${styles.mobileMenu} ${styles.show}`}>
-          <nav className={styles.mobileMenuLinks}>
-            {isLoggedIn ? (
-              <>
-                <span onClick={() => handleNavigate("/mypage")}>
-                  {translations[language].mypage}
-                </span>
-                <span onClick={onLogout} className={styles.logoutButton}>
-                  {translations[language].logout}
-                </span>
-              </>
-            ) : (
-              <span onClick={() => handleNavigate("/login")}>
-                {translations[language].login}
-              </span>
-            )}
-            <span onClick={() => handleNavigate("/signup")}>
-              {translations[language].signup}
-            </span>
-            <span onClick={() => handleNavigate("/promotion")}>
-              {translations[language].promotion}
-            </span>
-            <span>
-              <div onClick={() => setShowSignatureMenu(!showSignatureMenu)}>
-                {translations[language].signature}{" "}
-                {showSignatureMenu ? "∧" : "∨"}
-              </div>
-              {showSignatureMenu && (
-                <div>
-                  {signatureItems.map((item, i) => (
-                    <div key={i} onClick={() => handleNavigate("/signature")}>
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </span>
-            <span>
-              <div onClick={() => setShowOriginalMenu(!showOriginalMenu)}>
-                {translations[language].original} {showOriginalMenu ? "∧" : "∨"}
-              </div>
-              {showOriginalMenu && (
-                <div>
-                  {originalItems.map((item, i) => (
-                    <div key={i} onClick={() => handleNavigate("/original")}>
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </span>
-            <span onClick={() => handleNavigate("/artist")}>
-              {translations[language].artist}
-            </span>
-            <span onClick={() => handleNavigate("/business")}>
-              {translations[language].business}
-            </span>
-            <span onClick={() => handleNavigate("/review")}>
-              {translations[language].review}
-            </span>
-            <span onClick={() => handleNavigate("/faq")}>
-              {translations[language].faq}
-            </span>
-            <span onClick={toggleLanguage}>KR / EN</span>
-          </nav>
-        </section>
-      )}
-      <div className={`${styles.mobileBottomBar} ${styles.mobileOnly}`}>
-        <span
-          onClick={() => handleNavigate("/promotion")}
-          className={getLinkClass("/promotion")}
-        >
-          {translations[language].promotion}
-        </span>
-        <span
-          onClick={() => handleNavigate("/signature")}
-          className={getLinkClass("/signature")}
-        >
-          {translations[language].signature}
-        </span>
-        <span
-          onClick={() => handleNavigate("/original")}
-          className={getLinkClass("/original")}
-        >
-          {translations[language].original}
-        </span>
-        <span
-          onClick={() => handleNavigate("/artist")}
-          className={getLinkClass("/artist")}
-        >
-          {translations[language].artist}
-        </span>
-        <span
-          onClick={() => handleNavigate("/business")}
-          className={getLinkClass("/business")}
-        >
-          {translations[language].business}
+          &gt;
         </span>
       </div>
-    </header>
+    );
+  };
+
+  return (
+    <div className={styles.filterContainer}>
+      <div className={styles.leftAlign}>
+        <button
+          className={`${filters.type === "전체" ? styles.active : ""}`}
+          onClick={() => setFilters({ ...filters, type: "전체" })}
+        >
+          {t.all}
+        </button>
+        <button
+          className={` ${filters.type === "원화" ? styles.active : ""}`}
+          onClick={() => setFilters({ ...filters, type: "원화" })}
+        >
+          {t.original}
+        </button>
+        <button
+          className={`${filters.type === "판화" ? styles.active : ""}`}
+          onClick={() => setFilters({ ...filters, type: "판화" })}
+        >
+          {t.print}
+        </button>
+      </div>
+      <BackButton />
+      <section className={styles.MiddleBar}>
+        <div className={styles.filterHeader}></div>
+        <div className={styles.filterBox}>
+          <div className={styles.centerAlign}>
+            <div className={styles.mobileTabs}>
+              <button
+                className={`${mobileTab === "category" ? styles.active : ""}`}
+                onClick={() => setMobileTab("category")}
+              >
+                {t.all}
+              </button>
+              <button
+                className={`${mobileTab === "size" ? styles.active : ""}`}
+                onClick={() => setMobileTab("size")}
+              >
+                {t.small}
+              </button>
+              <button
+                className={`${
+                  mobileTab === "orientation" ? styles.active : ""
+                }`}
+                onClick={() => setMobileTab("orientation")}
+              >
+                {t.horizontal}
+              </button>
+              <button
+                className={`${mobileTab === "price" ? styles.active : ""}`}
+                onClick={() => setMobileTab("price")}
+              >
+                {t.price1}
+              </button>
+            </div>
+            {mobileTab === "category" && (
+              <div className={styles.filterCategory}>
+                <button
+                  className={`${styles.styleButton} ${
+                    filters.style1 === "추상" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("style1", "추상")}
+                >
+                  {t.abstract}
+                </button>
+                <button
+                  className={`${styles.styleButton} ${
+                    filters.style1 === "인물" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("style1", "인물")}
+                >
+                  {t.portrait}
+                </button>
+                <button
+                  className={`${styles.styleButton} ${
+                    filters.style1 === "풍경" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("style1", "풍경")}
+                >
+                  {t.landscape}
+                </button>
+                <button
+                  className={`${styles.styleButton} ${
+                    filters.style1 === "정물" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("style1", "정물")}
+                >
+                  {t.stillLife}
+                </button>
+                <button
+                  className={`${styles.styleButton} ${
+                    filters.style1 === "동물" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("style1", "동물")}
+                >
+                  {t.animal}
+                </button>
+              </div>
+            )}
+            {mobileTab === "size" && (
+              <div className={styles.filterCategory}>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price1 === "10호 미만" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price1", "10호 미만")}
+                >
+                  {t.small}
+                </button>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price1 === "30호 미만" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price1", "30호 미만")}
+                >
+                  {t.medium}
+                </button>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price1 === "50호 미만" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price1", "50호 미만")}
+                >
+                  {t.large}
+                </button>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price1 === "70호 미만" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price1", "70호 미만")}
+                >
+                  {t.xLarge}
+                </button>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price1 === "100호 이상" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price1", "100호 이상")}
+                >
+                  {t.xxLarge}
+                </button>
+              </div>
+            )}
+            {mobileTab === "orientation" && (
+              <div className={styles.filterCategory}>
+                <button
+                  className={`${styles.styleButton} ${
+                    filters.style2 === "가로형" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("style2", "가로형")}
+                >
+                  {t.horizontal}
+                </button>
+                <button
+                  className={`${styles.styleButton} ${
+                    filters.style2 === "세로형" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("style2", "세로형")}
+                >
+                  {t.vertical}
+                </button>
+                <button
+                  className={`${styles.styleButton} ${
+                    filters.style2 === "정사각형" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("style2", "정사각형")}
+                >
+                  {t.square}
+                </button>
+              </div>
+            )}
+            {mobileTab === "price" && (
+              <div className={styles.filterCategory}>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price2 === "50만원 미만" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price2", "50만원 미만")}
+                >
+                  {t.price1}
+                </button>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price2 === "80만원 미만" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price2", "80만원 미만")}
+                >
+                  {t.price2}
+                </button>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price2 === "100만원 미만" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price2", "100만원 미만")}
+                >
+                  {t.price3}
+                </button>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price2 === "150만원 미만" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price2", "150만원 미만")}
+                >
+                  {t.price4}
+                </button>
+                <button
+                  className={`${styles.priceButton} ${
+                    filters.price2 === "150만원 이상" ? styles.active : ""
+                  }`}
+                  onClick={() => toggleFilter("price2", "150만원 이상")}
+                >
+                  {t.price5}
+                </button>
+              </div>
+            )}
+          </div>
+          <div className={styles.recentKeywords}>
+            {recentFilters.map((filter, index) => (
+              <span key={index} className={styles.keywordTag}>
+                {filter}
+              </span>
+            ))}
+            <button className={styles.resetButton} onClick={resetFilters}>
+              <TbRefresh />
+            </button>
+          </div>
+        </div>
+      </section>
+      <section className={styles.gridPage}>
+        <div className={styles.gridContainer}>{renderItems()}</div>
+        {renderPagination()}
+      </section>
+    </div>
   );
 }
 
-export default Header;
+export default Original;

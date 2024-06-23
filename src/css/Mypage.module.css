@@ -1,7 +1,7 @@
 /* Ensure all elements use border-box sizing */
-*,
-*::before,
-*::after {
+.mypageContainer,
+.mypageContainer::before,
+.mypageContainer::after {
   box-sizing: border-box;
 }
 

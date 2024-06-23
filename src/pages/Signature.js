@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import styles from "../css/Signature.module.css";
 import BackButton from "../components/BackButton";
@@ -22,6 +22,8 @@ const translations = {
     title: "제목",
     caption: "캡션내용",
     date: "05. 2024",
+    sort: "정렬",
+    sortOptions: ["인기작", "최신작", "가로", "세로"],
   },
   EN: {
     menu: [
@@ -38,6 +40,8 @@ const translations = {
     title: "Title",
     caption: "Caption Content",
     date: "May 2024",
+    sort: "Sort",
+    sortOptions: ["Popular", "Newest", "Horizontal", "Vertical"],
   },
 };
 
@@ -45,6 +49,7 @@ function Signature() {
   const { id } = useParams();
   const { language } = useLanguage();
   const t = translations[language];
+  const navigate = useNavigate();
 
   if (id) {
     return <SignatureDetail />;
@@ -52,6 +57,7 @@ function Signature() {
 
   const [selectedMenu, setSelectedMenu] = useState(t.menu[0]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortOption, setSortOption] = useState("");
   const itemsPerPage = 50;
 
   const handleMenuClick = (menu) => {
@@ -61,6 +67,10 @@ function Signature() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
   };
 
   const totalItems = 200;
@@ -73,7 +83,11 @@ function Signature() {
     );
 
     return items.map((item) => (
-      <Link to={`/Signature/${item}`} key={item} className={styles.gridItem}>
+      <div
+        key={item}
+        onClick={() => navigate(`/Signature/${item}`)}
+        className={styles.gridItem}
+      >
         <div className={styles.imagePlaceholder}></div>
         <div className={styles.itemDetails}>
           <div>
@@ -89,7 +103,7 @@ function Signature() {
           </div>
           <FaCartPlus />
         </div>
-      </Link>
+      </div>
     ));
   };
 
@@ -143,6 +157,18 @@ function Signature() {
             {menu}
           </div>
         ))}
+      </div>
+      <div className={styles["signature-sort"]}>
+        <select value={sortOption} onChange={handleSortChange} defaultValue="">
+          <option value="" disabled>
+            {t.sort}
+          </option>
+          {t.sortOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
       <BackButton />
       <div className={styles.gridPage}>

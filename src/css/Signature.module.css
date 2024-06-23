@@ -1,3 +1,8 @@
+/* Global styles */
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 .signature {
   padding: 10px;
 }
@@ -14,7 +19,7 @@
   display: flex;
   justify-content: flex-start;
   margin-bottom: 20px;
-  padding:0;
+  padding: 0;
   border-bottom: 2px solid #ccc;
 }
 
@@ -29,13 +34,50 @@
   border-bottom: 2px solid red;
 }
 
+.signature-sort {
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  position: relative; /* For dropdown positioning */
+}
+
+.signature-sort select {
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 5px;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-appearance: none; /* Remove default arrow in WebKit browsers */
+  -moz-appearance: none; /* Remove default arrow in Firefox */
+  appearance: none; /* Remove default arrow in other browsers */
+}
+
+.signature-sort select::-ms-expand {
+  display: none; /* Remove default arrow in Internet Explorer */
+}
+
+.signature-sort::after {
+  content: '▾';
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.signature-sort select option {
+  font-family: inherit; /* Apply font family to options */
+}
 .gridPage {
   padding: 20px;
 }
 
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 각 행에 5개의 항목을 표시 */
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 }
 
@@ -54,38 +96,46 @@
 .headtext {
   font-weight: bold;
 }
-
 .itemDetails {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 14px;
+  position: relative;
+  padding-right: 20px; /* Ensure space for the cart icon */
 }
 
 .itemDetails p {
-  font-size: 10px;
+  margin: 0;
+}
+.itemDetails svg {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  padding: 20px 0;
 }
 
-.pageNumber,
 .pageArrow {
-  margin: 0 5px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  background-color: white;
   cursor: pointer;
+  padding: 0 10px;
 }
 
-.pageNumber:hover,
-.pageArrow:hover {
-  background-color: #f1f1f1;
+.pageNumber {
+  cursor: pointer;
+  padding: 0 10px;
 }
 
 .signature-page-number-selected {
-  color: red;
   font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .signature-sort select{
+    width: 20%;
+  }
 }
