@@ -34,18 +34,23 @@
   flex-direction: column;
   align-items: flex-start;
 }
-.artistBio h2{
+
+.artistBio h2 {
   font-size: 32px;
   font-weight: bold;
   margin: 0px;
 }
-.artistBio p{
+
+.artistBio p {
   margin: 0px;
 }
+
 .moretext {
   font-weight: bold;
-  color: #000; /* 원하는 색상으로 변경하세요 */
+  color: #000;
+  cursor: pointer;
 }
+
 .sectionTitle {
   font-size: 24px;
   margin-top: 20px;
@@ -61,6 +66,7 @@
 .gridItem {
   padding: 10px;
   text-align: left;
+  position: relative; /* Ensure relative positioning for cart icon */
 }
 
 .imagePlaceholder {
@@ -72,10 +78,19 @@
 
 .headtext {
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .itemDetails p {
   font-size: 10px;
+}
+
+.faCartPlusIcon {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #000; /* 원하는 색상으로 변경하세요 */
 }
 
 .pagination {
@@ -96,4 +111,28 @@
 .pageNumber:hover,
 .pageArrow:hover {
   background-color: #f1f1f1;
+}
+
+@media (max-width: 600px) {
+  .artistInfo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .artistImagePlaceholder {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .artistDetails {
+    text-align: center;
+  }
+
+  .artistBio {
+    align-items: center;
+  }
+
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr); /* Two-column layout for mobile */
+  }
 }

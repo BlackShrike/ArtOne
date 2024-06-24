@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import styles from "../css/Mypage.module.css"; // Ensure the path is correct
 import { useLanguage } from "../components/LanguageContext";
@@ -25,6 +25,8 @@ const translations = {
     select: "선택",
     price: "가격",
     payButton: "결제하기",
+    orderButton: "주문하기",
+    deleteButton: "삭제",
     paginationPrev: "<",
     paginationNext: ">",
     membershipBenefits: "아트멤버십 혜택",
@@ -83,6 +85,8 @@ const translations = {
     select: "Select",
     price: "Price",
     payButton: "Pay",
+    orderButton: "Order",
+    deleteButton: "Delete",
     paginationPrev: "<",
     paginationNext: ">",
     membershipBenefits: "Art Membership Benefits",
@@ -123,12 +127,25 @@ const translations = {
   },
 };
 
-function MyPage() {
+function MyPage({ isLoggedIn }) {
   const [selectedSection, setSelectedSection] = useState("main");
   const [membership, setMembership] = useState("White");
   const [selectedColor, setSelectedColor] = useState("white");
   const { language } = useLanguage();
+  const navigate = useNavigate();
   const t = translations[language];
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      setSelectedSection("main");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   const handleMembershipClick = (level) => {
     setMembership(level);
@@ -147,60 +164,107 @@ function MyPage() {
   };
 
   const textColor = membership === "White" ? "black" : "white";
-  const userInfoBackgroundColor =
-    membership === "White" ? "white" : selectedColor;
+
+  const renderRecentViewedDesktop = () => (
+    <div className={styles.recentViewedContainerDesktop}>
+      <h2>{t.recentViewed}</h2>
+      <table className={styles.recentViewedTable}>
+        <thead>
+          <tr>
+            <th>{t.title}</th>
+            <th className={styles.rightAlign}>{t.productInfo}</th>
+            <th>{t.price}</th>
+            <th>{t.select}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[...Array(5).keys()].map((_, index) => (
+            <tr key={index}>
+              <td>
+                <div className={styles.imagePlaceholder}></div>
+              </td>
+              <td>
+                <p className={styles.productTitle}>시그니처 에디션</p>
+                <p>
+                  작품이야기 작품이야기 작품이야기 작품이야기 작품이야기
+                  작품이야기 작품이야기
+                </p>
+              </td>
+              <td>
+                <p className={styles.oldPrice}>98,000원</p>
+                <p className={styles.newPrice}>49,900원</p>
+              </td>
+              <td>
+                <div className={styles.buttonGroup}>
+                  <button className={styles.orderButton}>
+                    {t.orderButton}
+                  </button>
+                  <button className={styles.cartButton}>{t.cart}</button>
+                  <button className={styles.deleteButton}>
+                    {t.deleteButton}
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className={styles.pagination}>
+        <span>{t.paginationPrev}</span>
+        {[...Array(15).keys()].map((number) => (
+          <span key={number + 1} className={styles.pageNumber}>
+            {number + 1}
+          </span>
+        ))}
+        <span>{t.paginationNext}</span>
+      </div>
+    </div>
+  );
+
+  const renderRecentViewedMobile = () => (
+    <div className={styles.recentViewedContainerMobile}>
+      <h2>{t.recentViewed}</h2>
+      <div className={styles.recentViewedGrid}>
+        {[...Array(5).keys()].map((_, index) => (
+          <div key={index} className={styles.card}>
+            <div className={styles.imagePlaceholder}></div>
+            <div className={styles.productDetails}>
+              <h3>시그니처 에디션</h3>
+              <p>
+                작품이야기 작품이야기 작품이야기 작품이야기 작품이야기
+                작품이야기 작품이야기
+              </p>
+              <div className={styles.buttonGroup}>
+                <p className={styles.newPrice}>49,900원</p>
+                <button className={styles.orderButton}>{t.orderButton}</button>
+                <button className={styles.cartButton}>{t.cart}</button>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className={`${styles.pagination} ${styles.Pagination}`}>
+          <span>{t.paginationPrev}</span>
+          {[...Array(15).keys()].map((number) => (
+            <span key={number + 1} className={styles.pageNumber}>
+              {number + 1}
+            </span>
+          ))}
+          <span>{t.paginationNext}</span>
+        </div>
+      </div>
+    </div>
+  );
 
   const renderContent = () => {
     switch (selectedSection) {
       case "recentViewed":
         return (
-          <div className={styles.recentViewedContainer}>
-            <h2>{t.recentViewed}</h2>
-            <table className={styles.recentViewedTable}>
-              <thead>
-                <tr>
-                  <th>{t.title}</th>
-                  <th>{t.productInfo}</th>
-                  <th>{t.price}</th>
-                  <th>{t.select}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...Array(5).keys()].map((_, index) => (
-                  <tr key={index}>
-                    <td>
-                      <div className={styles.imagePlaceholder}></div>
-                    </td>
-                    <td>
-                      <p>시그니처 헤더십</p>
-                      <p>
-                        작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                        작품명 작품명 작품명 작품명
-                      </p>
-                    </td>
-                    <td>49,500원</td>
-                    <td>
-                      <Link to="/Checkout">
-                        <button className={styles.payButton}>
-                          {t.payButton}
-                        </button>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className={styles.pagination}>
-              <span>{t.paginationPrev}</span>
-              {[...Array(15).keys()].map((number) => (
-                <span key={number + 1} className={styles.pageNumber}>
-                  {number + 1}
-                </span>
-              ))}
-              <span>{t.paginationNext}</span>
-            </div>
-          </div>
+          <>
+            <div className={styles.desktop}>{renderRecentViewedDesktop()}</div>
+            <div className={styles.mobile}>{renderRecentViewedMobile()}</div>
+          </>
         );
+
       case "updateInfo":
         return (
           <div className={styles.updateInfoContainer}>
@@ -265,7 +329,7 @@ function MyPage() {
                       type="button"
                       className={styles.searchAddressButton}
                     >
-                      {t.updateInfoForm.address.searchAddress}
+                      {t.updateInfoForm.searchAddress}
                     </button>
                   </div>
                   <input
@@ -419,7 +483,7 @@ function MyPage() {
                 </div>
                 <div
                   className={styles.userInfoCard}
-                  onClick={() => setSelectedSection("cart")}
+                  onClick={() => navigate("/checkout")}
                 >
                   <span>{t.userInfoCards.cartItems}</span>
                   <span>14개</span>
@@ -442,17 +506,6 @@ function MyPage() {
             </div>
             <div className={styles.orderStatus}>
               <h3>{t.inDelivery}</h3>
-              <div className={styles.orderItem}>
-                <div className={styles.imagePlaceholder}></div>
-                <div>
-                  <h2>시그니처 헤더십</h2>
-                  <p>
-                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                    작품명 작품명 작품명 작품명
-                  </p>
-                  <p className={styles.price}>120,000원</p>
-                </div>
-              </div>
               <div className={styles.orderItem}>
                 <div className={styles.imagePlaceholder}></div>
                 <div>
@@ -489,17 +542,6 @@ function MyPage() {
                   <p className={styles.price}>120,000원</p>
                 </div>
               </div>
-              <div className={styles.orderItem}>
-                <div className={styles.imagePlaceholder}></div>
-                <div>
-                  <h2>시그니처 헤더십</h2>
-                  <p>
-                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                    작품명 작품명 작품명 작품명
-                  </p>
-                  <p className={styles.price}>120,000원</p>
-                </div>
-              </div>
             </div>
           </>
         );
@@ -509,12 +551,12 @@ function MyPage() {
   return (
     <div className={styles.mypageContainer}>
       <nav className={styles.sidebar}>
-        <h2 onClick={() => setSelectedSection("")}>{t.myPage}</h2>
+        <h2 onClick={() => setSelectedSection("main")}>{t.myPage}</h2>
         <ul>
           <li onClick={() => setSelectedSection("recentViewed")}>
             {t.recentViewed}
           </li>
-          <li>{t.cart}</li>
+          <li onClick={() => navigate("/checkout")}>{t.cart}</li>
           <li onClick={() => setSelectedSection("updateInfo")}>
             {t.updateInfo}
           </li>

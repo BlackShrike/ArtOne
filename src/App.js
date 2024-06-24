@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -58,7 +53,8 @@ function App() {
 }
 
 function RoutesWrapper({ isLoggedIn, onLogin, onLogout }) {
-  const location = useLocation();
+  const [selectedSection, setSelectedSection] = useState("main");
+
   const isSearchPage = location.pathname.startsWith("/search");
 
   return (
@@ -89,7 +85,15 @@ function RoutesWrapper({ isLoggedIn, onLogin, onLogout }) {
           element={<FindAccountResult type="pw" />}
         />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route
+          path="/mypage"
+          element={
+            <MyPage
+              selectedSection={selectedSection}
+              setSelectedSection={setSelectedSection}
+            />
+          }
+        />
         <Route
           path="/checkout"
           element={isLoggedIn ? <Checkout /> : <Login onLogin={onLogin} />}

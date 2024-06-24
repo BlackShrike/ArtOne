@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../css/Signup.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
@@ -59,6 +59,29 @@ function Signup() {
   const { language } = useLanguage();
   const t = translations[language];
 
+  const [zonecode, setZonecode] = useState("");
+  const [roadAddress, setRoadAddress] = useState("");
+  const [roadAddressDetail, setRoadAddressDetail] = useState("");
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const onClickSearch = () => {
+    new window.daum.Postcode({
+      oncomplete: function (data) {
+        setZonecode(data.zonecode);
+        setRoadAddress(data.address);
+      },
+    }).open();
+  };
+
   return (
     <div className={styles.signupContainer}>
       <BackButton />
@@ -98,10 +121,23 @@ function Signup() {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="address">{t.address}</label>
-          <input type="text" id="address" required />
-          <button className={styles.addressSearchButton}>
-            {t.addressSearch}
-          </button>
+          <div className={styles.addressSearchContainer}>
+            <input type="text" value={zonecode} readOnly />
+            <button
+              type="button"
+              className={styles.addressSearchButton}
+              onClick={onClickSearch}
+            >
+              {t.addressSearch}
+            </button>
+          </div>
+          <input type="text" value={roadAddress} readOnly />
+          <input
+            type="text"
+            value={roadAddressDetail}
+            onChange={(e) => setRoadAddressDetail(e.target.value)}
+            placeholder="상세 주소를 입력해주세요"
+          />
         </div>
         <div className={styles.terms}>
           <div className={styles.term}>

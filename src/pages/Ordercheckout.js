@@ -272,7 +272,9 @@ function OrderCheckout() {
               {t.addToAddressList}
             </label>
           </div>
-          <div className={styles.orderSection}>
+          <div
+            className={`${styles.orderSection} ${styles.couponDiscountContainer}`}
+          >
             <h3>{t.couponDiscount}</h3>
             <label className={styles.label}>
               {t.coupon}

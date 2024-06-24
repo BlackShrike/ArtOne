@@ -120,3 +120,42 @@
   border-left: 1px solid #ccc;
   padding-left: 75px;
 }
+@media (max-width: 768px) {
+  .faqContainer {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .faqSidebar {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+  }
+
+  .faqContent {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .shippingContent,
+  .faqList {
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .contactWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contactLeftColumn,
+  .contactRightColumn {
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .contactRightColumn {
+    border-left: none;
+    margin-top: 20px;
+  }
+}

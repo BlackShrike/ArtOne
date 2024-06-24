@@ -43,6 +43,26 @@
   .tosSection h2 {
     font-size: 1.2em;
   }
-  
-  
-  
+
+@media (max-width: 768px) {
+  .tosContainer {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tosSidebar {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+  }
+
+  .tosContent {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .tosSection {
+    padding-left: 0;
+    width: 100%;
+  }
+}

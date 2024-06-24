@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "../css/ArtistDetail.module.css"; // Ensure this path is correct based on your project structure
 import BackButton from "../components/BackButton";
+import { FaCartPlus } from "react-icons/fa";
 import { useLanguage } from "../components/LanguageContext";
 
 const translations = {
@@ -68,8 +69,10 @@ function ArtistDetail() {
           <div key={index} className={styles.gridItem}>
             <div className={styles.imagePlaceholder}></div>
             <div className={styles.itemDetails}>
-              <p>
-                <span className={styles.headtext}>{t.title}</span>
+              <p className={styles.priceCart}>
+                <span className={styles.headtext}>
+                  {t.title} <FaCartPlus className={styles.faCartPlusIcon} />
+                </span>
               </p>
               <p>{t.description}</p>
               {showMore && <p>{t.additionalDescription}</p>}

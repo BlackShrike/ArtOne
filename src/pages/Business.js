@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../css/Business.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
+import { FaCartPlus } from "react-icons/fa";
 import { useLanguage } from "../components/LanguageContext";
 
 const translations = {
@@ -41,8 +42,10 @@ function Business() {
           <div key={index} className={styles.gridItem}>
             <div className={styles.imagePlaceholder}></div>
             <div className={styles.itemDetails}>
-              <p>
-                <span className={styles.headtext}>{t.title}</span>
+              <p className={styles.priceCart}>
+                <span className={styles.headtext}>
+                  {t.title} <FaCartPlus className={styles.faCartPlusIcon} />
+                </span>
               </p>
               <p>{t.description}</p>
               <p>{t.description}</p>

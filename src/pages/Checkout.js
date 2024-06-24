@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "../css/Checkout.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
@@ -37,6 +37,7 @@ function Checkout() {
   const [selectedItems, setSelectedItems] = useState([]);
   const { language } = useLanguage();
   const t = translations[language];
+  const navigate = useNavigate();
 
   const items = [
     {
@@ -160,9 +161,12 @@ function Checkout() {
                 .toLocaleString()}
               원
             </h3>
-            <Link to="/OrderCheckout" className={styles.purchaseButton}>
+            <button
+              onClick={() => navigate("/OrderCheckout")}
+              className={styles.purchaseButton}
+            >
               {t.purchase}
-            </Link>
+            </button>
           </div>
         </div>
       </div>

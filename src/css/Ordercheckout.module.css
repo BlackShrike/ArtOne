@@ -57,7 +57,6 @@
 .zoneCodeInput,
 .discountCodeInput {
   
-  width: 65%;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
@@ -65,10 +64,15 @@
   font-size: 16px;
   box-sizing: border-box;
 }
+.orderSection input,
+.orderSection select{
+  width: 65%;
+}
 .zoneCodeInput
 {
-  width: 35% !important;
+  width: 35% !important ;
   margin-right: 5%; 
+  
 }
 .roadAddressInput,
 .roadAddressDetailInput{
@@ -78,8 +82,8 @@
 .couponSelect,
 .discountCodeInput
 { 
-  width: 60% !important;
-  margin-right: 10% !important;
+  width: 60% ;
+  margin-right: 10% ;
 }
 .addressSearchContainer {
   position: relative;
@@ -133,7 +137,7 @@
 }
 .doubleCheckbox {
   position: relative;
-  left: 100%;
+  left: 50%;
   display: flex;
   align-items: center;
   margin-right: 10px;
@@ -328,4 +332,118 @@
 }
 .couponConatiner {
   width: 65%;
+}
+/* Media Queries for Mobile */
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .orderContainer,
+  .paymentContainer {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .orderHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .orderSection,
+  .orderContent {
+    width: 100%;
+    border: none;
+    padding: 0;
+  }
+
+  .orderSection h3 {
+    margin-bottom: 10px;
+  }
+
+  .orderSection .label {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .orderSection input,
+  .orderSection select,
+  .zoneCodeInput,
+  .discountCodeInput,
+  .emailInputContainer,
+  .phoneNumberContainer,
+  .addressSearchContainer {
+    width: 100%;
+    left: 0;
+  }
+  .addressSearchContainer {
+    margin-bottom: 10px;
+  }
+  .addressSearchButton,
+  .couponButton,
+  .discountCodeButton {
+    width: 100%;
+    margin: 0;
+  }
+  .doubleCheckbox{
+    left: 50%;
+  }
+  .smallCheckbox {
+    
+    position: static;
+    margin-bottom: 10px;
+  }
+  .smallCheckbox input{
+    width: auto;
+  }
+  .paymentHeader {
+    justify-content: center;
+  }
+
+  .orderSummary {
+    padding: 10px;
+  }
+
+  .paymentButtons {
+    flex-direction: column;
+  }
+
+  .payButton,
+  .smallButtons .payButton {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 16px;
+  }
+  /* 쿠폰/할인코드 섹션에서 라벨이 인풋과 동일한 줄을 가지도록 설정 */
+  .couponDiscountContainer .label {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .couponDiscountContainer .label > div {
+    width: 100%;
+  }
+
+  .couponDiscountContainer .couponConatiner {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .couponDiscountContainer .couponSelect,
+  .couponDiscountContainer .discountCodeInput,
+  .couponDiscountContainer .couponButton,
+  .couponDiscountContainer .discountCodeButton {
+    width: 48%;
+    margin: auto;
+  }
 }

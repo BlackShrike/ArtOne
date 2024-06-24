@@ -53,6 +53,7 @@ h2 {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin: 5px 0px;
   box-sizing: border-box;
 }
 
@@ -68,10 +69,16 @@ h2 {
   flex: 1;
 }
 
+.addressSearchContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .addressSearchButton {
-  width: 100%;
+  width: 20%;
   padding: 10px;
-  background-color: #f1f1f1;
+  background-color: transparent;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
@@ -114,4 +121,9 @@ textarea {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+}
+@media (max-width: 768px) {
+  .addressSearchButton {
+    width: 30%;
+  }
 }

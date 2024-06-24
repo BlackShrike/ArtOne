@@ -9,13 +9,13 @@
 }
 
 .letter {
-  margin: 0px;
+  margin: 0 5px;
   text-decoration: none;
   color: black;
   background-color: transparent;
   font-size: 14px;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   font-weight: bold;
 }
 
@@ -42,4 +42,26 @@
   margin: 5px 10px;
   text-decoration: none;
   color: black;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .alphabetContainer {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    overflow-x: auto; /* Enable horizontal scrolling on mobile */
+    white-space: nowrap; /* Prevent line breaks */
+  }
+
+  .artistList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two-column layout */
+    gap: 5px;
+  }
+
+  .artistName {
+    flex: 1 0 48%; /* Adjust to make better use of space on small screens */
+    margin: 5px 5px;
+  }
 }

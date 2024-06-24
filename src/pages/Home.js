@@ -6,7 +6,7 @@ import { FaCartPlus } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useLanguage } from "../components/LanguageContext";
-
+import "../css/slick.custom.css";
 const mainSettings = {
   dots: true,
   infinite: false,

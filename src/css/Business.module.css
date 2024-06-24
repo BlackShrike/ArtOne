@@ -1,70 +1,84 @@
 .gridPage {
-  }
-  
-  .header {
-    display: flex;
-    flex-direction: column;
-    color: #f3f3f3;
-    background: linear-gradient(#f1f1f1,black);
-    text-align: center;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    height: 300px;
-  }
-  
-  .header h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
-  
-  .header p {
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
+  padding: 20px;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  color: #f3f3f3;
+  background: linear-gradient(to bottom, #e7e7e7 50%, rgb(85, 85, 85));
+  text-align: center;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  height: 300px;
+}
+.header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.gridItem {
+  padding: 10px;
+  text-align: left;
+  position: relative; /* Ensure relative positioning for cart icon */
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 200px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+}
+
+.headtext {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemDetails p {
+  font-size: 10px;
+}
+
+.faCartPlusIcon {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #000; /* 원하는 색상으로 변경하세요 */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pageNumber,
+.pageArrow {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pageNumber:hover,
+.pageArrow:hover {
+  background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
   .gridContainer {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr); /* Two-column layout for mobile */
   }
-  
-  .gridItem {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .imagePlaceholder {
-    width: 100%;
-    height: 200px;
-    background-color: #ddd;
-    margin-bottom: 10px;
-  }
-  
-  .headtext {
-    font-weight: bold;
-  }
-  
-  .itemDetails p {
-    font-size: 10px;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .pageNumber,
-  .pageArrow {
-    margin: 0 5px;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    cursor: pointer;
-  }
-  
-  .pageNumber:hover,
-  .pageArrow:hover {
-    background-color: #f1f1f1;
-  }
-  
+}

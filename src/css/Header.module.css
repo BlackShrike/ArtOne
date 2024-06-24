@@ -41,6 +41,7 @@
 }
 
 .headerLinks {
+  align-items: center;
   margin-left: auto;
   display: flex;
   gap: 20px;
@@ -78,6 +79,27 @@
   color: red;
   border-bottom: 2px solid red;
 }
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
 
 .dropdownMenu {
   position: absolute;
@@ -93,6 +115,14 @@
   padding-right: 40%;
   box-sizing: border-box;
   gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dropdownMenu.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dropdownItem {
@@ -141,8 +171,8 @@
 .mobileMenuLinks {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: flex-end;
+  gap: 10px;
   padding: 20px;
 }
 
@@ -150,17 +180,14 @@
 .mobileMenuLinks a {
   font-size: 1.2em;
   padding: 10px 0;
-  width: 100%;
-  text-align: left;
+  text-align: right;
+  border-bottom: 1px solid #ccc; /* Add bottom border */
 }
 
 .mobileMenuLinks .separator {
   display: none;
 }
 
-.show {
-  display: block !important;
-}
 
 .desktopOnly {
   display: block;
@@ -219,22 +246,24 @@
     left: 0;
     border: 1px solid #ccc;
     z-index: 10;
+    right: 0;
   }
 
   .mobileMenuLinks {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 10px;
     padding: 20px;
   }
 
   .mobileMenuLinks span,
   .mobileMenuLinks a {
+    width: 100%;
     font-size: 1.2em;
     padding: 10px 0;
-    width: 100%;
-    text-align: left;
+    text-align: right;
+    border-bottom: 1px solid #ccc;
   }
 
   .mobileBottomBar {
@@ -242,7 +271,6 @@
     justify-content: space-around;
     width: 100%;
     background-color: white;
-    padding: 10px 0;
     border-top: 1px solid #ccc;
     z-index: 1;
   }
@@ -256,5 +284,30 @@
 
   .mobileBottomBar a.active {
     color: red;
+  }
+  .languageToggle {
+    width: auto !important;
+    font-size: 14px;
+    color: #888;
+    border: 1px solid #888;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .loginSignup {
+    font-size: 16px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .loginSignup span {
+    margin-left: 10px;
+  }
+
+  .closeButton {
+    margin-left: auto;
+    cursor: pointer;
   }
 }

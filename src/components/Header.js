@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { PiShoppingCart } from "react-icons/pi";
 import styles from "../css/Header.module.css";
@@ -8,6 +8,10 @@ import { useLanguage } from "./LanguageContext";
 const translations = {
   KR: {
     mypage: "마이페이지",
+    recentViewed: "최근 본 상품",
+    updateInfo: "정보 수정",
+    coupon: "쿠폰",
+    cart: "장바구니",
     logout: "로그아웃",
     login: "로그인",
     signup: "회원가입",
@@ -32,6 +36,10 @@ const translations = {
   },
   EN: {
     mypage: "My Page",
+    recentViewed: "Recently Viewed",
+    updateInfo: "Update Info",
+    coupon: "Coupons",
+    cart: "Cart",
     logout: "Logout",
     login: "Login",
     signup: "Sign Up",
@@ -61,17 +69,16 @@ function Header({ isLoggedIn, onLogout }) {
   const [showOriginalMenu, setShowOriginalMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
   const { language, toggleLanguage } = useLanguage(); // Use language context
-
-  const getLinkClass = (path) => {
-    return location.pathname.startsWith(path)
-      ? `${styles.active} ${styles.link}`
-      : styles.link;
-  };
 
   const handleNavigate = (path) => {
     navigate(path);
+    setShowMobileMenu(false); // Close mobile menu after navigation
+  };
+
+  const handleMyPageNavigate = (section) => {
+    navigate(`/mypage/${section}`);
+    setShowMobileMenu(false); // Close mobile menu after navigation
   };
 
   const signatureItems = [
@@ -99,7 +106,14 @@ function Header({ isLoggedIn, onLogout }) {
     <header className={styles.header}>
       <section className={styles.headerTop}>
         <h1 onClick={() => handleNavigate("/")}>ARTKO</h1>
+        <input
+          className={`${styles.searchInput} ${styles.desktopOnly}`}
+          placeholder="아티스트, 장르, 테마, 스타일 등을 입력해보세요"
+        />
         <nav className={styles.headerLinks}>
+          <span onClick={() => handleNavigate("/checkout")}>
+            <PiShoppingCart />
+          </span>
           {isLoggedIn ? (
             <>
               <span
@@ -123,12 +137,14 @@ function Header({ isLoggedIn, onLogout }) {
               {translations[language].login}
             </span>
           )}
-          <span
-            className={styles.desktopOnly}
-            onClick={() => handleNavigate("/signup")}
-          >
-            {translations[language].signup}
-          </span>
+          {!isLoggedIn && (
+            <span
+              className={styles.desktopOnly}
+              onClick={() => handleNavigate("/signup")}
+            >
+              {translations[language].signup}
+            </span>
+          )}
           <span className={styles.desktopOnly} onClick={toggleLanguage}>
             KR / EN
           </span>
@@ -137,9 +153,6 @@ function Header({ isLoggedIn, onLogout }) {
             onClick={() => handleNavigate("/search")}
           >
             <FaSearch />
-          </span>
-          <span onClick={() => handleNavigate("/search")}>
-            <PiShoppingCart />
           </span>
         </nav>
         <div
@@ -151,7 +164,7 @@ function Header({ isLoggedIn, onLogout }) {
       </section>
       <section className={styles.headerBottom}>
         <span onClick={() => handleNavigate("/promotion")}>
-          <span className={getLinkClass("/promotion")}>
+          <span className={styles.link}>
             {translations[language].promotion}
           </span>
         </span>
@@ -161,22 +174,22 @@ function Header({ isLoggedIn, onLogout }) {
         >
           <span
             onClick={() => handleNavigate("/signature")}
-            className={getLinkClass("/signature")}
+            className={styles.link}
           >
             {translations[language].signature}
           </span>
-          {showSignatureMenu && (
-            <div className={`${styles.dropdownMenu} ${styles.signatureMenu}`}>
-              {signatureItems.map((item, i) => (
-                <div className={styles.dropdownItem} key={i}>
-                  <div className={styles.dropdownBox}></div>
-                  <span onClick={() => handleNavigate("/signature")}>
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+          <div
+            className={`${styles.dropdownMenu} ${
+              showSignatureMenu ? styles.show : ""
+            }`}
+          >
+            {signatureItems.map((item, i) => (
+              <div className={styles.dropdownItem} key={i}>
+                <div className={styles.dropdownBox}></div>
+                <span onClick={() => handleNavigate("/signature")}>{item}</span>
+              </div>
+            ))}
+          </div>
         </span>
         <span
           onMouseEnter={() => setShowOriginalMenu(true)}
@@ -184,46 +197,37 @@ function Header({ isLoggedIn, onLogout }) {
         >
           <span
             onClick={() => handleNavigate("/original")}
-            className={getLinkClass("/original")}
+            className={styles.link}
           >
             {translations[language].original}
           </span>
-          {showOriginalMenu && (
-            <div className={styles.dropdownMenu}>
-              {originalItems.map((item, i) => (
-                <div className={styles.dropdownItem} key={i}>
-                  <div className={styles.dropdownBox}></div>
-                  <span onClick={() => handleNavigate("/original")}>
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+          <div
+            className={`${styles.dropdownMenu} ${
+              showOriginalMenu ? styles.show : ""
+            }`}
+          >
+            {originalItems.map((item, i) => (
+              <div className={styles.dropdownItem} key={i}>
+                <div className={styles.dropdownBox}></div>
+                <span onClick={() => handleNavigate("/original")}>{item}</span>
+              </div>
+            ))}
+          </div>
         </span>
         <span className={styles.separator}>|</span>
-        <span
-          onClick={() => handleNavigate("/artist")}
-          className={getLinkClass("/artist")}
-        >
+        <span onClick={() => handleNavigate("/artist")} className={styles.link}>
           {translations[language].artist}
         </span>
         <span
           onClick={() => handleNavigate("/business")}
-          className={getLinkClass("/business")}
+          className={styles.link}
         >
           {translations[language].business}
         </span>
-        <span
-          onClick={() => handleNavigate("/review")}
-          className={getLinkClass("/review")}
-        >
+        <span onClick={() => handleNavigate("/review")} className={styles.link}>
           {translations[language].review}
         </span>
-        <span
-          onClick={() => handleNavigate("/faq")}
-          className={getLinkClass("/faq")}
-        >
+        <span onClick={() => handleNavigate("/faq")} className={styles.link}>
           {translations[language].faq}
         </span>
       </section>
@@ -232,7 +236,7 @@ function Header({ isLoggedIn, onLogout }) {
           <nav className={styles.mobileMenuLinks}>
             {isLoggedIn ? (
               <>
-                <span onClick={() => handleNavigate("/mypage")}>
+                <span onClick={() => handleMyPageNavigate("recentViewed")}>
                   {translations[language].mypage}
                 </span>
                 <span onClick={onLogout} className={styles.logoutButton}>
@@ -244,9 +248,11 @@ function Header({ isLoggedIn, onLogout }) {
                 {translations[language].login}
               </span>
             )}
-            <span onClick={() => handleNavigate("/signup")}>
-              {translations[language].signup}
-            </span>
+            {!isLoggedIn && (
+              <span onClick={() => handleNavigate("/signup")}>
+                {translations[language].signup}
+              </span>
+            )}
             <span onClick={() => handleNavigate("/promotion")}>
               {translations[language].promotion}
             </span>
@@ -291,38 +297,37 @@ function Header({ isLoggedIn, onLogout }) {
             <span onClick={() => handleNavigate("/faq")}>
               {translations[language].faq}
             </span>
-            <span onClick={toggleLanguage}>KR / EN</span>
+            <span className={styles.languageToggle} onClick={toggleLanguage}>
+              KR / EN
+            </span>
           </nav>
         </section>
       )}
       <div className={`${styles.mobileBottomBar} ${styles.mobileOnly}`}>
         <span
           onClick={() => handleNavigate("/promotion")}
-          className={getLinkClass("/promotion")}
+          className={styles.link}
         >
           {translations[language].promotion}
         </span>
         <span
           onClick={() => handleNavigate("/signature")}
-          className={getLinkClass("/signature")}
+          className={styles.link}
         >
           {translations[language].signature}
         </span>
         <span
           onClick={() => handleNavigate("/original")}
-          className={getLinkClass("/original")}
+          className={styles.link}
         >
           {translations[language].original}
         </span>
-        <span
-          onClick={() => handleNavigate("/artist")}
-          className={getLinkClass("/artist")}
-        >
+        <span onClick={() => handleNavigate("/artist")} className={styles.link}>
           {translations[language].artist}
         </span>
         <span
           onClick={() => handleNavigate("/business")}
-          className={getLinkClass("/business")}
+          className={styles.link}
         >
           {translations[language].business}
         </span>

@@ -1,4 +1,3 @@
-/* Ensure all elements use border-box sizing */
 .mypageContainer,
 .mypageContainer::before,
 .mypageContainer::after {
@@ -113,19 +112,25 @@
   width: 15%;
   height: 100%;
   background-color: #eee;
-  border: 1px solid#ccc;
+  border: 1px solid #ccc;
   border-radius: 5px;
   margin-right: 20px;
 }
+
 .price {
   text-align: right;
   padding-right: 30px;
   font-weight: bold;
 }
-.recentViewedContainer {
+
+.recentViewedContainerDesktop,
+.recentViewedContainerMobile {
+  width: 100%;
   padding: 20px;
 }
-
+.recentViewedContainerMobile{
+  display: none;
+}
 .recentViewedTable {
   width: 100%;
   border-collapse: collapse;
@@ -137,20 +142,69 @@
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
+  height: auto;
 }
 
+.recentViewedTable th {
+  background-color: #f9f9f9;
+}
 
-.payButton {
+.recentViewedTable .rightAlign {
+  text-align: right;
+}
+
+.imagePlaceholder {
+  width: 80px;
+  height: 80px;
+  background-color: #eee;
+}
+
+.productTitle {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #999;
+  margin-bottom: 5px;
+}
+
+.newPrice {
+  font-weight: bold;
+  color: #333;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.orderButton {
   background-color: #333;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
   border-radius: 4px;
+  text-align: center;
 }
 
-.payButton:hover {
-  background-color: #555;
+.cartButton,
+.deleteButton {
+  background-color: transparent;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.deleteButton {
+  border: 1px solid #ccc;
 }
 
 .pagination {
@@ -167,7 +221,6 @@
 .pageNumber:hover {
   text-decoration: underline;
 }
-
 /* Update Info Styles */
 .updateInfoContainer {
   width: 100%;
@@ -197,18 +250,21 @@
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
   font-size: 14px;
 }
 
 .updateInfoForm .phoneNumber,
 .updateInfoForm .birthday {
+  width: 100%;
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 
 .updateInfoForm .phoneNumber input,
 .updateInfoForm .birthday input {
-  flex: 1;
+  padding: 10px
 }
 
 .updateInfoForm .address {
@@ -240,6 +296,7 @@
 }
 
 .submitButton {
+  width: 20%;
   background-color: #ff5a5f;
   color: white;
   border: none;
@@ -256,6 +313,7 @@
   background-color: #e04a4e;
 }
 
+/* Coupon Styles */
 .couponContainer {
   padding: 20px;
 }
@@ -273,6 +331,7 @@
 .couponForm .couponInputRow {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .couponForm input {
@@ -340,122 +399,94 @@
   font-size: 14px;
   color: #555;
 }
-
-.membershipContainer {
-  padding: 20px;
-}
-
-.membershipContainer h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.membershipContainer p {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.membershipLevels {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  align-items: flex-end;
-}
-
-.membershipLevel {
-  width: 100px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  text-align: left; /* 텍스트를 왼쪽 정렬 */
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  background-color: transparent; /* 기본 배경색 제거 */
-  display: flex;
-  flex-direction: row; /* 행 방향으로 정렬 */
-  align-items: flex-end;
-  justify-content: center; /* 중앙 정렬 */
-}
-
-.membershipLevel.selected {
-  border: 2px solid #333;
-  background-color: black;
-  color: white;
-}
-
-.membershipLevel.black.selected {
-  color: white;
-}
-
-.benefit {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-.squareBox {
-  border: #333 1px solid;
-  width: 12px;
-  height: 12px;
-  background-color: currentColor;
-  margin-bottom: 5px;
-}
-
-@media (max-width: 767px) {
-  .mypageContainer {
-    flex-direction: column;
-    align-items: center;
-  }
-
+@media (max-width: 768px) {
   .sidebar {
     display: none;
   }
 
   .mainContent {
     width: 100%;
-    padding: 10px;
   }
-
-  .userInfoCards {
+  .recentViewedContainerDesktop{
+    display: none ;
+  }
+  .recentViewedContainerMobile{
+    display: block;
+  }
+  .recentViewedTable {
+    display: none;
+  }
+  
+  .mobileRecentViewedGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .userInfoHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .card {
     width: 100%;
-    padding: 10px;
+    display: flex;
     border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius: 5px;
-    background-color: white;
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .imagePlaceholder {
+    width: 100%;
+    height: 90px;
+    background-color: #eee;
+    justify-content: center;
+  }
+
+  .card .productDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .card .productTitle {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .card .oldPrice {
+    text-decoration: line-through;
+    color: #999;
+    margin-bottom: 5px;
+  }
+
+  .card .newPrice {
+    font-weight: bold;
+    color: #333;
     margin-bottom: 10px;
   }
 
-  .userInfoCards {
-    width: 100%;
+  .card .buttonGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
-  .userInfoCard {
-    padding: 10px;
+  .card .orderButton {
+    background-color: transparent;
+    color: black;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
     text-align: center;
-    width: 100%;
   }
 
-  .userInfoCard span:first-child {
-    margin-bottom: 0px;
-  }
-  .orderItem .imagePlaceholder {
-    width: 50%;
-    margin-right: 5px;
-  }
-  .orderItem {
-    font-size: 12px;
+  .card .cartButton,
+  .card .deleteButton {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
   }
 }
