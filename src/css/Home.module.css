@@ -1,11 +1,4 @@
-@import 'slick-carousel/slick/slick.css';
-@import 'slick-carousel/slick/slick-theme.css';
 
-
-.sliderContainer {
-  max-width: 1400px;
-  margin: 0 auto;
-}
 
 .item {
   display: flex; 
@@ -20,11 +13,8 @@
     display: flex;
     justify-content: center;
 }
-
-
-
 .homeGrid {
-    display: grid !important;
+    display: grid ;
     gap: 5px;
     grid-template-columns: repeat(12, 1fr); /* 12 columns */
     grid-template-rows: repeat(7, 100px); /* 7 rows */
@@ -67,15 +57,23 @@
     height: 80%;
     background-color: #ddd;
 }
+.item:hover .smallGreyBox {
+  transform: scale(1.1);
+}
 
+.item:hover .smallGreyBox::before {
+  transform: scale(1.2);
+}
 .smallGreyBox {
-    width: 80px;
-    margin-right: 10px;
-    height: 100px;
-    background-color: #ddd;
+  transition: transform 0.5s ease;
+  width: 80px;
+  min-width: 80px;
+  margin-right: 10px;
+  height: 100px;
+  background-color: #ddd;
 }
 .largeItem {
-    grid-area: large;
+  grid-area: large;
 }
 
 .largeItem .text {
@@ -241,7 +239,7 @@
 
 
 .bestGrid {
-    display: grid !important;
+    display: grid ;
   grid-template-rows: repeat(2, 1fr);
     gap: 10px;
   
@@ -456,7 +454,6 @@
       flex-direction: row;
       align-items: center;
       text-align: left;
-      justify-content: center;
     }
     
   .homeGrid .smallItemLeft1 .text,
@@ -562,7 +559,6 @@
     .newGridItem p {
       display: none;
     }
-  
     .asymmetricGrid {
         display: flex;
         flex-direction: column;
@@ -577,23 +573,18 @@
     .gridItem3 {
         height: 300px;
     }
-   
     .textContainer {
       display: none;
     }
     .originalGridContainer {
       display: grid; /* 모바일에서만 보이도록 설정 */
       margin-bottom: 40px;
-
     }
     
-
   .originalGrid {
-    display: flex !important;
-    
+    display: flex ;
     gap: 20px;
   }
-  
   .originalGridItem {
     background-color: #f9f9f9;
     padding: 20px;

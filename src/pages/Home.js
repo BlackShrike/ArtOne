@@ -22,6 +22,7 @@ const mainSettings = {
       settings: {
         infinite: true,
         centerMode: true,
+        centerPadding: "75px",
       },
     },
   ],
@@ -228,13 +229,11 @@ function Home(props) {
       <div className={`${styles.greyBox} ${styles.bestGreyBox}`}></div>
       <div className={styles.bestText}>
         <h3>
-          {translations[language].bestItem} {index + 1}
+          {translations[language].bestItem} {index + 1} <FaCartPlus />
         </h3>
         <p className={styles.middleText}>
           {translations[language].bestDescription}
-          <div className={styles.priceCart}>
-            <FaCartPlus />
-          </div>
+          <div className={styles.priceCart}></div>
         </p>
         <p>{translations[language].bestPrice}</p>
       </div>

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import styles from "../css/Signature.module.css";
 import BackButton from "../components/BackButton";
@@ -46,19 +46,26 @@ const translations = {
 };
 
 function Signature() {
-  const { id } = useParams();
   const { language } = useLanguage();
   const t = translations[language];
   const navigate = useNavigate();
-
-  if (id) {
-    return <SignatureDetail />;
-  }
-
   const [selectedMenu, setSelectedMenu] = useState(t.menu[0]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState("");
+  const [selectedId, setSelectedId] = useState(null); // 선택된 항목의 ID를 관리하는 상태
   const itemsPerPage = 50;
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setSelectedId(null);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
@@ -85,7 +92,10 @@ function Signature() {
     return items.map((item) => (
       <div
         key={item}
-        onClick={() => navigate(`/Signature/${item}`)}
+        onClick={() => {
+          setSelectedId(item);
+          navigate(`/signature/${item}`, { replace: false });
+        }} // navigate로 URL에 id 포함시키기
         className={styles.gridItem}
       >
         <div className={styles.imagePlaceholder}></div>
@@ -170,11 +180,20 @@ function Signature() {
           ))}
         </select>
       </div>
-      <BackButton />
-      <div className={styles.gridPage}>
-        <div className={styles.gridContainer}>{renderItems()}</div>
-        {renderPagination()}
-      </div>
+      {selectedId ? (
+        <>
+          <BackButton onClick={() => setSelectedId(null)} />{" "}
+          {/* 뒤로 가기 버튼 클릭 시 그리드로 돌아감 */}
+          <SignatureDetail id={selectedId} /> {/* 선택된 항목의 ID를 전달 */}
+        </>
+      ) : (
+        <>
+          <div className={styles.gridPage}>
+            <div className={styles.gridContainer}>{renderItems()}</div>
+            {renderPagination()}
+          </div>
+        </>
+      )}
     </div>
   );
 }

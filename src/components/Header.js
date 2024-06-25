@@ -159,7 +159,7 @@ function Header({ isLoggedIn, onLogout }) {
           className={styles.hamburgerMenu}
           onClick={() => setShowMobileMenu(!showMobileMenu)}
         >
-          {showMobileMenu ? <FaTimes /> : <FaBars />}
+          {showMobileMenu ? <FaBars /> : <FaBars />}
         </div>
       </section>
       <section className={styles.headerBottom}>
@@ -233,57 +233,30 @@ function Header({ isLoggedIn, onLogout }) {
       </section>
       {showMobileMenu && (
         <section className={`${styles.mobileMenu} ${styles.show}`}>
+          <div className={styles.mobileMenuHeader}>
+            <span onClick={() => handleNavigate("/login")}>
+              {translations[language].login}
+            </span>
+            |
+            <span onClick={() => handleNavigate("/signup")}>
+              {translations[language].signup}
+            </span>
+            <span
+              className={styles.closeButton}
+              onClick={() => setShowMobileMenu(false)}
+            >
+              <FaTimes />
+            </span>
+          </div>
           <nav className={styles.mobileMenuLinks}>
-            {isLoggedIn ? (
-              <>
-                <span onClick={() => handleMyPageNavigate("recentViewed")}>
-                  {translations[language].mypage}
-                </span>
-                <span onClick={onLogout} className={styles.logoutButton}>
-                  {translations[language].logout}
-                </span>
-              </>
-            ) : (
-              <span onClick={() => handleNavigate("/login")}>
-                {translations[language].login}
-              </span>
-            )}
-            {!isLoggedIn && (
-              <span onClick={() => handleNavigate("/signup")}>
-                {translations[language].signup}
-              </span>
-            )}
             <span onClick={() => handleNavigate("/promotion")}>
               {translations[language].promotion}
             </span>
-            <span>
-              <div onClick={() => setShowSignatureMenu(!showSignatureMenu)}>
-                {translations[language].signature}{" "}
-                {showSignatureMenu ? "∧" : "∨"}
-              </div>
-              {showSignatureMenu && (
-                <div>
-                  {signatureItems.map((item, i) => (
-                    <div key={i} onClick={() => handleNavigate("/signature")}>
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              )}
+            <span onClick={() => handleNavigate("/signature")}>
+              {translations[language].signature}
             </span>
-            <span>
-              <div onClick={() => setShowOriginalMenu(!showOriginalMenu)}>
-                {translations[language].original} {showOriginalMenu ? "∧" : "∨"}
-              </div>
-              {showOriginalMenu && (
-                <div>
-                  {originalItems.map((item, i) => (
-                    <div key={i} onClick={() => handleNavigate("/original")}>
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              )}
+            <span onClick={() => handleNavigate("/original")}>
+              {translations[language].original}
             </span>
             <span onClick={() => handleNavigate("/artist")}>
               {translations[language].artist}
@@ -297,6 +270,22 @@ function Header({ isLoggedIn, onLogout }) {
             <span onClick={() => handleNavigate("/faq")}>
               {translations[language].faq}
             </span>
+            {isLoggedIn && (
+              <>
+                <span onClick={() => handleMyPageNavigate("recentViewed")}>
+                  {translations[language].recentViewed}
+                </span>
+                <span onClick={() => handleMyPageNavigate("updateInfo")}>
+                  {translations[language].updateInfo}
+                </span>
+                <span onClick={() => handleMyPageNavigate("coupon")}>
+                  {translations[language].coupon}
+                </span>
+                <span onClick={() => handleNavigate("/checkout")}>
+                  {translations[language].cart}
+                </span>
+              </>
+            )}
             <span className={styles.languageToggle} onClick={toggleLanguage}>
               KR / EN
             </span>

@@ -42,10 +42,13 @@
 }
 
 .details p {
+  font-weight: bold;
   margin: 10px 0;
   font-size: 16px;
 }
-
+.greyText{  
+  color: #bbb;
+}
 .selectionRow {
   display: flex;
   flex-direction: column;
@@ -67,6 +70,7 @@
 }
 
 .colors {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 5px;
@@ -78,7 +82,16 @@
   border-radius: 50%;
   border: 1px solid #000;
 }
-
+/* 다섯 번째 컬러 아이템의 오른쪽에 세로선 추가 */
+.color:nth-child(5)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 132px;
+  width: 1px;
+  height: 50px;
+  background-color: #ccc;
+}
 .sizeSelection select {
   width: 80%;
   padding: 5px;
@@ -99,6 +112,7 @@
 }
 
 .purchaseRow {
+  height: 50px;
   display: flex;
   width: 100%;
 }
@@ -113,10 +127,13 @@
   border-radius: 10px;
   background-color: transparent;
   cursor: pointer;
+  padding: 10px;
+  font-size: 50px;
 }
 
 .purchaseButton {
   width: 80%;
+  height: 100%;
   background-color: #000;
   color: #fff;
   border: none;
@@ -173,7 +190,7 @@
   font-size: 20px;
 }
 .reviewHead {
-  width: 90%;
+  width: 100%;
   height: 40px;
   margin-bottom: 30px;
   text-align: center;
@@ -184,7 +201,7 @@
   color: #fff;
 }
 .reviewContent {
-  width: 90%;
+  width: 100%;
   padding: 0px 10px;
   resize: none;
 }
@@ -206,7 +223,6 @@
 
 .gridItem {
   background-color: #fff;
-  border: 1px solid #ddd;
   padding: 10px;
 }
 
@@ -222,14 +238,13 @@
 
 .itemTitle {
   font-weight: bold;
-}
-
-.itemDescription {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 5px;
+  flex-direction: row; /* 추가 */
 }
+
 
 .cartIcon {
   margin-left: 10px;
@@ -247,7 +262,7 @@
   align-items: center;
 }
 .reviewmodalContent {
-  width: 90%;
+  width: 100%;
   height: 200px;
   resize: none;
 }
@@ -281,11 +296,12 @@
   justify-self: flex-end;
 }
 
-.imageUpload {
+.imageUpload  {
   margin-top: 10px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
+  flex-direction: column;
 }
 
 .uploadIcon {
@@ -297,7 +313,6 @@
   width: 100px;
   height: 100px;
   background-color: #ddd;
-  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -347,4 +362,42 @@
   color: #000;
   font-weight: bold;
   border-bottom: 2px solid #000;
+}
+@media (max-width: 768px) {
+  .detailContainer {
+    flex-direction: column;
+  }
+
+  .imagePlaceholder {
+    height: 200px;
+  }
+  .details h2 {
+    font-size: 16px;
+  }
+  .details p{
+    font-size: 12px;
+  }
+  .reviewImagePlaceholder {
+    width: 100%;
+    height: 100px;
+  }
+
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modalContent {
+    width: 90%;
+  }
+
+  .reviewmodalContent {
+    width: 100%;
+  }
+
+ 
+
+  .tab {
+    width: 100%;
+    text-align: center;
+  }
 }

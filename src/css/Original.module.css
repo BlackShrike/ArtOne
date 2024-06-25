@@ -42,10 +42,10 @@
 }
 
 .mobileTabs {
+  width: 100%;
   display: flex;
   border: 1px solid #ccc;
   justify-content: space-around;
-  margin-bottom: 10px;
 }
 
 .mobileTabs button {
@@ -104,7 +104,7 @@
   background-color: black;
   height: 10px; /* 검은색 바의 높이 설정 */
   width: 80%;
-  margin-bottom: 10px;
+  border: 1px solid black;
 }
 
 .centerAlign {
@@ -228,7 +228,6 @@
 .pageArrow {
   cursor: pointer;
   padding: 5px 10px;
-  border: 1px solid #ccc;
   background-color: white;
 }
 
@@ -243,6 +242,9 @@
 }
 
 @media (max-width: 767px) {
+  .leftAlign{
+    margin: 0px;
+  }
   .MiddleBar.desktop {
     display: none;
   }
@@ -285,5 +287,8 @@
 
   .gridContainer {
     grid-template-columns: repeat(1, 1fr); /* 한 줄에 2개의 항목 */
+  }
+  .pagination{
+    gap: 5px;
   }
 }

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import styles from "../css/SignatureDetail.module.css";
-import BackButton from "../components/BackButton";
 import { FaTimes, FaCartPlus, FaPlus } from "react-icons/fa";
-import { SlBasket } from "react-icons/sl";
+import { RiShoppingBag4Line } from "react-icons/ri";
 import { useLanguage } from "../components/LanguageContext";
 
 const translations = {
@@ -149,8 +147,7 @@ const translations = {
   },
 };
 
-function SignatureDetail() {
-  const { id } = useParams();
+function SignatureDetail({ id }) {
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -166,7 +163,6 @@ function SignatureDetail() {
 
   return (
     <div className={styles.detailPage}>
-      <BackButton />
       <div className={styles.detailContainer}>
         <div className={styles.imageSection}>
           <div className={styles.imagePlaceholder}></div>
@@ -271,7 +267,7 @@ function SignatureDetail() {
           </div>
           <div className={styles.purchaseRow}>
             <button className={styles.basketButton}>
-              <SlBasket />
+              <RiShoppingBag4Line />
             </button>
             <button
               className={styles.purchaseButton}
@@ -316,10 +312,10 @@ function SignatureDetail() {
             <div key={index} className={styles.gridItem}>
               <div className={styles.gridImagePlaceholder}></div>
               <div className={styles.itemDetails}>
-                <p className={styles.itemTitle}>제목</p>
-                <p className={styles.itemDescription}>
-                  작품 설명내용 <FaCartPlus className={styles.cartIcon} />
+                <p className={styles.itemTitle}>
+                  제목 <FaCartPlus className={styles.cartIcon} />
                 </p>
+                <p>작품 설명내용 </p>
                 <p>120,000원</p>
               </div>
             </div>

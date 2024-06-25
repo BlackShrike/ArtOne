@@ -16,7 +16,6 @@ import Checkout from "./pages/Checkout";
 import Ordercheckout from "./pages/Ordercheckout";
 import Paymentresult from "./pages/Paymentresult";
 import Signature from "./pages/Signature";
-import SignatureDetail from "./pages/SignatureDetail";
 import Artist from "./pages/Artist";
 import ArtistDetail from "./pages/ArtistDetail";
 import Business from "./pages/Business";
@@ -55,7 +54,7 @@ function App() {
 function RoutesWrapper({ isLoggedIn, onLogin, onLogout }) {
   const [selectedSection, setSelectedSection] = useState("main");
 
-  const isSearchPage = location.pathname.startsWith("/search");
+  const isSearchPage = window.location.hash.startsWith("#/search");
 
   return (
     <>
@@ -64,8 +63,7 @@ function RoutesWrapper({ isLoggedIn, onLogin, onLogout }) {
         <Route path="/" element={<Home />} />
         <Route path="/promotion" element={<Promotion />} />
         <Route path="/promotion/:id" element={<PromotionDetail />} />
-        <Route path="/signature" element={<Signature />} />
-        <Route path="/signature/:id" element={<SignatureDetail />} />
+        <Route path="/signature/*" element={<Signature />} />
         <Route path="/original" element={<Original />} />
         <Route path="/artist" element={<Artist />} />
         <Route path="/artist/:artistName" element={<ArtistDetail />} />

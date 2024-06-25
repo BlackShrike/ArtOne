@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #f8f9fa;
-  padding: 20px 20px;
+  padding:  20px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -67,17 +67,18 @@
 .link {
   color: black;
   text-decoration: none;
-  padding-bottom: 5px;
-  transition: all 0.3s;
+  padding-bottom: 6px; /* 밑줄 높이에 맞춰서 설정 */
+  border-bottom: 1px solid transparent; /* 기본적으로 투명한 밑줄 */
+  transition: all 0.5s;
 }
 
 .link:hover {
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid red;
 }
 
 .link.active {
   color: red;
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid red;
 }
 @keyframes slideDown {
   from {
@@ -168,22 +169,6 @@
   display: none;
 }
 
-.mobileMenuLinks {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-  padding: 20px;
-}
-
-.mobileMenuLinks span,
-.mobileMenuLinks a {
-  font-size: 1.2em;
-  padding: 10px 0;
-  text-align: right;
-  border-bottom: 1px solid #ccc; /* Add bottom border */
-}
-
 .mobileMenuLinks .separator {
   display: none;
 }
@@ -201,9 +186,11 @@
   .header {
     width: 100%;
     background-color: transparent;
+    padding: 0px;
   }
   .headerTop {
     justify-content: space-between;
+    padding: 0px;
   }
 
   .headerBottom {
@@ -239,31 +226,49 @@
   .mobileMenu {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
     background-color: white;
     position: absolute;
-    top: 60px; /* Adjust based on the header height */
-    left: 0;
+    top: 45px; /* Adjust based on the header height */
     border: 1px solid #ccc;
     z-index: 10;
-    right: 0;
+    left: 50%;
+    padding: 0px
   }
 
   .mobileMenuLinks {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     gap: 10px;
-    padding: 20px;
   }
-
+  .mobileMenuHeader {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    padding: 15px 10px;
+    border-bottom: 1px solid #ccc;
+    gap: 5px;
+  }
+  
+  .mobileMenuHeader span {
+    font-size: 1.2em;
+    white-space: nowrap ;
+    font-weight: 200;
+  }
+  
+  .mobileMenuHeader .closeButton {
+    padding: 0px;
+    cursor: pointer;
+  }
+  
   .mobileMenuLinks span,
   .mobileMenuLinks a {
-    width: 100%;
     font-size: 1.2em;
-    padding: 10px 0;
-    text-align: right;
+    padding: 5px 0;
+    text-align: justify;
+    padding-left: 40px;
     border-bottom: 1px solid #ccc;
+    
   }
 
   .mobileBottomBar {

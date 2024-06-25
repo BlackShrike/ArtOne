@@ -126,10 +126,10 @@
 .recentViewedContainerDesktop,
 .recentViewedContainerMobile {
   width: 100%;
-  padding: 20px;
 }
 .recentViewedContainerMobile{
   display: none;
+  padding: 0px;
 }
 .recentViewedTable {
   width: 100%;
@@ -429,7 +429,6 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
-    padding: 10px;
     align-items: center;
   }
 

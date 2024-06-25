@@ -1,4 +1,6 @@
 .detailPage {
+    width: 100%;
+    margin: auto;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -24,7 +26,7 @@
     width: 90%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 20px; /* Increase the gap for better spacing */
+    gap: 10px; /* Increase the gap for better spacing */
   }
   
   .item {
@@ -55,4 +57,13 @@
     display: flex;
     justify-content: space-between; /* Add space between text and icon */
     align-items: center;
+  }
+  @media (max-width : 768px){
+    .itemsContainer {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .imagePlaceholder{
+      position: relative;
+      left: 11px;
+    }
   }

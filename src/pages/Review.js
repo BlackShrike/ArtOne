@@ -70,8 +70,10 @@ function Review() {
               <h3>{t.reviewTitle}</h3>
               <p>{t.reviewDescription}</p>
               <p>{`${t.rating}: ${review.rating}`}</p>
-              <p>{t.author}</p>
-              <p>{`${t.comments} ${review.comments}`}</p>
+              <p span className={styles.ItemContent}>
+                <p>{t.author}</p>
+                <p> {`${t.comments} ${review.comments}`}</p>
+              </p>
             </div>
           </div>
         ))}
