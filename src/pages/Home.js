@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useLanguage } from "../components/LanguageContext";
 import "../css/slick.custom.css";
+
 const mainSettings = {
   dots: true,
   infinite: false,
@@ -123,17 +124,34 @@ const translations = {
   },
 };
 
-const GridItem = ({ className, greyBoxClass, textLines, price }) => (
-  <div className={`${styles.item} ${className}`}>
-    <div className={greyBoxClass}></div>
-    <div className={styles.text}>
-      {textLines.map((line, index) => (
-        <p key={index}>{line}</p>
-      ))}
-      {price && <p className={styles.homePrice}>{price}</p>}
+const GridItem = ({ className, greyBoxClass, textLines, price }) => {
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.target.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    e.target.style.backgroundPosition = `${x}% ${y}%`;
+  };
+
+  const handleMouseLeave = (e) => {
+    e.target.style.backgroundPosition = "center";
+  };
+
+  return (
+    <div className={`${styles.item} ${className}`}>
+      <div
+        className={`${styles.greyBox} ${greyBoxClass}`}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      ></div>
+      <div className={styles.text}>
+        {textLines.map((line, index) => (
+          <p key={index}>{line}</p>
+        ))}
+        {price && <p className={styles.homePrice}>{price}</p>}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const smallItemsData = [
   { textLines: ["워커비 WORKERBEE", "허니 로열 젤리"], price: "228,000원" },
