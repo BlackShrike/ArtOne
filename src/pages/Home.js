@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Home.module.css";
 import Slider from "react-slick";
@@ -14,121 +14,6 @@ const Arrow = ({ className, style, onClick, icon }) => (
     {icon}
   </div>
 );
-
-const mainSettings = (sliderRef, handleBeforeChange, handleAfterChange) => ({
-  dots: true,
-  infinite: false,
-  speed: 0, // 기본 애니메이션 제거
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-  autoplay: false,
-  centerMode: false,
-  customPaging: (i) => <div>{i + 1} / 6</div>,
-  appendDots: (dots) => (
-    <div>
-      <ul
-        style={{
-          margin: "0px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <li
-          className="slick-arrow"
-          onClick={() => {
-            sliderRef.current.slickPrev();
-          }}
-          style={{ cursor: "pointer" }}
-        >
-          <span className="arrow">❮</span>
-        </li>
-        {dots}
-        <li
-          className="slick-arrow"
-          onClick={() => {
-            sliderRef.current.slickNext();
-          }}
-          style={{ cursor: "pointer" }}
-        >
-          <span className="arrow">❯</span>
-        </li>
-      </ul>
-    </div>
-  ),
-  prevArrow: (
-    <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
-  ),
-  nextArrow: (
-    <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
-  ),
-  beforeChange: handleBeforeChange,
-  afterChange: handleAfterChange,
-  responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        centerMode: true,
-        centerPadding: "25px",
-      },
-    },
-  ],
-});
-
-const bestSettings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 5,
-  slidesToScroll: 5,
-  arrows: true,
-  autoplay: false,
-  centerMode: false,
-  centerPadding: "0px",
-  prevArrow: (
-    <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
-  ),
-  nextArrow: (
-    <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
-  ),
-  responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        variableWidth: true,
-      },
-    },
-  ],
-};
-
-const symmetricSettings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-  autoplay: false,
-  variableWidth: true,
-  centerMode: false,
-  prevArrow: (
-    <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
-  ),
-  nextArrow: (
-    <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
-  ),
-  responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        variableWidth: true,
-      },
-    },
-  ],
-};
 
 const translations = {
   KR: {
@@ -238,8 +123,9 @@ const smallItemsData = [
 
 function Home(props) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const { language } = useLanguage(); // Use language context
+  const [animating, setAnimating] = useState(false);
   const sliderRef = useRef(null);
+  const { language } = useLanguage();
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -247,28 +133,159 @@ function Home(props) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleBeforeChange = (oldIndex, newIndex) => {
+  const handleBeforeChange = useCallback(
+    (oldIndex, newIndex) => {
+      if (animating) return;
+
+      setAnimating(true);
+
+      const slides = document.querySelectorAll(".slick-slide");
+      slides.forEach((slide, index) => {
+        const items = slide.querySelectorAll(`.${styles.item}`);
+        items.forEach((item) => {
+          if (index === oldIndex) {
+            item.classList.add(
+              newIndex > oldIndex ? "slide-out-left" : "slide-out-right"
+            );
+            item.classList.remove("slide-in");
+          }
+        });
+      });
+    },
+    [animating]
+  );
+
+  const handleAfterChange = useCallback((current) => {
     const slides = document.querySelectorAll(".slick-slide");
-    slides.forEach((slide) => {
-      slide.classList.remove("slide-out-left", "slide-out-right");
+    slides.forEach((slide, index) => {
+      const items = slide.querySelectorAll(`.${styles.item}`);
+      items.forEach((item) => {
+        if (index === current) {
+          item.classList.add("slide-in");
+          item.classList.remove("slide-out-left", "slide-out-right");
+        }
+      });
     });
-    const currentSlide = slides[oldIndex];
-    if (currentSlide) {
-      currentSlide.classList.add(
-        newIndex > oldIndex ? "slide-out-left" : "slide-out-right"
-      );
-    }
+    setAnimating(false);
+  }, []);
+
+  const mainSettings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: false,
+    centerMode: false,
+    customPaging: (i) => <div>{i + 1} / 6</div>,
+    appendDots: (dots) => (
+      <div>
+        <ul
+          style={{
+            margin: "0px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <li
+            className="slick-arrow"
+            onClick={() => !animating && sliderRef.current.slickPrev()}
+            style={{ cursor: animating ? "default" : "pointer" }}
+          >
+            <span className="arrow">❮</span>
+          </li>
+          {dots}
+          <li
+            className="slick-arrow"
+            onClick={() => !animating && sliderRef.current.slickNext()}
+            style={{ cursor: animating ? "default" : "pointer" }}
+          >
+            <span className="arrow">❯</span>
+          </li>
+        </ul>
+      </div>
+    ),
+    prevArrow: (
+      <Arrow
+        className={`${styles.arrow} ${styles.prevArrow}`}
+        icon="❮"
+        onClick={() => !animating && sliderRef.current.slickPrev()}
+      />
+    ),
+    nextArrow: (
+      <Arrow
+        className={`${styles.arrow} ${styles.nextArrow}`}
+        icon="❯"
+        onClick={() => !animating && sliderRef.current.slickNext()}
+      />
+    ),
+    beforeChange: handleBeforeChange,
+    afterChange: handleAfterChange,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          centerMode: true,
+          centerPadding: "25px",
+        },
+      },
+    ],
   };
 
-  const handleAfterChange = (current) => {
-    const slides = document.querySelectorAll(".slick-slide");
-    slides.forEach((slide) => {
-      slide.classList.remove("slide-in", "slide-out-left", "slide-out-right");
-    });
-    const activeSlide = slides[current];
-    if (activeSlide) {
-      activeSlide.classList.add("slide-in");
-    }
+  const bestSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    arrows: true,
+    autoplay: false,
+    centerMode: false,
+    centerPadding: "0px",
+    prevArrow: (
+      <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
+    ),
+    nextArrow: (
+      <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
+    ),
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          variableWidth: true,
+        },
+      },
+    ],
+  };
+
+  const symmetricSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: false,
+    variableWidth: true,
+    centerMode: false,
+    prevArrow: (
+      <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
+    ),
+    nextArrow: (
+      <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
+    ),
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          variableWidth: true,
+        },
+      },
+    ],
   };
 
   const homeMain = Array.from({ length: 6 }, (_, index) => (
@@ -359,10 +376,7 @@ function Home(props) {
   return (
     <div className={styles.homeContainer}>
       <div className={styles.sliderContainer}>
-        <Slider
-          ref={sliderRef}
-          {...mainSettings(sliderRef, handleBeforeChange, handleAfterChange)}
-        >
+        <Slider ref={sliderRef} {...mainSettings}>
           {homeMain}
         </Slider>
       </div>
