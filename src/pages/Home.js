@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/Home.module.css";
 import Slider from "react-slick";
@@ -7,27 +7,74 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useLanguage } from "../components/LanguageContext";
 import "../css/slick.custom.css";
+import ZoomImage from "../components/ZoomImage";
 
-const mainSettings = {
+const Arrow = ({ className, style, onClick, icon }) => (
+  <div className={className} style={{ ...style }} onClick={onClick}>
+    {icon}
+  </div>
+);
+
+const mainSettings = (sliderRef, handleBeforeChange, handleAfterChange) => ({
   dots: true,
   infinite: false,
-  speed: 1000,
+  speed: 0, // 기본 애니메이션 제거
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: true,
   autoplay: false,
-  centerPadding: "50px",
+  centerMode: false,
+  customPaging: (i) => <div>{i + 1} / 6</div>,
+  appendDots: (dots) => (
+    <div>
+      <ul
+        style={{
+          margin: "0px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <li
+          className="slick-arrow"
+          onClick={() => {
+            sliderRef.current.slickPrev();
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          <span className="arrow">❮</span>
+        </li>
+        {dots}
+        <li
+          className="slick-arrow"
+          onClick={() => {
+            sliderRef.current.slickNext();
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          <span className="arrow">❯</span>
+        </li>
+      </ul>
+    </div>
+  ),
+  prevArrow: (
+    <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
+  ),
+  nextArrow: (
+    <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
+  ),
+  beforeChange: handleBeforeChange,
+  afterChange: handleAfterChange,
   responsive: [
     {
       breakpoint: 768,
       settings: {
-        infinite: true,
         centerMode: true,
-        centerPadding: "75px",
+        centerPadding: "25px",
       },
     },
   ],
-};
+});
 
 const bestSettings = {
   dots: true,
@@ -39,6 +86,12 @@ const bestSettings = {
   autoplay: false,
   centerMode: false,
   centerPadding: "0px",
+  prevArrow: (
+    <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
+  ),
+  nextArrow: (
+    <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
+  ),
   responsive: [
     {
       breakpoint: 768,
@@ -61,6 +114,12 @@ const symmetricSettings = {
   autoplay: false,
   variableWidth: true,
   centerMode: false,
+  prevArrow: (
+    <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
+  ),
+  nextArrow: (
+    <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
+  ),
   responsive: [
     {
       breakpoint: 768,
@@ -125,24 +184,31 @@ const translations = {
 };
 
 const GridItem = ({ className, greyBoxClass, textLines, price }) => {
-  const handleMouseMove = (e) => {
-    const { left, top, width, height } = e.target.getBoundingClientRect();
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
-    e.target.style.backgroundPosition = `${x}% ${y}%`;
-  };
+  const greyBoxRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
 
-  const handleMouseLeave = (e) => {
-    e.target.style.backgroundPosition = "center";
-  };
+  useEffect(() => {
+    if (greyBoxRef.current) {
+      const { width, height } = greyBoxRef.current.getBoundingClientRect();
+      setContainerWidth(width);
+      setContainerHeight(height);
+    }
+  }, []);
 
   return (
     <div className={`${styles.item} ${className}`}>
-      <div
-        className={`${styles.greyBox} ${greyBoxClass}`}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      ></div>
+      <div className={`${styles.greyBox} ${greyBoxClass}`} ref={greyBoxRef}>
+        {containerWidth > 0 && containerHeight > 0 && (
+          <ZoomImage
+            zoomRate={3}
+            containerWidth={containerWidth}
+            containerHeight={containerHeight}
+          >
+            <div className={`${styles.greyBoxContent} zoom-image`}></div>
+          </ZoomImage>
+        )}
+      </div>
       <div className={styles.text}>
         {textLines.map((line, index) => (
           <p key={index}>{line}</p>
@@ -173,6 +239,7 @@ const smallItemsData = [
 function Home(props) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { language } = useLanguage(); // Use language context
+  const sliderRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -180,7 +247,31 @@ function Home(props) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const homeMain = Array.from({ length: 8 }, (_, index) => (
+  const handleBeforeChange = (oldIndex, newIndex) => {
+    const slides = document.querySelectorAll(".slick-slide");
+    slides.forEach((slide) => {
+      slide.classList.remove("slide-out-left", "slide-out-right");
+    });
+    const currentSlide = slides[oldIndex];
+    if (currentSlide) {
+      currentSlide.classList.add(
+        newIndex > oldIndex ? "slide-out-left" : "slide-out-right"
+      );
+    }
+  };
+
+  const handleAfterChange = (current) => {
+    const slides = document.querySelectorAll(".slick-slide");
+    slides.forEach((slide) => {
+      slide.classList.remove("slide-in", "slide-out-left", "slide-out-right");
+    });
+    const activeSlide = slides[current];
+    if (activeSlide) {
+      activeSlide.classList.add("slide-in");
+    }
+  };
+
+  const homeMain = Array.from({ length: 6 }, (_, index) => (
     <div className={styles.homeGridWrapper} key={index}>
       <div className={styles.homeGrid}>
         <GridItem
@@ -268,7 +359,12 @@ function Home(props) {
   return (
     <div className={styles.homeContainer}>
       <div className={styles.sliderContainer}>
-        <Slider {...mainSettings}>{homeMain}</Slider>
+        <Slider
+          ref={sliderRef}
+          {...mainSettings(sliderRef, handleBeforeChange, handleAfterChange)}
+        >
+          {homeMain}
+        </Slider>
       </div>
       <div className={styles.newGrid}>
         <h2>{translations[language].newGridHeader}</h2>

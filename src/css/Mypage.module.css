@@ -5,6 +5,7 @@
 }
 
 .mypageContainer {
+  width: 100%;
   display: flex;
   padding: 20px;
   margin: auto;
@@ -76,7 +77,6 @@
 
 .userInfoCard span:first-child {
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .orderStatus {
@@ -110,6 +110,7 @@
 
 .orderItem .imagePlaceholder {
   width: 15%;
+  min-width: 100px;
   height: 100%;
   background-color: #eee;
   border: 1px solid #ccc;
@@ -399,13 +400,114 @@
   font-size: 14px;
   color: #555;
 }
+
+.membershipContainer {
+  padding: 20px;
+}
+
+.membershipContainer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.membershipContainer p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.membershipLevels {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  align-items: flex-end;
+}
+.membershipLevel {
+  width: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  background-color: transparent; /* 기본 배경색 제거 */
+  display: flex;
+  flex-direction: row; /* 행 방향으로 정렬 */
+  align-items: flex-end;
+  justify-content: center; /* 중앙 정렬 */
+}
+
+
+.membershipLevel.selected {
+  border: 2px solid #333;
+  background-color: black;
+  color: white;
+}
+
+.membershipLevel.black.selected {
+  color: white;
+}
+.benefit {
+  display: flex;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.headSection{  
+  position: relative;
+  right: 10%;
+}
+.contentSection {
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
+}
+.benefit h3 {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.benefit p {
+  text-align: left;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  color: #666;
+}
+
+
+
 @media (max-width: 768px) {
   .sidebar {
     display: none;
   }
-
+  .userInfoCards{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+  .userInfoCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px;
+    margin-bottom: 5px;
+    align-items: center;
+  }
+  .userInfoCard span{
+    padding: 0px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .userInfoCard:last-child{
+    margin-right: 10px;
+  }
   .mainContent {
     width: 100%;
+  }
+  .orderItem p{
+    font-size: 12px;
   }
   .recentViewedContainerDesktop{
     display: none ;
@@ -434,6 +536,7 @@
 
   .imagePlaceholder {
     width: 100%;
+    min-width: 100px;
     height: 90px;
     background-color: #eee;
     justify-content: center;
@@ -487,5 +590,31 @@
     cursor: pointer;
     border-radius: 4px;
     text-align: center;
+  }
+  .membershipContainer {
+    width: 100%;
+    padding: 0px;
+  }
+  .benefit {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+  }
+  .benefit h3 {
+    text-align: left;
+    padding: 0 10px;
+  }
+  .headSection{
+    left: 0;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    align-self: flex-start;
+  }
+  
+  .contentSection{
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

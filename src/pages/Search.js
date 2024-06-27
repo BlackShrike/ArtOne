@@ -54,9 +54,9 @@ const Search = () => {
         <div className={styles.searchTerms}>
           {["최근검색어1", "최근검색어2", "최근검색어3", "최근검색어4"].map(
             (term, index) => (
-              <div key={index} className={styles.searchTerm}>
+              <p key={index} className={styles.searchTerm}>
                 {term} <button className={styles.removeButton}>✖</button>
-              </div>
+              </p>
             )
           )}
         </div>

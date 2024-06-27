@@ -54,7 +54,7 @@ function App() {
 function RoutesWrapper({ isLoggedIn, onLogin, onLogout }) {
   const [selectedSection, setSelectedSection] = useState("main");
 
-  const isSearchPage = window.location.hash.startsWith("#/search");
+  const isSearchPage = window.location.hash.startsWith("/search");
 
   return (
     <>

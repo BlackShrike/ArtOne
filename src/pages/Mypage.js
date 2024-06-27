@@ -417,36 +417,56 @@ function MyPage({ isLoggedIn }) {
               )}
             </div>
             <div className={styles.membershipBenefits}>
-              <div className={`${styles.benefit} ${styles.white}`}>
-                <h3>{t.white}</h3>
-                <p>구매 누적금액 50만원 이상</p>
-                <p>10% 할인권 제공 (월간 적용금액 15만원 미만)</p>
+              <div className={styles.benefit}>
+                <section className={styles.headSection}>
+                  <h3>{t.white} </h3>
+                </section>
+                <section className={styles.contentSection}>
+                  <p>구매 누적금액 50만원 이상</p>
+                  <p>10% 할인권 제공 (월간 적용금액 15만원 미만)</p>
+                </section>
               </div>
-              <div className={`${styles.benefit} ${styles.cian}`}>
-                <h3>{t.cian}</h3>
-                <p>구매 누적금액 100만원 이상</p>
-                <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+              <div className={styles.benefit}>
+                <section className={styles.headSection}>
+                  <h3>{t.cian} </h3>
+                </section>
+                <section className={styles.contentSection}>
+                  <p>구매 누적금액 100만원 이상</p>
+                  <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+                </section>
               </div>
-              <div className={`${styles.benefit} ${styles.magenta}`}>
-                <h3>{t.magenta}</h3>
-                <p>구매 누적금액 100만원 이상</p>
-                <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
-                <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
+              <div className={styles.benefit}>
+                <section className={styles.headSection}>
+                  <h3>{t.magenta} </h3>
+                </section>
+                <section className={styles.contentSection}>
+                  <p>구매 누적금액 100만원 이상</p>
+                  <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+                  <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
+                </section>
               </div>
-              <div className={`${styles.benefit} ${styles.yellow}`}>
-                <h3>{t.yellow}</h3>
-                <p>구매 누적금액 100만원 이상</p>
-                <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
-                <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
-                <p>상시쿠폰 10% 할인/적용금액 15만원 미만)</p>
+              <div className={styles.benefit}>
+                <section className={styles.headSection}>
+                  <h3>{t.yellow} </h3>
+                </section>
+                <section className={styles.contentSection}>
+                  <p>구매 누적금액 100만원 이상</p>
+                  <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+                  <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
+                  <p>상시쿠폰 10% 할인/적용금액 15만원 미만</p>
+                </section>
               </div>
-              <div className={`${styles.benefit} ${styles.black}`}>
-                <h3>{t.black}</h3>
-                <p>구매 누적금액 100만원 이상</p>
-                <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
-                <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
-                <p>상시쿠폰 10% 할인/적용금액 15만원 미만)</p>
-                <p>VIP 멤버쉽 선물 (연 4회 / 적립수 2회)</p>
+              <div className={styles.benefit}>
+                <section className={styles.headSection}>
+                  <h3>{t.black} </h3>
+                </section>
+                <section className={styles.contentSection}>
+                  <p>구매 누적금액 100만원 이상</p>
+                  <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
+                  <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
+                  <p>상시쿠폰 10% 할인/적용금액 15만원 미만</p>
+                  <p>VIP 멤버쉽 선물 (연 4회 / 적립수 2회)</p>
+                </section>
               </div>
             </div>
           </div>

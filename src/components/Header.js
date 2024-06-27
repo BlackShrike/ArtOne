@@ -68,6 +68,8 @@ function Header({ isLoggedIn, onLogout }) {
   const [showSignatureMenu, setShowSignatureMenu] = useState(false);
   const [showOriginalMenu, setShowOriginalMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showMobileSignatureMenu, setShowMobileSignatureMenu] = useState(false);
+  const [showMobileOriginalMenu, setShowMobileOriginalMenu] = useState(false);
   const navigate = useNavigate();
   const { language, toggleLanguage } = useLanguage(); // Use language context
 
@@ -252,12 +254,40 @@ function Header({ isLoggedIn, onLogout }) {
             <span onClick={() => handleNavigate("/promotion")}>
               {translations[language].promotion}
             </span>
-            <span onClick={() => handleNavigate("/signature")}>
+            <span
+              onClick={() =>
+                setShowMobileSignatureMenu(!showMobileSignatureMenu)
+              }
+            >
               {translations[language].signature}
+              {showMobileSignatureMenu ? "∧" : "∨"}
             </span>
-            <span onClick={() => handleNavigate("/original")}>
+            {showMobileSignatureMenu &&
+              signatureItems.map((item, i) => (
+                <span
+                  className={styles.mobileDropdownItem}
+                  key={i}
+                  onClick={() => handleNavigate("/signature")}
+                >
+                  {item}
+                </span>
+              ))}
+            <span
+              onClick={() => setShowMobileOriginalMenu(!showMobileOriginalMenu)}
+            >
               {translations[language].original}
+              {showMobileOriginalMenu ? "∧" : "∨"}
             </span>
+            {showMobileOriginalMenu &&
+              originalItems.map((item, i) => (
+                <span
+                  className={styles.mobileDropdownItem}
+                  key={i}
+                  onClick={() => handleNavigate("/original")}
+                >
+                  {item}
+                </span>
+              ))}
             <span onClick={() => handleNavigate("/artist")}>
               {translations[language].artist}
             </span>

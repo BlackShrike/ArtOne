@@ -441,15 +441,16 @@
   }
 
   .item p {
-    max-width: 157px;
+    white-space: nowrap;
   }
 
   .homeGrid .smallGreyBox {
     width: 30%;
   }
-
+  .largeItem{
+    width: 100%;
+  }
   .largeItem .text {
-    white-space: wrap;
     margin-top: 20px;
   }
 

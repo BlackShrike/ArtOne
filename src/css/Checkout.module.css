@@ -151,6 +151,10 @@
 }
 
 @media (max-width: 767px) {
+  .checkoutContainer{
+    padding: 0px;
+    width: 100%;
+  }
   .checkoutContent {
     flex-direction: column;
     width: 100%;
@@ -158,15 +162,18 @@
 
   .checkoutItemsContainer {
     width: 100%;
+    margin: 0px;
   }
 
   .checkoutSummaryContainer {
     width: 100%;
     margin-top: 20px;
+    padding: 0px;
   }
 
   .checkoutItemsSection {
     width: 100%;
+    padding: 0px;
   }
   .checkoutStep{
     display: none;

@@ -29,10 +29,18 @@
 }
 
 @media (max-width: 767px) {
+  .gridPage {
+    padding: 0px;
+  }
   .gridContainer {
     grid-template-columns: 1fr; /* 한 줄 배치 */
     padding: 0px;
   }
+  
+.gridItem {
+  padding: 0px;
+  text-align: left;
+}
 
   .itemDetails p {
     font-size: 12px; /* 글자 크기 조정 */

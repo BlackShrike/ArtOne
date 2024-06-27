@@ -42,6 +42,7 @@
 }
 
 .mobileTabs {
+  box-sizing: border-box;
   width: 100%;
   display: flex;
   border: 1px solid #ccc;
@@ -262,6 +263,7 @@
   .MiddleBar .filterBox {
     width: 100%;
     background-color: transparent;
+    box-sizing: border-box;
   }
   .MiddleBar .styleButton {
     font-size: 12px;

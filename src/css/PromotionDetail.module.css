@@ -59,6 +59,9 @@
     align-items: center;
   }
   @media (max-width : 768px){
+    .detailPage{
+      padding: 0px;
+    }
     .itemsContainer {
       grid-template-columns: repeat(2, 1fr);
     }
