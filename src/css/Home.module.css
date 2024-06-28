@@ -4,7 +4,29 @@
   justify-content: space-between;
   height: 100%;
 }
+.homeContainer{
+  display: flex;
+  flex-direction: column;
+}
+.newGrid {
+  order: 2; /* 기본 순서 */
+}
 
+.bestGrid {
+  order: 1; /* 기본 순서 */
+}
+
+.asymmetricGridContainer {
+  order: 3;
+}
+
+.symmetricGridContainer {
+  order: 4;
+}
+
+.textContainer {
+  order: 5;
+}
 .homeContainer h2 {
   display: flex;
   justify-content: center;
@@ -408,6 +430,17 @@
 
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
+  .newGrid {
+    order: 3; /* BestGrid보다 밑으로 이동 */
+  }
+
+  .bestGrid {
+    order: 2; /* BestGrid가 위로 이동 */
+  }
+  .sliderContainer{
+    width: 100%;
+    padding: 0;
+  }
   .homeGridWrapper {
     margin: auto;
   }
@@ -417,29 +450,34 @@
     grid-template-rows: repeat(4, 200px);
     grid-template-areas:
       "large"
-      "small-left1"
-      "small-left2"
-      "small-right1";
+      "small-right1"
+      "small-right2"
+      "small-right3";
   }
 
   .homeGrid > div {
     display: none;
   }
 
-  .homeGrid .largeItem, .homeGrid .smallItemLeft1, .homeGrid .smallItemLeft2, .homeGrid .smallItemRight1 {
+  .homeGrid .largeItem,  .homeGrid .smallItemRight1 , .homeGrid .smallItemRight2, .homeGrid .smallItemRight3 {
     display: flex;
   }
 
-  .homeGrid .smallItemLeft1, .homeGrid .smallItemLeft2, .homeGrid .smallItemRight1 {
+   .homeGrid .smallItemRight1, .homeGrid .smallItemRight2, .homeGrid .smallItemRight3{
     flex-direction: row;
     align-items: center;
     text-align: left;
   }
 
-  .homeGrid .smallItemLeft1 .text, .homeGrid .smallItemLeft2 .text, .homeGrid .smallItemRight1 .text {
+   .homeGrid .smallItemRight1 .text , .homeGrid .smallItemRight2 .homeGrid .text ,.smallItemRight3 .text {
     max-width: 140px; /* 텍스트의 최대 너비를 지정 */
   }
-
+  /* 각 아이템의 첫 번째 텍스트 크기를 줄이기 위한 스타일 추가 */
+.homeGrid .smallItemRight1 p:first-child, 
+.homeGrid .smallItemRight2 p:first-child, 
+.homeGrid .smallItemRight3 p:first-child {
+    font-size: 12px; /* 원하는 크기로 조정 */
+}
   .item p {
     white-space: nowrap;
   }
@@ -449,6 +487,8 @@
   }
   .largeItem{
     width: 100%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
   }
   .largeItem .text {
     margin-top: 20px;

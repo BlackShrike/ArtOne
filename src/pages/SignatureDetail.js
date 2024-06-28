@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../css/SignatureDetail.module.css";
 import { FaTimes, FaCartPlus, FaPlus } from "react-icons/fa";
 import { RiShoppingBag4Line } from "react-icons/ri";
@@ -11,7 +12,7 @@ const translations = {
     artworkInfo: "1980년대 미니멀리즘 작품",
     price: "270,000원",
     description:
-      "프랭크 쇼토 브라운(Frank Chouteau Brown)은 미네소타주 미니애폴리스(MinneaPolis)에서 태어나 미니애폴리 미술학교(Minneapolis School of Fine Arts), 보스턴 아트 클럽(Boston Art Club) 및 유럽에서 교육을 받은 미국인 건축가 입니다.",
+      "프랭크 쇼토 브라운(Frank Chouteau Brown)은 미네소타주 미니애폴리스(Minneapolis)에서 태어나 미네소타 미술학교(Minneapolis School of Fine Arts), 보스턴 아트 클럽(Boston Art Club) 및 유럽에서 교육을 받은 미국인 건축가입니다.",
     colorLabel: "COLOR",
     sizeLabel: "SIZE",
     sizeOptions: [
@@ -21,7 +22,7 @@ const translations = {
       "70 x 70 mm",
     ],
     quantityText:
-      "Linen Like Hard Twits Cotton Yarn Woven resil 1 RED(알루미늄 액자) - 61X91",
+      "Linen Like Hard Twist Cotton Yarn Woven resil 1 RED(알루미늄 액자) - 61X91",
     totalText: "합계",
     basketButton: "장바구니",
     purchaseButton: "구매하기",
@@ -44,34 +45,19 @@ const translations = {
     tabs: ["배송안내", "교환 및 반품", "제품문의"],
     tabContents: [
       {
-        title: "1.내용",
+        title: "1. 제목",
         content:
-          "-내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+          "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
       },
       {
-        title: "2.내용",
+        title: "2. 제목",
         content:
-          "-내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+          "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
       },
       {
-        title: "1.내용",
+        title: "3. 제목",
         content:
-          "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-      },
-      {
-        title: "2.내용",
-        content:
-          "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-      },
-      {
-        title: "1.내용",
-        content:
-          "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-      },
-      {
-        title: "2.내용",
-        content:
-          "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+          "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
       },
     ],
   },
@@ -91,7 +77,7 @@ const translations = {
       "70 x 70 mm",
     ],
     quantityText:
-      "Linen Like Hard Twits Cotton Yarn Woven resil 1 RED (Aluminum Frame) - 61X91",
+      "Linen Like Hard Twist Cotton Yarn Woven resil 1 RED (Aluminum Frame) - 61X91",
     totalText: "Total",
     basketButton: "Add to Basket",
     purchaseButton: "Purchase",
@@ -114,34 +100,19 @@ const translations = {
     tabs: ["Shipping Information", "Returns & Exchanges", "Product Inquiry"],
     tabContents: [
       {
-        title: "1. Content",
+        title: "1. Head",
         content:
-          "-Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+          "- Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
       },
       {
-        title: "2. Content",
+        title: "2. Head",
         content:
-          "-Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+          "- Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
       },
       {
-        title: "1. Content",
+        title: "3. Head",
         content:
-          "Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
-      },
-      {
-        title: "2. Content",
-        content:
-          "Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
-      },
-      {
-        title: "1. Content",
-        content:
-          "Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
-      },
-      {
-        title: "2. Content",
-        content:
-          "Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
+          "- Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
       },
     ],
   },
@@ -150,16 +121,34 @@ const translations = {
 function SignatureDetail({ id }) {
   const { language } = useLanguage();
   const t = translations[language];
+  const navigate = useNavigate();
 
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const toggleReviewModal = () => setShowReviewModal(!showReviewModal);
   const togglePurchaseModal = () => setShowPurchaseModal(!showPurchaseModal);
   const increaseQuantity = () => setQuantity(quantity + 1);
   const decreaseQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
+
+  const handlePurchaseClick = () => {
+    navigate("/checkout");
+  };
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+    togglePurchaseModal();
+  };
 
   return (
     <div className={styles.detailPage}>
@@ -178,8 +167,8 @@ function SignatureDetail({ id }) {
             <br />
             {t.artworkName}
           </h2>
-          <p>
-            <span className={styles.greyText}>{t.artworkInfo}</span>{" "}
+          <p className={styles.detailsRow}>
+            <span className={styles.greyText}>{t.artworkInfo}</span>
             <span className={styles.price}>{t.price}</span>
           </p>
           <p>{t.description}</p>
@@ -259,8 +248,8 @@ function SignatureDetail({ id }) {
               <span>X</span>
             </div>
             <div className={styles.totalPrice}>
+              <p>{t.totalText} </p>
               <p>
-                {t.totalText}{" "}
                 <span className={styles.price}>{270000 * quantity}원</span>
               </p>
             </div>
@@ -271,38 +260,76 @@ function SignatureDetail({ id }) {
             </button>
             <button
               className={styles.purchaseButton}
-              onClick={togglePurchaseModal}
+              onClick={handlePurchaseClick}
             >
               {t.purchaseButton}
             </button>
           </div>
+          <p className={styles.warningText}>
+            주문 제작 상품(액자)의 경우 발주 확인 후 취소 및 교환, 환불이
+            불가합니다. 제작 및 발송까지 영업일 기준 약 7일 소요됩니다.
+          </p>
+          <div
+            className={styles.purchaseInfoRow}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? "구매안내 ∧" : "구매안내 ∨"}
+          </div>
+          {isExpanded && (
+            <>
+              <div className={styles.tabs}>
+                {t.tabs.map((tab, index) => (
+                  <React.Fragment key={index}>
+                    <span
+                      key={index}
+                      className={styles.tab}
+                      onClick={() => handleTabClick(index)}
+                    >
+                      {tab}
+                    </span>
+                    {index < t.tabs.length - 1 && (
+                      <span className={styles.dot}>·</span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className={styles.reviews}>
         <h2>{t.reviewsTitle}</h2>
         <div className={styles.reviewNotice}>
-          {t.reviewNotice}{" "}
-          <button
-            className={styles.writeReviewButton}
-            onClick={toggleReviewModal}
-          >
-            {t.writeReviewButton}
-          </button>
+          {t.reviewNotice}
+          {!isMobile && (
+            <button
+              className={styles.writeReviewButton}
+              onClick={toggleReviewModal}
+            >
+              {t.writeReviewButton}
+            </button>
+          )}
         </div>
         <div className={styles.reviewList}>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <div key={index} className={styles.reviewItem}>
-              <p className={styles.reviewer}>ooo님</p>
-              <div className={styles.reviewImagePlaceholder}></div>
-              <p className={styles.reviewTitle}>
-                리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목
-              </p>
-              <p className={styles.reviewContent}>
-                리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
-              </p>
-              <div className={styles.reviewSeparator}></div>
-            </div>
-          ))}
+          <div className={styles.reviewItem}>
+            <p className={styles.reviewer}>ooo님</p>
+            <div className={styles.reviewImagePlaceholder}></div>
+            <p className={styles.reviewTitle}>
+              리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목
+            </p>
+            <p className={styles.reviewContent}>
+              리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
+            </p>
+            <div className={styles.reviewSeparator}></div>
+          </div>
+          {isMobile && (
+            <button
+              className={styles.writeReviewButton}
+              onClick={toggleReviewModal}
+            >
+              {t.writeReviewButton}
+            </button>
+          )}
         </div>
       </div>
       <div className={styles.similarWorks}>
@@ -364,25 +391,25 @@ function SignatureDetail({ id }) {
             </div>
             <div className={styles.tabs}>
               {t.tabs.map((tab, index) => (
-                <span
-                  key={index}
-                  className={`${styles.tab} ${
-                    activeTab === index ? styles.activeTab : ""
-                  }`}
-                  onClick={() => setActiveTab(index)}
-                >
-                  {tab}
-                </span>
-              ))}
-            </div>
-            {t.tabContents
-              .slice(activeTab * 2, activeTab * 2 + 2)
-              .map((content, index) => (
                 <React.Fragment key={index}>
-                  <h3>{content.title}</h3>
-                  <p>{content.content}</p>
+                  <span
+                    className={`${styles.tab} ${
+                      activeTab === index ? styles.activeTab : ""
+                    }`}
+                    onClick={() => setActiveTab(index)}
+                  >
+                    {tab}
+                  </span>
+                  {index < t.tabs.length - 1 && (
+                    <span className={styles.dot}>·</span>
+                  )}
                 </React.Fragment>
               ))}
+            </div>
+            <div className={styles.tabContent}>
+              <h3>{t.tabContents[activeTab].title}</h3>
+              <p>{t.tabContents[activeTab].content}</p>
+            </div>
           </div>
         </div>
       )}

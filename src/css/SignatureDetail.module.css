@@ -46,9 +46,11 @@
   margin: 10px 0;
   font-size: 16px;
 }
-.greyText{  
+
+.greyText {
   color: #bbb;
 }
+
 .selectionRow {
   display: flex;
   flex-direction: column;
@@ -82,7 +84,7 @@
   border-radius: 50%;
   border: 1px solid #000;
 }
-/* 다섯 번째 컬러 아이템의 오른쪽에 세로선 추가 */
+
 .color:nth-child(5)::after {
   content: '';
   position: absolute;
@@ -92,6 +94,7 @@
   height: 50px;
   background-color: #ccc;
 }
+
 .sizeSelection select {
   width: 80%;
   padding: 5px;
@@ -110,40 +113,29 @@
   font-size: 24px;
   font-weight: bold;
 }
-
 .purchaseRow {
   height: 50px;
   display: flex;
   width: 100%;
+  border-bottom: none; /* Border-bottom 제거 */
 }
-
-.basketButton {
-  width: 15%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #000;
-  border-radius: 10px;
-  background-color: transparent;
-  cursor: pointer;
-  padding: 10px;
-  font-size: 50px;
+.warningText{
+  font-weight: normal !important ;
 }
-
-.purchaseButton {
-  width: 80%;
-  height: 100%;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
+.purchaseInfoRow {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #999;
+  border-bottom: 1px solid #ccc;
   cursor: pointer;
-  padding: 10px;
 }
 
 .reviews {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .reviewNotice {
@@ -161,16 +153,20 @@
   background-color: transparent;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .reviewList {
   width: 100%;
   margin-top: 10px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .reviewItem {
   padding: 10px 0;
+  order: 0; /* 기본 순서 */
 }
 
 .reviewImagePlaceholder {
@@ -189,6 +185,7 @@
   padding: 10px;
   font-size: 20px;
 }
+
 .reviewHead {
   width: 100%;
   height: 40px;
@@ -196,10 +193,12 @@
   text-align: center;
   font-weight: bolder;
 }
+
 .reviewHead option:hover {
   background-color: #000;
   color: #fff;
 }
+
 .reviewContent {
   width: 100%;
   padding: 0px 10px;
@@ -242,9 +241,8 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 5px;
-  flex-direction: row; /* 추가 */
+  flex-direction: row;
 }
-
 
 .cartIcon {
   margin-left: 10px;
@@ -261,11 +259,13 @@
   justify-content: center;
   align-items: center;
 }
+
 .reviewmodalContent {
   width: 100%;
   height: 200px;
   resize: none;
 }
+
 .modalContent {
   display: flex;
   flex-direction: column;
@@ -295,8 +295,31 @@
   cursor: pointer;
   justify-self: flex-end;
 }
+.basketButton {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 50px;
+}
 
-.imageUpload  {
+.purchaseButton {
+  width: 80%;
+  height: 100%;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px;
+}
+.imageUpload {
   margin-top: 10px;
   display: flex;
   align-items: flex-start;
@@ -348,14 +371,19 @@
 
 .tabs {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 10px;
 }
 
 .tab {
+  white-space: nowrap;
   cursor: pointer;
   padding: 10px;
   transition: color 0.3s;
+}
+.dot {
+  margin: 0 5px;
+  align-self: center; /* 가운데 점을 중앙에 위치하게 설정 */
 }
 
 .activeTab {
@@ -363,6 +391,7 @@
   font-weight: bold;
   border-bottom: 2px solid #000;
 }
+
 @media (max-width: 768px) {
   .detailContainer {
     flex-direction: column;
@@ -371,11 +400,22 @@
   .imagePlaceholder {
     height: 200px;
   }
+
   .details h2 {
     font-size: 16px;
   }
-  .details p{
+
+  .details p {
     font-size: 12px;
+  }
+  .sizeSelection p{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sizeSelection select{
+    margin-top: 20px;
+    width: 100%;
   }
   .reviewImagePlaceholder {
     width: 100%;
@@ -394,10 +434,20 @@
     width: 100%;
   }
 
- 
-
   .tab {
     width: 100%;
     text-align: center;
+  }
+
+  .writeReviewButtonContainer {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .reviewList {
+    order: 0;
   }
 }

@@ -86,7 +86,7 @@ const GridItem = ({ className, greyBoxClass, textLines, price }) => {
       <div className={`${styles.greyBox} ${greyBoxClass}`} ref={greyBoxRef}>
         {containerWidth > 0 && containerHeight > 0 && (
           <ZoomImage
-            zoomRate={3}
+            zoomRate={2}
             containerWidth={containerWidth}
             containerHeight={containerHeight}
           >

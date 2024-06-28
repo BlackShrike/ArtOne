@@ -129,10 +129,20 @@
 }
 
 @media (max-width: 767px) {
+  .signature{
+    padding: 0px;
+  }
   .gridContainer {
     grid-template-columns: repeat(2, 1fr);
   }
   .signature-sort select{
     width: 20%;
   }
+  .signature-sort{
+    padding: 0px;
+  }
+  .gridPage {
+    padding: 0px;
+  }
+  
 }
