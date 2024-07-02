@@ -226,13 +226,13 @@
   .mobileMenu {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 60%;
     background-color: white;
     position: absolute;
     top: 45px; /* Adjust based on the header height */
     border: 1px solid #ccc;
     z-index: 10;
-    left: 50%;
+    left: 40%;
     padding: 0px
   }
 
@@ -244,12 +244,14 @@
   .mobileMenuHeader {
     display: flex;
     justify-content: space-around;
-    width: 90%;
-    padding: 15px 10px;
+    width: 100%;
+    padding: 20px 10px;
     border-bottom: 1px solid #000;
     gap: 5px;
   }
-  
+  .lightFont {
+    font-weight: 500; /* 원하는 폰트 두께로 설정 */
+  }
   .mobileMenuHeader span {
     font-size: 1em;
     white-space: nowrap ;
@@ -261,11 +263,21 @@
     padding: 0px;
     cursor: pointer;
   }
-  
+  .menuItem{
+    justify-content: space-between; /* 텍스트와 화살표 사이에 공간을 만듭니다 */
+  }
+  .menuItem p{
+    margin: 0px;
+  }
+.arrow {
+  margin-left: auto; /* 화살표를 오른쪽 끝으로 보냅니다 */
+  padding-right: 10px; /* 화살표와 텍스트 사이의 간격을 추가합니다 */
+}
   .mobileMenuLinks span,
   .mobileMenuLinks a {
+    display: flex;
     font-size: 1.2em;
-    padding: 5px 0;
+    padding: 10px 0;
     text-align: justify;
     padding-left: 40px;
     border-bottom: 1px solid #000;
@@ -294,7 +306,7 @@
     color: red;
   }
   .languageToggle {
-    width: 50% !important;
+    width: 30% !important;
     font-size: 14px;
     color: #888;
     border: 1px solid #888;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styles from "../css/Original.module.css"; // Ensure this path is correct based on your project structure
-import BackButton from "../components/BackButton"; // Assuming there's a BackButton component
+import styles from "../css/Original.module.css";
+import BackButton from "../components/BackButton";
 import { TbRefresh } from "react-icons/tb";
 import { AiOutlineClose } from "react-icons/ai";
 import { useLanguage } from "../components/LanguageContext";
@@ -84,8 +84,8 @@ function Original() {
   const { language } = useLanguage();
   const t = translations[language];
 
-  const itemsPerPage = 30; // 한 페이지당 30개 항목
-  const totalItems = 300; // 총 항목 수
+  const itemsPerPage = 30;
+  const totalItems = 300;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -119,7 +119,7 @@ function Original() {
     if (value && !recentKeywords.includes(value)) {
       setRecentKeywords((prevKeywords) => {
         const newKeywords = [value, ...prevKeywords];
-        return newKeywords.slice(0, 5); // 최대 5개의 최근 키워드
+        return newKeywords.slice(0, 5);
       });
     }
   };
@@ -151,6 +151,28 @@ function Original() {
     setRecentKeywords((prevKeywords) =>
       prevKeywords.filter((item) => item !== keyword)
     );
+  };
+
+  const handleKeywordClick = (keyword) => {
+    if (filters.type === keyword) {
+      toggleFilter("type", keyword);
+    } else if (filters.style1 === keyword) {
+      toggleFilter("style1", keyword);
+    } else if (filters.style2 === keyword) {
+      toggleFilter("style2", keyword);
+    } else if (filters.style3 === keyword) {
+      toggleFilter("style3", keyword);
+    } else if (filters.style4 === keyword) {
+      toggleFilter("style4", keyword);
+    } else if (filters.price1 === keyword) {
+      toggleFilter("price1", keyword);
+    } else if (filters.price2 === keyword) {
+      toggleFilter("price2", keyword);
+    } else if (filters.price3 === keyword) {
+      toggleFilter("price3", keyword);
+    } else if (filters.price4 === keyword) {
+      toggleFilter("price4", keyword);
+    }
   };
 
   const handlePageChange = (pageNumber) => {
@@ -343,6 +365,7 @@ function Original() {
               <button
                 className={`${styles.priceButton} ${
                   filters.price1 === "100호 이상" ? styles.active : ""
+                }
                 }`}
                 onClick={() => toggleFilter("price1", "100호 이상")}
               >
@@ -395,7 +418,11 @@ function Original() {
           </div>
           <div className={styles.recentKeywords}>
             {recentKeywords.map((keyword, index) => (
-              <span key={index} className={styles.keywordTag}>
+              <span
+                key={index}
+                className={styles.keywordTag}
+                onClick={() => handleKeywordClick(keyword)}
+              >
                 {keyword}
                 <AiOutlineClose onClick={() => removeKeyword(keyword)} />
               </span>
@@ -598,7 +625,11 @@ function Original() {
           )}
           <div className={styles.recentKeywords}>
             {recentKeywords.map((keyword, index) => (
-              <span key={index} className={styles.keywordTag}>
+              <span
+                key={index}
+                className={styles.keywordTag}
+                onClick={() => handleKeywordClick(keyword)}
+              >
                 {keyword}
                 <AiOutlineClose onClick={() => removeKeyword(keyword)} />
               </span>

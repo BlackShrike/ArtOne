@@ -453,11 +453,13 @@
   justify-content: space-evenly;
   align-items: center;
 }
-.headSection{  
+.headSection{
+  width: 30%;
   position: relative;
   right: 10%;
 }
 .contentSection {
+  width: 60%;
   border-left: 1px solid #ccc;
   padding-left: 10px;
 }
@@ -612,6 +614,7 @@
   }
   
   .contentSection{
+    width: 90%;
     border: none;
     display: flex;
     flex-direction: column;

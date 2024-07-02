@@ -255,12 +255,15 @@ function Header({ isLoggedIn, onLogout }) {
               {translations[language].promotion}
             </span>
             <span
+              className={styles.menuItem}
               onClick={() =>
                 setShowMobileSignatureMenu(!showMobileSignatureMenu)
               }
             >
-              {translations[language].signature}
-              {showMobileSignatureMenu ? "∧" : "∨"}
+              <p>{translations[language].signature}</p>
+              <p className={styles.arrow}>
+                {showMobileSignatureMenu ? "∧" : "∨"}
+              </p>
             </span>
             {showMobileSignatureMenu &&
               signatureItems.map((item, i) => (
@@ -273,10 +276,13 @@ function Header({ isLoggedIn, onLogout }) {
                 </span>
               ))}
             <span
+              className={styles.menuItem}
               onClick={() => setShowMobileOriginalMenu(!showMobileOriginalMenu)}
             >
-              {translations[language].original}
-              {showMobileOriginalMenu ? "∧" : "∨"}
+              <p>{translations[language].original}</p>
+              <p className={styles.arrow}>
+                {showMobileOriginalMenu ? "∧" : "∨"}
+              </p>
             </span>
             {showMobileOriginalMenu &&
               originalItems.map((item, i) => (
@@ -302,16 +308,28 @@ function Header({ isLoggedIn, onLogout }) {
             </span>
             {isLoggedIn && (
               <>
-                <span onClick={() => handleMyPageNavigate("recentViewed")}>
+                <span
+                  className={styles.lightFont}
+                  onClick={() => handleMyPageNavigate("recentViewed")}
+                >
                   {translations[language].recentViewed}
                 </span>
-                <span onClick={() => handleMyPageNavigate("updateInfo")}>
+                <span
+                  className={styles.lightFont}
+                  onClick={() => handleMyPageNavigate("updateInfo")}
+                >
                   {translations[language].updateInfo}
                 </span>
-                <span onClick={() => handleMyPageNavigate("coupon")}>
+                <span
+                  className={styles.lightFont}
+                  onClick={() => handleMyPageNavigate("coupon")}
+                >
                   {translations[language].coupon}
                 </span>
-                <span onClick={() => handleNavigate("/checkout")}>
+                <span
+                  className={styles.lightFont}
+                  onClick={() => handleNavigate("/checkout")}
+                >
                   {translations[language].cart}
                 </span>
               </>

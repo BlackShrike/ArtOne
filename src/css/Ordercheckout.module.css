@@ -331,6 +331,7 @@
   box-sizing: border-box;
 }
 .couponConatiner {
+  display: flex;
   width: 65%;
 }
 /* Media Queries for Mobile */
@@ -429,7 +430,7 @@
   }
 
   .couponDiscountContainer .label > div {
-    width: 100%;
+    width: 80%;
   }
 
   .couponDiscountContainer .couponConatiner {

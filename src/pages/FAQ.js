@@ -302,7 +302,6 @@ const translations = {
     },
   },
 };
-
 function FAQ() {
   const [activeSection, setActiveSection] = useState("shipping");
   const { language } = useLanguage();
@@ -337,12 +336,7 @@ function FAQ() {
               <h2>{t.shippingContent.productInfo}</h2>
               <p>{t.shippingContent.productInfoContent}</p>
               <h2>{t.shippingContent.customerCenter}</h2>
-              <p>
-                {t.shippingContent.customerCenterContent.replace(
-                  /\n/g,
-                  "<br />"
-                )}
-              </p>
+              <p>{t.shippingContent.customerCenterContent}</p>
               <h2>{t.shippingContent.exchangeRefund}</h2>
               <p>{t.shippingContent.exchangeRefundContent}</p>
               <h2>{t.shippingContent.cancelExchangeNotPossible}</h2>
@@ -362,19 +356,9 @@ function FAQ() {
           <div className={styles.customerServiceContent}>
             <h1>{t.customerServiceContent.header}</h1>
             <h3>{t.customerServiceContent.consultationGuide}</h3>
-            <b>
-              {t.customerServiceContent.consultationGuideContent.replace(
-                /\n/g,
-                "<br />"
-              )}
-            </b>
+            <b>{t.customerServiceContent.consultationGuideContent}</b>
             <h2>{t.customerServiceContent.customerCenter}</h2>
-            <p>
-              {t.customerServiceContent.customerCenterContent.replace(
-                /\n/g,
-                "<br />"
-              )}
-            </p>
+            <p>{t.customerServiceContent.customerCenterContent}</p>
           </div>
         )}
         {activeSection === "faq" && (
@@ -413,7 +397,7 @@ function FAQ() {
                   <strong>{qna.question}</strong>
                   <span>
                     {Array.isArray(qna.answer)
-                      ? qna.answer.join("<br />")
+                      ? qna.answer.join("\n")
                       : qna.answer}
                   </span>
                 </li>
@@ -447,21 +431,9 @@ function FAQ() {
                 <h2>{t.contactContent.headOffice.title}</h2>
               </div>
               <div className={styles.contactRightColumn}>
-                <p>
-                  {t.contactContent.headOffice.address.replace(/\n/g, "<br />")}
-                </p>
-                <p>
-                  {t.contactContent.headOffice.businessInquiry.replace(
-                    /\n/g,
-                    "<br />"
-                  )}
-                </p>
-                <p>
-                  {t.contactContent.headOffice.recruitmentInquiry.replace(
-                    /\n/g,
-                    "<br />"
-                  )}
-                </p>
+                <p>{t.contactContent.headOffice.address}</p>
+                <p>{t.contactContent.headOffice.businessInquiry}</p>
+                <p>{t.contactContent.headOffice.recruitmentInquiry}</p>
               </div>
             </div>
             <div className={styles.contactWrapper}>
@@ -469,18 +441,8 @@ function FAQ() {
                 <h2>{t.contactContent.customerCenter.title}</h2>
               </div>
               <div className={styles.contactRightColumn}>
-                <p>
-                  {t.contactContent.customerCenter.address.replace(
-                    /\n/g,
-                    "<br />"
-                  )}
-                </p>
-                <p>
-                  {t.contactContent.customerCenter.operationTime.replace(
-                    /\n/g,
-                    "<br />"
-                  )}
-                </p>
+                <p>{t.contactContent.customerCenter.address}</p>
+                <p>{t.contactContent.customerCenter.operationTime}</p>
               </div>
             </div>
           </div>

@@ -2,33 +2,49 @@ import React, { useRef, useState, useCallback, useEffect } from "react";
 import "../css/ZoomImage.css";
 import imageSrc from "../img/Img1.jpg"; // 이미지 경로를 import
 
-const ZoomImage = ({ zoomRate, containerWidth, containerHeight, children }) => {
+const ZoomImage = ({ zoomRate, children }) => {
   const [cursor, setCursor] = useState({ cursorX: 0, cursorY: 0 });
   const [isHover, setIsHover] = useState(false);
   const containerRef = useRef();
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
   const handleMouseMove = useCallback(
     (e) => {
-      const rect = containerRef.current.getBoundingClientRect();
-      const cursorX = e.clientX - rect.left;
-      const cursorY = e.clientY - rect.top;
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const cursorX = e.clientX - rect.left;
+        const cursorY = e.clientY - rect.top;
 
-      setCursor({ cursorX, cursorY });
+        setCursor({ cursorX, cursorY });
+      }
     },
     [zoomRate]
   );
 
   useEffect(() => {
-    if (containerRef.current) {
-      const { width, height } = containerRef.current.getBoundingClientRect();
-      containerRef.current.style.backgroundSize = `${width}px ${height}px`;
-    }
+    const updateContainerSize = () => {
+      if (containerRef.current) {
+        const { width, height } = containerRef.current.getBoundingClientRect();
+        setContainerSize({ width, height });
+      }
+    };
+
+    const handleImageLoad = () => {
+      updateContainerSize();
+      window.addEventListener("resize", updateContainerSize);
+    };
+
+    const img = new Image();
+    img.src = imageSrc;
+    img.onload = handleImageLoad;
+
+    return () => window.removeEventListener("resize", updateContainerSize);
   }, [zoomRate]);
 
   const cursorStyle = {
     position: "absolute",
-    width: `${containerWidth}px`,
-    height: `${containerHeight}px`,
+    width: `${containerSize.width}px`,
+    height: `${containerSize.height}px`,
     left: 0,
     top: 0,
     zIndex: 999,
@@ -36,8 +52,8 @@ const ZoomImage = ({ zoomRate, containerWidth, containerHeight, children }) => {
       ? window.getComputedStyle(containerRef.current).backgroundImage
       : `url(${imageSrc})`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: `${containerWidth * zoomRate}px ${
-      containerHeight * zoomRate
+    backgroundSize: `${containerSize.width * zoomRate}px ${
+      containerSize.height * zoomRate
     }px`,
     backgroundPosition: `-${cursor.cursorX * (zoomRate - 1)}px -${
       cursor.cursorY * (zoomRate - 1)
@@ -55,12 +71,12 @@ const ZoomImage = ({ zoomRate, containerWidth, containerHeight, children }) => {
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       style={{
-        width: containerWidth,
-        height: containerHeight,
+        width: "100%",
+        height: "100%",
         overflow: "hidden",
         position: "relative",
         backgroundImage: `url(${imageSrc})`, // 이미지 경로를 설정
-        backgroundSize: "fill", // 이미지를 컨테이너에 맞추어 조정
+        backgroundSize: "cover", // 이미지를 컨테이너에 맞추어 조정
         backgroundPosition: "center",
       }}
     >

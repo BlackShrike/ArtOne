@@ -1,40 +1,28 @@
+/* 기본 스타일 */
 .item {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  align-items: flex-start;
 }
-.homeContainer{
+
+.homeContainer {
   display: flex;
   flex-direction: column;
 }
-.newGrid {
-  order: 2; /* 기본 순서 */
-}
 
-.bestGrid {
-  order: 1; /* 기본 순서 */
-}
-
-.asymmetricGridContainer {
-  order: 3;
-}
-
-.symmetricGridContainer {
-  order: 4;
-}
-
-.textContainer {
-  order: 5;
-}
 .homeContainer h2 {
   display: flex;
   justify-content: center;
 }
-
+section{
+  padding-bottom: 30px;
+}
+/* 홈 그리드 */
 .homeGrid {
   display: grid;
-  gap: 5px;
+  gap: 15px;
   grid-template-columns: repeat(12, 1fr); /* 12 columns */
   grid-template-rows: repeat(7, 100px); /* 7 rows */
   grid-template-areas:
@@ -65,6 +53,7 @@
 .greyBox {
   width: 100%;
   height: 80%;
+  min-height: 100px;
   background-color: #ddd;
   background-size: cover;
   transition: background-size 0.5s ease, background-position 0.5s ease;
@@ -72,10 +61,10 @@
 }
 
 .smallGreyBox {
-  width: 80px;
-  min-width: 80px;
-  margin-right: 10px;
-  height: 100px;
+  width: 20%;
+  height: 90%;
+  min-width: 100px;
+  min-height: 50px;
   background-color: #ddd;
   background-size: cover;
   transition: background-size 0.5s ease, background-position 0.5s ease;
@@ -92,18 +81,19 @@
   height: 20%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .largeItem .text p:first-child {
   font-size: 24px; /* First line larger */
   font-weight: 700;
-  margin: 0;
+  margin: 5px 0px;
 }
 
 .largeItem .text p:last-child {
   font-size: 14px; /* Second line smaller */
-  margin: 0;
+  font-weight: 400;
+  margin: 5px 0px;
 }
 
 .mediumItem1 {
@@ -117,18 +107,15 @@
 .mediumItem1, .mediumItem2 {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 .mediumItem1 .text, .mediumItem2 .text {
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin-top: 15px;
 }
 
 .mediumItem1 .text p:first-child, .mediumItem2 .text p:first-child {
+  white-space: nowrap;
   font-size: 16px; /* First line larger */
   font-weight: 700;
   margin: 0;
@@ -141,97 +128,73 @@
 
 .smallItemLeft1 {
   grid-area: small-left1;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemLeft2 {
   grid-area: small-left2;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight1 {
   grid-area: small-right1;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight2 {
   grid-area: small-right2;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight3 {
   grid-area: small-right3;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight4 {
   grid-area: small-right4;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight5 {
   grid-area: small-right5;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight6 {
   grid-area: small-right6;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight7 {
   grid-area: small-right7;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight8 {
   grid-area: small-right8;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight9 {
   grid-area: small-right9;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
 .smallItemRight10 {
   grid-area: small-right10;
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
 }
 
@@ -241,8 +204,13 @@
   margin-right: 10px;
 }
 
+/* 베스트 섹션 */
+.bestSection {
+  margin-top: 40px;
+}
+
 .bestGrid {
-  display: grid;
+  display: grid !important;
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
 }
@@ -276,7 +244,7 @@
 
 .centeredHeading {
   text-align: center;
-  margin: 20px 0;
+  margin: 30px 0px;
 }
 
 .bestGreyBox {
@@ -284,7 +252,7 @@
 }
 
 /* 새로운 그리드 섹션 */
-.newGrid {
+.newGridSection {
   margin-top: 40px;
   text-align: center;
 }
@@ -327,10 +295,12 @@
 .newGridItem6 { grid-area: item6; }
 .newGridItem7 { grid-area: item7; }
 
-/* New Grid for 비대칭 그리드 */
-.asymmetricGrid {
+/* 비대칭 그리드 섹션 */
+.asymmetricGridSection {
   margin-top: 40px;
   text-align: center;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .asymmetricGrid {
@@ -359,8 +329,8 @@
 .gridItem2 { grid-area: item2; }
 .gridItem3 { grid-area: item3; }
 
-/* New Grid for 대칭 2열 그리드 */
-.symmetricGridContainer {
+/* 대칭 그리드 섹션 */
+.symmetricGridSection {
   text-align: center;
   margin-top: 40px;
   font-size: 18px;
@@ -403,12 +373,10 @@
   font-size: 14px;
 }
 
-/* 텍스트 스타일 */
-.asymmetricGridContainer, .symmetricGridContainer, .textContainer {
-  text-align: center;
+/* 텍스트 섹션 */
+.textContainerSection {
   margin-top: 40px;
-  font-size: 18px;
-  font-weight: bold;
+  text-align: center;
 }
 
 .textContainer p {
@@ -430,80 +398,80 @@
 
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
-  .newGrid {
-    order: 3; /* BestGrid보다 밑으로 이동 */
+  section{
+    padding-bottom: 0px;
   }
-
-  .bestGrid {
-    order: 2; /* BestGrid가 위로 이동 */
-  }
-  .sliderContainer{
+  .sliderContainer {
     width: 100%;
     padding: 0;
   }
+
   .homeGridWrapper {
     margin: auto;
   }
 
-  .homeGrid {
+  .homeGridMobile {
+    width: 80% !important;
+    display: grid !important;
+    gap: 5px;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 200px);
+    grid-template-rows: repeat(6, 133px);
     grid-template-areas:
+      "large"
+      "large"
       "large"
       "small-right1"
       "small-right2"
       "small-right3";
   }
 
-  .homeGrid > div {
-    display: none;
-  }
-
-  .homeGrid .largeItem,  .homeGrid .smallItemRight1 , .homeGrid .smallItemRight2, .homeGrid .smallItemRight3 {
+  .homeGridMobile .largeItem,
+  .homeGridMobile .smallItemRight1,
+  .homeGridMobile .smallItemRight2,
+  .homeGridMobile .smallItemRight3 {
     display: flex;
   }
 
-   .homeGrid .smallItemRight1, .homeGrid .smallItemRight2, .homeGrid .smallItemRight3{
+  .homeGridMobile .smallItemRight1,
+  .homeGridMobile .smallItemRight2,
+  .homeGridMobile .smallItemRight3 {
+    display: flex;
     flex-direction: row;
     align-items: center;
     text-align: left;
-  }
-
-   .homeGrid .smallItemRight1 .text , .homeGrid .smallItemRight2 .homeGrid .text ,.smallItemRight3 .text {
-    max-width: 140px; /* 텍스트의 최대 너비를 지정 */
-  }
-  /* 각 아이템의 첫 번째 텍스트 크기를 줄이기 위한 스타일 추가 */
-.homeGrid .smallItemRight1 p:first-child, 
-.homeGrid .smallItemRight2 p:first-child, 
-.homeGrid .smallItemRight3 p:first-child {
-    font-size: 12px; /* 원하는 크기로 조정 */
+    justify-content: space-around;
 }
-  .item p {
-    white-space: nowrap;
+
+  .homeGridMobile .smallItemRight1 .text,
+  .homeGridMobile .smallItemRight2 .text,
+  .homeGridMobile .smallItemRight3 .text {
+    max-width: 140px;
   }
 
-  .homeGrid .smallGreyBox {
+  .homeGridMobile .smallGreyBox {
     width: 30%;
   }
-  .largeItem{
+
+  .largeItem {
     width: 100%;
     border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
   }
+
   .largeItem .text {
+    white-space: wrap;
     margin-top: 20px;
   }
 
   .largeItem .text p:first-child {
-    font-size: 16px; /* First line larger */
+    font-size: 16px;
     font-weight: 700;
-    margin: 0;
+    padding-bottom: 20px;
   }
 
   .largeItem .text p:last-child {
     display: none;
   }
-
   .bestGrid {
     display: flex;
     flex-direction: column;
@@ -599,7 +567,9 @@
     display: none;
   }
 
-  .gridItem1, .gridItem2, .gridItem3 {
+  .gridItem1,
+  .gridItem2,
+  .gridItem3 {
     height: 300px;
   }
 
