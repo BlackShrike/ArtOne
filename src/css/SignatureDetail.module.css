@@ -160,7 +160,7 @@
 .innerImagePlaceholder {
   width: 80%;
   height: 80%;
-  background-color: #bbb;
+  background-color: #ccc;
 }
 .reviews {
   margin-top: 20px;
@@ -381,10 +381,10 @@
 .imageUploadPlaceholder {
   width: 100px;
   height: 100px;
-  background-color: #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid #ccc;
 }
 
 .submitButton {

@@ -14,10 +14,7 @@
 }
 
 .orderHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  display: none
 }
 
 .orderContent {
@@ -58,7 +55,6 @@
 .discountCodeInput {
   
   padding: 10px;
-  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
@@ -123,7 +119,6 @@
 .checkboxContainer {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
   box-sizing: border-box;
 }
 
@@ -137,9 +132,9 @@
 }
 .doubleCheckbox {
   position: relative;
-  left: 50%;
+  left: 80%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   margin-right: 10px;
   box-sizing: border-box;
   white-space: nowrap;
@@ -179,7 +174,7 @@
   box-sizing: border-box;
 }
 
-.paymentHeader .redText {
+.redText {
   color: red;
   box-sizing: border-box;
 }
@@ -188,7 +183,6 @@
   width: 100%;
   padding: 20px;
   border: 1px solid #ccc;
-  background-color: #f9f9f9;
   box-sizing: border-box;
 }
 
@@ -197,11 +191,16 @@
   font-weight: bold;
   margin-bottom: 10px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 }
 
 .orderSummary p {
+  font-size: 14px;
   margin: 5px 0;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 }
 
 .orderSummary label {
@@ -209,17 +208,23 @@
   align-items: center;
   margin-bottom: 20px;
   box-sizing: border-box;
+  white-space: nowrap;
+  font-size: 12px;
 }
 
 .orderSummary input {
-  margin-right: 10px;
+  margin-right: 5px;
   box-sizing: border-box;
 }
-
+.totalShipping {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
 .paymentButtons {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  white-space: nowrap;
 }
 
 .payButton {
@@ -250,10 +255,10 @@
 }
 
 .smallButtons .payButton {
-  width: 32%;
-  padding: 10px;
+  width: 30%;
+  padding: 10px 5px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 10px;
 }
 
 .payButton.kakaopay {
@@ -297,15 +302,19 @@
 .emailInputContainer {
   width: 65%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
 }
-
-.emailInput {
-  width: 65%;
-  box-sizing: border-box;
+.emailInputContainer input {
+ width: 45%;
 }
-
+.emailInputContainer .emailInput1  {
+  width: 50%;
+}
+.emailInputContainer .emailInput2{
+  width: 35%;
+}
 .emailSelect {
   position: relative;
   left: 35%;
@@ -365,38 +374,23 @@
   }
 
   .orderSection .label {
-    flex-direction: column;
+    flex-direction: row;
+    white-space: nowrap;
     align-items: flex-start;
     margin-bottom: 10px;
   }
-
-  .orderSection input,
-  .orderSection select,
-  .zoneCodeInput,
-  .discountCodeInput,
-  .emailInputContainer,
-  .phoneNumberContainer,
-  .addressSearchContainer {
-    width: 100%;
-    left: 0;
+  .emailInputContainer input{
+    width: 60%;
   }
+  
   .addressSearchContainer {
     margin-bottom: 10px;
   }
-  .addressSearchButton,
-  .couponButton,
-  .discountCodeButton {
-    width: 100%;
-    margin: 0;
-  }
+ 
   .doubleCheckbox{
     left: 50%;
   }
-  .smallCheckbox {
-    
-    position: static;
-    margin-bottom: 10px;
-  }
+  
   .smallCheckbox input{
     width: auto;
   }
@@ -406,19 +400,16 @@
 
   .orderSummary {
     padding: 10px;
+    border: none;
   }
-
+  .paymentHeader .checkoutStep {
+    display: none;
+  }
   .paymentButtons {
     flex-direction: column;
   }
 
-  .payButton,
-  .smallButtons .payButton {
-    width: 100%;
-    margin: 5px 0;
-    padding: 10px;
-    font-size: 16px;
-  }
+ 
   /* 쿠폰/할인코드 섹션에서 라벨이 인풋과 동일한 줄을 가지도록 설정 */
   .couponDiscountContainer .label {
     display: flex;

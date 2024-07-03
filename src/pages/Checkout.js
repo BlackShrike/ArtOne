@@ -92,7 +92,7 @@ function Checkout() {
                 {t.selectAll} ({selectedItems.length}/{items.length})
               </span>
             </label>
-            <label>
+            <label className={styles.chooseDelete}>
               <input type="checkbox" />
               <span>{t.deleteSelected}</span>
             </label>

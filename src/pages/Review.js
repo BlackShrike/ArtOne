@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../css/Review.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
@@ -38,6 +38,13 @@ const reviews = Array.from({ length: 20 }).map((_, index) => ({
 function Review() {
   const { language } = useLanguage();
   const t = translations[language];
+  const [currentPage, setCurrentPage] = useState(1);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  const itemsPerPage = 50;
+  const totalItems = 200;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   return (
     <div className={styles.reviewPage}>
@@ -74,14 +81,35 @@ function Review() {
           </div>
         ))}
       </div>
+
       <div className={styles.pagination}>
-        <button className={styles.pageArrow}>{"<"}</button>
-        {Array.from({ length: 9 }).map((_, index) => (
-          <button key={index} className={styles.pageNumber}>
+        <button
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+          disabled={currentPage === 1}
+        >
+          {"<"}
+        </button>
+        {Array.from({ length: totalPages }).map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.pageNumber} ${
+              currentPage === index + 1 ? styles.activePage : ""
+            }`}
+            onClick={() => handlePageChange(index + 1)}
+          >
             {index + 1}
           </button>
         ))}
-        <button className={styles.pageArrow}>{">"}</button>
+        <button
+          className={styles.pageArrow}
+          onClick={() =>
+            handlePageChange(Math.min(totalPages, currentPage + 1))
+          }
+          disabled={currentPage === totalPages}
+        >
+          {">"}
+        </button>
       </div>
     </div>
   );

@@ -26,11 +26,11 @@
 }
 
 .slick-prev {
-  left: 10px;
+  left: -40px;
 }
 
 .slick-next {
-  right: 10px;
+  right: -40px;
 }
 
 /* 페이지네이션 */
@@ -39,7 +39,8 @@
   display: flex !important;
   align-items: center;
   justify-content: center;
-  padding-bottom: 20px;
+  font-weight: 200;
+  height: 25px;
 }
 
 .slick-dots li {
@@ -59,15 +60,14 @@
 
 /* 현재 페이지 번호만 보이게 하기 */
 .slick-dots .slick-active {
-  margin-right: 20px;
+  width: 40px;
   display: block;
   white-space: nowrap;
 }
 
 /* 페이지네이션 화살표 스타일링 */
 .slick-arrow {
-  display: block !important;
-  font-size: 1.5rem;
+  display: block !important ;
   cursor: pointer;
   user-select: none;
 }
@@ -77,4 +77,10 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+@media screen and (max-width: 768px){
+  .slick-prev,
+  .slick-next {
+    display: none !important;
+  }
 }

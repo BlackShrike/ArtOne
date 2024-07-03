@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../css/Business.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
 import { FaCartPlus } from "react-icons/fa";
@@ -28,6 +28,11 @@ const translations = {
 function Business() {
   const { language } = useLanguage();
   const t = translations[language];
+  const [currentPage, setCurrentPage] = useState(1); // Add state for current page
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className={styles.gridPage}>
@@ -55,13 +60,29 @@ function Business() {
         ))}
       </div>
       <div className={styles.pagination}>
-        <button className={styles.pageArrow}>{"<"}</button>
+        <button
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+        >
+          {"<"}
+        </button>
         {Array.from({ length: 9 }).map((_, index) => (
-          <button key={index} className={styles.pageNumber}>
+          <button
+            key={index}
+            className={`${styles.pageNumber} ${
+              currentPage === index + 1 ? styles.activePage : ""
+            }`}
+            onClick={() => handlePageChange(index + 1)}
+          >
             {index + 1}
           </button>
         ))}
-        <button className={styles.pageArrow}>{">"}</button>
+        <button
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(Math.min(9, currentPage + 1))}
+        >
+          {">"}
+        </button>
       </div>
     </div>
   );

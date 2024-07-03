@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "../css/Home.module.css";
 import Slider from "react-slick";
 import { FaCartPlus } from "react-icons/fa";
@@ -37,9 +37,9 @@ const translations = {
     symmetricGridHeader:
       "열정적으로 작품 세계를 풀어가는 작가분들의 원화 작품입니다.",
     moreText: "더보기",
-    symmetricItem: "작품소개작품소개",
+    symmetricItem: "작품설명\n작품설명",
     textContainer:
-      "아름다움을 좋아하는 분들에게 감사를 전하기 좋은 날 더불어 좋은 작품과 함께하세요 :)",
+      "아름다움을 좋아하는 분들에게 감사를 전하기 좋은 날\n더불어 좋은 작품과 함께하세요 :)",
     smallItemsLeft: [
       {
         textLines: ["툴프레스 ToolPress", "[PB ONLY] Print Bakery 한지 엽서"],
@@ -192,12 +192,33 @@ function Home() {
   const [slideIndex, setSlideIndex] = useState(0);
   const sliderRef = useRef(null);
   const { language } = useLanguage();
-
+  const navigate = useNavigate();
+  const [symmetricGridHeader, setSymmetricGridHeader] = useState(
+    translations[language].symmetricGridHeader
+  );
+  const handleMoreTextClick = () => {
+    navigate("/Original");
+  };
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth <= 768) {
+        setSymmetricGridHeader("오리지널 원화");
+      } else {
+        setSymmetricGridHeader(translations[language].symmetricGridHeader);
+      }
+    };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [language]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setSymmetricGridHeader("오리지널 원화");
+    } else {
+      setSymmetricGridHeader(translations[language].symmetricGridHeader);
+    }
+  }, [isMobile, language]);
 
   const mainSettings = {
     dots: true,
@@ -252,30 +273,77 @@ function Home() {
         onClick={() => sliderRef.current.slickNext()}
       />
     ),
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          centerMode: true,
+        },
+      },
+    ],
   };
 
   const bestSettings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 1000,
-    slidesToShow: 5,
+    slidesToShow: 7.5,
     slidesToScroll: 1,
     arrows: true,
     autoplay: false,
     centerMode: false,
     centerPadding: "0px",
+    beforeChange: (current, next) => setSlideIndex(next),
+
     prevArrow: (
-      <Arrow className={`${styles.arrow} ${styles.prevArrow}`} icon="❮" />
+      <Arrow
+        className={`${styles.arrow} ${styles.prevArrow}`}
+        icon="❮"
+        onClick={() => sliderRef.current.slickPrev()}
+      />
     ),
     nextArrow: (
-      <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
+      <Arrow
+        className={`${styles.arrow} ${styles.nextArrow}`}
+        icon="❯"
+        onClick={() => sliderRef.current.slickNext()}
+      />
     ),
     responsive: [
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          appendDots: (dots) => (
+            <div>
+              <ul
+                style={{
+                  margin: "0px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <li
+                  className="slick-arrow"
+                  onClick={() => sliderRef.current.slickPrev()}
+                  style={{ cursor: "pointer", display: "none" }}
+                >
+                  <span className="arrow">❮</span>
+                </li>
+                {dots}
+                <li
+                  className="slick-arrow"
+                  onClick={() => sliderRef.current.slickNext()}
+                  style={{ cursor: "pointer", display: "none" }}
+                >
+                  <span className="arrow">❯</span>
+                </li>
+              </ul>
+            </div>
+          ),
+          customPaging: (i) => <div>{i + 1} / 8</div>,
+          slidesToShow: 2.5,
+          slidesToScroll: 2,
         },
       },
     ],
@@ -285,7 +353,7 @@ function Home() {
     dots: true,
     infinite: true,
     speed: 1000,
-    slidesToShow: 1,
+    slidesToShow: 1.5,
     slidesToScroll: 1,
     arrows: true,
     autoplay: false,
@@ -297,14 +365,6 @@ function Home() {
     nextArrow: (
       <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
     ),
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          variableWidth: true,
-        },
-      },
-    ],
   };
   const homeMainDesktop = Array.from({ length: 8 }, (_, index) => (
     <div className={styles.homeGridWrapper} key={index}>
@@ -451,12 +511,12 @@ function Home() {
         </div>
       </section>
       <section className={styles.symmetricGridSection}>
-        <p>{translations[language].symmetricGridHeader}</p>
-        <Link to="/Original" className={styles.moreText}>
+        <p>{symmetricGridHeader}</p>
+        <button className={styles.moreText} onClick={handleMoreTextClick}>
           {translations[language].moreText}
-        </Link>
+        </button>
         {isMobile ? (
-          <Slider className={styles.specificSlider} {...symmetricSettings}>
+          <Slider {...symmetricSettings}>
             {Array.from({ length: 6 }, (_, index) => (
               <div key={index} className={styles.symmetricGridItem}>
                 <div className={styles.greyBox}></div>

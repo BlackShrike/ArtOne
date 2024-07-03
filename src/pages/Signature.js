@@ -130,9 +130,7 @@ function Signature() {
           <span
             key={index}
             className={`${styles.pageNumber} ${
-              currentPage === index + 1
-                ? styles["signature-page-number-selected"]
-                : ""
+              currentPage === index + 1 ? styles.activePage : ""
             }`}
             onClick={() => handlePageChange(index + 1)}
           >

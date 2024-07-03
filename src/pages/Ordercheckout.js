@@ -27,9 +27,9 @@ const translations = {
     discountCode: "할인코드",
     orderSummary: "주문 예상 금액",
     totalProductPrice: "총 상품금액",
-    totalShipping: "총 배송비",
-    totalDiscount: "총 할인금액",
-    totalAmount: "합계",
+    totalShipping: "총 배송",
+    totalDiscount: "총 할인",
+    totalAmount: "총 주문금액",
     agreeTerms: "본인은 웹사이트 이용 약관을(를) 읽었으며 이에 동의합니다",
     cardPayment: "카드 결제",
     kakaoPay: "카카오페이 결제",
@@ -168,13 +168,13 @@ function OrderCheckout() {
               <div className={styles.emailInputContainer}>
                 <input
                   type="text"
-                  className={styles.emailInput}
+                  className={styles.emailInput1}
                   placeholder={t.email}
                 />
                 <span>@</span>
                 <input
                   type="text"
-                  className={styles.emailInput}
+                  className={styles.emailInput2}
                   placeholder={emailDomain}
                   disabled={emailDomain !== "custom"}
                 />
@@ -298,14 +298,29 @@ function OrderCheckout() {
       </div>
       <div className={styles.paymentContainer}>
         <div className={styles.paymentHeader}>
-          <span className={styles.checkoutStep}>{t.checkoutStep}</span>
+          <span className={styles.checkoutStep}>
+            {t.checkoutStep.split("→")[0]}→
+            <span className={styles.redText}>
+              {t.checkoutStep.split("→")[1]}
+            </span>
+            →{t.checkoutStep.split("→")[2]}
+          </span>
         </div>
         <div className={styles.orderSummary}>
           <h3>{t.orderSummary}</h3>
-          <p>{`${t.totalProductPrice}: 120,000원`}</p>
-          <p>{`${t.totalShipping}: 0원`}</p>
-          <p>{`${t.totalDiscount}: 0원`}</p>
-          <h3>{`${t.totalAmount}: 120,000원`}</h3>
+          <p>
+            {`${t.totalProductPrice}`} <span>120,000원</span>
+          </p>
+          <p>
+            {`${t.totalDiscount}`} <span className={styles.redText}>- 0원</span>
+          </p>
+          <p className={styles.totalShipping}>
+            {`${t.totalShipping}`}
+            <span>+ 0원</span>
+          </p>
+          <h3>
+            {`${t.totalAmount}`} : <span> 120,000원</span>
+          </h3>
           <label>
             <input type="checkbox" className={styles.termsCheckbox} />
             <span>{t.agreeTerms}</span>

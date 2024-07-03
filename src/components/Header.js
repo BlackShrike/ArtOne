@@ -70,7 +70,9 @@ function Header({ isLoggedIn, onLogout }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showMobileSignatureMenu, setShowMobileSignatureMenu] = useState(false);
   const [showMobileOriginalMenu, setShowMobileOriginalMenu] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const { language, toggleLanguage } = useLanguage(); // Use language context
 
   const handleNavigate = (path) => {
@@ -83,6 +85,17 @@ function Header({ isLoggedIn, onLogout }) {
     setShowMobileMenu(false); // Close mobile menu after navigation
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const handleSearch = () => {
+    if (searchTerm) {
+      navigate(`/search-results?query=${searchTerm}`);
+    }
+  };
   const signatureItems = [
     translations[language].all,
     translations[language].person,
@@ -107,76 +120,97 @@ function Header({ isLoggedIn, onLogout }) {
   return (
     <header className={styles.header}>
       <section className={styles.headerTop}>
-        <h1 onClick={() => handleNavigate("/")}>ARTKO</h1>
-        <input
-          className={`${styles.searchInput} ${styles.desktopOnly}`}
-          placeholder="아티스트, 장르, 테마, 스타일 등을 입력해보세요"
-        />
-        <nav className={styles.headerLinks}>
-          <span onClick={() => handleNavigate("/checkout")}>
-            <PiShoppingCart />
-          </span>
-          {isLoggedIn ? (
-            <>
+        <div className={styles.headerLeft}>
+          <h1 onClick={() => handleNavigate("/")}>ARTKO</h1>
+          <input
+            type="text"
+            className={`${styles.searchInput} ${styles.desktopOnly}`}
+            placeholder="아티스트, 장르, 테마, 스타일 등을 입력해보세요"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+        <div className={styles.headerRight}>
+          <nav className={styles.headerLinks}>
+            <span onClick={() => handleNavigate("/checkout")}>
+              <PiShoppingCart />
+            </span>
+            {isLoggedIn ? (
+              <>
+                <span
+                  className={styles.desktopOnly}
+                  onClick={() => handleNavigate("/mypage")}
+                >
+                  {translations[language].mypage}
+                </span>
+                <span
+                  onClick={onLogout}
+                  className={`${styles.logoutButton} ${styles.desktopOnly}`}
+                >
+                  {translations[language].logout}
+                </span>
+              </>
+            ) : (
               <span
                 className={styles.desktopOnly}
-                onClick={() => handleNavigate("/mypage")}
+                onClick={() => handleNavigate("/login")}
               >
-                {translations[language].mypage}
+                {translations[language].login}
               </span>
+            )}
+            {!isLoggedIn && (
               <span
-                onClick={onLogout}
-                className={`${styles.logoutButton} ${styles.desktopOnly}`}
+                className={styles.desktopOnly}
+                onClick={() => handleNavigate("/signup")}
               >
-                {translations[language].logout}
+                {translations[language].signup}
               </span>
-            </>
-          ) : (
-            <span
-              className={styles.desktopOnly}
-              onClick={() => handleNavigate("/login")}
-            >
-              {translations[language].login}
+            )}
+            <span className={styles.desktopOnly} onClick={toggleLanguage}>
+              KR / EN
             </span>
-          )}
-          {!isLoggedIn && (
-            <span
-              className={styles.desktopOnly}
-              onClick={() => handleNavigate("/signup")}
-            >
-              {translations[language].signup}
-            </span>
-          )}
-          <span className={styles.desktopOnly} onClick={toggleLanguage}>
-            KR / EN
+          </nav>
+          <div className={styles.artMembershipBox}>
+            <p>아트 멤버십 혜택</p>
+          </div>
+        </div>
+
+        <div className={styles.hamburgerMenu}>
+          <FaBars />
+          <span
+            className={styles.mobileOnly}
+            onClick={() => handleNavigate("/checkout")}
+          >
+            <PiShoppingCart />
           </span>
           <span
             className={styles.mobileOnly}
             onClick={() => handleNavigate("/search")}
           >
-            <FaSearch />
+            <FaSearch onClick={() => setShowMobileMenu(!showMobileMenu)} />
           </span>
-        </nav>
-        <div
-          className={styles.hamburgerMenu}
-          onClick={() => setShowMobileMenu(!showMobileMenu)}
-        >
-          {showMobileMenu ? <FaBars /> : <FaBars />}
         </div>
       </section>
       <section className={styles.headerBottom}>
-        <span onClick={() => handleNavigate("/promotion")}>
-          <span className={styles.link}>
-            {translations[language].promotion}
-          </span>
+        <span
+          onClick={() => handleNavigate("/promotion")}
+          className={`${styles.link} ${
+            location.pathname === "/promotion" ? styles.active : ""
+          }`}
+        >
+          {translations[language].promotion}
         </span>
         <span
           onMouseEnter={() => setShowSignatureMenu(true)}
           onMouseLeave={() => setShowSignatureMenu(false)}
+          className={styles.link}
         >
           <span
             onClick={() => handleNavigate("/signature")}
-            className={styles.link}
+            className={`${styles.link} ${
+              location.pathname === "/signature" ? styles.active : ""
+            }`}
           >
             {translations[language].signature}
           </span>
@@ -196,10 +230,13 @@ function Header({ isLoggedIn, onLogout }) {
         <span
           onMouseEnter={() => setShowOriginalMenu(true)}
           onMouseLeave={() => setShowOriginalMenu(false)}
+          className={styles.link}
         >
           <span
             onClick={() => handleNavigate("/original")}
-            className={styles.link}
+            className={`${styles.link} ${
+              location.pathname === "/original" ? styles.active : ""
+            }`}
           >
             {translations[language].original}
           </span>
@@ -217,19 +254,36 @@ function Header({ isLoggedIn, onLogout }) {
           </div>
         </span>
         <span className={styles.separator}>|</span>
-        <span onClick={() => handleNavigate("/artist")} className={styles.link}>
+        <span
+          onClick={() => handleNavigate("/artist")}
+          className={`${styles.link} ${
+            location.pathname === "/artist" ? styles.active : ""
+          }`}
+        >
           {translations[language].artist}
         </span>
         <span
           onClick={() => handleNavigate("/business")}
-          className={styles.link}
+          className={`${styles.link} ${
+            location.pathname === "/business" ? styles.active : ""
+          }`}
         >
           {translations[language].business}
         </span>
-        <span onClick={() => handleNavigate("/review")} className={styles.link}>
+        <span
+          onClick={() => handleNavigate("/review")}
+          className={`${styles.link} ${
+            location.pathname === "/review" ? styles.active : ""
+          }`}
+        >
           {translations[language].review}
         </span>
-        <span onClick={() => handleNavigate("/faq")} className={styles.link}>
+        <span
+          onClick={() => handleNavigate("/faq")}
+          className={`${styles.link} ${
+            location.pathname === "/faq" ? styles.active : ""
+          }`}
+        >
           {translations[language].faq}
         </span>
       </section>
@@ -307,7 +361,7 @@ function Header({ isLoggedIn, onLogout }) {
               {translations[language].faq}
             </span>
             {isLoggedIn && (
-              <>
+              <div className={styles.mobileMyPage}>
                 <span
                   className={styles.lightFont}
                   onClick={() => handleMyPageNavigate("recentViewed")}
@@ -332,7 +386,7 @@ function Header({ isLoggedIn, onLogout }) {
                 >
                   {translations[language].cart}
                 </span>
-              </>
+              </div>
             )}
             <span className={styles.languageToggle} onClick={toggleLanguage}>
               KR / EN

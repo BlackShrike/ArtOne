@@ -417,27 +417,54 @@ function MyPage({ isLoggedIn }) {
               )}
             </div>
             <div className={styles.membershipBenefits}>
-              <div className={styles.benefit}>
+              <div
+                className={`${styles.benefit} ${
+                  membership === "White" ? styles.selected : ""
+                }`}
+                style={{
+                  color: membership === "White" ? "white" : "black",
+                  backgroundColor:
+                    membership === "White" ? "black" : "transparent",
+                }}
+              >
                 <section className={styles.headSection}>
-                  <h3>{t.white} </h3>
+                  <h3>{t.white}</h3>
                 </section>
                 <section className={styles.contentSection}>
                   <p>구매 누적금액 50만원 이상</p>
                   <p>10% 할인권 제공 (월간 적용금액 15만원 미만)</p>
                 </section>
               </div>
-              <div className={styles.benefit}>
+              <div
+                className={`${styles.benefit} ${
+                  membership === "Cian" ? styles.selected : ""
+                }`}
+                style={{
+                  color: membership === "Cian" ? "white" : "black",
+                  backgroundColor:
+                    membership === "Cian" ? "black" : "transparent",
+                }}
+              >
                 <section className={styles.headSection}>
-                  <h3>{t.cian} </h3>
+                  <h3>{t.cian}</h3>
                 </section>
                 <section className={styles.contentSection}>
                   <p>구매 누적금액 100만원 이상</p>
                   <p>10% 할인권 2장 제공 (월간 적용금액 15만원 미만)</p>
                 </section>
               </div>
-              <div className={styles.benefit}>
+              <div
+                className={`${styles.benefit} ${
+                  membership === "Magenta" ? styles.selected : ""
+                }`}
+                style={{
+                  color: membership === "Magenta" ? "white" : "black",
+                  backgroundColor:
+                    membership === "Magenta" ? "black" : "transparent",
+                }}
+              >
                 <section className={styles.headSection}>
-                  <h3>{t.magenta} </h3>
+                  <h3>{t.magenta}</h3>
                 </section>
                 <section className={styles.contentSection}>
                   <p>구매 누적금액 100만원 이상</p>
@@ -445,9 +472,18 @@ function MyPage({ isLoggedIn }) {
                   <p>생일쿠폰 제공 (10% 할인/적용금액 15만원 미만)</p>
                 </section>
               </div>
-              <div className={styles.benefit}>
+              <div
+                className={`${styles.benefit} ${
+                  membership === "Yellow" ? styles.selected : ""
+                }`}
+                style={{
+                  color: membership === "Yellow" ? "white" : "black",
+                  backgroundColor:
+                    membership === "Yellow" ? "black" : "transparent",
+                }}
+              >
                 <section className={styles.headSection}>
-                  <h3>{t.yellow} </h3>
+                  <h3>{t.yellow}</h3>
                 </section>
                 <section className={styles.contentSection}>
                   <p>구매 누적금액 100만원 이상</p>
@@ -456,9 +492,18 @@ function MyPage({ isLoggedIn }) {
                   <p>상시쿠폰 10% 할인/적용금액 15만원 미만</p>
                 </section>
               </div>
-              <div className={styles.benefit}>
+              <div
+                className={`${styles.benefit} ${
+                  membership === "Black" ? styles.selected : ""
+                }`}
+                style={{
+                  color: membership === "Black" ? "white" : "black",
+                  backgroundColor:
+                    membership === "Black" ? "black" : "transparent",
+                }}
+              >
                 <section className={styles.headSection}>
-                  <h3>{t.black} </h3>
+                  <h3>{t.black}</h3>
                 </section>
                 <section className={styles.contentSection}>
                   <p>구매 누적금액 100만원 이상</p>

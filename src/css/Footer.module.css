@@ -13,6 +13,7 @@
   justify-content: flex-start;
   flex-shrink: 0;
   height: auto;
+  flex:1;
 }
 
 .footerHeader {

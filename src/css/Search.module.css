@@ -8,11 +8,13 @@
   z-index: 1000;
   overflow-y: auto;
 }
-
 .header {
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+  margin: auto;
 }
 
 .closeButton {
@@ -24,62 +26,52 @@
 
 .searchContainer {
   display: flex;
-  padding: 20px 0;
-  border-bottom: 1px solid #ccc;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.searchInputWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
 }
 
 .searchInput {
-  background-color: #eee;
-  flex: 1;
-  padding: 10px;
+  width: 100%;
+  padding: 10px 40px 10px 10px;
   font-size: 16px;
+  background-color: #eee;
   border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 .searchButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 24px;
   cursor: pointer;
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
+  font-size: 16px;
+  color: #666;
 }
 
 .recentSearches,
 .recommendedSearches {
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
-.searchTerms,
-.recommendButtons {
+.searchTerms {
   display: flex;
-  flex-wrap: wrap;
-}
-.searchTerms{
   flex-direction: column;
 }
-.searchTerm,
-.recommendButton {
-  width: 25%;
-  color: #aaa;
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none; /* Remove border for recommendButton */
-  background-color: transparent;
-  font-size: 14px;
-  white-space: nowrap;
-}
-.searchTerm{
-  margin: 5px 20px;
-}
 
-.recommendButton {
-  border: 1px solid #ccc; /* Add border for recommendButton */
-  padding: 5px;
+.searchTerm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:5px;
+  color: #ccc;
 }
 
 .removeButton {
@@ -87,5 +79,20 @@
   border: none;
   font-size: 16px;
   cursor: pointer;
-  margin-left: 10px;
+}
+
+.recommendButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.recommendButton {
+  flex: 1 1 calc(50% - 10px); /* Adjust width to two columns */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+  text-align: center;
 }

@@ -22,8 +22,11 @@
   text-align: right;
   margin-bottom: 20px;
 }
-
+.results-header h2{
+  text-align: center;
+}
 .results-header span {
+  font-weight: 500;
   font-size: 16px;
   color: #333;
 }
@@ -68,6 +71,7 @@
 }
 
 .item-price {
+  font-weight: bold;
   margin-top: 20px;
 }
 
@@ -117,7 +121,7 @@
   }
 
   .item-price {
-    margin-top: 10px;
+    margin-top: 0px;
   }
 
   .cart-icon {

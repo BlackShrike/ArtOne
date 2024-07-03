@@ -147,7 +147,10 @@
 .pageArrow:hover {
   background-color: #f1f1f1;
 }
-
+.activePage {
+  color: red;
+  text-decoration: underline;
+}
 @media (max-width: 768px) {
   .gridContainer {
     grid-template-columns: repeat(2, 1fr); /* Two-column layout for mobile */

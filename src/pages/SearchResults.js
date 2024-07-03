@@ -1,4 +1,5 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import styles from "../css/SearchResults.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
@@ -22,6 +23,8 @@ const translations = {
 function SearchResults() {
   const { language } = useLanguage();
   const t = translations[language];
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query");
 
   const items = Array.from({ length: 50 }).map((_, index) => ({
     id: index,
@@ -36,7 +39,8 @@ function SearchResults() {
         <BackButton />
       </div>
       <div className={styles["results-header"]}>
-        <span>0000 {t.results} 000건</span>
+        <h2>{`${query}`}</h2>
+        <span className={styles["results-count"]}>{`${t.results} 000건`}</span>
       </div>
       <div className={styles["grid-container"]}>
         {items.map((item) => (

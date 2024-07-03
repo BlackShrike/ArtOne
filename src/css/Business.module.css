@@ -71,12 +71,9 @@
   background-color: white;
   cursor: pointer;
 }
-
-.pageNumber:hover,
-.pageArrow:hover {
-  background-color: #f1f1f1;
+.pageNumber.activePage {
+  color: red;
 }
-
 @media (max-width: 768px) {
   .gridContainer {
     grid-template-columns: repeat(2, 1fr); /* Two-column layout for mobile */

@@ -4,7 +4,8 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  align-items: flex-start;
+  white-space: nowrap;
+  align-items: center;
 }
 
 .homeContainer {
@@ -17,25 +18,62 @@
   justify-content: center;
 }
 section{
+  width: 90%;
   padding-bottom: 30px;
+  margin: auto;
+}
+.sliderSection{
+  order: 1;
+}
+.bestSection{
+  order: 3
+}
+.newGridSection {
+  order: 2;
+  margin-top: 40px;
+  text-align: center;
+}
+/* 비대칭 그리드 섹션 */
+.asymmetricGridSection {
+  order: 4;
+  margin-top: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+/* 대칭 그리드 섹션 */
+.symmetricGridSection {
+  order: 5;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 텍스트 섹션 */
+.textContainerSection {
+  order: 6;
+  margin-top: 40px;
+  text-align: center;
+  white-space: pre-line;
 }
 /* 홈 그리드 */
 .homeGrid {
   display: grid;
-  gap: 15px;
+  gap: 5px;
   grid-template-columns: repeat(12, 1fr); /* 12 columns */
   grid-template-rows: repeat(7, 100px); /* 7 rows */
   grid-template-areas:
-    "large large large large large large /medium1 medium1 medium1 /medium2 medium2 medium2"
-    "large large large large large large/ medium1 medium1 medium1 /medium2 medium2 medium2"
-    "large large large large large large /medium1 medium1 medium1 /medium2 medium2 medium2"
-    "large large large large large large/ small-right1 small-right1 small-right1 /small-right6 small-right6 small-right6"
-    "large large large large large large /small-right2 small-right2 small-right2/ small-right7 small-right7 small-right7"
-    "large large large large large large/ small-right3 small-right3 small-right3/ small-right8 small-right8 small-right8"
-    "small-left1 small-left1 small-left1/ small-left1 small-left1 small-left1 small-right4 small-right4 small-right4/ small-right9 small-right9 small-right9"
-    "small-left2 small-left2 small-left2 /small-left2 small-left2 small-left2 small-right5 small-right5 small-right5 /small-right10 small-right10 small-right10";
+    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
+    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
+    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
+    "large large large large large large small-right1 small-right1 small-right1 small-right6 small-right6 small-right6"
+    "large large large large large large small-right2 small-right2 small-right2 small-right7 small-right7 small-right7"
+    "large large large large large large small-right3 small-right3 small-right3 small-right8 small-right8 small-right8"
+    "small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-right4 small-right4 small-right4 small-right9 small-right9 small-right9"
+    "small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-right5 small-right5 small-right5 small-right10 small-right10 small-right10";
   margin: auto;
-  padding: 10px;
+  padding-top: 20px;
 }
 
 .homePrice {
@@ -61,18 +99,18 @@ section{
 }
 
 .smallGreyBox {
-  width: 20%;
-  height: 90%;
-  min-width: 100px;
-  min-height: 50px;
+  width: 56px;
+  height: 67px;
   background-color: #ddd;
   background-size: cover;
   transition: background-size 0.5s ease, background-position 0.5s ease;
   background-position: center;
+  margin-right: 10px;
 }
 
 .largeItem {
   grid-area: large;
+  align-items: flex-start;
 }
 
 .largeItem .text {
@@ -85,13 +123,13 @@ section{
 }
 
 .largeItem .text p:first-child {
-  font-size: 24px; /* First line larger */
+  font-size: 20px; /* First line larger */
   font-weight: 700;
-  margin: 5px 0px;
+  margin: 10px 0px;
 }
 
 .largeItem .text p:last-child {
-  font-size: 14px; /* Second line smaller */
+  font-size: 12px; /* Second line smaller */
   font-weight: 400;
   margin: 5px 0px;
 }
@@ -111,14 +149,16 @@ section{
 }
 
 .mediumItem1 .text, .mediumItem2 .text {
-  margin-top: 15px;
+  margin-top: 5px;
+  overflow: hidden;
+  width: 100%;
 }
 
 .mediumItem1 .text p:first-child, .mediumItem2 .text p:first-child {
   white-space: nowrap;
   font-size: 16px; /* First line larger */
   font-weight: 700;
-  margin: 0;
+  margin-bottom: 5px;
 }
 
 .mediumItem1 .text p:last-child, .mediumItem2 .text p:last-child {
@@ -130,72 +170,95 @@ section{
   grid-area: small-left1;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemLeft2 {
   grid-area: small-left2;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight1 {
   grid-area: small-right1;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight2 {
   grid-area: small-right2;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight3 {
   grid-area: small-right3;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight4 {
   grid-area: small-right4;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight5 {
   grid-area: small-right5;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight6 {
   grid-area: small-right6;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight7 {
   grid-area: small-right7;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight8 {
   grid-area: small-right8;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight9 {
   grid-area: small-right9;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
+
 }
 
 .smallItemRight10 {
   grid-area: small-right10;
   flex-direction: row;
   justify-content: flex-start;
+  font-size: 12px;
 }
 
 .smallItem .greyBox {
@@ -204,10 +267,7 @@ section{
   margin-right: 10px;
 }
 
-/* 베스트 섹션 */
-.bestSection {
-  margin-top: 40px;
-}
+
 
 .bestGrid {
   display: grid !important;
@@ -224,13 +284,19 @@ section{
 }
 
 .bestText {
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-
+.bestText h3 {
+  display: flex;
+  justify-content: space-between; /* 텍스트와 아이콘을 양 끝에 배치 */
+  align-items: center;
+  width: 100%; /* 부모 요소의 전체 너비를 차지하도록 설정 */
+}
 .bestText > * {
-  margin: 0px; /* 원하는 간격으로 조정 */
+  margin: 0px;
 }
 
 .middleText {
@@ -252,15 +318,11 @@ section{
 }
 
 /* 새로운 그리드 섹션 */
-.newGridSection {
-  margin-top: 40px;
-  text-align: center;
-}
 
 .newGridContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 125px);
   gap: 10px;
   grid-template-areas:
     "item1 item2 item2 item3"
@@ -295,17 +357,10 @@ section{
 .newGridItem6 { grid-area: item6; }
 .newGridItem7 { grid-area: item7; }
 
-/* 비대칭 그리드 섹션 */
-.asymmetricGridSection {
-  margin-top: 40px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-}
 
 .asymmetricGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(3, 150px);
   gap: 10px;
   grid-template-areas:
@@ -317,25 +372,20 @@ section{
 }
 
 .asymmetricGridItem {
-  background-color: #eee;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
+    background-color: #ddd;
+    padding: 0px 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: #fff;
+    white-space: pre-line;
 }
 
 .gridItem1 { grid-area: item1; }
 .gridItem2 { grid-area: item2; }
 .gridItem3 { grid-area: item3; }
 
-/* 대칭 그리드 섹션 */
-.symmetricGridSection {
-  text-align: center;
-  margin-top: 40px;
-  font-size: 18px;
-  font-weight: bold;
-}
 
 .sliderContainer {
   max-width: 1400px;
@@ -370,28 +420,28 @@ section{
 
 .itemText {
   text-align: left;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-/* 텍스트 섹션 */
-.textContainerSection {
-  margin-top: 40px;
-  text-align: center;
-}
+
 
 .textContainer p {
   margin: 10px 0;
+  font-weight: bold;
 }
 
 .moreText {
   position: relative;
-  top: 0;
-  left: 40%;
+  top: -20px;
+  left: 42%;
   color: gray;
   font-size: 12px;
+  font-weight: bold;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
-
 .originalGridContainer {
   display: none; /* 기본적으로 숨김 처리 */
 }
@@ -399,16 +449,26 @@ section{
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
   section{
+    width: 100%;
     padding-bottom: 0px;
+  }
+  .bestSection{
+    order: 2;
+  }
+  .newGridSection{
+    order: 3;
   }
   .sliderContainer {
     width: 100%;
     padding: 0;
+    margin: 0;
   }
-
+  
   .homeGridMobile {
-    width: 80% !important;
+    width: 95% !important;
     display: grid !important;
+    margin: 0 15px;
+    justify-content: center;
     gap: 5px;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(6, 133px);
@@ -435,13 +495,13 @@ section{
     flex-direction: row;
     align-items: center;
     text-align: left;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
   .homeGridMobile .smallItemRight1 .text,
   .homeGridMobile .smallItemRight2 .text,
   .homeGridMobile .smallItemRight3 .text {
-    max-width: 140px;
+    width: 100px;
   }
 
   .homeGridMobile .smallGreyBox {
@@ -456,7 +516,6 @@ section{
 
   .largeItem .text {
     white-space: wrap;
-    margin-top: 20px;
   }
 
   .largeItem .text p:first-child {
@@ -481,21 +540,14 @@ section{
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
+    padding-right: 0px
   }
 
   .bestGreyBox {
     width: 95%;
   }
 
-  .bestText {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .bestText > * {
-    margin: 0px;
-  }
+  
 
   .middleText {
     display: flex;
@@ -505,7 +557,10 @@ section{
   .priceCart {
     margin-left: 10px;
   }
-
+  
+  .newGridSection h2{
+    font-size: 18px;
+  }
   .newGridContainer {
     display: flex;
     flex-direction: column;
@@ -551,7 +606,9 @@ section{
   .newGridItem p {
     display: none;
   }
-
+  .asymmetricGridSection{
+    font-size: 16px;
+  }
   .asymmetricGrid {
     display: flex;
     flex-direction: column;
@@ -602,11 +659,16 @@ section{
   }
 
   .symmetricGridContainer {
+    grid-template-columns: repeat(1,1fr);
     font-size: 12px;
   }
 
   .symmetricGridItem {
     width: auto !important;
     padding: 0 20px;
+  }
+  
+  .moreText{
+    display: none;
   }
 }
