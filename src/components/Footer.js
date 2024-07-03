@@ -20,6 +20,7 @@ const translations = {
 function Footer(props) {
   const [isInfoVisible, setIsInfoVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isFlexGrowVisible, setIsFlexGrowVisible] = useState(false);
   const { language } = useLanguage(); // Use language context
 
   useEffect(() => {
@@ -31,12 +32,22 @@ function Footer(props) {
         setIsMobile(false);
         setIsInfoVisible(true); // 웹 화면에서는 보임
       }
+      // 남은 공간이 있을 때 flexGrow div를 보이게 설정
+      const footerHeight = document.querySelector(
+        `.${styles.footer}`
+      ).offsetHeight;
+      const windowHeight = window.innerHeight;
+      if (footerHeight < windowHeight) {
+        setIsFlexGrowVisible(true);
+      } else {
+        setIsFlexGrowVisible(false);
+      }
     };
 
     handleResize(); // 초기 실행
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [styles.footer]);
 
   const toggleInfoVisibility = () => {
     if (isMobile) {
@@ -60,6 +71,8 @@ function Footer(props) {
         <p>{translations[language].info1}</p>
         <p>{translations[language].info2}</p>
       </div>
+      {isFlexGrowVisible && <div className={styles.flexGrow}></div>}{" "}
+      {/* 빈 공간을 채우는 div */}
     </footer>
   );
 }

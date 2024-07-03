@@ -1,5 +1,5 @@
 .artistContainer {
-  padding: 20px;
+  padding: 0px
 }
 
 .alphabetContainer {
@@ -31,7 +31,7 @@
 }
 
 .artistSection {
-  width: 95%;
+  width: 90%;
   margin: auto
 }
 

@@ -36,9 +36,14 @@ function ArtistDetail() {
   const { artistName } = useParams();
   const [showMore, setShowMore] = useState(false);
   const { language } = useLanguage(); // Use language context
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지를 추적하는 상태
 
   const handleShowMore = () => {
     setShowMore(!showMore);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber); // 페이지 변경 핸들러
   };
 
   const t = translations[language]; // Get the translations for the current language
@@ -82,13 +87,31 @@ function ArtistDetail() {
         ))}
       </div>
       <div className={styles.pagination}>
-        <button className={styles.pageArrow}>{"<"}</button>
+        <button
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          {"<"}
+        </button>
         {Array.from({ length: 9 }).map((_, index) => (
-          <button key={index} className={styles.pageNumber}>
+          <button
+            key={index}
+            className={`${styles.pageNumber} ${
+              currentPage === index + 1 ? styles.activePage : ""
+            }`}
+            onClick={() => handlePageChange(index + 1)}
+          >
             {index + 1}
           </button>
         ))}
-        <button className={styles.pageArrow}>{">"}</button>
+        <button
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === 9}
+        >
+          {">"}
+        </button>
       </div>
     </div>
   );

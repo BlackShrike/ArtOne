@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f8f9fa;
   padding:  20px;
+  padding-bottom: 0px;
+  border-bottom: 1px solid #ccc;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   font-style: normal;

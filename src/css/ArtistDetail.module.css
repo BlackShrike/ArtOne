@@ -112,7 +112,10 @@
 .pageArrow:hover {
   background-color: #f1f1f1;
 }
-
+.activePage {
+  color: red;
+  text-decoration: underline;
+}
 @media (max-width: 600px) {
   .artistInfo {
     flex-direction: column;

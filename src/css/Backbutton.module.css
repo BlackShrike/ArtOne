@@ -2,15 +2,21 @@
   display: flex;
   align-self: flex-start;
   margin-bottom: 20px;
+  position: relative;
+  height: 40px; /* 원하는 높이로 설정 */
+  left: 20px; /* 페이지 왼쪽에서 떨어진 거리 조정 */
 }
 
 .backButton {
   text-decoration: none;
-  color: #333;
-  font-size: 14px;
+  color: #ccc;
+  font-size: 20px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   font-family: inherit; /* Ensures the button text matches the surrounding text */
+  height: 100%; /* 부모 요소의 높이를 채우도록 설정 */
+  display: flex;
+  align-items: center; /* 버튼 내 텍스트를 수직 가운데 정렬 */
 }

@@ -12,7 +12,7 @@ function BackButton() {
   return (
     <div className={styles.backLink}>
       <button onClick={handleBack} className={styles.backButton}>
-        ← 뒤로가기
+        {"<"} 뒤로가기
       </button>
     </div>
   );

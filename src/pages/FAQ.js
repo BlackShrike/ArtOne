@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../css/FAQ.module.css";
 import { useLanguage } from "../components/LanguageContext";
-
+import BackButton from "../components/BackButton";
 const translations = {
   KR: {
     sections: {
@@ -302,6 +302,7 @@ const translations = {
     },
   },
 };
+
 function FAQ() {
   const [activeSection, setActiveSection] = useState("shipping");
   const { language } = useLanguage();
@@ -310,6 +311,7 @@ function FAQ() {
 
   return (
     <div className={styles.faqContainer}>
+      <BackButton></BackButton>
       <div className={styles.faqSidebar}>
         <ul>
           {Object.keys(t.sections).map((key) => (

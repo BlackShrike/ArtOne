@@ -28,8 +28,32 @@
 
 .itemDetails p {
   font-size: 12px;
+}/* 페이지네이션 관련 CSS 추가 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
+.pageNumber,
+.pageArrow {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pageNumber:hover,
+.pageArrow:hover {
+  background-color: #f1f1f1;
+}
+
+/* 추가할 CSS */
+.activePage {
+  color: red;
+  text-decoration: underline;
+}
 @media (max-width: 767px) {
   .gridPage {
     padding: 0px;

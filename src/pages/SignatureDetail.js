@@ -26,6 +26,7 @@ const translations = {
     totalText: "합계",
     basketButton: "장바구니",
     purchaseButton: "구매하기",
+    reviewsHead: "리뷰",
     reviewsTitle: "전체 리뷰",
     reviewNotice: "리뷰를 작성해주시면 5000원 할인쿠폰을 드립니다.",
     writeReviewButton: "리뷰 작성하기",
@@ -38,7 +39,7 @@ const translations = {
       "작품이 너무 예뻐요. 추천합니다.",
       "작품이 너무 마음에 들어요!",
     ],
-    reviewModalPlaceholder: "리뷰를 작성해 주세요.",
+    reviewModalPlaceholder: "리뷰를 작성해주세요.",
     imageUploadText: "사진첨부",
     submitButton: "등록하고 5,000원 할인쿠폰받기",
     purchaseModalTitle: "구매안내",
@@ -81,6 +82,7 @@ const translations = {
     totalText: "Total",
     basketButton: "Add to Basket",
     purchaseButton: "Purchase",
+    reviewsHead: "Review",
     reviewsTitle: "All Reviews",
     reviewNotice: "Write a review and receive a $5 discount coupon.",
     writeReviewButton: "Write a Review",
@@ -297,8 +299,12 @@ function SignatureDetail({ id }) {
           )}
         </div>
       </div>
+      <div className={styles.extraImagePlaceholder}>
+        <div className={styles.innerImagePlaceholder}></div>
+      </div>
       <div className={styles.reviews}>
-        <h2>{t.reviewsTitle}</h2>
+        <h2 className={styles.reviewsHead}>{t.reviewsHead}</h2>
+        <h2 className={styles.reviewsTitle}>{t.reviewsTitle}</h2>
         <div className={styles.reviewNotice}>
           {t.reviewNotice}
           {!isMobile && (
@@ -313,7 +319,11 @@ function SignatureDetail({ id }) {
         <div className={styles.reviewList}>
           <div className={styles.reviewItem}>
             <p className={styles.reviewer}>ooo님</p>
-            <div className={styles.reviewImagePlaceholder}></div>
+            <div className={styles.reviewImages}>
+              <div className={styles.reviewImagePlaceholder}></div>
+              <div className={styles.reviewImagePlaceholder}></div>
+              <div className={styles.reviewImagePlaceholder}></div>
+            </div>
             <p className={styles.reviewTitle}>
               리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목리뷰제목
             </p>
@@ -354,7 +364,12 @@ function SignatureDetail({ id }) {
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div className={styles.modalHeader}>
-              <h2 className={styles.modalTitle}>{t.reviewModalTitle}</h2>
+              <div className={styles.modalTitle}>
+                <div className={styles.reviewModalTitle}>
+                  <p>{t.artistName}</p>
+                  <p>{t.artworkName}</p>
+                </div>
+              </div>
               <FaTimes
                 className={styles.closeIcon}
                 onClick={toggleReviewModal}
@@ -400,9 +415,6 @@ function SignatureDetail({ id }) {
                   >
                     {tab}
                   </span>
-                  {index < t.tabs.length - 1 && (
-                    <span className={styles.dot}>·</span>
-                  )}
                 </React.Fragment>
               ))}
             </div>

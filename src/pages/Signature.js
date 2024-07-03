@@ -168,23 +168,28 @@ function Signature() {
           </div>
         ))}
       </div>
-      <div className={styles["signature-sort"]}>
-        <select value={sortOption} onChange={handleSortChange} defaultValue="">
-          <option value="" disabled>
-            {t.sort}
-          </option>
-          {t.sortOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
+      {!selectedId && (
+        <div className={styles["signature-sort"]}>
+          <select
+            value={sortOption}
+            onChange={handleSortChange}
+            defaultValue=""
+          >
+            <option value="" disabled>
+              {t.sort}
             </option>
-          ))}
-        </select>
-      </div>
+            {t.sortOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       {selectedId ? (
         <>
-          <BackButton onClick={() => setSelectedId(null)} />{" "}
-          {/* 뒤로 가기 버튼 클릭 시 그리드로 돌아감 */}
-          <SignatureDetail id={selectedId} /> {/* 선택된 항목의 ID를 전달 */}
+          <BackButton onClick={() => setSelectedId(null)} />
+          <SignatureDetail id={selectedId} />
         </>
       ) : (
         <>

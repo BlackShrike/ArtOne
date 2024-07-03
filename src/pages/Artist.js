@@ -504,8 +504,8 @@ function Artist() {
           </button>
         ))}
       </div>
-      <BackButton />
       <div className={styles.artistSection}>
+        <BackButton />
         <h2 className={styles.letterHeader}>{selectedLetter}</h2>
         <div className={styles.artistList}>
           {artists[selectedLetter].map((artist, index) => (

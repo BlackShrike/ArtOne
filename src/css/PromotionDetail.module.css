@@ -58,6 +58,30 @@
     justify-content: space-between; /* Add space between text and icon */
     align-items: center;
   }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pageNumber,
+  .pageArrow {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .pageNumber:hover,
+  .pageArrow:hover {
+    background-color: #f1f1f1;
+  }
+.activePage {
+  color: red;
+  text-decoration: underline;
+}
+
   @media (max-width : 768px){
     .detailPage{
       padding: 0px;

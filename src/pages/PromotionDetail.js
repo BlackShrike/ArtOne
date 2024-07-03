@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "../css/PromotionDetail.module.css";
 import BackButton from "../components/BackButton";
@@ -24,6 +24,48 @@ function PromotionDetail() {
   const { language } = useLanguage();
   const t = translations[language];
   const { id } = useParams();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const totalItems = 20; // 총 아이템 수
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const renderPagination = () => {
+    return (
+      <div className={styles.pagination}>
+        <button
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+          disabled={currentPage === 1}
+        >
+          {"<"}
+        </button>
+        {Array.from({ length: totalPages }).map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.pageNumber} ${
+              currentPage === index + 1 ? styles.activePage : ""
+            }`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          className={styles.pageArrow}
+          onClick={() =>
+            handlePageChange(Math.min(totalPages, currentPage + 1))
+          }
+          disabled={currentPage === totalPages}
+        >
+          {">"}
+        </button>
+      </div>
+    );
+  };
 
   return (
     <div className={styles.detailPage}>
@@ -31,7 +73,7 @@ function PromotionDetail() {
       <h2 className={styles.title}>{`${t.promotionName} ${id}`}</h2>
       <div className={styles.imagePlaceholder}></div>
       <div className={styles.itemsContainer}>
-        {Array.from({ length: 20 }).map((_, index) => (
+        {Array.from({ length: itemsPerPage }).map((_, index) => (
           <div key={index} className={styles.item}>
             <div className={styles.itemImagePlaceholder}></div>
             <div className={styles.itemDetails}>
@@ -47,6 +89,7 @@ function PromotionDetail() {
           </div>
         ))}
       </div>
+      {renderPagination()}
     </div>
   );
 }

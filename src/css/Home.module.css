@@ -26,14 +26,14 @@ section{
   grid-template-columns: repeat(12, 1fr); /* 12 columns */
   grid-template-rows: repeat(7, 100px); /* 7 rows */
   grid-template-areas:
-    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
-    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
-    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
-    "large large large large large large small-right1 small-right1 small-right1 small-right6 small-right6 small-right6"
-    "large large large large large large small-right2 small-right2 small-right2 small-right7 small-right7 small-right7"
-    "large large large large large large small-right3 small-right3 small-right3 small-right8 small-right8 small-right8"
-    "small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-right4 small-right4 small-right4 small-right9 small-right9 small-right9"
-    "small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-right5 small-right5 small-right5 small-right10 small-right10 small-right10";
+    "large large large large large large /medium1 medium1 medium1 /medium2 medium2 medium2"
+    "large large large large large large/ medium1 medium1 medium1 /medium2 medium2 medium2"
+    "large large large large large large /medium1 medium1 medium1 /medium2 medium2 medium2"
+    "large large large large large large/ small-right1 small-right1 small-right1 /small-right6 small-right6 small-right6"
+    "large large large large large large /small-right2 small-right2 small-right2/ small-right7 small-right7 small-right7"
+    "large large large large large large/ small-right3 small-right3 small-right3/ small-right8 small-right8 small-right8"
+    "small-left1 small-left1 small-left1/ small-left1 small-left1 small-left1 small-right4 small-right4 small-right4/ small-right9 small-right9 small-right9"
+    "small-left2 small-left2 small-left2 /small-left2 small-left2 small-left2 small-right5 small-right5 small-right5 /small-right10 small-right10 small-right10";
   margin: auto;
   padding: 10px;
 }
@@ -404,10 +404,6 @@ section{
   .sliderContainer {
     width: 100%;
     padding: 0;
-  }
-
-  .homeGridWrapper {
-    margin: auto;
   }
 
   .homeGridMobile {
