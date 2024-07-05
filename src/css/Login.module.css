@@ -40,7 +40,9 @@ h2 {
   border-radius: 4px;
   box-sizing: border-box;
 }
-
+.loginForm input::placeholder{
+  font-weight: bold;
+}
 .rememberMe {
   display: flex;
   align-items: center;

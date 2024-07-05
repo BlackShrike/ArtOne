@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { PiShoppingCart } from "react-icons/pi";
 import styles from "../css/Header.module.css";

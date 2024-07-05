@@ -81,6 +81,7 @@
 
 .link.active {
   border-bottom: 1px solid red;
+  color: red;
 }
 .artMembershipBox {
   position: relative;;
