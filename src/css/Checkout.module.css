@@ -29,8 +29,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
   font-weight: bold;
+  margin: 0px 20px;
+  padding: 10px;
+  width: 90%;
 }
 
 .checkoutItemHeader label {
@@ -47,6 +49,7 @@
   gap: 10px; /* Space between grid items */
   border: 1px solid #ccc; /* Add border around the section */
   padding: 10px;
+  margin: 0 20px;
 }
 
 .checkoutItemContainer {
@@ -170,9 +173,12 @@
     margin-top: 20px;
     padding: 0px;
   }
-
+  .checkoutItemHeader{
+    width: 90%;
+    padding: 0px;
+  }
   .checkoutItemsSection {
-    width: 100%;
+    width: 90%;
     padding: 0px;
   }
   

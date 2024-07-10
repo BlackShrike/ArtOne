@@ -1,12 +1,13 @@
 .paymentResultContainer {
-  max-width: 80%;
+  width: 50%;
   margin: auto;
   padding: 20px;
+  border-radius: 8px;
 }
 
 .paymentResultContainer h2 {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .thankYouMessage {
@@ -17,36 +18,80 @@
 .paymentDetails {
   display: flex;
   flex-direction: column;
-  border: #ccc 1px solid;
+  border-top: 1px solid #ccc;
 }
 
 .section {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0;
   border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 4px;
+}
+.paymentResultContainer:nth-child(2) span,
+.paymentResultContainer:nth-child(3) span{
+  margin-bottom: 10px;
+}
+.header {
+  flex: 1;
+  font-weight: bold;
 }
 
-.section h3 {
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.center.flex2 {
+  flex: 2;
+  font-weight: 400;
+}
+
+.center.flex1 {
+  flex: 1;
+}
+.center.flex2 .centerItem:first-child span:first-child {
+  font-weight: bold;
+}
+.flex2 :nth-child(2){
   margin-bottom: 10px;
-  font-size: 18px;
+}
+.centerItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.centerItem .content {
+  text-align: right;
+  flex: 1;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .imagePlaceholder {
   width: 80px;
   height: 80px;
   background-color: #eee;
-  margin-top: 10px;
 }
 
 .deliveryNotes {
   margin-top: 20px;
+  padding-top: 10px;
 }
 
 .deliveryNotes h3 {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .note {
   color: #888;
   margin: 5px 0;
+  text-align: center;
 }

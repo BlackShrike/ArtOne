@@ -12,12 +12,17 @@ const translations = {
     option1: "옵션 1: 40 x 50 cm",
     option2: "옵션 2: (프레임) 별도 열람(매장 표시)",
     orderer: "주문자",
-    ordererName: "주문자 이름: 홍길동",
-    phoneNumber: "전화번호: 010-0000-0000",
-    email: "이메일: abcd@naver.com",
+    ordererName: "주문자 이름",
+    ordererNameContent: "홍길동",
+    phoneNumber: "전화번호",
+    phoneNumberContent: "010-0000-0000",
+    email: "이메일",
+    emailContent: "abcd@naver.com",
     recipient: "수령인",
-    recipientName: "수령인: 홍길동",
-    deliveryAddress: "배송주소: 00000 서울특별시 마포구 101동 1001호",
+    recipientName: "수령인",
+    recipientNameContent: "홍길동",
+    deliveryAddress: "배송주소",
+    deliveryAddressContent: "00000 서울특별시 마포구 101동 1001호",
     deliveryNotes: "배송 유의사항",
     note1: "1. 배송 유의사항 1",
     note2: "2. 배송 유의사항 2",
@@ -33,13 +38,17 @@ const translations = {
     option1: "Option 1: 40 x 50 cm",
     option2: "Option 2: (Frame) View separately (Display in store)",
     orderer: "Orderer",
-    ordererName: "Orderer Name: Hong Gil Dong",
-    phoneNumber: "Phone Number: 010-0000-0000",
-    email: "Email: abcd@naver.com",
+    ordererName: "Orderer Name",
+    ordererNameContent: "Hong Gil Dong",
+    phoneNumber: "Phone Number",
+    phoneNumberContent: "010-0000-0000",
+    email: "Email",
+    emailContent: "abcd@naver.com",
     recipient: "Recipient",
-    recipientName: "Recipient: Hong Gil Dong",
-    deliveryAddress:
-      "Delivery Address: 00000 Seoul, Mapo-gu, Building 101, Unit 1001",
+    recipientName: "Recipient",
+    recipientNameContent: "Hong Gil Dong",
+    deliveryAddress: "Delivery Address",
+    deliveryAddressContent: "00000 Seoul, Mapo-gu, Building 101, Unit 1001",
     deliveryNotes: "Delivery Notes",
     note1: "1. Delivery Note 1",
     note2: "2. Delivery Note 2",
@@ -57,24 +66,68 @@ function PaymentResult() {
       <p className={styles.thankYouMessage}>{t.thankYouMessage}</p>
       <div className={styles.paymentDetails}>
         <div className={styles.section}>
-          <h3>{t.productInfo}</h3>
-          <p>{t.productName}</p>
-          <p>{t.price}</p>
-          <p>{t.option1}</p>
-          <p>{t.option2}</p>
-          <div className={styles.imagePlaceholder}></div>
+          <div className={styles.header}>
+            <h3>{t.productInfo}</h3>
+          </div>
+          <div className={`${styles.center} ${styles.flex2}`}>
+            <div className={styles.centerItem}>
+              <span>{t.productName}</span>
+            </div>
+            <div className={styles.centerItem}>
+              <span>{t.price}</span>
+            </div>
+            <div className={styles.centerItem}>
+              <span>{t.option1}</span>
+            </div>
+            <div className={styles.centerItem}>
+              <span>{t.option2}</span>
+            </div>
+          </div>
+          <div className={styles.right}>
+            <div className={styles.imagePlaceholder}></div>
+          </div>
         </div>
         <div className={styles.section}>
-          <h3>{t.orderer}</h3>
-          <p>{t.ordererName}</p>
-          <p>{t.phoneNumber}</p>
-          <p>{t.email}</p>
+          <div className={styles.header}>
+            <h3>{t.orderer}</h3>
+          </div>
+          <div className={`${styles.center} ${styles.flex1}`}>
+            <div className={styles.centerItem}>
+              <span>{t.ordererName}</span>
+            </div>
+            <div className={styles.centerItem}>
+              <span>{t.phoneNumber}</span>
+            </div>
+            <div className={styles.centerItem}>
+              <span>{t.email}</span>
+            </div>
+          </div>
+          <div className={styles.right}>
+            <span>{t.ordererNameContent}</span>
+            <span>{t.phoneNumberContent}</span>
+            <span>{t.emailContent}</span>
+          </div>
         </div>
         <div className={styles.section}>
-          <h3>{t.recipient}</h3>
-          <p>{t.recipientName}</p>
-          <p>{t.phoneNumber}</p>
-          <p>{t.deliveryAddress}</p>
+          <div className={styles.header}>
+            <h3>{t.recipient}</h3>
+          </div>
+          <div className={`${styles.center} ${styles.flex1}`}>
+            <div className={styles.centerItem}>
+              <span>{t.recipientName}</span>
+            </div>
+            <div className={styles.centerItem}>
+              <span>{t.phoneNumber}</span>
+            </div>
+            <div className={styles.centerItem}>
+              <span>{t.deliveryAddress}</span>
+            </div>
+          </div>
+          <div className={styles.right}>
+            <span>{t.recipientNameContent}</span>
+            <span>{t.phoneNumberContent}</span>
+            <span>{t.deliveryAddressContent}</span>
+          </div>
         </div>
       </div>
       <div className={styles.deliveryNotes}>

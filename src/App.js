@@ -24,7 +24,6 @@ import Promotion from "./pages/Promotion";
 import PromotionDetail from "./pages/PromotionDetail";
 import TermsOfService from "./pages/Termsofservice";
 import { LanguageProvider } from "./components/LanguageContext";
-import ArtworksPage from "./pages/ArtworksPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -106,7 +105,6 @@ function RoutesWrapper({ isLoggedIn, onLogin, onLogout }) {
           element={isLoggedIn ? <Paymentresult /> : <Login onLogin={onLogin} />}
         />
         <Route path="/Termsofservice" element={<TermsOfService />} />
-        <Route path="/ArtworksPage" element={<ArtworksPage />} />
       </Routes>
       {!isSearchPage && <Footer />}
     </>

@@ -445,7 +445,31 @@ section{
 .originalGridContainer {
   display: none; /* 기본적으로 숨김 처리 */
 }
+.grid-item-slide-right {
+  animation: slideRight 0.5s ease-in-out;
+}
 
+.grid-item-slide-left {
+  animation: slideLeft 0.5s ease-in-out;
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
   section{
