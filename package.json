@@ -2,6 +2,7 @@
   "name": "artone",
   "version": "0.5.0",
   "private": true,
+  "proxy": "https://contemporaryk.cafe24api.com",
   "homepage": "https://blackshrike.github.io/ArtOne/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

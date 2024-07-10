@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -24,15 +24,23 @@ import Promotion from "./pages/Promotion";
 import PromotionDetail from "./pages/PromotionDetail";
 import TermsOfService from "./pages/Termsofservice";
 import { LanguageProvider } from "./components/LanguageContext";
-
+import apiClient from "./components/api";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("access_token");
     setIsLoggedIn(false);
   };
 

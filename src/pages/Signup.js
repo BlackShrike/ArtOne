@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../css/Signup.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
+import apiClient from "../components/api";
 
 const translations = {
   KR: {
@@ -59,9 +60,54 @@ function Signup() {
   const { language } = useLanguage();
   const t = translations[language];
 
-  const [zonecode, setZonecode] = useState("");
-  const [roadAddress, setRoadAddress] = useState("");
-  const [roadAddressDetail, setRoadAddressDetail] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
+    name: "",
+    phoneNumber: "",
+    birthdate: "",
+    address: "",
+    roadAddress: "",
+    zonecode: "",
+    roadAddressDetail: "",
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    try {
+      const response = await apiClient.post("/admin/customers", {
+        member_id: formData.username,
+        member_password: formData.password,
+        email: formData.email,
+        name: formData.name,
+        cellphone: formData.phoneNumber,
+        birthday: formData.birthdate,
+        address: formData.roadAddress,
+        address_detail: formData.roadAddressDetail,
+        zip_code: formData.zonecode,
+      });
+      console.log(response.data);
+      alert("회원가입 성공!");
+    } catch (error) {
+      console.error(error);
+      alert("회원가입 실패!");
+    }
+  };
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -76,8 +122,11 @@ function Signup() {
   const onClickSearch = () => {
     new window.daum.Postcode({
       oncomplete: function (data) {
-        setZonecode(data.zonecode);
-        setRoadAddress(data.address);
+        setFormData((prevData) => ({
+          ...prevData,
+          zonecode: data.zonecode,
+          roadAddress: data.address,
+        }));
       },
     }).open();
   };
@@ -86,43 +135,67 @@ function Signup() {
     <div className={styles.signupContainer}>
       <BackButton />
       <h2>{t.signup}</h2>
-      <form className={styles.signupForm}>
+      <form className={styles.signupForm} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="username">{t.username}</label>
-          <input type="text" id="username" required />
+          <input type="text" id="username" required onChange={handleChange} />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="password">{t.password}</label>
-          <input type="password" id="password" required />
+          <input
+            type="password"
+            id="password"
+            required
+            onChange={handleChange}
+          />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="confirm-password">{t.confirmPassword}</label>
-          <input type="password" id="confirm-password" required />
+          <label htmlFor="confirmPassword">{t.confirmPassword}</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            required
+            onChange={handleChange}
+          />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="email">{t.email}</label>
-          <input type="email" id="email" required />
+          <input type="email" id="email" required onChange={handleChange} />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="name">{t.name}</label>
-          <input type="text" id="name" required />
+          <input type="text" id="name" required onChange={handleChange} />
         </div>
         <div className={`${styles.formGroup} ${styles.phoneInput}`}>
           <label>{t.phoneNumber}</label>
-          <input type="text" placeholder="010" maxLength="3" required />
+          <input
+            type="text"
+            id="phoneNumber"
+            placeholder="010"
+            maxLength="3"
+            required
+            onChange={handleChange}
+          />
           <input type="text" placeholder="1234" maxLength="4" required />
           <input type="text" placeholder="5678" maxLength="4" required />
         </div>
         <div className={`${styles.formGroup} ${styles.birthdateInput}`}>
           <label>{t.birthdate}</label>
-          <input type="text" placeholder={t.year} maxLength="4" required />
+          <input
+            type="text"
+            id="birthdate"
+            placeholder={t.year}
+            maxLength="4"
+            required
+            onChange={handleChange}
+          />
           <input type="text" placeholder={t.month} maxLength="2" required />
           <input type="text" placeholder={t.day} maxLength="2" required />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="address">{t.address}</label>
           <div className={styles.addressSearchContainer}>
-            <input type="text" value={zonecode} readOnly />
+            <input type="text" value={formData.zonecode} readOnly />
             <button
               type="button"
               className={styles.addressSearchButton}
@@ -131,11 +204,12 @@ function Signup() {
               {t.addressSearch}
             </button>
           </div>
-          <input type="text" value={roadAddress} readOnly />
+          <input type="text" value={formData.roadAddress} readOnly />
           <input
             type="text"
-            value={roadAddressDetail}
-            onChange={(e) => setRoadAddressDetail(e.target.value)}
+            id="roadAddressDetail"
+            value={formData.roadAddressDetail}
+            onChange={handleChange}
             placeholder="상세 주소를 입력해주세요"
           />
         </div>

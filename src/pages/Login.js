@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import styles from "../css/Login.module.css"; // Ensure the path is correct
+import styles from "../css/Login.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
-
+import apiClient from "../components/api";
 const translations = {
   KR: {
     loginHeader: "LOGIN",
@@ -33,9 +33,10 @@ const translations = {
     google: "Continue with Google",
   },
 };
-
 function Login({ onLogin }) {
   const [remember, setRemember] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
@@ -43,11 +44,24 @@ function Login({ onLogin }) {
   const toggleRemember = () => {
     setRemember(!remember);
   };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onLogin();
-    navigate("/mypage");
+
+    try {
+      const response = await apiClient.post("/admin/oauth/token", {
+        grant_type: "password",
+        username: username,
+        password: password,
+      });
+
+      const accessToken = response.data.access_token;
+      localStorage.setItem("access_token", accessToken);
+      onLogin();
+      navigate("/mypage");
+    } catch (error) {
+      console.error(error);
+      alert("로그인 실패!");
+    }
   };
 
   return (
@@ -55,8 +69,18 @@ function Login({ onLogin }) {
       <BackButton />
       <h2>{t.loginHeader}</h2>
       <form className={styles.loginForm}>
-        <input type="text" placeholder={t.usernamePlaceholder} />
-        <input type="password" placeholder={t.passwordPlaceholder} />
+        <input
+          type="text"
+          placeholder={t.usernamePlaceholder}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder={t.passwordPlaceholder}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <div className={styles.rememberMe} onClick={toggleRemember}>
           {remember ? (
             <FaCheckCircle className={styles.checkboxIcon} />
