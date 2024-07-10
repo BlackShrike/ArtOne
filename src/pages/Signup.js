@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../css/Signup.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
-import apiClient from "../components/api";
+import apiClient from "../components/api"; // apiClient import 추가
 
 const translations = {
   KR: {
@@ -66,8 +66,12 @@ function Signup() {
     confirmPassword: "",
     email: "",
     name: "",
-    phoneNumber: "",
-    birthdate: "",
+    phoneNumberPart1: "",
+    phoneNumberPart2: "",
+    phoneNumberPart3: "",
+    birthYear: "",
+    birthMonth: "",
+    birthDay: "",
     address: "",
     roadAddress: "",
     zonecode: "",
@@ -89,18 +93,23 @@ function Signup() {
       return;
     }
 
+    const phoneNumber = `${formData.phoneNumberPart1}-${formData.phoneNumberPart2}-${formData.phoneNumberPart3}`;
+    const birthday = `${formData.birthYear}-${formData.birthMonth}-${formData.birthDay}`;
+
+    const payload = {
+      member_id: formData.username,
+      member_password: formData.password,
+      email: formData.email,
+      name: formData.name,
+      address: formData.roadAddress,
+      address_detail: formData.roadAddressDetail,
+      birthday: birthday,
+      cellphone: phoneNumber,
+      zip_code: formData.zonecode,
+    };
+
     try {
-      const response = await apiClient.post("/admin/customers", {
-        member_id: formData.username,
-        member_password: formData.password,
-        email: formData.email,
-        name: formData.name,
-        cellphone: formData.phoneNumber,
-        birthday: formData.birthdate,
-        address: formData.roadAddress,
-        address_detail: formData.roadAddressDetail,
-        zip_code: formData.zonecode,
-      });
+      const response = await apiClient.post("/admin/customers", payload);
       console.log(response.data);
       alert("회원가입 성공!");
     } catch (error) {
@@ -170,27 +179,55 @@ function Signup() {
           <label>{t.phoneNumber}</label>
           <input
             type="text"
-            id="phoneNumber"
+            id="phoneNumberPart1"
             placeholder="010"
             maxLength="3"
             required
             onChange={handleChange}
           />
-          <input type="text" placeholder="1234" maxLength="4" required />
-          <input type="text" placeholder="5678" maxLength="4" required />
+          <input
+            type="text"
+            id="phoneNumberPart2"
+            placeholder="1234"
+            maxLength="4"
+            required
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            id="phoneNumberPart3"
+            placeholder="5678"
+            maxLength="4"
+            required
+            onChange={handleChange}
+          />
         </div>
         <div className={`${styles.formGroup} ${styles.birthdateInput}`}>
           <label>{t.birthdate}</label>
           <input
             type="text"
-            id="birthdate"
+            id="birthYear"
             placeholder={t.year}
             maxLength="4"
             required
             onChange={handleChange}
           />
-          <input type="text" placeholder={t.month} maxLength="2" required />
-          <input type="text" placeholder={t.day} maxLength="2" required />
+          <input
+            type="text"
+            id="birthMonth"
+            placeholder={t.month}
+            maxLength="2"
+            required
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            id="birthDay"
+            placeholder={t.day}
+            maxLength="2"
+            required
+            onChange={handleChange}
+          />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="address">{t.address}</label>
