@@ -8,18 +8,15 @@ const ZoomImage = ({ zoomRate, children }) => {
   const containerRef = useRef();
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
-  const handleMouseMove = useCallback(
-    (e) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const cursorX = e.clientX - rect.left;
-        const cursorY = e.clientY - rect.top;
+  const handleMouseMove = useCallback((e) => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const cursorX = e.clientX - rect.left;
+      const cursorY = e.clientY - rect.top;
 
-        setCursor({ cursorX, cursorY });
-      }
-    },
-    [zoomRate]
-  );
+      setCursor({ cursorX, cursorY });
+    }
+  }, []);
 
   useEffect(() => {
     const updateContainerSize = () => {
