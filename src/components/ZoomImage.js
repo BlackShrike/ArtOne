@@ -39,7 +39,7 @@ const ZoomImage = ({ zoomRate, children }) => {
     img.onload = handleImageLoad;
 
     return () => window.removeEventListener("resize", updateContainerSize);
-  }, [zoomRate]);
+  }, []);
 
   const cursorStyle = {
     position: "absolute",

@@ -47,7 +47,7 @@ function Footer(props) {
     handleResize(); // 초기 실행
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [styles.footer]);
+  }, []);
 
   const toggleInfoVisibility = () => {
     if (isMobile) {

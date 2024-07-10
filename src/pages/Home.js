@@ -189,7 +189,6 @@ const GridItem = ({ className, greyBoxClass, textLines, price }) => {
 
 function Home() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [slideIndex, setSlideIndex] = useState(0);
   const sliderRef = useRef(null);
   const { language } = useLanguage();
   const navigate = useNavigate();
@@ -229,7 +228,6 @@ function Home() {
     arrows: true,
     autoplay: false,
     centerMode: false,
-    beforeChange: (current, next) => setSlideIndex(next),
     customPaging: (i) => <div>{i + 1} / 8</div>,
     appendDots: (dots) => (
       <div>
@@ -293,7 +291,6 @@ function Home() {
     autoplay: false,
     centerMode: false,
     centerPadding: "0px",
-    beforeChange: (current, next) => setSlideIndex(next),
 
     prevArrow: (
       <Arrow

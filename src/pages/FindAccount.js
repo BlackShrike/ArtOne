@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/FindAccount.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";

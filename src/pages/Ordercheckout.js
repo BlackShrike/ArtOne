@@ -175,7 +175,9 @@ function OrderCheckout() {
                 <input
                   type="text"
                   className={styles.emailInput2}
-                  placeholder={emailDomain}
+                  value={
+                    emailDomain === "custom" ? customEmailDomain : emailDomain
+                  }
                   disabled={emailDomain !== "custom"}
                 />
               </div>
