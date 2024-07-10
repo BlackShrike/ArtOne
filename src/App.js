@@ -24,7 +24,7 @@ import Promotion from "./pages/Promotion";
 import PromotionDetail from "./pages/PromotionDetail";
 import TermsOfService from "./pages/Termsofservice";
 import { LanguageProvider } from "./components/LanguageContext";
-import apiClient from "./components/api";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,6 +37,7 @@ function App() {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    localStorage.setItem("access_token", "your_access_token_here");
   };
 
   const handleLogout = () => {
@@ -48,6 +49,7 @@ function App() {
     <LanguageProvider>
       <Router>
         <div className="App">
+          <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
           <RoutesWrapper
             isLoggedIn={isLoggedIn}
             onLogin={handleLogin}
@@ -66,7 +68,6 @@ function RoutesWrapper({ isLoggedIn, onLogin, onLogout }) {
 
   return (
     <>
-      {!isSearchPage && <Header isLoggedIn={isLoggedIn} onLogout={onLogout} />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/promotion" element={<Promotion />} />
