@@ -103,8 +103,8 @@ section{
 }
 
 .smallGreyBox {
-  width: 56px;
-  height: 67px;
+  width: 68px;
+  height: 80px;
   background-color: #ddd;
   background-size: cover;
   transition: background-size 0.5s ease, background-position 0.5s ease;

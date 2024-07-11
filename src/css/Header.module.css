@@ -130,15 +130,14 @@
   top: 100%;
   left: 0;
   background-color: white;
-  border: 1px solid #aaa;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   z-index: 10;
-  width: 100%;
+  width: 100vw;
   padding-top: 10px;
   padding-right: 40%;
   box-sizing: border-box;
-  gap: 10px;
+  gap: 20px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -150,7 +149,7 @@
 }
 
 .dropdownItem {
-  width: 150px;
+  width: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,7 +161,7 @@
   width: 125px;
   height: 125px;
   background-color: #aaa;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .dropdownItem a {
