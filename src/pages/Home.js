@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useLanguage } from "../components/LanguageContext";
 import "../css/slick.custom.css";
 import ZoomImage from "../components/ZoomImage";
+import { wrapGrid } from "animate-css-grid";
 
 const Arrow = ({ className, style, onClick, icon }) => (
   <div className={className} style={{ ...style }} onClick={onClick}>
@@ -135,22 +136,6 @@ const translations = {
   },
 };
 
-const smallItemsData = [
-  { textLines: ["워커비 WORKERBEE", "허니 로열 젤리"], price: "228,000원" },
-  {
-    textLines: ["워커비 WORKERBEE", "워커비 스페셜 허니 박스"],
-    price: "152,000원",
-  },
-  {
-    textLines: ["워커비 WORKERBEE", "허니 미니 차 GIFT SET - 3개입"],
-    price: "14,000원",
-  },
-  { textLines: ["워커비 WORKERBEE", "허니 로열 젤리"], price: "228,000원" },
-  {
-    textLines: ["워커비 WORKERBEE", "워커비 스페셜 허니 박스"],
-    price: "152,000원",
-  },
-];
 const GridItem = ({ className, greyBoxClass, textLines, price }) => {
   const greyBoxRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -173,7 +158,13 @@ const GridItem = ({ className, greyBoxClass, textLines, price }) => {
             containerWidth={containerWidth}
             containerHeight={containerHeight}
           >
-            <div className={`${styles.greyBoxContent} zoom-image`}></div>
+            <div
+              className={`${styles.greyBoxContent}`}
+              style={{
+                width: containerWidth,
+                height: containerHeight,
+              }}
+            ></div>
           </ZoomImage>
         )}
       </div>
@@ -192,36 +183,87 @@ function Home() {
   const sliderRef = useRef(null);
   const { language } = useLanguage();
   const navigate = useNavigate();
+  const currentTranslations = translations[language];
   const [symmetricGridHeader, setSymmetricGridHeader] = useState(
-    translations[language].symmetricGridHeader
+    currentTranslations.symmetricGridHeader
   );
-  const handleMoreTextClick = () => {
-    navigate("/Original");
-  };
+  const [leftGridItems, setLeftGridItems] = useState([
+    { type: "largeItem", textLines: currentTranslations.main.slice(0, 2) },
+    { type: "mediumItem1", textLines: currentTranslations.main.slice(2, 4) },
+    { type: "mediumItem2", textLines: currentTranslations.main.slice(2, 4) },
+    ...currentTranslations.smallItemsLeft.map((item, i) => ({
+      type: `smallItemLeft${i + 1}`,
+      textLines: item.textLines,
+      price: item.price,
+    })),
+  ]);
+  const [rightGridItems, setRightGridItems] = useState([
+    ...currentTranslations.smallItemsRight.map((item, i) => ({
+      type: `smallItemRight${i + 1}`,
+      textLines: item.textLines,
+      price: item.price,
+    })),
+    ...currentTranslations.smallItemsRight.map((item, i) => ({
+      type: `smallItemRight${i + 6}`,
+      textLines: item.textLines,
+      price: item.price,
+    })),
+  ]);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
       if (window.innerWidth <= 768) {
         setSymmetricGridHeader("오리지널 원화");
       } else {
-        setSymmetricGridHeader(translations[language].symmetricGridHeader);
+        setSymmetricGridHeader(currentTranslations.symmetricGridHeader);
       }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [language]);
+  }, [currentTranslations]);
 
   useEffect(() => {
     if (isMobile) {
       setSymmetricGridHeader("오리지널 원화");
     } else {
-      setSymmetricGridHeader(translations[language].symmetricGridHeader);
+      setSymmetricGridHeader(currentTranslations.symmetricGridHeader);
     }
-  }, [isMobile, language]);
+  }, [isMobile, currentTranslations]);
+
+  const slideRight = () => {
+    setLeftGridItems((prevItems) => {
+      let newItems = [...prevItems];
+      newItems.unshift(newItems.pop());
+      return newItems;
+    });
+    setRightGridItems((prevItems) => {
+      let newItems = [...prevItems];
+      newItems.unshift(newItems.pop());
+      return newItems;
+    });
+  };
+
+  const slideLeft = () => {
+    setLeftGridItems((prevItems) => {
+      let newItems = [...prevItems];
+      newItems.push(newItems.shift());
+      return newItems;
+    });
+    setRightGridItems((prevItems) => {
+      let newItems = [...prevItems];
+      newItems.push(newItems.shift());
+      return newItems;
+    });
+  };
+
+  const handleMoreTextClick = () => {
+    navigate("/Original");
+  };
 
   const mainSettings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -241,7 +283,10 @@ function Home() {
         >
           <li
             className="slick-arrow"
-            onClick={() => sliderRef.current.slickPrev()}
+            onClick={() => {
+              sliderRef.current.slickPrev();
+              slideLeft;
+            }}
             style={{ cursor: "pointer" }}
           >
             <span className="arrow">❮</span>
@@ -249,7 +294,10 @@ function Home() {
           {dots}
           <li
             className="slick-arrow"
-            onClick={() => sliderRef.current.slickNext()}
+            onClick={() => {
+              sliderRef.current.slickNext();
+              slideRight;
+            }}
             style={{ cursor: "pointer" }}
           >
             <span className="arrow">❯</span>
@@ -261,14 +309,20 @@ function Home() {
       <Arrow
         className={`${styles.arrow} ${styles.prevArrow}`}
         icon="❮"
-        onClick={() => sliderRef.current.slickPrev()}
+        onClick={() => {
+          sliderRef.current.slickPrev();
+          slideLeft;
+        }}
       />
     ),
     nextArrow: (
       <Arrow
         className={`${styles.arrow} ${styles.nextArrow}`}
         icon="❯"
-        onClick={() => sliderRef.current.slickNext()}
+        onClick={() => {
+          sliderRef.current.slickNext();
+          slideRight;
+        }}
       />
     ),
     responsive: [
@@ -363,92 +417,87 @@ function Home() {
       <Arrow className={`${styles.arrow} ${styles.nextArrow}`} icon="❯" />
     ),
   };
-  const homeMainDesktop = Array.from({ length: 8 }, (_, index) => (
-    <div className={styles.homeGridWrapper} key={index}>
+
+  const homeMainDesktop = (
+    <div className={styles.homeGridWrapper}>
       <div className={styles.homeGrid}>
-        <GridItem
-          className={styles.largeItem}
-          greyBoxClass={styles.greyBox}
-          textLines={translations[language].main.slice(0, 2)}
-        />
-        <GridItem
-          className={styles.mediumItem1}
-          greyBoxClass={styles.greyBox}
-          textLines={translations[language].main.slice(2, 4)}
-        />
-        <GridItem
-          className={styles.mediumItem2}
-          greyBoxClass={styles.greyBox}
-          textLines={translations[language].main.slice(2, 4)}
-        />
-        <GridItem
-          className={styles.smallItemLeft1}
-          greyBoxClass={styles.smallGreyBox}
-          textLines={translations[language].main.slice(4, 6)}
-          price={translations[language].smallItemsLeft[0].price}
-        />
-        <GridItem
-          className={styles.smallItemLeft2}
-          greyBoxClass={styles.smallGreyBox}
-          textLines={translations[language].main.slice(6, 8)}
-          price={translations[language].smallItemsLeft[1].price}
-        />
-        {smallItemsData.map((item, i) => (
+        {leftGridItems.map((item, index) => (
           <GridItem
-            key={i}
-            className={styles[`smallItemRight${i + 1}`]}
-            greyBoxClass={styles.smallGreyBox}
+            key={index}
+            className={styles[item.type]}
+            greyBoxClass={
+              item.type.startsWith("smallItem")
+                ? styles.smallGreyBox
+                : styles.greyBox
+            }
             textLines={item.textLines}
             price={item.price}
           />
         ))}
-        {smallItemsData.map((item, i) => (
+        {rightGridItems.map((item, index) => (
           <GridItem
-            key={i + 5}
-            className={styles[`smallItemRight${i + 6}`]}
-            greyBoxClass={styles.smallGreyBox}
+            key={index}
+            className={styles[item.type]}
+            greyBoxClass={
+              item.type.startsWith("smallItem")
+                ? styles.smallGreyBox
+                : styles.greyBox
+            }
             textLines={item.textLines}
             price={item.price}
           />
         ))}
       </div>
     </div>
-  ));
+  );
 
-  const homeMainMobile = Array.from({ length: 8 }, (_, index) => (
-    <div className={styles.homeGridMobile} key={index}>
-      <GridItem
-        className={styles.largeItem}
-        greyBoxClass={styles.greyBox}
-        textLines={translations[language].main.slice(0, 2)}
-      />
-      {smallItemsData.slice(0, 3).map((item, i) => (
+  const homeMainMobile = (
+    <div className={styles.homeGridMobile}>
+      {leftGridItems.slice(0, 4).map((item, index) => (
         <GridItem
-          key={i}
-          className={styles[`smallItemRight${i + 1}`]}
-          greyBoxClass={styles.smallGreyBox}
+          key={index}
+          className={styles[item.type]}
+          greyBoxClass={
+            item.type.startsWith("smallItem")
+              ? styles.smallGreyBox
+              : styles.greyBox
+          }
+          textLines={item.textLines}
+          price={item.price}
+        />
+      ))}
+      {rightGridItems.slice(0, 4).map((item, index) => (
+        <GridItem
+          key={index}
+          className={styles[item.type]}
+          greyBoxClass={
+            item.type.startsWith("smallItem")
+              ? styles.smallGreyBox
+              : styles.greyBox
+          }
           textLines={item.textLines}
           price={item.price}
         />
       ))}
     </div>
-  ));
+  );
 
   const bestItems = Array.from({ length: 20 }, (_, index) => (
     <div key={index} className={styles.bestItem}>
       <div className={`${styles.greyBox} ${styles.bestGreyBox}`}></div>
       <div className={styles.bestText}>
         <h3>
-          {translations[language].bestItem} {index + 1} <FaCartPlus />
+          {currentTranslations.bestItem} {index + 1} <FaCartPlus />
         </h3>
         <p className={styles.middleText}>
-          {translations[language].bestDescription}
+          {currentTranslations.bestDescription}
           <div className={styles.priceCart}></div>
         </p>
-        <p>{translations[language].bestPrice}</p>
+        <p>{currentTranslations.bestPrice}</p>
       </div>
     </div>
   ));
+
   return (
     <div className={styles.homeContainer}>
       <section className={styles.sliderSection}>
@@ -460,7 +509,7 @@ function Home() {
       </section>
       <section className={styles.bestSection}>
         <h2 className={styles.centeredHeading}>
-          {translations[language].bestHeader}
+          {currentTranslations.bestHeader}
         </h2>
         <div className={styles.sliderContainer}>
           <Slider {...bestSettings}>
@@ -478,7 +527,7 @@ function Home() {
         </div>
       </section>
       <section className={styles.newGridSection}>
-        <h2>{translations[language].newGridHeader}</h2>
+        <h2>{currentTranslations.newGridHeader}</h2>
         <div className={styles.newGridContainer}>
           {Array.from({ length: 7 }, (_, index) => (
             <div
@@ -487,30 +536,30 @@ function Home() {
                 styles[`newGridItem${index + 1}`]
               }`}
             >
-              <p>{translations[language].symmetricItem}</p>
-              <p>{translations[language].symmetricItem}</p>
+              <p>{currentTranslations.symmetricItem}</p>
+              <p>{currentTranslations.symmetricItem}</p>
             </div>
           ))}
         </div>
       </section>
       <section className={styles.asymmetricGridSection}>
-        <p>{translations[language].asymmetricGridHeader}</p>
+        <p>{currentTranslations.asymmetricGridHeader}</p>
         <div className={styles.asymmetricGrid}>
           <div className={`${styles.asymmetricGridItem} ${styles.gridItem1}`}>
-            <p>{translations[language].symmetricItem}</p>
+            <p>{currentTranslations.symmetricItem}</p>
           </div>
           <div className={`${styles.asymmetricGridItem} ${styles.gridItem2}`}>
-            <p>{translations[language].symmetricItem}</p>
+            <p>{currentTranslations.symmetricItem}</p>
           </div>
           <div className={`${styles.asymmetricGridItem} ${styles.gridItem3}`}>
-            <p>{translations[language].symmetricItem}</p>
+            <p>{currentTranslations.symmetricItem}</p>
           </div>
         </div>
       </section>
       <section className={styles.symmetricGridSection}>
         <p>{symmetricGridHeader}</p>
         <button className={styles.moreText} onClick={handleMoreTextClick}>
-          {translations[language].moreText}
+          {currentTranslations.moreText}
         </button>
         {isMobile ? (
           <Slider {...symmetricSettings}>
@@ -522,7 +571,7 @@ function Home() {
                   <div className={styles.itemText}>
                     <strong>{`작가명 ${index + 1}`}</strong>
                     <br />
-                    {translations[language].symmetricItem}, 제작년도
+                    {currentTranslations.symmetricItem}, 제작년도
                   </div>
                 </div>
               </div>
@@ -538,7 +587,7 @@ function Home() {
                   <div className={styles.itemText}>
                     <strong>{`작가명 ${index + 1}`}</strong>
                     <br />
-                    {translations[language].symmetricItem}, 제작년도
+                    {currentTranslations.symmetricItem}, 제작년도
                   </div>
                 </div>
               </div>
@@ -548,7 +597,7 @@ function Home() {
       </section>
       <section className={styles.textContainerSection}>
         <div className={styles.textContainer}>
-          <p>{translations[language].textContainer}</p>
+          <p>{currentTranslations.textContainer}</p>
         </div>
       </section>
     </div>

@@ -11,6 +11,7 @@
 .homeContainer {
   display: flex;
   flex-direction: column;
+  padding: 0 60px;
 }
 
 .homeContainer h2 {
@@ -18,7 +19,7 @@
   justify-content: center;
 }
 section{
-  width: 90%;
+  width: 100%;
   padding-bottom: 30px;
   margin: auto;
 }
@@ -32,6 +33,9 @@ section{
   order: 2;
   margin-top: 40px;
   text-align: center;
+}
+.newGridSection h2{
+  font-size: 34px;
 }
 /* 비대칭 그리드 섹션 */
 .asymmetricGridSection {
@@ -330,7 +334,6 @@ section{
     "item1 item2 item2 item4"
     "item5 item6 item6 item7"
     "item5 item6 item6 item7";
-  max-width: 1400px;
   margin: 0 auto; /* 그리드를 가로 중앙으로 정렬 */
 }
 
@@ -367,7 +370,6 @@ section{
     "item1 item1 item2"
     "item1 item1 item2"
     "item1 item1 item3";
-  width: 90%;
   margin: auto;
 }
 
@@ -388,7 +390,6 @@ section{
 
 
 .sliderContainer {
-  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -396,12 +397,11 @@ section{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  width: 90%;
   margin: auto;
 }
 
 .symmetricGridItem {
-  height: 200px; /* 높이를 고정하여 일정한 크기로 유지 */
+  height: 600px; 
   position: relative;
 }
 
@@ -445,31 +445,7 @@ section{
 .originalGridContainer {
   display: none; /* 기본적으로 숨김 처리 */
 }
-.grid-item-slide-right {
-  animation: slideRight 0.5s ease-in-out;
-}
 
-.grid-item-slide-left {
-  animation: slideLeft 0.5s ease-in-out;
-}
-
-@keyframes slideRight {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideLeft {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
   section{
