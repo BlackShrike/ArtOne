@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styles from "../css/Signup.module.css"; // Ensure the path is correct
+import styles from "../css/Signup.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
-import apiClient from "../components/api"; // apiClient import 추가
+import apiClient from "../components/api";
 
 const translations = {
   KR: {
@@ -184,7 +184,7 @@ function Signup() {
             maxLength="3"
             required
             onChange={handleChange}
-          />{" "}
+          />
           <span className={styles.hyphen}>-</span>
           <input
             type="text"
@@ -193,7 +193,7 @@ function Signup() {
             maxLength="4"
             required
             onChange={handleChange}
-          />{" "}
+          />
           <span className={styles.hyphen}>-</span>
           <input
             type="text"
@@ -202,8 +202,7 @@ function Signup() {
             maxLength="4"
             required
             onChange={handleChange}
-          />{" "}
-          <span className={styles.hyphen}>-</span>
+          />
         </div>
         <div className={`${styles.formGroup} ${styles.birthdateInput}`}>
           <label>{t.birthdate}</label>
@@ -214,8 +213,8 @@ function Signup() {
             maxLength="4"
             required
             onChange={handleChange}
-          />{" "}
-          <span className={styles.hyphen}></span>
+          />
+          <span className={styles.hyphen}>-</span>
           <input
             type="text"
             id="birthMonth"
@@ -223,8 +222,8 @@ function Signup() {
             maxLength="2"
             required
             onChange={handleChange}
-          />{" "}
-          <span className={styles.hyphen}></span>
+          />
+          <span className={styles.hyphen}>-</span>
           <input
             type="text"
             id="birthDay"
@@ -236,24 +235,26 @@ function Signup() {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="address">{t.address}</label>
-          <div className={styles.addressSearchContainer}>
-            <input type="text" value={formData.zonecode} readOnly />
-            <button
-              type="button"
-              className={styles.addressSearchButton}
-              onClick={onClickSearch}
-            >
-              {t.addressSearch}
-            </button>
+          <div className={styles.addressInputs}>
+            <div className={styles.addressSearchContainer}>
+              <input type="text" value={formData.zonecode} readOnly />
+              <button
+                type="button"
+                className={styles.addressSearchButton}
+                onClick={onClickSearch}
+              >
+                {t.addressSearch}
+              </button>
+            </div>
+            <input type="text" value={formData.roadAddress} readOnly />
+            <input
+              type="text"
+              id="roadAddressDetail"
+              value={formData.roadAddressDetail}
+              onChange={handleChange}
+              placeholder="상세 주소를 입력해주세요"
+            />
           </div>
-          <input type="text" value={formData.roadAddress} readOnly />
-          <input
-            type="text"
-            id="roadAddressDetail"
-            value={formData.roadAddressDetail}
-            onChange={handleChange}
-            placeholder="상세 주소를 입력해주세요"
-          />
         </div>
         <div className={styles.terms}>
           <div className={styles.term}>
