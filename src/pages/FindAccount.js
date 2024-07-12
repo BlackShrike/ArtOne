@@ -102,9 +102,9 @@ function FindAccount() {
             <>
               <p className={styles.label}>{t.phonePlaceholder}</p>
               <div className={styles.phoneInput}>
-                <input type="text" maxLength="3" required />
-                <input type="text" maxLength="4" required />
-                <input type="text" maxLength="4" required />
+                <input type="text" maxLength="3" required /> -
+                <input type="text" maxLength="4" required /> -
+                <input type="text" maxLength="4" required /> -
               </div>
             </>
           ) : (
@@ -121,9 +121,12 @@ function FindAccount() {
               <>
                 <p className={styles.label}>{t.phonePlaceholder}</p>
                 <div className={styles.phoneInput}>
-                  <input type="text" maxLength="3" required />
-                  <input type="text" maxLength="4" required />
-                  <input type="text" maxLength="4" required />
+                  <input type="text" maxLength="3" required />{" "}
+                  <span className={styles.hyphen}>-</span>
+                  <input type="text" maxLength="4" required />{" "}
+                  <span className={styles.hyphen}>-</span>
+                  <input type="text" maxLength="4" required />{" "}
+                  <span className={styles.hyphen}>-</span>
                 </div>
               </>
             ) : (

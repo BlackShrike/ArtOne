@@ -78,11 +78,11 @@
 }
 
 .link:hover {
-  border-bottom: 1px solid red;
+  border-bottom: 3px solid red;
 }
 
 .link.active {
-  border-bottom: 1px solid red;
+  border-bottom: 3px solid red;
   color: red;
 }
 .artMembershipBox {
@@ -133,7 +133,7 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   z-index: 10;
-  width: 100vw;
+  width: calc(100% + 50px);
   padding-top: 10px;
   padding-right: 40%;
   box-sizing: border-box;
@@ -168,6 +168,7 @@
   text-decoration: none;
   color: black;
   text-align: center;
+  font-size: 20px;
 }
 
 .logoutButton {

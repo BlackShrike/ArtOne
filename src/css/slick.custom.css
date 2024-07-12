@@ -4,13 +4,13 @@
 /* 화살표 스타일링 */
 .slick-prev,
 .slick-next {
-  font-size: 4rem;
+  font-size: 60px;
   z-index: 2;
   background: none;
   border: none;
   color: black;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(0.5, 1);
 }
 
 .slick-prev:hover,

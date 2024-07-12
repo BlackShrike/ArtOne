@@ -2,8 +2,6 @@
 
 .search-results-container {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 20px;
 }
 
@@ -21,6 +19,7 @@
 .results-header {
   text-align: right;
   margin-bottom: 20px;
+  padding: 0 20px;
 }
 .results-header h2{
   text-align: center;
@@ -33,12 +32,13 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(5, 320px);
+  gap: 53px;
+  justify-content: center;
+  margin-bottom: 220px;
 }
 
 .grid-item {
-  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,9 +46,9 @@
 
 .image-placeholder {
   width: 100%;
-  height: 200px;
+  height: 371px;
   background-color: #ddd;
-  margin-bottom: 10px;
+  margin-bottom: 27px;
 }
 
 .item-details {
@@ -72,7 +72,7 @@
 
 .item-price {
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 13px;
 }
 
 .cart-icon {
@@ -83,7 +83,7 @@
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 275px;
 }
 
 .page-number,

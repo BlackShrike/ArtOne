@@ -25,8 +25,8 @@ function Promotion() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  const totalItems = 20; // 총 아이템 수
+  const itemsPerPage = 12;
+  const totalItems = 80; // 총 아이템 수
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   if (id) {

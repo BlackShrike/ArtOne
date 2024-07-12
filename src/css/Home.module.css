@@ -1,7 +1,35 @@
-/* 기본 스타일 */
+/* 애니메이션 정의 */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* 애니메이션 클래스 */
+.animateOut {
+  animation: fadeOut 0.4s forwards;
+}
+
+.gridItemWrapper {
+  animation: slideIn 0.4s forwards;
+}
+
+
+/* 나머지 스타일은 그대로 유지 */
 .item {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   height: 100%;
   white-space: nowrap;
@@ -17,40 +45,54 @@
 .homeContainer h2 {
   display: flex;
   justify-content: center;
+  font-size: 33.5px;
 }
-section{
+
+section {
   width: 100%;
   padding-bottom: 30px;
   margin: auto;
 }
-.sliderSection{
+
+figure {
+  width: auto;
+  height: 80%;
+  margin: 0px;
+}
+
+.sliderSection {
   order: 1;
 }
-.bestSection{
-  order: 3
+
+.bestSection {
+  order: 3;
 }
+
 .newGridSection {
   order: 2;
   margin-top: 40px;
   text-align: center;
 }
-.newGridSection h2{
+
+.newGridSection h2 {
   font-size: 34px;
 }
+
 /* 비대칭 그리드 섹션 */
 .asymmetricGridSection {
   order: 4;
   margin-top: 40px;
   text-align: center;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 33px;
 }
+
 /* 대칭 그리드 섹션 */
 .symmetricGridSection {
   order: 5;
   text-align: center;
   margin-top: 40px;
-  font-size: 18px;
+  font-size: 33px;
   font-weight: bold;
 }
 
@@ -60,28 +102,43 @@ section{
   margin-top: 40px;
   text-align: center;
   white-space: pre-line;
+  font-size: 33px;
 }
+
 /* 홈 그리드 */
 .homeGrid {
   display: grid;
   gap: 5px;
-  grid-template-columns: repeat(12, 1fr); /* 12 columns */
-  grid-template-rows: repeat(7, 100px); /* 7 rows */
+  max-width: calc(100vh-120px);
+  grid-template-columns: repeat(16, 105px); /* 16 columns */
+  grid-template-rows: repeat(7, 145px); /* 7 rows */
   grid-template-areas:
-    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
-    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
-    "large large large large large large medium1 medium1 medium1 medium2 medium2 medium2"
-    "large large large large large large small-right1 small-right1 small-right1 small-right6 small-right6 small-right6"
-    "large large large large large large small-right2 small-right2 small-right2 small-right7 small-right7 small-right7"
-    "large large large large large large small-right3 small-right3 small-right3 small-right8 small-right8 small-right8"
-    "small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-right4 small-right4 small-right4 small-right9 small-right9 small-right9"
-    "small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-right5 small-right5 small-right5 small-right10 small-right10 small-right10";
-  margin: auto;
+    "large large large large large large large large medium1 medium1 medium1 medium1 medium2 medium2 medium2 medium2"
+    "large large large large large large large large medium1 medium1 medium1 medium1 medium2 medium2 medium2 medium2"
+    "large large large large large large large large medium1 medium1 medium1 medium1 medium2 medium2 medium2 medium2"
+    "large large large large large large large large small-right1 small-right1 small-right1 small-right1 small-right6 small-right6 small-right6 small-right6"
+    "large large large large large large large large small-right2 small-right2 small-right2 small-right2 small-right7 small-right7 small-right7 small-right7"
+    "large large large large large large large large small-right3 small-right3 small-right3 small-right3 small-right8 small-right8 small-right8 small-right8"
+    "small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-right4 small-right4 small-right4 small-right4 small-right9 small-right9 small-right9 small-right9"
+    "small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-right5 small-right5 small-right5 small-right5 small-right10 small-right10 small-right10 small-right10";
   padding-top: 20px;
 }
 
 .homePrice {
   font-weight: bold;
+}
+
+.gridItemWrapper {
+  display: grid;
+  position: relative;
+}
+
+.gridItemContent {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .item p {
@@ -94,7 +151,7 @@ section{
 
 .greyBox {
   width: 100%;
-  height: 80%;
+  height: 100%;
   min-height: 100px;
   background-color: #ddd;
   background-size: cover;
@@ -103,8 +160,8 @@ section{
 }
 
 .smallGreyBox {
-  width: 68px;
-  height: 80px;
+  width: 94px;
+  height: 120px;
   background-color: #ddd;
   background-size: cover;
   transition: background-size 0.5s ease, background-position 0.5s ease;
@@ -115,8 +172,11 @@ section{
 .largeItem {
   grid-area: large;
   align-items: flex-start;
+  flex-direction: column;
 }
-
+.largeItem figure{
+  width: 100%;
+}
 .largeItem .text {
   white-space: nowrap;
   text-align: left;
@@ -126,14 +186,14 @@ section{
   justify-content: flex-start;
 }
 
-.largeItem .text p:first-child {
-  font-size: 20px; /* First line larger */
+.largeItem .text div:first-child {
+  font-size: 28px; /* First line larger */
   font-weight: 700;
   margin: 10px 0px;
 }
 
-.largeItem .text p:last-child {
-  font-size: 12px; /* Second line smaller */
+.largeItem .text div:last-child {
+  font-size: 22px; /* Second line smaller */
   font-weight: 400;
   margin: 5px 0px;
 }
@@ -158,108 +218,110 @@ section{
   width: 100%;
 }
 
-.mediumItem1 .text p:first-child, .mediumItem2 .text p:first-child {
+.mediumItem1 .text div:first-child, .mediumItem2 .text div:first-child {
   white-space: nowrap;
-  font-size: 16px; /* First line larger */
+  font-size: 22px; /* First line larger */
   font-weight: 700;
   margin-bottom: 5px;
 }
 
-.mediumItem1 .text p:last-child, .mediumItem2 .text p:last-child {
-  font-size: 12px; /* Second line smaller */
+.mediumItem1 .text div:last-child, .mediumItem2 .text div:last-child {
+  font-size: 22px; /* Second line smaller */
   margin: 0;
+  white-space: nowrap;
 }
 
 .smallItemLeft1 {
   grid-area: small-left1;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemLeft2 {
   grid-area: small-left2;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight1 {
   grid-area: small-right1;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight2 {
   grid-area: small-right2;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight3 {
   grid-area: small-right3;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight4 {
   grid-area: small-right4;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight5 {
   grid-area: small-right5;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight6 {
   grid-area: small-right6;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight7 {
   grid-area: small-right7;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight8 {
   grid-area: small-right8;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight9 {
   grid-area: small-right9;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
-
 }
 
 .smallItemRight10 {
   grid-area: small-right10;
+  display: flex;
   flex-direction: row;
   justify-content: flex-start;
   font-size: 12px;
@@ -270,8 +332,13 @@ section{
   height: 90%;
   margin-right: 10px;
 }
-
-
+.text{
+  flex-grow: 1;
+}
+.text div {
+  font-size: 18px;
+  margin: 8px 0;
+}
 
 .bestGrid {
   display: grid !important;
@@ -293,16 +360,21 @@ section{
   flex-direction: column;
   align-items: flex-start;
 }
+
 .bestText h3 {
   display: flex;
   justify-content: space-between; /* 텍스트와 아이콘을 양 끝에 배치 */
   align-items: center;
   width: 100%; /* 부모 요소의 전체 너비를 차지하도록 설정 */
 }
+
 .bestText > * {
   margin: 0px;
 }
 
+.bestText :last-child {
+  margin-top: 6px;
+}
 .middleText {
   display: flex;
   margin: 0;
@@ -318,15 +390,15 @@ section{
 }
 
 .bestGreyBox {
-  height: 150px;
+  width: 205px;
+  height: 238px;
 }
 
 /* 새로운 그리드 섹션 */
-
 .newGridContainer {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 125px);
+  grid-template-columns: repeat(4, 442px); /* 4개의 균일한 칼럼 */
+  grid-template-rows: repeat(5); /* 행 높이를 자동으로 설정 */
   gap: 10px;
   grid-template-areas:
     "item1 item2 item2 item3"
@@ -339,33 +411,28 @@ section{
 
 .newGridItem {
   background-color: #eee;
-  padding: 20px;
+  padding: 30px 25px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   font-size: 14px;
   color: white;
+  height: auto; /* 높이를 자동으로 설정 */
 }
 
-.newGridItem p {
-  margin: 2px;
-}
-
-.newGridItem1 { grid-area: item1; }
-.newGridItem2 { grid-area: item2; }
-.newGridItem3 { grid-area: item3; }
-.newGridItem4 { grid-area: item4; }
-.newGridItem5 { grid-area: item5; }
-.newGridItem6 { grid-area: item6; }
-.newGridItem7 { grid-area: item7; }
-
-
+.newGridItem1 { grid-area: item1; height: 741px; } /* 새로운 높이 설정 */
+.newGridItem2 { grid-area: item2; height: 741px; } /* 새로운 높이 설정 */
+.newGridItem3 { grid-area: item3; height: 481px; } /* 새로운 높이 설정 */
+.newGridItem4 { grid-area: item4; height: 235px; } /* 새로운 높이 설정 */
+.newGridItem5 { grid-area: item5; height: 351px; } /* 새로운 높이 설정 */
+.newGridItem6 { grid-area: item6; height: 351px; } /* 새로운 높이 설정 */
+.newGridItem7 { grid-area: item7; height: 351px; } /* 새로운 높이 설정 */
 .asymmetricGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(3, 150px);
-  gap: 10px;
+  grid-template-rows: repeat(3, 250px);
+  gap: 12px;
   grid-template-areas:
     "item1 item1 item2"
     "item1 item1 item2"
@@ -379,7 +446,7 @@ section{
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    font-size: 14px;
+    font-size: 20px;
     color: #fff;
     white-space: pre-line;
 }
@@ -387,7 +454,6 @@ section{
 .gridItem1 { grid-area: item1; }
 .gridItem2 { grid-area: item2; }
 .gridItem3 { grid-area: item3; }
-
 
 .sliderContainer {
   margin: 0 auto;
@@ -401,8 +467,9 @@ section{
 }
 
 .symmetricGridItem {
-  height: 600px; 
+  height: 576px; 
   position: relative;
+  margin-bottom: 34px;
 }
 
 .profilePlaceholder {
@@ -424,28 +491,26 @@ section{
   font-weight: 400;
 }
 
-
-
 .textContainer p {
   margin: 10px 0;
   font-weight: bold;
 }
 
 .moreText {
+  left: 48%;
   position: relative;
-  top: -20px;
-  left: 42%;
   color: gray;
-  font-size: 12px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
   border: none;
   background-color: transparent;
+  padding-bottom: 20px;
 }
+
 .originalGridContainer {
   display: none; /* 기본적으로 숨김 처리 */
 }
-
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
   section{

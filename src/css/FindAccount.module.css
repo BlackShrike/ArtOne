@@ -1,21 +1,12 @@
 .findAccountContainer {
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
   padding: 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.backLink {
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.backLink a {
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
-}
 
 .label {
   text-align: left;
@@ -26,15 +17,17 @@
 }
 
 .findTabs {
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
 .findTabs button {
+  width: 200px;
   padding: 10px 20px;
   border: none;
-  border-bottom: 2px solid transparent;
+  border: 1px solid #ccc;
   background: none;
   cursor: pointer;
   font-size: 16px;
@@ -46,13 +39,18 @@
 
 h2 {
   font-size: 24px;
+  margin-top: 50px;
   margin-bottom: 20px;
 }
 
 .authMethods {
+  width: 350px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 100;
+  white-space: nowrap;
 }
 
 .authMethods div {
@@ -72,10 +70,12 @@ h2 {
   color: white;
   background-color: #ff6b6b;
   border-radius: 50%;
+  margin-right: 8px;
   padding: 2px;
 }
 
 .findForm {
+  width: 400px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -83,11 +83,11 @@ h2 {
 }
 
 .findForm input {
-  width: 100%;
-  padding: 10px;
+  width: calc(30%);
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  height: 50px;
 }
 
 .phoneInput {
@@ -96,14 +96,18 @@ h2 {
 }
 
 .phoneInput input {
-  width: calc(33.33%);
+  width: calc(30%);
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
+.hyphen {
+  font-size: 18px;
+}
 .confirmButton {
+  margin-top: 40px;
   width: 100%;
   padding: 10px;
   background-color: #ff6b6b;

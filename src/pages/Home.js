@@ -8,7 +8,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { useLanguage } from "../components/LanguageContext";
 import "../css/slick.custom.css";
 import ZoomImage from "../components/ZoomImage";
-import { wrapGrid } from "animate-css-grid";
 
 const Arrow = ({ className, style, onClick, icon }) => (
   <div className={className} style={{ ...style }} onClick={onClick}>
@@ -136,57 +135,13 @@ const translations = {
   },
 };
 
-const GridItem = ({ className, greyBoxClass, textLines, price }) => {
-  const greyBoxRef = useRef(null);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [containerHeight, setContainerHeight] = useState(0);
-
-  useEffect(() => {
-    if (greyBoxRef.current) {
-      const { width, height } = greyBoxRef.current.getBoundingClientRect();
-      setContainerWidth(width);
-      setContainerHeight(height);
-    }
-  }, []);
-
-  return (
-    <div className={`${styles.item} ${className}`}>
-      <div className={`${styles.greyBox} ${greyBoxClass}`} ref={greyBoxRef}>
-        {containerWidth > 0 && containerHeight > 0 && (
-          <ZoomImage
-            zoomRate={2}
-            containerWidth={containerWidth}
-            containerHeight={containerHeight}
-          >
-            <div
-              className={`${styles.greyBoxContent}`}
-              style={{
-                width: containerWidth,
-                height: containerHeight,
-              }}
-            ></div>
-          </ZoomImage>
-        )}
-      </div>
-      <div className={styles.text}>
-        {textLines.map((line, index) => (
-          <p key={index}>{line}</p>
-        ))}
-        {price && <p className={styles.homePrice}>{price}</p>}
-      </div>
-    </div>
-  );
-};
-
-function Home() {
+const Home = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const sliderRef = useRef(null);
+  const gridRef = useRef(null);
   const { language } = useLanguage();
   const navigate = useNavigate();
   const currentTranslations = translations[language];
-  const [symmetricGridHeader, setSymmetricGridHeader] = useState(
-    currentTranslations.symmetricGridHeader
-  );
   const [leftGridItems, setLeftGridItems] = useState([
     { type: "largeItem", textLines: currentTranslations.main.slice(0, 2) },
     { type: "mediumItem1", textLines: currentTranslations.main.slice(2, 4) },
@@ -209,52 +164,120 @@ function Home() {
       price: item.price,
     })),
   ]);
+  const [animating, setAnimating] = useState(false);
+  const [itemsToRemove, setItemsToRemove] = useState([]);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth <= 768) {
-        setSymmetricGridHeader("오리지널 원화");
-      } else {
-        setSymmetricGridHeader(currentTranslations.symmetricGridHeader);
-      }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [currentTranslations]);
+  }, []);
+
+  const handleAnimationEnd = (index, side) => {
+    setItemsToRemove((prev) => [...prev, { index, side }]);
+  };
 
   useEffect(() => {
-    if (isMobile) {
-      setSymmetricGridHeader("오리지널 원화");
-    } else {
-      setSymmetricGridHeader(currentTranslations.symmetricGridHeader);
+    if (itemsToRemove.length > 0) {
+      const newLeftItems = leftGridItems.filter(
+        (_, index) =>
+          !itemsToRemove.some(
+            (item) => item.index === index && item.side === "left"
+          )
+      );
+      const newRightItems = rightGridItems.filter(
+        (_, index) =>
+          !itemsToRemove.some(
+            (item) => item.index === index && item.side === "right"
+          )
+      );
+
+      setLeftGridItems(newLeftItems);
+      setRightGridItems(newRightItems);
+      setItemsToRemove([]);
     }
-  }, [isMobile, currentTranslations]);
+  }, [itemsToRemove]);
 
   const slideRight = () => {
-    setLeftGridItems((prevItems) => {
-      let newItems = [...prevItems];
-      newItems.unshift(newItems.pop());
-      return newItems;
-    });
-    setRightGridItems((prevItems) => {
-      let newItems = [...prevItems];
-      newItems.unshift(newItems.pop());
-      return newItems;
-    });
+    if (animating) return;
+    setAnimating(true);
+
+    const newLeftItems = [
+      { ...leftGridItems[1], type: "largeItem" },
+      { ...leftGridItems[2], type: "mediumItem1" },
+      { type: "mediumItem2", textLines: currentTranslations.main.slice(4, 6) },
+      ...rightGridItems.slice(0, 2).map((item, i) => ({
+        ...item,
+        type: `smallItemLeft${i + 1}`,
+      })),
+      ...rightGridItems.slice(2, 5).map((item, i) => ({
+        ...rightGridItems[i + 2],
+        type: `smallItemLeft${i + 3}`,
+      })),
+    ];
+
+    const newRightItems = [
+      ...rightGridItems.slice(2).map((item, i) => ({
+        ...rightGridItems[i + 5],
+        type: `smallItemRight${i + 1}`,
+      })),
+      ...rightGridItems.slice(5).map((item, i) => ({
+        type: `smallItemRight${i + 6}`,
+        textLines: currentTranslations.smallItemsRight[i].textLines,
+        price: currentTranslations.smallItemsRight[i].price,
+      })),
+    ];
+
+    setLeftGridItems(newLeftItems);
+    setRightGridItems(newRightItems);
+
+    setTimeout(() => {
+      setAnimating(false);
+    }, 400);
   };
 
   const slideLeft = () => {
-    setLeftGridItems((prevItems) => {
-      let newItems = [...prevItems];
-      newItems.push(newItems.shift());
-      return newItems;
-    });
-    setRightGridItems((prevItems) => {
-      let newItems = [...prevItems];
-      newItems.push(newItems.shift());
-      return newItems;
-    });
+    if (animating) return;
+    setAnimating(true);
+
+    const newLeftItems = [
+      { ...leftGridItems[0], type: "mediumItem1" },
+      { ...leftGridItems[1], type: "mediumItem2" },
+      { type: "largeItem", textLines: currentTranslations.main.slice(0, 2) },
+      ...leftGridItems.slice(3, 5).map((item, i) => ({
+        ...rightGridItems[i],
+        type: `smallItemLeft${i + 1}`,
+      })),
+      ...rightGridItems.slice(2, 4).map((item, i) => ({
+        ...rightGridItems[i + 2],
+        type: `smallItemLeft${i + 3}`,
+      })),
+    ];
+
+    const newRightItems = [
+      ...leftGridItems.slice(3, 5).map((item, i) => ({
+        ...rightGridItems[i],
+        type: `smallItemRight${i + 1}`,
+      })),
+      ...rightGridItems.slice(0, 2).map((item, i) => ({
+        ...rightGridItems[i],
+        type: `smallItemRight${i + 3}`,
+      })),
+      ...leftGridItems.slice(3, 5).map((item, i) => ({
+        type: `smallItemRight${i + 6}`,
+        textLines: currentTranslations.smallItemsLeft[i].textLines,
+        price: currentTranslations.smallItemsLeft[i].price,
+      })),
+    ];
+
+    setLeftGridItems(newLeftItems);
+    setRightGridItems(newRightItems);
+
+    setTimeout(() => {
+      setAnimating(false);
+    }, 400);
   };
 
   const handleMoreTextClick = () => {
@@ -285,7 +308,7 @@ function Home() {
             className="slick-arrow"
             onClick={() => {
               sliderRef.current.slickPrev();
-              slideLeft;
+              slideLeft();
             }}
             style={{ cursor: "pointer" }}
           >
@@ -296,7 +319,7 @@ function Home() {
             className="slick-arrow"
             onClick={() => {
               sliderRef.current.slickNext();
-              slideRight;
+              slideRight();
             }}
             style={{ cursor: "pointer" }}
           >
@@ -311,7 +334,7 @@ function Home() {
         icon="❮"
         onClick={() => {
           sliderRef.current.slickPrev();
-          slideLeft;
+          slideLeft();
         }}
       />
     ),
@@ -321,7 +344,7 @@ function Home() {
         icon="❯"
         onClick={() => {
           sliderRef.current.slickNext();
-          slideRight;
+          slideRight();
         }}
       />
     ),
@@ -418,8 +441,69 @@ function Home() {
     ),
   };
 
+  const GridItem = ({
+    className = "",
+    greyBoxClass,
+    textLines = [],
+    price = "",
+    animateOut,
+    onAnimationEnd,
+  }) => {
+    const greyBoxRef = useRef(null);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const [containerHeight, setContainerHeight] = useState(0);
+
+    useEffect(() => {
+      if (greyBoxRef.current) {
+        const { width, height } = greyBoxRef.current.getBoundingClientRect();
+        setContainerWidth(width);
+        setContainerHeight(height);
+      }
+    }, []);
+
+    return (
+      <article
+        className={`${className} ${styles.gridItemContent} ${
+          (className.includes("largeItem") ||
+            className.includes("mediumItem")) &&
+          styles.columnDirection
+        } ${animateOut ? styles.animateOut : ""}`}
+        onAnimationEnd={animateOut ? () => onAnimationEnd() : undefined}
+      >
+        <figure className={styles.greyBoxContainer}>
+          <figcaption
+            className={`${styles.greyBox} ${greyBoxClass}`}
+            ref={greyBoxRef}
+          >
+            {containerWidth > 0 && containerHeight > 0 && (
+              <ZoomImage
+                zoomRate={2}
+                containerWidth={containerWidth}
+                containerHeight={containerHeight}
+              >
+                <section
+                  className={styles.greyBoxContent}
+                  style={{
+                    width: containerWidth,
+                    height: containerHeight,
+                  }}
+                ></section>
+              </ZoomImage>
+            )}
+          </figcaption>
+        </figure>
+        <div className={styles.text}>
+          {textLines.map((line, index) => (
+            <div key={index}>{line}</div>
+          ))}
+          {price && <div className={styles.homePrice}>{price}</div>}
+        </div>
+      </article>
+    );
+  };
+
   const homeMainDesktop = (
-    <div className={styles.homeGridWrapper}>
+    <div className={styles.homeGridWrapper} ref={gridRef}>
       <div className={styles.homeGrid}>
         {leftGridItems.map((item, index) => (
           <GridItem
@@ -432,6 +516,8 @@ function Home() {
             }
             textLines={item.textLines}
             price={item.price}
+            animateOut={animating && index === leftGridItems.length - 1}
+            onAnimationEnd={() => handleAnimationEnd(index, "left")}
           />
         ))}
         {rightGridItems.map((item, index) => (
@@ -445,6 +531,8 @@ function Home() {
             }
             textLines={item.textLines}
             price={item.price}
+            animateOut={animating && index === rightGridItems.length - 1}
+            onAnimationEnd={() => handleAnimationEnd(index, "right")}
           />
         ))}
       </div>
@@ -452,33 +540,35 @@ function Home() {
   );
 
   const homeMainMobile = (
-    <div className={styles.homeGridMobile}>
-      {leftGridItems.slice(0, 4).map((item, index) => (
-        <GridItem
-          key={index}
-          className={styles[item.type]}
-          greyBoxClass={
-            item.type.startsWith("smallItem")
-              ? styles.smallGreyBox
-              : styles.greyBox
-          }
-          textLines={item.textLines}
-          price={item.price}
-        />
-      ))}
-      {rightGridItems.slice(0, 4).map((item, index) => (
-        <GridItem
-          key={index}
-          className={styles[item.type]}
-          greyBoxClass={
-            item.type.startsWith("smallItem")
-              ? styles.smallGreyBox
-              : styles.greyBox
-          }
-          textLines={item.textLines}
-          price={item.price}
-        />
-      ))}
+    <div className={styles.homeGridWrapper}>
+      <div className={styles.homeGridMobile}>
+        {leftGridItems.slice(0, 4).map((item, index) => (
+          <GridItem
+            key={index}
+            className={styles[item.type]}
+            greyBoxClass={
+              item.type.startsWith("smallItem")
+                ? styles.smallGreyBox
+                : styles.greyBox
+            }
+            textLines={item.textLines}
+            price={item.price}
+          />
+        ))}
+        {rightGridItems.slice(0, 4).map((item, index) => (
+          <GridItem
+            key={index}
+            className={styles[item.type]}
+            greyBoxClass={
+              item.type.startsWith("smallItem")
+                ? styles.smallGreyBox
+                : styles.greyBox
+            }
+            textLines={item.textLines}
+            price={item.price}
+          />
+        ))}
+      </div>
     </div>
   );
 
@@ -536,8 +626,8 @@ function Home() {
                 styles[`newGridItem${index + 1}`]
               }`}
             >
-              <p>{currentTranslations.symmetricItem}</p>
-              <p>{currentTranslations.symmetricItem}</p>
+              <span>{currentTranslations.symmetricItem}</span>
+              <span>{currentTranslations.symmetricItem}</span>
             </div>
           ))}
         </div>
@@ -546,18 +636,18 @@ function Home() {
         <p>{currentTranslations.asymmetricGridHeader}</p>
         <div className={styles.asymmetricGrid}>
           <div className={`${styles.asymmetricGridItem} ${styles.gridItem1}`}>
-            <p>{currentTranslations.symmetricItem}</p>
+            <span>{currentTranslations.symmetricItem}</span>
           </div>
           <div className={`${styles.asymmetricGridItem} ${styles.gridItem2}`}>
-            <p>{currentTranslations.symmetricItem}</p>
+            <span>{currentTranslations.symmetricItem}</span>
           </div>
           <div className={`${styles.asymmetricGridItem} ${styles.gridItem3}`}>
-            <p>{currentTranslations.symmetricItem}</p>
+            <span>{currentTranslations.symmetricItem}</span>
           </div>
         </div>
       </section>
       <section className={styles.symmetricGridSection}>
-        <p>{symmetricGridHeader}</p>
+        <p>{currentTranslations.symmetricGridHeader}</p>
         <button className={styles.moreText} onClick={handleMoreTextClick}>
           {currentTranslations.moreText}
         </button>
@@ -602,6 +692,6 @@ function Home() {
       </section>
     </div>
   );
-}
+};
 
 export default Home;

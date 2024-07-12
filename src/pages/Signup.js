@@ -184,7 +184,8 @@ function Signup() {
             maxLength="3"
             required
             onChange={handleChange}
-          />
+          />{" "}
+          <span className={styles.hyphen}>-</span>
           <input
             type="text"
             id="phoneNumberPart2"
@@ -192,7 +193,8 @@ function Signup() {
             maxLength="4"
             required
             onChange={handleChange}
-          />
+          />{" "}
+          <span className={styles.hyphen}>-</span>
           <input
             type="text"
             id="phoneNumberPart3"
@@ -200,7 +202,8 @@ function Signup() {
             maxLength="4"
             required
             onChange={handleChange}
-          />
+          />{" "}
+          <span className={styles.hyphen}>-</span>
         </div>
         <div className={`${styles.formGroup} ${styles.birthdateInput}`}>
           <label>{t.birthdate}</label>
@@ -211,7 +214,8 @@ function Signup() {
             maxLength="4"
             required
             onChange={handleChange}
-          />
+          />{" "}
+          <span className={styles.hyphen}></span>
           <input
             type="text"
             id="birthMonth"
@@ -219,7 +223,8 @@ function Signup() {
             maxLength="2"
             required
             onChange={handleChange}
-          />
+          />{" "}
+          <span className={styles.hyphen}></span>
           <input
             type="text"
             id="birthDay"
