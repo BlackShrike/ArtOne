@@ -19,4 +19,5 @@
   height: 100%; /* 부모 요소의 높이를 채우도록 설정 */
   display: flex;
   align-items: center; /* 버튼 내 텍스트를 수직 가운데 정렬 */
+  white-space: nowrap;
 }

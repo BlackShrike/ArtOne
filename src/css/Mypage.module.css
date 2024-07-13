@@ -5,16 +5,29 @@
 }
 
 .mypageContainer {
-  width: 100%;
+  width: 80%; /* Make the container narrower */
   display: flex;
   padding: 20px;
   margin: auto;
+  flex-direction: column;
 }
 
+.contentWrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding-bottom: 440px;
+}
 .sidebar {
+  min-width: 200px;
   width: 200px;
+  flex: 1;
   margin-right: 20px;
-  border-right: #ccc 1px solid;
+  border-right: 1px solid #ccc;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sidebar h2 {
@@ -28,13 +41,21 @@
 }
 
 .sidebar li {
-  margin-bottom: 10px;
+  margin-bottom: 25px; /* Increase spacing between items */
   cursor: pointer;
   font-size: 18px;
 }
+.sidebarSeparator {
+  width: 80%; /* Adjust as needed */
+  margin: 15px 0; /* Add some spacing around the separator */
+  border: 0;
+  border-top: 1px solid #ccc;
+}
 
 .mainContent {
-  width: 80%;
+  flex: 3;
+  margin-left: 100px;
+  padding: 20px;
 }
 
 .userInfo {
@@ -48,7 +69,7 @@
   align-items: center;
   padding: 10px;
   border-radius: 4px;
-  border: #333 1px solid;
+  border: 1px solid #333;
   background-color: white;
 }
 
@@ -59,16 +80,16 @@
 }
 
 .userInfoCard {
-  flex: 1;
-  padding: 40px 20px;
+  width: 188px; /* Set the width for each card */
+  padding: 18px; /* Adjust the padding */
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: center;
-  margin-right: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  cursor: pointer; /* 클릭 가능하도록 커서 스타일 추가 */
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .userInfoCard:last-child {
@@ -77,6 +98,7 @@
 
 .userInfoCard span:first-child {
   font-weight: bold;
+  margin-bottom: 5px; /* Add some space between the lines */
 }
 
 .orderStatus {
@@ -113,8 +135,7 @@
   min-width: 100px;
   height: 100%;
   background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 2px solid #ccc;
   margin-right: 20px;
 }
 
@@ -128,10 +149,12 @@
 .recentViewedContainerMobile {
   width: 100%;
 }
-.recentViewedContainerMobile{
+
+.recentViewedContainerMobile {
   display: none;
-  padding: 0px;
+  padding: 0;
 }
+
 .recentViewedTable {
   width: 100%;
   border-collapse: collapse;
@@ -140,23 +163,25 @@
 
 .recentViewedTable th,
 .recentViewedTable td {
-  border: 1px solid #ccc;
   padding: 10px;
-  text-align: left;
   height: auto;
 }
 
 .recentViewedTable th {
   background-color: #f9f9f9;
+  text-align: center;
 }
-
+.recentViewedTable td{
+  text-align: left;
+}
 .recentViewedTable .rightAlign {
   text-align: right;
+  padding-right: 50px;
 }
 
 .imagePlaceholder {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 116px;
   background-color: #eee;
 }
 
@@ -219,261 +244,23 @@
   cursor: pointer;
 }
 
-.pageNumber:hover {
-  text-decoration: underline;
-}
-/* Update Info Styles */
-.updateInfoContainer {
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
-}
-
-.updateInfoContainer h2 {
+.noOrders {
+  font-size: 16px;
+  color: #666;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.updateInfoForm {
-  display: flex;
-  flex-direction: column;
-}
-
-.updateInfoForm label {
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.updateInfoForm input,
-.updateInfoForm select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-
-.updateInfoForm .phoneNumber,
-.updateInfoForm .birthday {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.updateInfoForm .phoneNumber input,
-.updateInfoForm .birthday input {
-  padding: 10px
-}
-
-.updateInfoForm .address {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.zipCodeRow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.searchAddressButton {
-  width: auto;
-  padding: 10px;
-  background-color: #ffeb3b;
-  color: black;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-.searchAddressButton:hover {
-  background-color: #fdd835;
-}
-
-.submitButton {
-  width: 20%;
-  background-color: #ff5a5f;
+.toggleButton {
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #333;
   color: white;
   border: none;
-  padding: 10px;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 16px;
-  margin-top: 20px;
+  text-align: center;
   display: block;
-  margin: 20px auto 0;
-}
-
-.submitButton:hover {
-  background-color: #e04a4e;
-}
-
-/* Coupon Styles */
-.couponContainer {
-  padding: 20px;
-}
-
-.couponForm {
-  display: flex;
-  flex-direction: column;
-}
-
-.couponForm label {
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.couponForm .couponInputRow {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.couponForm input {
-  width: 75%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.couponForm .couponRegisterButton {
-  width: 20%;
-  background-color: #ff5a5f;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.couponForm .couponRegisterButton:hover {
-  background-color: #e04a4e;
-}
-
-.couponTitle {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: left;
-}
-
-.ownedCoupons {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-}
-
-.coupon {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.coupon span {
-  display: block;
-  font-size: 16px;
-}
-
-.couponInfo {
-  margin: auto;
-  width: 80%;
-  margin-top: 20px;
-  border: #ccc 1px solid;
-}
-
-.couponInfo h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.couponInfo p {
-  font-size: 14px;
-  color: #555;
-}
-
-.membershipContainer {
-  padding: 20px;
-}
-
-.membershipContainer h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.membershipContainer p {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.membershipLevels {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  align-items: flex-end;
-}
-.membershipLevel {
-  width: 100px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  text-align: left; /* 텍스트를 왼쪽 정렬 */
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  background-color: transparent; /* 기본 배경색 제거 */
-  display: flex;
-  flex-direction: row; /* 행 방향으로 정렬 */
-  align-items: flex-end;
-  justify-content: center; /* 중앙 정렬 */
-}
-
-
-.membershipLevel.selected {
-  border: 2px solid #333;
-  background-color: black;
-  color: white;
-}
-
-.membershipLevel.black.selected {
-  color: white;
-}
-.benefit {
-  display: flex;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.headSection{
-  width: 30%;
-  position: relative;
-  right: 10%;
-}
-.contentSection {
-  width: 60%;
-  border-left: 1px solid #ccc;
-  padding-left: 10px;
-}
-.benefit h3 {
-  text-align: center;
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-.benefit p {
-  text-align: left;
-  padding-left: 30px;
-  margin-bottom: 10px;
-  line-height: 1.6;
 }
 
 

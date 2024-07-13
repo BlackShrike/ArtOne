@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import styles from "../css/Mypage.module.css"; // Ensure the path is correct
 import { useLanguage } from "../components/LanguageContext";
+import BackButton from "../components/BackButton";
 
 const translations = {
   KR: {
     myPage: "마이페이지",
     recentViewed: "최근 본 상품",
-    cart: "장바구니",
+    cart: "장바구니담기",
     updateInfo: "정보수정",
     coupon: "쿠폰",
     membership: "아트멤버십 혜택",
@@ -19,11 +20,12 @@ const translations = {
     membershipCard: "아트멤버쉽",
     inDelivery: "배송중",
     delivered: "배송완료",
-    title: "제목",
+    noOrders: "주문내역이 없습니다",
+    Image: "이미지",
     productInfo: "상품 정보",
     amount: "금액",
     select: "선택",
-    price: "가격",
+    price: "판매가",
     payButton: "결제하기",
     orderButton: "주문하기",
     deleteButton: "삭제",
@@ -79,7 +81,8 @@ const translations = {
     membershipCard: "Membership Card",
     inDelivery: "In Delivery",
     delivered: "Delivered",
-    title: "Title",
+    noOrders: "No orders found",
+    Image: "Image",
     productInfo: "Product Info",
     amount: "Amount",
     select: "Select",
@@ -126,11 +129,11 @@ const translations = {
     },
   },
 };
-
-function MyPage({ isLoggedIn }) {
+function MyPage() {
   const [selectedSection, setSelectedSection] = useState("main");
   const [membership, setMembership] = useState("White");
   const [selectedColor, setSelectedColor] = useState("white");
+  const [hasOrders, setHasOrders] = useState(false); // State to toggle order visibility
   const { language } = useLanguage();
   const navigate = useNavigate();
   const t = translations[language];
@@ -171,7 +174,7 @@ function MyPage({ isLoggedIn }) {
       <table className={styles.recentViewedTable}>
         <thead>
           <tr>
-            <th>{t.title}</th>
+            <th>{t.Image}</th>
             <th className={styles.rightAlign}>{t.productInfo}</th>
             <th>{t.price}</th>
             <th>{t.select}</th>
@@ -237,7 +240,7 @@ function MyPage({ isLoggedIn }) {
               <div className={styles.buttonGroup}>
                 <p className={styles.newPrice}>49,900원</p>
                 <button className={styles.orderButton}>{t.orderButton}</button>
-                <button className={styles.cartButton}>{t.cart}</button>
+                <button className={styles.cartButton}>{t.cartItems}</button>
               </div>
             </div>
           </div>
@@ -569,45 +572,57 @@ function MyPage({ isLoggedIn }) {
                 </div>
               </div>
             </div>
-            <div className={styles.orderStatus}>
-              <h3>{t.inDelivery}</h3>
-              <div className={styles.orderItem}>
-                <div className={styles.imagePlaceholder}></div>
-                <div>
-                  <h2>시그니처 헤더십</h2>
-                  <p>
-                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                    작품명 작품명 작품명 작품명
-                  </p>
-                  <p className={styles.price}>120,000원</p>
+            {hasOrders ? (
+              <>
+                <div className={styles.orderStatus}>
+                  <h3>{t.inDelivery}</h3>
+                  <div className={styles.orderItem}>
+                    <div className={styles.imagePlaceholder}></div>
+                    <div>
+                      <h2>시그니처 헤더십</h2>
+                      <p>
+                        작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
+                        작품명 작품명 작품명 작품명
+                      </p>
+                      <p className={styles.price}>120,000원</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className={styles.orderStatus}>
-              <h3>{t.delivered}</h3>
-              <div className={styles.orderItem}>
-                <div className={styles.imagePlaceholder}></div>
-                <div>
-                  <h2>시그니처 헤더십</h2>
-                  <p>
-                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                    작품명 작품명 작품명 작품명
-                  </p>
-                  <p className={styles.price}>120,000원</p>
+                <div className={styles.orderStatus}>
+                  <h3>{t.delivered}</h3>
+                  <div className={styles.orderItem}>
+                    <div className={styles.imagePlaceholder}></div>
+                    <div>
+                      <h2>시그니처 헤더십</h2>
+                      <p>
+                        작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
+                        작품명 작품명 작품명 작품명
+                      </p>
+                      <p className={styles.price}>120,000원</p>
+                    </div>
+                  </div>
+                  <div className={styles.orderItem}>
+                    <div className={styles.imagePlaceholder}></div>
+                    <div>
+                      <h2>시그니처 헤더십</h2>
+                      <p>
+                        작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
+                        작품명 작품명 작품명 작품명
+                      </p>
+                      <p className={styles.price}>120,000원</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.orderItem}>
-                <div className={styles.imagePlaceholder}></div>
-                <div>
-                  <h2>시그니처 헤더십</h2>
-                  <p>
-                    작품명 작품명 작품명 작품명 작품명 작품명 작품명 작품명
-                    작품명 작품명 작품명 작품명
-                  </p>
-                  <p className={styles.price}>120,000원</p>
-                </div>
-              </div>
-            </div>
+              </>
+            ) : (
+              <p className={styles.noOrders}>{t.noOrders}</p>
+            )}
+            <button
+              className={styles.toggleButton}
+              onClick={() => setHasOrders(!hasOrders)}
+            >
+              Toggle Orders
+            </button>
           </>
         );
     }
@@ -615,20 +630,24 @@ function MyPage({ isLoggedIn }) {
 
   return (
     <div className={styles.mypageContainer}>
-      <nav className={styles.sidebar}>
-        <h2 onClick={() => setSelectedSection("main")}>{t.myPage}</h2>
-        <ul>
-          <li onClick={() => setSelectedSection("recentViewed")}>
-            {t.recentViewed}
-          </li>
-          <li onClick={() => navigate("/checkout")}>{t.cart}</li>
-          <li onClick={() => setSelectedSection("updateInfo")}>
-            {t.updateInfo}
-          </li>
-          <li onClick={() => setSelectedSection("coupon")}>{t.coupon}</li>
-        </ul>
-      </nav>
-      <div className={styles.mainContent}>{renderContent()}</div>
+      <BackButton />
+      <h2 onClick={() => setSelectedSection()}>{t.myPage}</h2>
+      <div className={styles.contentWrapper}>
+        <nav className={styles.sidebar}>
+          <ul>
+            <li onClick={() => setSelectedSection("recentViewed")}>
+              {t.recentViewed}
+            </li>
+            <li onClick={() => navigate("/checkout")}>{t.cartItems}</li>
+            <hr className={styles.sidebarSeparator} />
+            <li onClick={() => setSelectedSection("updateInfo")}>
+              {t.updateInfo}
+            </li>
+            <li onClick={() => setSelectedSection("coupon")}>{t.coupon}</li>
+          </ul>
+        </nav>
+        <div className={styles.mainContent}>{renderContent()}</div>
+      </div>
     </div>
   );
 }

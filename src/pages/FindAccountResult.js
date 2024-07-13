@@ -6,8 +6,8 @@ import { useLanguage } from "../components/LanguageContext";
 
 const translations = {
   KR: {
-    resultHeader: "홍길동님",
-    idResult: "아이디",
+    resultHeader: "홍길동",
+    idResult: "님 아이디",
     passwordResult: "비밀번호",
     idList: ["sampleIDsampleID", "sampleIDsampleID2"],
     emailSent: "새로운 비밀번호를 이메일로 발송하였습니다.",
@@ -33,7 +33,7 @@ function FindAccountResult({ type }) {
     <div className={styles.findAccountResultContainer}>
       <BackButton />
       <h2>
-        {t.resultHeader} {type === "id" ? t.idResult : t.passwordResult}
+        {t.resultHeader} <p>{type === "id" ? t.idResult : t.passwordResult}</p>
       </h2>
       <div className={styles.result}>
         {type === "id" ? (

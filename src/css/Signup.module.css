@@ -1,4 +1,3 @@
-
 .signupContainer {
   width: 100%;
   margin: 0 auto;
@@ -20,7 +19,7 @@
   font-size: 14px;
 }
 
-h2 {
+.signupContainer h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
@@ -66,18 +65,28 @@ h2 {
   gap: 5px;
   width: 100%;
 }
+
 .hyphen {
   font-size: 18px;
 }
+
 .phoneInput input,
 .birthdateInput input {
   width: calc(30%);
+}
+
+.addressInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
 .addressSearchContainer {
   display: flex;
   gap: 10px;
   align-items: center;
+  width: 100%;
 }
 
 .addressSearchButton {
@@ -127,6 +136,7 @@ textarea {
   cursor: pointer;
   font-size: 16px;
 }
+
 @media (max-width: 768px) {
   .addressSearchButton {
     width: 30%;

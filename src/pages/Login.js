@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../css/Login.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
-import apiClient from "../components/api";
+
 const translations = {
   KR: {
     loginHeader: "LOGIN",
@@ -33,6 +33,7 @@ const translations = {
     google: "Continue with Google",
   },
 };
+
 function Login({ onLogin }) {
   const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState("");
@@ -44,31 +45,20 @@ function Login({ onLogin }) {
   const toggleRemember = () => {
     setRemember(!remember);
   };
-  const handleSubmit = async (event) => {
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    try {
-      const response = await apiClient.post("/admin/oauth/token", {
-        grant_type: "password",
-        username: username,
-        password: password,
-      });
-
-      const accessToken = response.data.access_token;
-      localStorage.setItem("access_token", accessToken);
-      onLogin();
-      navigate("/mypage");
-    } catch (error) {
-      console.error(error);
-      alert("로그인 실패!");
-    }
+    // Simulating successful login
+    localStorage.setItem("access_token", "dummy_access_token");
+    onLogin();
+    navigate("/mypage");
   };
 
   return (
-    <div className={styles.loginContainer} onSubmit={handleSubmit}>
+    <div className={styles.loginContainer}>
       <BackButton />
       <h2>{t.loginHeader}</h2>
-      <form className={styles.loginForm}>
+      <form className={styles.loginForm} onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder={t.usernamePlaceholder}
