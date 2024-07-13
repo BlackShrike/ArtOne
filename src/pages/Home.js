@@ -198,7 +198,7 @@ const Home = () => {
       setRightGridItems(newRightItems);
       setItemsToRemove([]);
     }
-  }, [itemsToRemove]);
+  }, [itemsToRemove, leftGridItems, rightGridItems]);
 
   const slideRight = () => {
     if (animating) return;
