@@ -18,52 +18,33 @@
 .paymentDetails {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #ccc;
+  border: 1px solid #ccc;
+  padding: 32px 57px;
 }
-
+.paymentDetails h3{
+  margin: 0;
+}
 .section {
   display: flex;
   justify-content: space-between;
   padding: 30px 0;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
-.paymentResultContainer:nth-child(2) span,
-.paymentResultContainer:nth-child(3) span{
-  margin-bottom: 10px;
+
+.section:last-child {
+  border-bottom: none;
 }
+
 .header {
   flex: 1;
   font-weight: bold;
 }
 
 .center {
+  flex: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.center.flex2 {
-  flex: 2;
-  font-weight: 400;
-}
-
-.center.flex1 {
-  flex: 1;
-}
-.center.flex2 .centerItem:first-child span:first-child {
-  font-weight: bold;
-}
-.flex2 :nth-child(2){
-  margin-bottom: 10px;
-}
-.centerItem {
-  display: flex;
-  justify-content: space-between;
-}
-
-.centerItem .content {
-  text-align: right;
-  flex: 1;
 }
 
 .right {
@@ -74,10 +55,22 @@
   justify-content: center;
 }
 
+.right.flex2 {
+  flex: 2;
+}
+
+.centerItem,
+.right span {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
 .imagePlaceholder {
-  width: 80px;
-  height: 80px;
+  width: 113px;
+  height: 135px;
   background-color: #eee;
+  position: relative;
+  left: 50%;
 }
 
 .deliveryNotes {
@@ -94,4 +87,5 @@
   color: #888;
   margin: 5px 0;
   text-align: center;
+  font-size: 14px;
 }

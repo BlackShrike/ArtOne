@@ -243,6 +243,121 @@
 .pageNumber {
   cursor: pointer;
 }
+.updateInfoContainer {
+  width: 50%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.updateInfoContainer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.updateInfoForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateInfoForm label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.updateInfoForm label span {
+  margin-bottom: 8px;
+}
+
+.updateInfoForm input,
+.updateInfoForm .phoneNumber input,
+.updateInfoForm .birthday input,
+.updateInfoForm .address input,
+.updateInfoForm .zipCodeRow input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.updateInfoForm .phoneNumber,
+.updateInfoForm .birthday,
+.updateInfoForm .address {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateInfoForm .phoneNumber {
+  display: flex;
+  justify-content: space-between;
+}
+
+.updateInfoForm .phoneNumber input {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.updateInfoForm .phoneNumber input:last-child {
+  margin-right: 0;
+}
+
+.updateInfoForm .birthday {
+  display: flex;
+  justify-content: space-between;
+}
+
+.updateInfoForm .birthday input {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.updateInfoForm .birthday input:last-child {
+  margin-right: 0;
+}
+
+.updateInfoForm .address .zipCodeRow {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.updateInfoForm .address input {
+  margin-bottom: 8px;
+}
+
+.updateInfoForm .address .zipCodeRow input {
+  flex: 1;
+}
+
+.updateInfoForm .address .searchAddressButton {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.updateInfoForm .submitButton {
+  padding: 10px;
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.updateInfoForm .submitButton:hover {
+  background-color: #e04a4e;
+}
 
 .noOrders {
   font-size: 16px;

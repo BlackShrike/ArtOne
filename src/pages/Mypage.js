@@ -53,7 +53,8 @@ const translations = {
       email: "이메일",
       name: "이름",
       phone: "전화번호",
-      birthday: {
+      birthday: "생년월일",
+      birthdayPlaceholders: {
         year: "년",
         month: "월",
         day: "일",
@@ -67,6 +68,7 @@ const translations = {
       confirmButton: "확인",
     },
   },
+
   EN: {
     myPage: "My Page",
     recentViewed: "Recently Viewed",
@@ -114,7 +116,8 @@ const translations = {
       email: "Email",
       name: "Name",
       phone: "Phone Number",
-      birthday: {
+      birthday: "Birthday",
+      birthdayPlaceholders: {
         year: "Year",
         month: "Month",
         day: "Day",
@@ -304,24 +307,24 @@ function MyPage() {
                 </div>
               </label>
               <label>
-                {t.updateInfoForm.birthday.year}{" "}
+                {t.updateInfoForm.birthday}
                 <div className={styles.birthday}>
                   <input
                     type="text"
-                    placeholder={t.updateInfoForm.birthday.year}
+                    placeholder={t.updateInfoForm.birthdayPlaceholders.year}
                   />
                   <input
                     type="text"
-                    placeholder={t.updateInfoForm.birthday.month}
+                    placeholder={t.updateInfoForm.birthdayPlaceholders.month}
                   />
                   <input
                     type="text"
-                    placeholder={t.updateInfoForm.birthday.day}
+                    placeholder={t.updateInfoForm.birthdayPlaceholders.day}
                   />
                 </div>
               </label>
               <label>
-                {t.updateInfoForm.address.zipCode}{" "}
+                {t.updateInfoForm.address.zipCode}
                 <div className={styles.address}>
                   <div className={styles.zipCodeRow}>
                     <input

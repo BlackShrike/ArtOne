@@ -125,12 +125,12 @@ function Checkout() {
         <div className={styles.checkoutSummaryContainer}>
           <div className={styles.checkoutStepContainer}>
             <span className={styles.checkoutStep}>
-              <span className={styles.redText}>{t.cart}</span> → {t.order} →{" "}
-              {t.completed}
+              <span className={styles.redText}>{t.cart}</span> {" > "}
+              <span>{t.order}</span> {" > "} <span>{t.completed}</span>
             </span>
           </div>
           <div className={styles.checkoutSummary}>
-            <h3>{t.expectedOrderAmount}</h3>
+            <h2>{t.expectedOrderAmount}</h2>
             <div className={styles.amountContainer}>
               <p>{t.totalAmount}</p>
               <p>
@@ -144,23 +144,27 @@ function Checkout() {
               </p>
             </div>
             <div className={styles.amountContainer}>
-              <span>{t.totalDiscount}</span>
-              <span className={styles.redText}>-0</span>
+              <p>{t.totalDiscount}</p>
+              <span className={styles.redText}>- 0 원</span>
             </div>
             <div className={styles.amountContainer}>
               <p>{t.totalShipping}</p>
-              <p>0원</p>
+              <p>+ 0원</p>
             </div>
-            <h3>
-              {t.total}:{" "}
-              {items
-                .reduce(
-                  (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
-                  0
-                )
-                .toLocaleString()}
-              원
-            </h3>
+            <div
+              className={`${styles.amountContainer} ${styles.lastAmountContainer}`}
+            >
+              <h3>
+                {t.total}:{" "}
+                {items
+                  .reduce(
+                    (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
+                    0
+                  )
+                  .toLocaleString()}
+                원
+              </h3>
+            </div>
             <button
               onClick={() => navigate("/OrderCheckout")}
               className={styles.purchaseButton}

@@ -18,7 +18,6 @@
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "https://contemporaryk.cafe24api.com",
 
   "scripts": {
     "start": "react-scripts start",

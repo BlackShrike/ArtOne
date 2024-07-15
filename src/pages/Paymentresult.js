@@ -65,11 +65,11 @@ function PaymentResult() {
       <h2>{t.paymentCompleted}</h2>
       <p className={styles.thankYouMessage}>{t.thankYouMessage}</p>
       <div className={styles.paymentDetails}>
-        <div className={styles.section}>
+        <section className={styles.section}>
           <div className={styles.header}>
             <h3>{t.productInfo}</h3>
           </div>
-          <div className={`${styles.center} ${styles.flex2}`}>
+          <div className={styles.center}>
             <div className={styles.centerItem}>
               <span>{t.productName}</span>
             </div>
@@ -83,15 +83,15 @@ function PaymentResult() {
               <span>{t.option2}</span>
             </div>
           </div>
-          <div className={styles.right}>
+          <div className={`${styles.right} ${styles.flex2}`}>
             <div className={styles.imagePlaceholder}></div>
           </div>
-        </div>
-        <div className={styles.section}>
+        </section>
+        <section className={styles.section}>
           <div className={styles.header}>
             <h3>{t.orderer}</h3>
           </div>
-          <div className={`${styles.center} ${styles.flex1}`}>
+          <div className={styles.center}>
             <div className={styles.centerItem}>
               <span>{t.ordererName}</span>
             </div>
@@ -102,17 +102,17 @@ function PaymentResult() {
               <span>{t.email}</span>
             </div>
           </div>
-          <div className={styles.right}>
+          <div className={`${styles.right} ${styles.flex2}`}>
             <span>{t.ordererNameContent}</span>
             <span>{t.phoneNumberContent}</span>
             <span>{t.emailContent}</span>
           </div>
-        </div>
-        <div className={styles.section}>
+        </section>
+        <section className={styles.section}>
           <div className={styles.header}>
             <h3>{t.recipient}</h3>
           </div>
-          <div className={`${styles.center} ${styles.flex1}`}>
+          <div className={styles.center}>
             <div className={styles.centerItem}>
               <span>{t.recipientName}</span>
             </div>
@@ -123,12 +123,12 @@ function PaymentResult() {
               <span>{t.deliveryAddress}</span>
             </div>
           </div>
-          <div className={styles.right}>
+          <div className={`${styles.right} ${styles.flex2}`}>
             <span>{t.recipientNameContent}</span>
             <span>{t.phoneNumberContent}</span>
             <span>{t.deliveryAddressContent}</span>
           </div>
-        </div>
+        </section>
       </div>
       <div className={styles.deliveryNotes}>
         <h3>{t.deliveryNotes}</h3>
