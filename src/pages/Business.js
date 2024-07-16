@@ -1,3 +1,4 @@
+//Business.js
 import React, { useState } from "react";
 import styles from "../css/Business.module.css"; // Ensure the path is correct
 import BackButton from "../components/BackButton";

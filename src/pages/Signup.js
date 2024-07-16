@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styles from "../css/Signup.module.css";
-import BackButton from "../components/BackButton";
+//Signup.js
+import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../components/LanguageContext";
-import apiClient from "../components/api";
+import {
+  signUp,
+  checkUsernameAvailability,
+  login,
+} from "../components/apiClient";
+import BackButton from "../components/BackButton";
+import styles from "../css/Signup.module.css";
 
 const translations = {
   KR: {
@@ -14,19 +20,19 @@ const translations = {
     name: "이름",
     phoneNumber: "전화번호",
     birthdate: "생년월일",
+    address: "주소",
+    addressSearch: "주소 검색",
     year: "년",
     month: "월",
     day: "일",
-    address: "주소",
-    addressSearch: "주소검색",
-    term1: "[필수] 만 14세 이상입니다.",
-    term2: "[필수] 이용약관, 개인정보 수집 및 이용에 모두 동의합니다.",
-    term3: "[선택] 개인정보 수집 및 이용 동의",
-    termsText: "이용 약관 내용...",
-    privacyText: "개인정보 수집 및 이용 동의 내용...",
+    term1: "이용 약관 동의 (필수)",
+    term2: "개인정보 수집 및 이용 동의 (필수)",
+    term3: "마케팅 정보 수신 동의 (선택)",
     smsConsent: "SMS 수신 동의",
-    emailConsent: "E-Mail 수신 동의",
-    submit: "가입하기",
+    emailConsent: "이메일 수신 동의",
+    submit: "회원가입",
+    termsText: "이용 약관의 내용이 여기에 표시됩니다.",
+    privacyText: "개인정보 수집 및 이용 동의 내용이 여기에 표시됩니다.",
   },
   EN: {
     signup: "Sign Up",
@@ -37,28 +43,25 @@ const translations = {
     name: "Name",
     phoneNumber: "Phone Number",
     birthdate: "Birthdate",
+    address: "Address",
+    addressSearch: "Search Address",
     year: "Year",
     month: "Month",
     day: "Day",
-    address: "Address",
-    addressSearch: "Search Address",
-    term1: "[Required] I am over 14 years old.",
-    term2:
-      "[Required] I agree to the terms of use and the collection and use of personal information.",
-    term3:
-      "[Optional] I agree to the collection and use of personal information.",
-    termsText: "Terms of Use content...",
-    privacyText:
-      "Consent to collection and use of personal information content...",
-    smsConsent: "Agree to receive SMS",
-    emailConsent: "Agree to receive E-Mail",
+    term1: "Agree to Terms of Service (Required)",
+    term2: "Agree to Privacy Policy (Required)",
+    term3: "Agree to Receive Marketing Information (Optional)",
+    smsConsent: "Agree to Receive SMS",
+    emailConsent: "Agree to Receive Emails",
     submit: "Sign Up",
+    termsText: "The terms of service will be displayed here.",
+    privacyText: "The privacy policy will be displayed here.",
   },
 };
-
 function Signup() {
   const { language } = useLanguage();
   const t = translations[language];
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -76,7 +79,18 @@ function Signup() {
     roadAddress: "",
     zonecode: "",
     roadAddressDetail: "",
+    marketing_agree_sms: "N",
+    marketing_agree_email: "N",
+    third_party_agree: "N",
+    send_alarm: "N",
   });
+
+  const [errors, setErrors] = useState({});
+  const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
+
+  const part1Ref = useRef(null);
+  const part2Ref = useRef(null);
+  const part3Ref = useRef(null);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -86,10 +100,64 @@ function Signup() {
     }));
   };
 
+  const handlePhoneNumberChange = (e) => {
+    const { id, value } = e.target;
+    if (id === "phoneNumberPart1" && value.length === 3) {
+      part2Ref.current.focus();
+    } else if (id === "phoneNumberPart2" && value.length === 4) {
+      part3Ref.current.focus();
+    }
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!isUsernameAvailable) {
+      newErrors.username = "아이디가 이미 사용 중입니다.";
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "비밀번호가 일치하지 않습니다.";
+    }
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "유효한 이메일 주소를 입력해주세요.";
+    }
+
+    if (
+      !/^\d{3}-\d{3,4}-\d{4}$/.test(
+        `${formData.phoneNumberPart1}-${formData.phoneNumberPart2}-${formData.phoneNumberPart3}`
+      )
+    ) {
+      newErrors.phoneNumber = "유효한 전화번호를 입력해주세요.";
+    }
+
+    if (!formData.name) {
+      newErrors.name = "이름을 입력해주세요.";
+    }
+
+    if (!formData.roadAddress || !formData.roadAddressDetail) {
+      newErrors.address = "주소를 입력해주세요.";
+    }
+
+    if (
+      !document.getElementById("term1").checked ||
+      !document.getElementById("term2").checked
+    ) {
+      newErrors.terms = "필수 약관에 동의해주세요.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
+    if (!validateForm()) {
       return;
     }
 
@@ -97,23 +165,45 @@ function Signup() {
     const birthday = `${formData.birthYear}-${formData.birthMonth}-${formData.birthDay}`;
 
     const payload = {
-      member_id: formData.username,
-      member_password: formData.password,
-      email: formData.email,
+      uid: formData.username,
+      pass: formData.password,
       name: formData.name,
-      address: formData.roadAddress,
-      address_detail: formData.roadAddressDetail,
-      birthday: birthday,
-      cellphone: phoneNumber,
-      zip_code: formData.zonecode,
+      email: formData.email,
+      callnum: phoneNumber,
+      gender: formData.gender,
+      birth: birthday,
+      addr_post: formData.zonecode,
+      addr: formData.roadAddress,
+      addr_detail: formData.roadAddressDetail,
+      marketing_agree_sms: formData.marketing_agree_sms,
+      marketing_agree_email: formData.marketing_agree_email,
+      third_party_agree: formData.third_party_agree,
+      send_alarm: formData.send_alarm,
     };
 
     try {
-      const response = await apiClient.post("/admin/customers", payload);
-      console.log(response.data);
-      alert("회원가입 성공!");
+      const response = await signUp(payload);
+      console.log(response);
+      if (response.code === 200) {
+        alert("회원가입 성공!");
+        const loginResponse = await login({
+          username: formData.username,
+          password: formData.password,
+        });
+        console.log(loginResponse);
+        if (loginResponse.code === 200) {
+          navigate("/mypage");
+        } else {
+          alert("자동 로그인 실패: " + loginResponse.msg);
+        }
+      } else {
+        alert("회원가입 실패: " + response.msg);
+      }
     } catch (error) {
-      console.error(error);
+      console.error(
+        "Error during sign up:",
+        error.response ? error.response.data : error.message
+      );
       alert("회원가입 실패!");
     }
   };
@@ -140,6 +230,36 @@ function Signup() {
     }).open();
   };
 
+  const handleUsernameBlur = async () => {
+    if (formData.username) {
+      try {
+        const response = await checkUsernameAvailability(formData.username);
+        setIsUsernameAvailable(response.code === -10);
+        if (response.code === -10) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            username: "사용 가능한 아이디입니다.",
+          }));
+        } else {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            username: "이미 사용 중인 아이디입니다.",
+          }));
+        }
+      } catch (error) {
+        console.error(
+          "Error checking username availability:",
+          error.response ? error.response.data : error.message
+        );
+        setIsUsernameAvailable(false);
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          username: "아이디 중복체크 중 오류가 발생했습니다.",
+        }));
+      }
+    }
+  };
+
   return (
     <div className={styles.signupContainer}>
       <BackButton />
@@ -147,7 +267,16 @@ function Signup() {
       <form className={styles.signupForm} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="username">{t.username}</label>
-          <input type="text" id="username" required onChange={handleChange} />
+          <input
+            type="text"
+            id="username"
+            required
+            onChange={handleChange}
+            onBlur={handleUsernameBlur}
+          />
+          {errors.username && (
+            <span className={styles.error}>{errors.username}</span>
+          )}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="password">{t.password}</label>
@@ -157,6 +286,9 @@ function Signup() {
             required
             onChange={handleChange}
           />
+          {errors.password && (
+            <span className={styles.error}>{errors.password}</span>
+          )}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="confirmPassword">{t.confirmPassword}</label>
@@ -166,14 +298,19 @@ function Signup() {
             required
             onChange={handleChange}
           />
+          {errors.confirmPassword && (
+            <span className={styles.error}>{errors.confirmPassword}</span>
+          )}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="email">{t.email}</label>
           <input type="email" id="email" required onChange={handleChange} />
+          {errors.email && <span className={styles.error}>{errors.email}</span>}
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="name">{t.name}</label>
           <input type="text" id="name" required onChange={handleChange} />
+          {errors.name && <span className={styles.error}>{errors.name}</span>}
         </div>
         <div className={`${styles.formGroup} ${styles.phoneInput}`}>
           <label>{t.phoneNumber}</label>
@@ -183,7 +320,8 @@ function Signup() {
             placeholder="010"
             maxLength="3"
             required
-            onChange={handleChange}
+            onChange={handlePhoneNumberChange}
+            ref={part1Ref}
           />
           <span className={styles.hyphen}>-</span>
           <input
@@ -192,7 +330,8 @@ function Signup() {
             placeholder="1234"
             maxLength="4"
             required
-            onChange={handleChange}
+            onChange={handlePhoneNumberChange}
+            ref={part2Ref}
           />
           <span className={styles.hyphen}>-</span>
           <input
@@ -201,8 +340,12 @@ function Signup() {
             placeholder="5678"
             maxLength="4"
             required
-            onChange={handleChange}
+            onChange={handlePhoneNumberChange}
+            ref={part3Ref}
           />
+          {errors.phoneNumber && (
+            <span className={styles.error}>{errors.phoneNumber}</span>
+          )}
         </div>
         <div className={`${styles.formGroup} ${styles.birthdateInput}`}>
           <label>{t.birthdate}</label>
@@ -254,8 +397,12 @@ function Signup() {
               onChange={handleChange}
               placeholder="상세 주소를 입력해주세요"
             />
+            {errors.address && (
+              <span className={styles.error}>{errors.address}</span>
+            )}
           </div>
         </div>
+
         <div className={styles.terms}>
           <div className={styles.term}>
             <input type="checkbox" id="term1" required />
@@ -283,16 +430,41 @@ function Signup() {
           ></textarea>
           <div className={styles.optionalTerms}>
             <div className={styles.term}>
-              <input type="checkbox" id="sms" />
+              <input
+                type="checkbox"
+                id="sms"
+                onChange={() =>
+                  setFormData({
+                    ...formData,
+                    marketing_agree_sms:
+                      formData.marketing_agree_sms === "Y" ? "N" : "Y",
+                  })
+                }
+              />
               <label htmlFor="sms">{t.smsConsent}</label>
             </div>
             <div className={styles.term}>
-              <input type="checkbox" id="emailConsent" />
+              <input
+                type="checkbox"
+                id="emailConsent"
+                onChange={() =>
+                  setFormData({
+                    ...formData,
+                    marketing_agree_email:
+                      formData.marketing_agree_email === "Y" ? "N" : "Y",
+                  })
+                }
+              />
               <label htmlFor="emailConsent">{t.emailConsent}</label>
             </div>
           </div>
+          {errors.terms && <span className={styles.error}>{errors.terms}</span>}
         </div>
-        <button type="submit" className={styles.signupButton}>
+        <button
+          type="submit"
+          className={styles.signupButton}
+          onClick={handleSubmit}
+        >
           {t.submit}
         </button>
       </form>

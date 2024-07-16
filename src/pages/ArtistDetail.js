@@ -1,3 +1,4 @@
+//ArtistDetail.js
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "../css/ArtistDetail.module.css"; // Ensure this path is correct based on your project structure

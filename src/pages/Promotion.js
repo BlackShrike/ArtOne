@@ -1,3 +1,4 @@
+//Promotion.js
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "../css/Promotion.module.css";

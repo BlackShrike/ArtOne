@@ -1,3 +1,4 @@
+//Artist.js
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import styles from "../css/Artist.module.css"; // Ensure this path is correct based on your project structure

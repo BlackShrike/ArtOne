@@ -1,3 +1,4 @@
+//TermsofService.js
 import React, { useState } from "react";
 import styles from "../css/Termsofservice.module.css";
 

@@ -1,3 +1,4 @@
+//FAQ.js
 import React, { useState } from "react";
 import styles from "../css/FAQ.module.css";
 import { useLanguage } from "../components/LanguageContext";

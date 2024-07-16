@@ -1,3 +1,4 @@
+//Paymentresult.js
 import React from "react";
 import styles from "../css/Paymentresult.module.css"; // Ensure the path is correct
 import { useLanguage } from "../components/LanguageContext";

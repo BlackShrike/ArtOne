@@ -24,17 +24,23 @@ import Promotion from "./pages/Promotion";
 import PromotionDetail from "./pages/PromotionDetail";
 import TermsOfService from "./pages/Termsofservice";
 import { LanguageProvider } from "./components/LanguageContext";
+import { getAccessToken, setAccessToken } from "./components/apiClient";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (token) {
-      setIsLoggedIn(true);
+    async function fetchToken() {
+      try {
+        const token = await getAccessToken();
+        setAccessToken(token);
+        console.log("Access Token:", token);
+      } catch (error) {
+        console.error("Error fetching access token:", error);
+      }
     }
-  }, []);
 
+    fetchToken();
+  }, []);
   const handleLogin = () => {
     setIsLoggedIn(true);
     localStorage.setItem("access_token", "your_access_token_here");

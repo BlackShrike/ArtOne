@@ -1,3 +1,4 @@
+//FindAccountResult.js
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/FindAccountResult.module.css"; // Ensure the path is correct

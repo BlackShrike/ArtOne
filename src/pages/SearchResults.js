@@ -1,3 +1,4 @@
+//SearchResults.js
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";

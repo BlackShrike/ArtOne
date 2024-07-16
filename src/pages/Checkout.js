@@ -1,3 +1,4 @@
+//Checkout.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/Checkout.module.css"; // Ensure the path is correct

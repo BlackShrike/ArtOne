@@ -72,7 +72,6 @@ function Footer(props) {
         <p>{translations[language].info2}</p>
       </div>
       {isFlexGrowVisible && <div className={styles.flexGrow}></div>}{" "}
-      {/* 빈 공간을 채우는 div */}
     </footer>
   );
 }

@@ -1,3 +1,4 @@
+//SignatureDetail.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/SignatureDetail.module.css";
