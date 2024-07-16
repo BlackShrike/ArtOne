@@ -12,7 +12,7 @@ const pages = [
   "FindAccount",
   "FindAccountResult",
   "Signup",
-  "MyPage",
+  "Mypage",
   "Checkout",
   "Ordercheckout",
   "Paymentresult",
@@ -23,7 +23,7 @@ const pages = [
   "Review",
   "Promotion",
   "PromotionDetail",
-  "TermsOfService",
+  "Termsofservice",
 ];
 
 module.exports = {
