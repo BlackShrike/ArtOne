@@ -1,0 +1,154 @@
+
+
+.N6f6dIsHzi0jRquSmty7 {
+  width: 100%;
+  padding: 20px;
+}
+
+.KDEkPNWvAVYhHGVtc9Tf {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.KDEkPNWvAVYhHGVtc9Tf a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.wO4LlqNwNchM2vZpKP2G {
+  text-align: right;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+.wO4LlqNwNchM2vZpKP2G h2{
+  text-align: center;
+}
+.wO4LlqNwNchM2vZpKP2G span {
+  font-weight: 500;
+  font-size: 16px;
+  color: #333;
+}
+
+.UfEBqNTogCDwTBvuBHwa {
+  display: grid;
+  grid-template-columns: repeat(5, 320px);
+  gap: 53px;
+  justify-content: center;
+  margin-bottom: 220px;
+}
+
+.S6p0PcPM8GnLJYvi5iNW {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pOmDrizuHXeYSS6_CoS2 {
+  width: 100%;
+  height: 371px;
+  background-color: #ddd;
+  margin-bottom: 27px;
+}
+
+.vzFuTdZt1mylFZJE6wZ0 {
+  width: 100%;
+  text-align: left;
+}
+
+.Nktjl_gBxgT_r98AcLxv {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.IpUL8HIs1TEox7dKLbcp,
+.eaeTBmc26cj_izU8M3L9,
+.x2vpEzoqgOQMCc6k_Yim {
+  margin: 0;
+  font-size: 14px;
+}
+
+.x2vpEzoqgOQMCc6k_Yim {
+  font-weight: bold;
+  margin-top: 13px;
+}
+
+.hlvcg8EV9Pk1yADA3MMU {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.mze448asYV0op3L8cLbV {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 275px;
+}
+
+.q0SZdOS7KqV432rmwnAz,
+.Iq0bAQQVBRmh3PblhmlE {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.q0SZdOS7KqV432rmwnAz:hover,
+.Iq0bAQQVBRmh3PblhmlE:hover {
+  background-color: #f1f1f1;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .N6f6dIsHzi0jRquSmty7 {
+    padding: 0px;
+  }
+  .UfEBqNTogCDwTBvuBHwa {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .pOmDrizuHXeYSS6_CoS2 {
+    height: 150px;
+  }
+
+  .IpUL8HIs1TEox7dKLbcp,
+  .eaeTBmc26cj_izU8M3L9,
+  .x2vpEzoqgOQMCc6k_Yim {
+    font-size: 16px;
+  }
+
+  .x2vpEzoqgOQMCc6k_Yim {
+    margin-top: 0px;
+  }
+
+  .hlvcg8EV9Pk1yADA3MMU {
+    font-size: 24px;
+  }
+
+}
+.w9IkjbamqKdtqljUEbpr {
+  display: flex;
+  align-self: flex-start;
+  margin-bottom: 20px;
+  position: relative;
+  height: 40px; /* 원하는 높이로 설정 */
+  left: 20px; /* 페이지 왼쪽에서 떨어진 거리 조정 */
+}
+
+.Jd7_EXvTvjY1M6fbVXKy {
+  text-decoration: none;
+  color: #ccc;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit; /* Ensures the button text matches the surrounding text */
+  height: 100%; /* 부모 요소의 높이를 채우도록 설정 */
+  display: flex;
+  align-items: center; /* 버튼 내 텍스트를 수직 가운데 정렬 */
+  white-space: nowrap;
+}
