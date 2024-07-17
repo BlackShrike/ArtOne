@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding:  0px 50px;
-  padding-top: 20px;
+  padding: 0px 50px;
   border-bottom: 1px solid #aaa;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   font-style: normal;
+  position: relative; /* 추가 */
 }
 
 .headerTop,
@@ -40,12 +40,14 @@
   font-weight: 400;
   font-style: normal;
 }
-.headerLeft{
+
+.headerLeft {
   display: flex;
 }
+
 .headerLinks {
   margin-top: 20px;
-  display: flex ;
+  display: flex;
   align-items: center;
   margin-left: auto;
   gap: 20px;
@@ -73,17 +75,25 @@
   color: black;
   text-decoration: none;
   padding-bottom: 6px; /* 밑줄 높이에 맞춰서 설정 */
-  border-bottom: 1px solid transparent; /* 기본적으로 투명한 밑줄 */
+  border-bottom: 3px solid transparent #fff; /* 기본적으로 투명한 밑줄 */
   transition: all 0.5s;
+  position: relative; /* 추가 */
 }
 
-.link:hover {
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px; /* 링크 밑줄을 헤더 밑줄과 맞추기 위해 조정 */
+  width: 100%;
   border-bottom: 3px solid red;
+  transform: scaleX(0);
+  transition: transform 0.5s;
 }
 
-.link.active {
-  border-bottom: 3px solid red;
-  color: red;
+.link:hover::after,
+.link.active::after {
+  transform: scaleX(1);
 }
 .artMembershipBox {
   position: relative;;
