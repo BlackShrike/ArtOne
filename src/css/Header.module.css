@@ -74,8 +74,8 @@
 .link {
   color: black;
   text-decoration: none;
-  padding-bottom: 6px; /* 밑줄 높이에 맞춰서 설정 */
-  border-bottom: 3px solid transparent #fff; /* 기본적으로 투명한 밑줄 */
+  padding-bottom: 10px; /* 밑줄 높이에 맞춰서 설정 */
+  border-bottom: 3px solid transparent ; /* 기본적으로 투명한 밑줄 */
   transition: all 0.5s;
   position: relative; /* 추가 */
 }
@@ -84,7 +84,7 @@
   content: '';
   position: absolute;
   left: 0;
-  bottom: -6px; /* 링크 밑줄을 헤더 밑줄과 맞추기 위해 조정 */
+  bottom: -14px; /* 링크 밑줄을 헤더 밑줄과 맞추기 위해 조정 */
   width: 100%;
   border-bottom: 3px solid red;
   transform: scaleX(0);
@@ -134,23 +134,24 @@
     transform: translateY(-10px);
   }
 }
+.dropdownContainer {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  background-color: white;
+  z-index: 10;
+}
 
 .dropdownMenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
+  position: fixed;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  z-index: 10;
-  width: calc(100% + 50px);
-  padding-top: 10px;
-  padding-right: 40%;
-  box-sizing: border-box;
-  gap: 20px;
+  width: 100vw;
+  margin: auto;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 10;
 }
 
 .dropdownMenu.show {
@@ -159,14 +160,14 @@
 }
 
 .dropdownItem {
-  width: 160px;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
+  padding: 10px;
   box-sizing: border-box;
 }
-
 .dropdownBox {
   width: 125px;
   height: 125px;

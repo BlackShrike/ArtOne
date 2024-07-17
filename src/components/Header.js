@@ -214,17 +214,21 @@ function Header({ isLoggedIn, onLogout }) {
           >
             {translations[language].signature}
           </span>
-          <div
-            className={`${styles.dropdownMenu} ${
-              showSignatureMenu ? styles.show : ""
-            }`}
-          >
-            {signatureItems.map((item, i) => (
-              <div className={styles.dropdownItem} key={i}>
-                <div className={styles.dropdownBox}></div>
-                <span onClick={() => handleNavigate("/signature")}>{item}</span>
-              </div>
-            ))}
+          <div className={styles.dropdownContainer}>
+            <div
+              className={`${styles.dropdownMenu} ${
+                showSignatureMenu ? styles.show : ""
+              }`}
+            >
+              {signatureItems.map((item, i) => (
+                <div className={styles.dropdownItem} key={i}>
+                  <div className={styles.dropdownBox}></div>
+                  <span onClick={() => handleNavigate("/signature")}>
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </span>
         <span
@@ -240,17 +244,21 @@ function Header({ isLoggedIn, onLogout }) {
           >
             {translations[language].original}
           </span>
-          <div
-            className={`${styles.dropdownMenu} ${
-              showOriginalMenu ? styles.show : ""
-            }`}
-          >
-            {originalItems.map((item, i) => (
-              <div className={styles.dropdownItem} key={i}>
-                <div className={styles.dropdownBox}></div>
-                <span onClick={() => handleNavigate("/original")}>{item}</span>
-              </div>
-            ))}
+          <div className={styles.dropdownContainer}>
+            <div
+              className={`${styles.dropdownMenu} ${
+                showOriginalMenu ? styles.show : ""
+              }`}
+            >
+              {originalItems.map((item, i) => (
+                <div className={styles.dropdownItem} key={i}>
+                  <div className={styles.dropdownBox}></div>
+                  <span onClick={() => handleNavigate("/original")}>
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </span>
         <span className={styles.separator}>|</span>
