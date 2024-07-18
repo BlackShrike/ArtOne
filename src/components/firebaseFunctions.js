@@ -1,21 +1,25 @@
-import { auth, firestore } from "./Firebase";
+import { firestore } from "../Firebase";
+import {
+  doc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  serverTimestamp,
+  collection,
+  getDoc,
+} from "firebase/firestore";
 
 // 회원가입
 export async function signUp(email, password, userInfo) {
   try {
-    const userCredential = await auth.createUserWithEmailAndPassword(
-      email,
-      password
-    );
-    const user = userCredential.user;
-    await firestore
-      .collection("users")
-      .doc(user.uid)
-      .set({
-        email: email,
-        ...userInfo,
-      });
-    return user;
+    const userRef = doc(firestore, "users", email);
+    await setDoc(userRef, {
+      email: email,
+      password: password,
+      ...userInfo,
+    });
+    return { email, ...userInfo };
   } catch (error) {
     console.error("Error signing up:", error);
     throw error;
@@ -25,11 +29,13 @@ export async function signUp(email, password, userInfo) {
 // 로그인
 export async function signIn(email, password) {
   try {
-    const userCredential = await auth.signInWithEmailAndPassword(
-      email,
-      password
-    );
-    return userCredential.user;
+    const userRef = doc(firestore, "users", email);
+    const userDoc = await getDoc(userRef);
+    if (userDoc.exists() && userDoc.data().password === password) {
+      return userDoc.data();
+    } else {
+      throw new Error("Invalid email or password");
+    }
   } catch (error) {
     console.error("Error signing in:", error);
     throw error;
@@ -38,10 +44,10 @@ export async function signIn(email, password) {
 
 // 장바구니 아이템 추가
 export async function addToCart(userId, item) {
-  const cartRef = firestore.collection("carts").doc(userId);
+  const cartRef = doc(firestore, "carts", userId);
   try {
-    await cartRef.update({
-      cartItems: firebase.firestore.FieldValue.arrayUnion(item),
+    await updateDoc(cartRef, {
+      cartItems: arrayUnion(item),
     });
     console.log("Item added to cart");
   } catch (error) {
@@ -52,10 +58,10 @@ export async function addToCart(userId, item) {
 
 // 장바구니 아이템 제거
 export async function removeFromCart(userId, item) {
-  const cartRef = firestore.collection("carts").doc(userId);
+  const cartRef = doc(firestore, "carts", userId);
   try {
-    await cartRef.update({
-      cartItems: firebase.firestore.FieldValue.arrayRemove(item),
+    await updateDoc(cartRef, {
+      cartItems: arrayRemove(item),
     });
     console.log("Item removed from cart");
   } catch (error) {
@@ -66,16 +72,16 @@ export async function removeFromCart(userId, item) {
 
 // 주문 생성
 export async function createOrder(userId, cartItems, totalPrice) {
-  const orderRef = firestore.collection("orders").doc();
+  const orderRef = doc(collection(firestore, "orders"));
   try {
-    await orderRef.set({
+    await setDoc(orderRef, {
       userId: userId,
       orderItems: cartItems,
       status: "ordered",
       totalPrice: totalPrice,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: serverTimestamp(),
     });
-    await firestore.collection("carts").doc(userId).update({
+    await updateDoc(doc(firestore, "carts", userId), {
       cartItems: [],
     });
     console.log("Order created");

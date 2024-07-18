@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../components/LanguageContext";
-import { signUp } from "../firebaseFunctions";
+import { signUp } from "../components/firebaseFunctions";
 import BackButton from "../components/BackButton";
 import styles from "../css/Signup.module.css";
 
@@ -217,13 +217,7 @@ function Signup() {
       <form className={styles.signupForm} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="username">{t.username}</label>
-          <input
-            type="text"
-            id="username"
-            required
-            onChange={handleChange}
-            onBlur={handleUsernameBlur}
-          />
+          <input type="text" id="username" required onChange={handleChange} />
           {errors.username && (
             <span className={styles.error}>{errors.username}</span>
           )}
