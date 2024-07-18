@@ -1,4 +1,3 @@
-//Home.js
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/Home.module.css";
@@ -9,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useLanguage } from "../components/LanguageContext";
 import "../css/slick.custom.css";
 import ZoomImage from "../components/ZoomImage";
+import { getProducts } from "../components/apiClient";
 
 const Arrow = ({ className, style, onClick, icon }) => (
   <div className={className} style={{ ...style }} onClick={onClick}>
@@ -135,7 +135,6 @@ const translations = {
     ],
   },
 };
-
 const Home = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const sliderRef = useRef(null);
@@ -143,30 +142,23 @@ const Home = () => {
   const { language } = useLanguage();
   const navigate = useNavigate();
   const currentTranslations = translations[language];
-  const [leftGridItems, setLeftGridItems] = useState([
-    { type: "largeItem", textLines: currentTranslations.main.slice(0, 2) },
-    { type: "mediumItem1", textLines: currentTranslations.main.slice(2, 4) },
-    { type: "mediumItem2", textLines: currentTranslations.main.slice(2, 4) },
-    ...currentTranslations.smallItemsLeft.map((item, i) => ({
-      type: `smallItemLeft${i + 1}`,
-      textLines: item.textLines,
-      price: item.price,
-    })),
-  ]);
-  const [rightGridItems, setRightGridItems] = useState([
-    ...currentTranslations.smallItemsRight.map((item, i) => ({
-      type: `smallItemRight${i + 1}`,
-      textLines: item.textLines,
-      price: item.price,
-    })),
-    ...currentTranslations.smallItemsRight.map((item, i) => ({
-      type: `smallItemRight${i + 6}`,
-      textLines: item.textLines,
-      price: item.price,
-    })),
-  ]);
-  const [animating, setAnimating] = useState(false);
-  const [itemsToRemove, setItemsToRemove] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -175,111 +167,6 @@ const Home = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const handleAnimationEnd = (index, side) => {
-    setItemsToRemove((prev) => [...prev, { index, side }]);
-  };
-
-  useEffect(() => {
-    if (itemsToRemove.length > 0) {
-      const newLeftItems = leftGridItems.filter(
-        (_, index) =>
-          !itemsToRemove.some(
-            (item) => item.index === index && item.side === "left"
-          )
-      );
-      const newRightItems = rightGridItems.filter(
-        (_, index) =>
-          !itemsToRemove.some(
-            (item) => item.index === index && item.side === "right"
-          )
-      );
-
-      setLeftGridItems(newLeftItems);
-      setRightGridItems(newRightItems);
-      setItemsToRemove([]);
-    }
-  }, [itemsToRemove, leftGridItems, rightGridItems]);
-
-  const slideRight = () => {
-    if (animating) return;
-    setAnimating(true);
-
-    const newLeftItems = [
-      { ...leftGridItems[1], type: "largeItem" },
-      { ...leftGridItems[2], type: "mediumItem1" },
-      { type: "mediumItem2", textLines: currentTranslations.main.slice(4, 6) },
-      ...rightGridItems.slice(0, 2).map((item, i) => ({
-        ...item,
-        type: `smallItemLeft${i + 1}`,
-      })),
-      ...rightGridItems.slice(2, 5).map((item, i) => ({
-        ...rightGridItems[i + 2],
-        type: `smallItemLeft${i + 3}`,
-      })),
-    ];
-
-    const newRightItems = [
-      ...rightGridItems.slice(2).map((item, i) => ({
-        ...rightGridItems[i + 5],
-        type: `smallItemRight${i + 1}`,
-      })),
-      ...rightGridItems.slice(5).map((item, i) => ({
-        type: `smallItemRight${i + 6}`,
-        textLines: currentTranslations.smallItemsRight[i].textLines,
-        price: currentTranslations.smallItemsRight[i].price,
-      })),
-    ];
-
-    setLeftGridItems(newLeftItems);
-    setRightGridItems(newRightItems);
-
-    setTimeout(() => {
-      setAnimating(false);
-    }, 400);
-  };
-
-  const slideLeft = () => {
-    if (animating) return;
-    setAnimating(true);
-
-    const newLeftItems = [
-      { ...leftGridItems[0], type: "mediumItem1" },
-      { ...leftGridItems[1], type: "mediumItem2" },
-      { type: "largeItem", textLines: currentTranslations.main.slice(0, 2) },
-      ...leftGridItems.slice(3, 5).map((item, i) => ({
-        ...rightGridItems[i],
-        type: `smallItemLeft${i + 1}`,
-      })),
-      ...rightGridItems.slice(2, 4).map((item, i) => ({
-        ...rightGridItems[i + 2],
-        type: `smallItemLeft${i + 3}`,
-      })),
-    ];
-
-    const newRightItems = [
-      ...leftGridItems.slice(3, 5).map((item, i) => ({
-        ...rightGridItems[i],
-        type: `smallItemRight${i + 1}`,
-      })),
-      ...rightGridItems.slice(0, 2).map((item, i) => ({
-        ...rightGridItems[i],
-        type: `smallItemRight${i + 3}`,
-      })),
-      ...leftGridItems.slice(3, 5).map((item, i) => ({
-        type: `smallItemRight${i + 6}`,
-        textLines: currentTranslations.smallItemsLeft[i].textLines,
-        price: currentTranslations.smallItemsLeft[i].price,
-      })),
-    ];
-
-    setLeftGridItems(newLeftItems);
-    setRightGridItems(newRightItems);
-
-    setTimeout(() => {
-      setAnimating(false);
-    }, 400);
-  };
 
   const handleMoreTextClick = () => {
     navigate("/Original");
@@ -309,7 +196,6 @@ const Home = () => {
             className="slick-arrow"
             onClick={() => {
               sliderRef.current.slickPrev();
-              slideLeft();
             }}
             style={{ cursor: "pointer" }}
           >
@@ -320,7 +206,6 @@ const Home = () => {
             className="slick-arrow"
             onClick={() => {
               sliderRef.current.slickNext();
-              slideRight();
             }}
             style={{ cursor: "pointer" }}
           >
@@ -335,7 +220,6 @@ const Home = () => {
         icon="❮"
         onClick={() => {
           sliderRef.current.slickPrev();
-          slideLeft();
         }}
       />
     ),
@@ -345,7 +229,6 @@ const Home = () => {
         icon="❯"
         onClick={() => {
           sliderRef.current.slickNext();
-          slideRight();
         }}
       />
     ),
@@ -369,7 +252,6 @@ const Home = () => {
     autoplay: false,
     centerMode: false,
     centerPadding: "0px",
-
     prevArrow: (
       <Arrow
         className={`${styles.arrow} ${styles.prevArrow}`}
@@ -449,6 +331,10 @@ const Home = () => {
     price = "",
     animateOut,
     onAnimationEnd,
+    title,
+    description,
+    artist,
+    image,
   }) => {
     const greyBoxRef = useRef(null);
     const [containerWidth, setContainerWidth] = useState(0);
@@ -475,6 +361,11 @@ const Home = () => {
           <figcaption
             className={`${styles.greyBox} ${greyBoxClass}`}
             ref={greyBoxRef}
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
           >
             {containerWidth > 0 && containerHeight > 0 && (
               <ZoomImage
@@ -498,10 +389,73 @@ const Home = () => {
             <div key={index}>{line}</div>
           ))}
           {price && <div className={styles.homePrice}>{price}</div>}
+          {title && <div className={styles.homeTitle}>{title}</div>}
+          {description && (
+            <div className={styles.homeDescription}>{description}</div>
+          )}
+          {artist && <div className={styles.homeArtist}>{artist}</div>}
         </div>
       </article>
     );
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // 로딩 중일 때 표시할 내용
+  }
+
+  const leftGridItems = [
+    {
+      type: "largeItem",
+      textLines: [currentTranslations.main[0]],
+      price: "",
+      image: products[0]?.image,
+      title: currentTranslations.main[0],
+      description: currentTranslations.main[1],
+    },
+    {
+      type: "mediumItem1",
+      textLines: [currentTranslations.main[2]],
+      price: "",
+      image: products[1]?.image,
+      title: currentTranslations.main[2],
+      description: currentTranslations.main[3],
+    },
+    {
+      type: "mediumItem2",
+      textLines: [currentTranslations.main[4]],
+      price: "",
+      image: products[2]?.image,
+      title: currentTranslations.main[4],
+      description: currentTranslations.main[5],
+    },
+    {
+      type: "smallItemLeft1",
+      textLines: currentTranslations.smallItemsLeft[0].textLines,
+      price: currentTranslations.smallItemsLeft[0].price,
+      image: products[3]?.image,
+    },
+    {
+      type: "smallItemLeft2",
+      textLines: currentTranslations.smallItemsLeft[1].textLines,
+      price: currentTranslations.smallItemsLeft[1].price,
+      image: products[4]?.image,
+    },
+  ];
+
+  const rightGridItems = [
+    ...currentTranslations.smallItemsRight.slice(0, 5).map((item, index) => ({
+      type: `smallItemRight${index + 1}`,
+      textLines: item.textLines,
+      price: item.price,
+      image: products[index + 5]?.image,
+    })),
+    ...currentTranslations.smallItemsRight.slice(0, 5).map((item, index) => ({
+      type: `smallItemRight${index + 6}`,
+      textLines: item.textLines,
+      price: item.price,
+      image: products[index + 10]?.image,
+    })),
+  ];
 
   const homeMainDesktop = (
     <div className={styles.homeGridWrapper} ref={gridRef}>
@@ -517,8 +471,7 @@ const Home = () => {
             }
             textLines={item.textLines}
             price={item.price}
-            animateOut={animating && index === leftGridItems.length - 1}
-            onAnimationEnd={() => handleAnimationEnd(index, "left")}
+            image={item.image}
           />
         ))}
         {rightGridItems.map((item, index) => (
@@ -532,8 +485,7 @@ const Home = () => {
             }
             textLines={item.textLines}
             price={item.price}
-            animateOut={animating && index === rightGridItems.length - 1}
-            onAnimationEnd={() => handleAnimationEnd(index, "right")}
+            image={item.image}
           />
         ))}
       </div>
@@ -554,6 +506,7 @@ const Home = () => {
             }
             textLines={item.textLines}
             price={item.price}
+            image={item.image}
           />
         ))}
         {rightGridItems.slice(0, 4).map((item, index) => (
@@ -567,6 +520,7 @@ const Home = () => {
             }
             textLines={item.textLines}
             price={item.price}
+            image={item.image}
           />
         ))}
       </div>
@@ -575,7 +529,10 @@ const Home = () => {
 
   const bestItems = Array.from({ length: 20 }, (_, index) => (
     <div key={index} className={styles.bestItem}>
-      <div className={`${styles.greyBox} ${styles.bestGreyBox}`}></div>
+      <div
+        className={`${styles.greyBox} ${styles.bestGreyBox}`}
+        style={{ backgroundImage: `url(${products[index]?.image})` }}
+      ></div>
       <div className={styles.bestText}>
         <h3>
           {currentTranslations.bestItem} {index + 1} <FaCartPlus />
@@ -588,6 +545,26 @@ const Home = () => {
       </div>
     </div>
   ));
+
+  const newGridItems = Array.from({ length: 7 }, (_, index) => ({
+    image: products[index + 15]?.image,
+    textLines: [
+      currentTranslations.newGridHeader,
+      currentTranslations.newGridHeader,
+    ],
+  }));
+
+  const asymmetricGridItems = Array.from({ length: 3 }, (_, index) => ({
+    image: products[index + 22]?.image,
+    textLines: [currentTranslations.asymmetricGridHeader],
+  }));
+
+  const symmetricGridItems = Array.from({ length: 6 }, (_, index) => ({
+    image: products[index + 25]?.image,
+    textLines: [currentTranslations.symmetricItem],
+    artist: `작가명 ${index + 1}`,
+    year: "제작년도",
+  }));
 
   return (
     <div className={styles.homeContainer}>
@@ -620,15 +597,17 @@ const Home = () => {
       <section className={styles.newGridSection}>
         <h2>{currentTranslations.newGridHeader}</h2>
         <div className={styles.newGridContainer}>
-          {Array.from({ length: 7 }, (_, index) => (
+          {newGridItems.map((item, index) => (
             <div
               key={index}
               className={`${styles.newGridItem} ${
                 styles[`newGridItem${index + 1}`]
               }`}
+              style={{ backgroundImage: `url(${item.image})` }}
             >
-              <span>{currentTranslations.symmetricItem}</span>
-              <span>{currentTranslations.symmetricItem}</span>
+              {item.textLines.map((line, idx) => (
+                <span key={idx}>{line}</span>
+              ))}
             </div>
           ))}
         </div>
@@ -636,15 +615,19 @@ const Home = () => {
       <section className={styles.asymmetricGridSection}>
         <p>{currentTranslations.asymmetricGridHeader}</p>
         <div className={styles.asymmetricGrid}>
-          <div className={`${styles.asymmetricGridItem} ${styles.gridItem1}`}>
-            <span>{currentTranslations.symmetricItem}</span>
-          </div>
-          <div className={`${styles.asymmetricGridItem} ${styles.gridItem2}`}>
-            <span>{currentTranslations.symmetricItem}</span>
-          </div>
-          <div className={`${styles.asymmetricGridItem} ${styles.gridItem3}`}>
-            <span>{currentTranslations.symmetricItem}</span>
-          </div>
+          {asymmetricGridItems.map((item, index) => (
+            <div
+              key={index}
+              className={`${styles.asymmetricGridItem} ${
+                styles[`gridItem${index + 1}`]
+              }`}
+              style={{ backgroundImage: `url(${item.image})` }}
+            >
+              {item.textLines.map((line, idx) => (
+                <span key={idx}>{line}</span>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
       <section className={styles.symmetricGridSection}>
@@ -654,15 +637,20 @@ const Home = () => {
         </button>
         {isMobile ? (
           <Slider {...symmetricSettings}>
-            {Array.from({ length: 6 }, (_, index) => (
+            {symmetricGridItems.map((item, index) => (
               <div key={index} className={styles.symmetricGridItem}>
-                <div className={styles.greyBox}></div>
+                <div
+                  className={styles.greyBox}
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                  }}
+                ></div>
                 <div className={styles.profilePlaceholder}>
                   <div className={styles.profileIcon}></div>
                   <div className={styles.itemText}>
-                    <strong>{`작가명 ${index + 1}`}</strong>
+                    <strong>{item.artist}</strong>
                     <br />
-                    {currentTranslations.symmetricItem}, 제작년도
+                    {item.textLines[0]}, {item.year}
                   </div>
                 </div>
               </div>
@@ -670,15 +658,20 @@ const Home = () => {
           </Slider>
         ) : (
           <div className={styles.symmetricGrid}>
-            {Array.from({ length: 6 }, (_, index) => (
+            {symmetricGridItems.map((item, index) => (
               <div key={index} className={styles.symmetricGridItem}>
-                <div className={styles.greyBox}></div>
+                <div
+                  className={styles.greyBox}
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                  }}
+                ></div>
                 <div className={styles.profilePlaceholder}>
                   <div className={styles.profileIcon}></div>
                   <div className={styles.itemText}>
-                    <strong>{`작가명 ${index + 1}`}</strong>
+                    <strong>{item.artist}</strong>
                     <br />
-                    {currentTranslations.symmetricItem}, 제작년도
+                    {item.textLines[0]}, {item.year}
                   </div>
                 </div>
               </div>

@@ -1,4 +1,3 @@
-// src/setupProxy.js
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
@@ -9,6 +8,16 @@ module.exports = function (app) {
       changeOrigin: true,
       pathRewrite: {
         "^/api": "/v2",
+      },
+      onProxyReq: (proxyReq) => {
+        proxyReq.setHeader(
+          "Access-Control-Allow-Headers",
+          "access-token, Content-Type"
+        );
+      },
+      onProxyRes: (proxyRes) => {
+        proxyRes.headers["Access-Control-Allow-Headers"] =
+          "access-token, Content-Type";
       },
     })
   );

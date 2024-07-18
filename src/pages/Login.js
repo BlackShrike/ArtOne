@@ -1,11 +1,10 @@
-//Login.js
 import React, { useState } from "react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/Login.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
-import { login } from "../components/apiClient"; // 올바른 import 경로
+// import { login } from "../components/apiClient"; // 로그인 API 제거
 
 const translations = {
   KR: {
@@ -42,7 +41,7 @@ function Login({ onLogin }) {
   const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null); // 에러 상태 추가
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { language } = useLanguage();
   const t = translations[language];
@@ -53,17 +52,18 @@ function Login({ onLogin }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // 로그인 API 호출 부분 제거
     try {
-      const response = await login({ username, password });
-      if (response.code !== 200) {
-        throw new Error(response.msg || "Login failed");
-      }
-      localStorage.setItem("access_token", response.access_token);
+      // const response = await login({ username, password });
+      // if (response.code !== 200) {
+      //   throw new Error(response.msg || "Login failed");
+      // }
+      // localStorage.setItem("access_token", response.access_token);
       onLogin();
       navigate("/mypage");
     } catch (error) {
       console.error(error);
-      setError(t.loginFailed); // 에러 메시지 설정
+      setError(t.loginFailed);
     }
   };
 

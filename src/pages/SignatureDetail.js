@@ -1,4 +1,3 @@
-//SignatureDetail.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/SignatureDetail.module.css";
@@ -8,12 +7,11 @@ import { useLanguage } from "../components/LanguageContext";
 
 const translations = {
   KR: {
-    artistName: "Frank Chouteau Brown(작가이름)",
-    artworkName: "Linen Like Hard Twist Cotton 1 (작품명)",
-    artworkInfo: "1980년대 미니멀리즘 작품",
+    artistName: "작가",
+    artworkName: "작품명",
+    artworkInfo: "작품 정보",
     price: "270,000원",
-    description:
-      "프랭크 쇼토 브라운(Frank Chouteau Brown)은 미네소타주 미니애폴리스(Minneapolis)에서 태어나 미네소타 미술학교(Minneapolis School of Fine Arts), 보스턴 아트 클럽(Boston Art Club) 및 유럽에서 교육을 받은 미국인 건축가입니다.",
+    description: "작품 설명",
     colorLabel: "COLOR",
     sizeLabel: "SIZE",
     sizeOptions: [
@@ -22,8 +20,7 @@ const translations = {
       "50 x 50 mm",
       "70 x 70 mm",
     ],
-    quantityText:
-      "Linen Like Hard Twist Cotton Yarn Woven resil 1 RED(알루미늄 액자) - 61X91",
+    quantityText: "수량",
     totalText: "합계",
     basketButton: "장바구니",
     purchaseButton: "구매하기",
@@ -47,35 +44,28 @@ const translations = {
     tabs: ["배송안내", "교환 및 반품", "제품문의"],
     tabContents: [
       {
-        title: ["1. 제목", "2. 제목"],
-        content: [
+        title: "1. 제목",
+        content:
           "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-          "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-        ],
       },
       {
-        title: ["1. 제목", "2. 제목"],
-        content: [
+        title: "2. 제목",
+        content:
           "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-          "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-        ],
       },
       {
-        title: ["1. 제목", "2. 제목"],
-        content: [
+        title: "3. 제목",
+        content:
           "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-          "- 내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
-        ],
       },
     ],
   },
   EN: {
-    artistName: "Frank Chouteau Brown",
-    artworkName: "Linen Like Hard Twist Cotton 1",
-    artworkInfo: "1980s Minimalism Artwork",
+    artistName: "Artist Name",
+    artworkName: "Artwork Name",
+    artworkInfo: "Artwork Info",
     price: "$270.00",
-    description:
-      "Frank Chouteau Brown was an American architect born in Minneapolis, Minnesota, who was educated at the Minneapolis School of Fine Arts, Boston Art Club, and in Europe.",
+    description: "Artwork Description",
     colorLabel: "COLOR",
     sizeLabel: "SIZE",
     sizeOptions: [
@@ -84,8 +74,7 @@ const translations = {
       "50 x 50 mm",
       "70 x 70 mm",
     ],
-    quantityText:
-      "Linen Like Hard Twist Cotton Yarn Woven resil 1 RED (Aluminum Frame) - 61X91",
+    quantityText: "Quantity",
     totalText: "Total",
     basketButton: "Add to Basket",
     purchaseButton: "Purchase",
@@ -109,17 +98,17 @@ const translations = {
     tabs: ["Shipping Information", "Returns & Exchanges", "Product Inquiry"],
     tabContents: [
       {
-        title: "1. Head",
+        title: "1. Title",
         content:
           "- Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
       },
       {
-        title: "2. Head",
+        title: "2. Title",
         content:
           "- Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
       },
       {
-        title: "3. Head",
+        title: "3. Title",
         content:
           "- Content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content",
       },
@@ -127,7 +116,7 @@ const translations = {
   },
 };
 
-function SignatureDetail({ id }) {
+function SignatureDetail({ id, product }) {
   const { language } = useLanguage();
   const t = translations[language];
   const navigate = useNavigate();
@@ -163,24 +152,39 @@ function SignatureDetail({ id }) {
     <div className={styles.detailPage}>
       <div className={styles.detailContainer}>
         <div className={styles.imageSection}>
-          <div className={styles.imagePlaceholder}></div>
+          <div
+            className={styles.imagePlaceholder}
+            style={{
+              backgroundImage: `url(${product.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          ></div>
           <div className={styles.imageThumbnails}>
             {Array.from({ length: 8 }).map((_, index) => (
-              <div key={index} className={styles.thumbnailPlaceholder}></div>
+              <div
+                key={index}
+                className={styles.thumbnailPlaceholder}
+                style={{
+                  backgroundImage: `url(${product.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
             ))}
           </div>
         </div>
         <div className={styles.details}>
           <h2>
-            {t.artistName}
+            {product.artist}
             <br />
-            {t.artworkName}
+            {product.title}
           </h2>
           <p className={styles.detailsRow}>
             <span className={styles.greyText}>{t.artworkInfo}</span>
             <span className={styles.price}>{t.price}</span>
           </p>
-          <p>{t.description}</p>
+          <p>{product.description}</p>
           <div className={styles.selectionRow}>
             <div className={styles.colorSelection}>
               <p>
@@ -354,7 +358,14 @@ function SignatureDetail({ id }) {
         <div className={styles.gridContainer}>
           {Array.from({ length: 20 }).map((_, index) => (
             <div key={index} className={styles.gridItem}>
-              <div className={styles.gridImagePlaceholder}></div>
+              <div
+                className={styles.gridImagePlaceholder}
+                style={{
+                  backgroundImage: `url(${product.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
               <div className={styles.itemDetails}>
                 <p className={styles.itemTitle}>
                   제목 <FaCartPlus className={styles.cartIcon} />
@@ -373,8 +384,8 @@ function SignatureDetail({ id }) {
             <div className={styles.modalHeader}>
               <div className={styles.modalTitle}>
                 <div className={styles.reviewModalTitle}>
-                  <p>{t.artistName}</p>
-                  <p>{t.artworkName}</p>
+                  <p>{product.artist}</p>
+                  <p>{product.title}</p>
                 </div>
               </div>
               <FaTimes

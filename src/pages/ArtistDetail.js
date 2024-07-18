@@ -1,10 +1,10 @@
-//ArtistDetail.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styles from "../css/ArtistDetail.module.css"; // Ensure this path is correct based on your project structure
+import styles from "../css/ArtistDetail.module.css";
 import BackButton from "../components/BackButton";
 import { FaCartPlus } from "react-icons/fa";
 import { useLanguage } from "../components/LanguageContext";
+import { getProducts } from "../components/apiClient";
 
 const translations = {
   KR: {
@@ -36,18 +36,99 @@ const translations = {
 function ArtistDetail() {
   const { artistName } = useParams();
   const [showMore, setShowMore] = useState(false);
-  const { language } = useLanguage(); // Use language context
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지를 추적하는 상태
+  const { language } = useLanguage();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+        const artistProducts = data.filter(
+          (product) => product.artist === artistName
+        );
+        setProducts(artistProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchProducts();
+  }, [artistName]);
 
   const handleShowMore = () => {
     setShowMore(!showMore);
   };
 
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber); // 페이지 변경 핸들러
+    setCurrentPage(pageNumber);
   };
 
-  const t = translations[language]; // Get the translations for the current language
+  const totalItems = products.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const renderPagination = () => {
+    return (
+      <div className={styles.pagination}>
+        <button
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          {"<"}
+        </button>
+        {Array.from({ length: totalPages }).map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.pageNumber} ${
+              currentPage === index + 1 ? styles.activePage : ""
+            }`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          className={styles.pageArrow}
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          {">"}
+        </button>
+      </div>
+    );
+  };
+
+  const renderItems = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const items = products.slice(startIndex, startIndex + itemsPerPage);
+
+    return items.map((product, index) => (
+      <div key={index} className={styles.gridItem}>
+        <div
+          className={styles.imagePlaceholder}
+          style={{
+            backgroundImage: `url(${product.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></div>
+        <div className={styles.itemDetails}>
+          <p className={styles.priceCart}>
+            <span className={styles.headtext}>
+              {product.title} <FaCartPlus className={styles.faCartPlusIcon} />
+            </span>
+          </p>
+          <p>{product.description}</p>
+          <p>
+            {language === "KR" ? `${product.price}원` : `$${product.price}`}
+          </p>
+        </div>
+      </div>
+    ));
+  };
+
+  const t = translations[language];
 
   return (
     <div className={styles.gridPage}>
@@ -70,50 +151,8 @@ function ArtistDetail() {
         {artistName}
         {t.worksTitle}
       </h2>
-      <div className={styles.gridContainer}>
-        {Array.from({ length: 30 }).map((_, index) => (
-          <div key={index} className={styles.gridItem}>
-            <div className={styles.imagePlaceholder}></div>
-            <div className={styles.itemDetails}>
-              <p className={styles.priceCart}>
-                <span className={styles.headtext}>
-                  {t.title} <FaCartPlus className={styles.faCartPlusIcon} />
-                </span>
-              </p>
-              <p>{t.description}</p>
-              {showMore && <p>{t.additionalDescription}</p>}
-              <p>{t.price}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className={styles.pagination}>
-        <button
-          className={styles.pageArrow}
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          {"<"}
-        </button>
-        {Array.from({ length: 9 }).map((_, index) => (
-          <button
-            key={index}
-            className={`${styles.pageNumber} ${
-              currentPage === index + 1 ? styles.activePage : ""
-            }`}
-            onClick={() => handlePageChange(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button
-          className={styles.pageArrow}
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === 9}
-        >
-          {">"}
-        </button>
-      </div>
+      <div className={styles.gridContainer}>{renderItems()}</div>
+      {renderPagination()}
     </div>
   );
 }

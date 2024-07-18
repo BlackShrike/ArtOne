@@ -5,6 +5,7 @@ import BackButton from "../components/BackButton";
 import { TbRefresh } from "react-icons/tb";
 import { AiOutlineClose } from "react-icons/ai";
 import { useLanguage } from "../components/LanguageContext";
+import { getProducts } from "../components/apiClient";
 
 const translations = {
   KR: {
@@ -68,7 +69,6 @@ const translations = {
     price: "Price",
   },
 };
-
 function Original() {
   const [filters, setFilters] = useState({
     type: localStorage.getItem("type") || "전체",
@@ -86,14 +86,28 @@ function Original() {
   const t = translations[language];
 
   const itemsPerPage = 30;
-  const totalItems = 300;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [recentKeywords, setRecentKeywords] = useState(() => {
     const savedKeywords = JSON.parse(localStorage.getItem("recentKeywords"));
     return savedKeywords || [];
   });
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("type", filters.type);
@@ -182,14 +196,18 @@ function Original() {
 
   const renderItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const items = Array.from({ length: totalItems }).slice(
-      startIndex,
-      startIndex + itemsPerPage
-    );
+    const items = products.slice(startIndex, startIndex + itemsPerPage);
 
-    return items.map((_, index) => (
+    return items.map((item, index) => (
       <div key={index} className={styles.gridItem}>
-        <div className={styles.imagePlaceholder}></div>
+        <div
+          className={styles.imagePlaceholder}
+          style={{
+            backgroundImage: `url(${item.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></div>
         <div className={styles.itemDetails}>
           <p>
             <span className={styles.headtext}>{t.artist}</span>
@@ -202,6 +220,8 @@ function Original() {
   };
 
   const renderPagination = () => {
+    const totalItems = products.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
     return (
       <div className={styles.pagination}>
         <span
@@ -642,7 +662,9 @@ function Original() {
         </div>
       </section>
       <section className={styles.gridPage}>
-        <div className={styles.gridContainer}>{renderItems()}</div>
+        <div className={styles.gridContainer}>
+          {loading ? <div>Loading...</div> : renderItems()}
+        </div>
         {renderPagination()}
       </section>
     </div>

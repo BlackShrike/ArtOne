@@ -1,4 +1,3 @@
-//Signature.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
@@ -6,6 +5,7 @@ import styles from "../css/Signature.module.css";
 import BackButton from "../components/BackButton";
 import SignatureDetail from "./SignatureDetail";
 import { useLanguage } from "../components/LanguageContext";
+import { getProducts } from "../components/apiClient";
 
 const translations = {
   KR: {
@@ -53,8 +53,21 @@ function Signature() {
   const [selectedMenu, setSelectedMenu] = useState(t.menu[0]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOption, setSortOption] = useState("");
-  const [selectedId, setSelectedId] = useState(null); // 선택된 항목의 ID를 관리하는 상태
+  const [selectedId, setSelectedId] = useState(null);
+  const [products, setProducts] = useState([]);
   const itemsPerPage = 50;
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -81,34 +94,39 @@ function Signature() {
     setSortOption(event.target.value);
   };
 
-  const totalItems = 200;
+  const totalItems = products.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const renderItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const items = Array.from({ length: itemsPerPage }).map(
-      (_, index) => startIndex + index + 1
-    );
+    const items = products.slice(startIndex, startIndex + itemsPerPage);
 
-    return items.map((item) => (
+    return items.map((item, index) => (
       <div
-        key={item}
+        key={index}
         onClick={() => {
-          setSelectedId(item);
-          navigate(`/signature/${item}`, { replace: false });
-        }} // navigate로 URL에 id 포함시키기
+          setSelectedId(index);
+          navigate(`/signature/${index}`, { replace: false });
+        }}
         className={styles.gridItem}
       >
-        <div className={styles.imagePlaceholder}></div>
+        <div
+          className={styles.imagePlaceholder}
+          style={{
+            backgroundImage: `url(${item.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></div>
         <div className={styles.itemDetails}>
           <div>
             <p>
               <span className={styles.headtext}>
-                {t.title} {item}
+                {t.title} {item.title}
               </span>
             </p>
             <p>
-              {t.caption} {item}
+              {t.caption} {item.description}
             </p>
             <p>{t.date}</p>
           </div>
@@ -185,10 +203,10 @@ function Signature() {
           </select>
         </div>
       )}
-      {selectedId ? (
+      {selectedId !== null ? (
         <>
           <BackButton onClick={() => setSelectedId(null)} />
-          <SignatureDetail id={selectedId} />
+          <SignatureDetail id={selectedId} product={products[selectedId]} />
         </>
       ) : (
         <>

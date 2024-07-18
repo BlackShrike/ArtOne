@@ -2,9 +2,12 @@ import axios from "axios";
 
 const clientId = "e1cb5da70827d8e06a60e291279a0b1547f7628bec";
 const clientSecret = "17bd397f1e711b4899a990";
+const apiBaseURL = "/api/v2"; // 프록시를 통해 API 엔드포인트로 라우팅
+
+const baseImageURL = "https://cdn.imweb.me/upload";
 
 const apiClient = axios.create({
-  baseURL: "/api",
+  baseURL: apiBaseURL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -14,15 +17,21 @@ let accessToken = null;
 
 export async function getAccessToken() {
   try {
-    console.log("Sending request to /api/auth with payload:", {
+    const params = {
       key: clientId,
       secret: clientSecret,
-    });
-    const response = await apiClient.post("/auth", {
-      key: clientId,
-      secret: clientSecret,
-    });
+    };
+
+    console.log("Sending request to /auth with params:", params);
+
+    const response = await apiClient.get("/auth", { params });
+
+    console.log("Request Details:");
+    console.log("URL: ", apiClient.defaults.baseURL + "/auth");
+    console.log("Params: ", params);
+
     console.log("Access Token Response:", response.data);
+
     accessToken = response.data.access_token;
     return accessToken;
   } catch (error) {
@@ -38,100 +47,29 @@ export function setAccessToken(token) {
   accessToken = token;
 }
 
-export async function signUp(payload) {
-  try {
-    if (!accessToken) {
-      await getAccessToken();
-    }
-    console.log("Payload for sign up:", payload);
-    const response = await apiClient.post("/member/member", payload, {
-      headers: {
-        "access-token": `${accessToken}`,
-      },
-    });
-    console.log("Sign Up Response:", response.data);
-    return response.data;
-  } catch (error) {
-    console.error(
-      "Error during sign up:",
-      error.response ? error.response.data : error.message
-    );
-    throw error;
-  }
-}
-export async function login({ username, password }) {
-  try {
-    if (!accessToken) {
-      await getAccessToken();
-    }
-    console.log("Username for login check:", username);
-    const userResponse = await apiClient.get(`/member/members/${username}`, {
-      headers: {
-        "access-token": `${accessToken}`,
-      },
-    });
-    console.log("User Info Response:", userResponse.data);
-
-    if (userResponse.data) {
-      // Assuming the user data contains a field 'pass' for password
-      const user = userResponse.data;
-      if (user.pass === password) {
-        console.log("Login successful!");
-        return {
-          code: 200,
-          msg: "Login successful",
-          access_token: accessToken,
-        };
-      } else {
-        console.log("Invalid password");
-        return { code: -1, msg: "Invalid password" };
-      }
-    } else {
-      console.log("User not found");
-      return { code: -1, msg: "User not found" };
-    }
-  } catch (error) {
-    console.error(
-      "Error during login:",
-      error.response ? error.response.data : error.message
-    );
-    throw error;
-  }
-}
-
-export async function checkUsernameAvailability(username) {
-  try {
-    if (!accessToken) {
-      await getAccessToken();
-    }
-    console.log("Username for availability check:", username);
-    const response = await apiClient.get(`/member/members/${username}`, {
-      headers: {
-        "access-token": `${accessToken}`,
-      },
-    });
-    console.log("Username Availability Response:", response.data);
-    return response.data;
-  } catch (error) {
-    console.error(
-      "Error checking username availability:",
-      error.response ? error.response.data : error.message
-    );
-    throw error;
-  }
-}
 export async function getProducts() {
   try {
     if (!accessToken) {
       await getAccessToken();
     }
-    const response = await apiClient.get("/shop/products", {
+    const requestConfig = {
       headers: {
         "access-token": `${accessToken}`,
       },
-    });
+    };
+    const response = await apiClient.get("/shop/products", requestConfig);
+
+    console.log("Request Details:");
+    console.log("URL: ", apiClient.defaults.baseURL + "/shop/products");
+    console.log("Headers: ", requestConfig.headers);
+
     console.log("Products Response:", response.data);
-    return response.data;
+    return response.data.data.list.map((product) => ({
+      image: `${baseImageURL}/${product.image_url[product.images[0]]}`,
+      title: product.name,
+      description: product.simple_content,
+      artist: product.origin,
+    }));
   } catch (error) {
     console.error(
       "Error fetching products:",

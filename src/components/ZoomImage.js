@@ -1,8 +1,7 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import "../css/ZoomImage.css";
-import imageSrc from "../img/Img1.jpg"; // 이미지 경로를 import
 
-const ZoomImage = ({ zoomRate, children }) => {
+const ZoomImage = ({ imageSrc, zoomRate, children }) => {
   const [cursor, setCursor] = useState({ cursorX: 0, cursorY: 0 });
   const [isHover, setIsHover] = useState(false);
   const containerRef = useRef();
@@ -36,7 +35,7 @@ const ZoomImage = ({ zoomRate, children }) => {
     img.onload = handleImageLoad;
 
     return () => window.removeEventListener("resize", updateContainerSize);
-  }, []);
+  }, [imageSrc]);
 
   const cursorStyle = {
     position: "absolute",
