@@ -41,7 +41,6 @@ function Artist() {
     ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     ..."ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ",
   ];
-  const artistKeys = Object.keys(artists).sort();
 
   return (
     <div className={styles.artistContainer}>

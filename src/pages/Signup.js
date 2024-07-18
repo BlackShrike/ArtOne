@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../components/LanguageContext";
-// import { signUp, checkUsernameAvailability, login } from "../components/apiClient"; // 회원가입 및 로그인 API 제거
+import { signUp } from "../firebaseFunctions";
 import BackButton from "../components/BackButton";
 import styles from "../css/Signup.module.css";
 
@@ -157,25 +157,28 @@ function Signup() {
       return;
     }
 
-    // 회원가입 및 로그인 API 호출 부분 제거
+    const payload = {
+      username: formData.username,
+      password: formData.password,
+      email: formData.email,
+      name: formData.name,
+      phoneNumber: `${formData.phoneNumberPart1}-${formData.phoneNumberPart2}-${formData.phoneNumberPart3}`,
+      birthdate: `${formData.birthYear}-${formData.birthMonth}-${formData.birthDay}`,
+      address: formData.roadAddress,
+      addressDetail: formData.roadAddressDetail,
+      zonecode: formData.zonecode,
+      marketing_agree_sms: formData.marketing_agree_sms,
+      marketing_agree_email: formData.marketing_agree_email,
+      third_party_agree: formData.third_party_agree,
+      send_alarm: formData.send_alarm,
+    };
+
     try {
-      // const response = await signUp(payload);
-      // console.log(response);
-      // if (response.code === 200) {
-      //   alert("회원가입 성공!");
-      //   const loginResponse = await login({
-      //     username: formData.username,
-      //     password: formData.password,
-      //   });
-      //   console.log(loginResponse);
-      //   if (loginResponse.code === 200) {
-      //     navigate("/mypage");
-      //   } else {
-      //     alert("자동 로그인 실패: " + loginResponse.msg);
-      //   }
-      // } else {
-      //   alert("회원가입 실패: " + response.msg);
-      // }
+      const user = await signUp(payload.email, payload.password, payload);
+      if (user) {
+        alert("회원가입 성공!");
+        navigate("/"); // 회원가입 성공 후 기본 페이지로 이동
+      }
     } catch (error) {
       console.error(
         "Error during sign up:",
@@ -205,37 +208,6 @@ function Signup() {
         }));
       },
     }).open();
-  };
-
-  // 아이디 중복 체크 API 호출 부분 제거
-  const handleUsernameBlur = async () => {
-    if (formData.username) {
-      try {
-        // const response = await checkUsernameAvailability(formData.username);
-        // setIsUsernameAvailable(response.code === -10);
-        // if (response.code === -10) {
-        //   setErrors((prevErrors) => ({
-        //     ...prevErrors,
-        //     username: "사용 가능한 아이디입니다.",
-        //   }));
-        // } else {
-        //   setErrors((prevErrors) => ({
-        //     ...prevErrors,
-        //     username: "이미 사용 중인 아이디입니다.",
-        //   }));
-        // }
-      } catch (error) {
-        console.error(
-          "Error checking username availability:",
-          error.response ? error.response.data : error.message
-        );
-        setIsUsernameAvailable(false);
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          username: "아이디 중복체크 중 오류가 발생했습니다.",
-        }));
-      }
-    }
   };
 
   return (
@@ -438,11 +410,7 @@ function Signup() {
           </div>
           {errors.terms && <span className={styles.error}>{errors.terms}</span>}
         </div>
-        <button
-          type="submit"
-          className={styles.signupButton}
-          onClick={handleSubmit}
-        >
+        <button type="submit" className={styles.signupButton}>
           {t.submit}
         </button>
       </form>
