@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import styles from "../css/Signature.module.css";
 import BackButton from "../components/BackButton";
 import SignatureDetail from "./SignatureDetail";
 import { useLanguage } from "../components/LanguageContext";
-import { getProducts, addToCart } from "../components/apiClient";
 import { useUser } from "../components/UserContext";
 
 const translations = {

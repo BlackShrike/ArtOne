@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../components/LanguageContext";
 import BackButton from "../components/BackButton";
 import styles from "../css/Signup.module.css";
-import axios from "axios";
 
 const translations = {
   KR: {

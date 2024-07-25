@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "../css/Checkout.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
-import { getCartItems, removeFromCart } from "../components/apiClient";
-import { useUser } from "../components/UserContext"; // UserContext 사용
 
 const translations = {
   KR: {

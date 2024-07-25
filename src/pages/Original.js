@@ -4,8 +4,6 @@ import BackButton from "../components/BackButton";
 import { TbRefresh } from "react-icons/tb";
 import { AiOutlineClose } from "react-icons/ai";
 import { useLanguage } from "../components/LanguageContext";
-import { getProducts, addToCart } from "../components/apiClient";
-import { useUser } from "../components/UserContext";
 
 const translations = {
   KR: {

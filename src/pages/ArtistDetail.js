@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "../css/ArtistDetail.module.css";
 import BackButton from "../components/BackButton";
 import { FaCartPlus } from "react-icons/fa";
 import { useLanguage } from "../components/LanguageContext";
-import { getProducts, addToCart } from "../components/apiClient";
-import { useUser } from "../components/UserContext";
 
 const translations = {
   KR: {

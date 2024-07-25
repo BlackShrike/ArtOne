@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import styles from "../css/Login.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
-import { useUser } from "../components/UserContext";
-import axios from "axios";
 
 const translations = {
   KR: {

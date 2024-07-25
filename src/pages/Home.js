@@ -8,7 +8,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { useLanguage } from "../components/LanguageContext";
 import "../css/slick.custom.css";
 import ZoomImage from "../components/ZoomImage";
-import { getProducts } from "../components/apiClient";
 
 const Arrow = ({ className, style, onClick, icon }) => (
   <div className={className} style={{ ...style }} onClick={onClick}>
@@ -142,23 +141,6 @@ const Home = () => {
   const { language } = useLanguage();
   const navigate = useNavigate();
   const currentTranslations = translations[language];
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await getProducts();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
 
   useEffect(() => {
     const handleResize = () => {

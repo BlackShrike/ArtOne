@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../css/Artist.module.css";
 import BackButton from "../components/BackButton";
-import { getProducts } from "../components/apiClient";
 
 const generateArtistData = (products) => {
   const artists = {};
