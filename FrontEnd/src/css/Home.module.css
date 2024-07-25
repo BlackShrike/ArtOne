@@ -1,0 +1,738 @@
+/* 애니메이션 정의 */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* 애니메이션 클래스 */
+.animateOut {
+  animation: fadeOut 0.4s forwards;
+}
+
+.gridItemWrapper {
+  animation: slideIn 0.4s forwards;
+}
+
+
+/* 나머지 스타일은 그대로 유지 */
+.item {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  white-space: nowrap;
+  align-items: center;
+}
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 60px;
+}
+
+.homeContainer h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 33.5px;
+}
+
+section {
+  width: 100%;
+  padding-bottom: 30px;
+  margin: auto;
+}
+
+figure {
+  width: auto;
+  height: 80%;
+  margin: 0px;
+}
+
+.sliderSection {
+  order: 1;
+}
+
+.bestSection {
+  order: 3;
+}
+
+.newGridSection {
+  order: 2;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.newGridSection h2 {
+  font-size: 34px;
+}
+
+/* 비대칭 그리드 섹션 */
+.asymmetricGridSection {
+  order: 4;
+  margin-top: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 33px;
+}
+
+/* 대칭 그리드 섹션 */
+.symmetricGridSection {
+  order: 5;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 33px;
+  font-weight: bold;
+}
+
+/* 텍스트 섹션 */
+.textContainerSection {
+  order: 6;
+  margin-top: 40px;
+  text-align: center;
+  white-space: pre-line;
+  font-size: 33px;
+}
+
+/* 홈 그리드 */
+.homeGrid {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(16, 105px); /* 16 columns */
+  grid-template-rows: repeat(7, 145px); /* 7 rows */
+  grid-template-areas:
+    "large large large large large large large large medium1 medium1 medium1 medium1 medium2 medium2 medium2 medium2"
+    "large large large large large large large large medium1 medium1 medium1 medium1 medium2 medium2 medium2 medium2"
+    "large large large large large large large large medium1 medium1 medium1 medium1 medium2 medium2 medium2 medium2"
+    "large large large large large large large large small-right1 small-right1 small-right1 small-right1 small-right6 small-right6 small-right6 small-right6"
+    "large large large large large large large large small-right2 small-right2 small-right2 small-right2 small-right7 small-right7 small-right7 small-right7"
+    "large large large large large large large large small-right3 small-right3 small-right3 small-right3 small-right8 small-right8 small-right8 small-right8"
+    "small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-left1 small-right4 small-right4 small-right4 small-right4 small-right9 small-right9 small-right9 small-right9"
+    "small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-left2 small-right5 small-right5 small-right5 small-right5 small-right10 small-right10 small-right10 small-right10";
+  padding-top: 20px;
+}
+
+.homePrice {
+  font-weight: bold;
+}
+
+.gridItemWrapper {
+  display: grid;
+  position: relative;
+}
+
+.gridItemContent {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.item p {
+  margin: 5px 5px;
+}
+
+.item:hover .greyBox, .item:hover .smallGreyBox {
+  background-size: 200%; /* 이미지 확대 */
+}
+
+.greyBox {
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
+  background-color: #ddd;
+  background-size: cover;
+  transition: background-size 0.5s ease, background-position 0.5s ease;
+  background-position: center;
+}
+
+.smallGreyBox {
+  width: 94px;
+  height: 120px;
+  background-color: #ddd;
+  background-size: cover;
+  transition: background-size 0.5s ease, background-position 0.5s ease;
+  background-position: center;
+  margin-right: 10px;
+}
+
+.largeItem {
+  grid-area: large;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.largeItem figure{
+  width: 100%;
+}
+.largeItem .text {
+  white-space: nowrap;
+  text-align: left;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.largeItem .text div:first-child {
+  font-size: 28px; /* First line larger */
+  font-weight: 700;
+  margin: 10px 0px;
+}
+
+.largeItem .text div:last-child {
+  font-size: 22px; /* Second line smaller */
+  font-weight: 400;
+  margin: 5px 0px;
+}
+
+.mediumItem1 {
+  grid-area: medium1;
+}
+
+.mediumItem2 {
+  grid-area: medium2;
+}
+
+.mediumItem1, .mediumItem2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.mediumItem1 .text, .mediumItem2 .text {
+  margin-top: 5px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.mediumItem1 .text div:first-child, .mediumItem2 .text div:first-child {
+  white-space: nowrap;
+  font-size: 22px; /* First line larger */
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.mediumItem1 .text div:last-child, .mediumItem2 .text div:last-child {
+  font-size: 22px; /* Second line smaller */
+  margin: 0;
+  white-space: nowrap;
+}
+
+.smallItemLeft1 {
+  grid-area: small-left1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemLeft2 {
+  grid-area: small-left2;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight1 {
+  grid-area: small-right1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight2 {
+  grid-area: small-right2;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight3 {
+  grid-area: small-right3;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight4 {
+  grid-area: small-right4;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight5 {
+  grid-area: small-right5;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight6 {
+  grid-area: small-right6;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight7 {
+  grid-area: small-right7;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight8 {
+  grid-area: small-right8;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight9 {
+  grid-area: small-right9;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItemRight10 {
+  grid-area: small-right10;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.smallItem .greyBox {
+  width: 30%;
+  height: 90%;
+  margin-right: 10px;
+}
+.text{
+  flex-grow: 1;
+}
+.text div {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.bestGrid {
+  display: grid !important;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.bestItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.bestText {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bestText h3 {
+  display: flex;
+  justify-content: space-between; /* 텍스트와 아이콘을 양 끝에 배치 */
+  align-items: center;
+  width: 100%; /* 부모 요소의 전체 너비를 차지하도록 설정 */
+}
+
+.bestText > * {
+  margin: 0px;
+}
+
+.bestText :last-child {
+  margin-top: 6px;
+}
+.middleText {
+  display: flex;
+  margin: 0;
+}
+
+.priceCart {
+  margin-left: 50px; /* 아이콘과 텍스트 사이의 간격 조정 */
+}
+
+.centeredHeading {
+  text-align: center;
+  margin: 30px 0px;
+}
+
+.bestGreyBox {
+  width: 205px;
+  height: 238px;
+}
+
+/* 새로운 그리드 섹션 */
+.newGridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 442px); /* 4개의 균일한 칼럼 */
+  grid-template-rows: repeat(5); /* 행 높이를 자동으로 설정 */
+  gap: 10px;
+  grid-template-areas:
+    "item1 item2 item2 item3"
+    "item1 item2 item2 item3"
+    "item1 item2 item2 item4"
+    "item5 item6 item6 item7"
+    "item5 item6 item6 item7";
+  margin: 0 auto; /* 그리드를 가로 중앙으로 정렬 */
+}
+
+.newGridItem {
+  background-color: #eee;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 14px;
+  color: white;
+  height: auto; /* 높이를 자동으로 설정 */
+}
+
+.newGridItem1 { grid-area: item1; height: 741px; } /* 새로운 높이 설정 */
+.newGridItem2 { grid-area: item2; height: 741px; } /* 새로운 높이 설정 */
+.newGridItem3 { grid-area: item3; height: 481px; } /* 새로운 높이 설정 */
+.newGridItem4 { grid-area: item4; height: 235px; } /* 새로운 높이 설정 */
+.newGridItem5 { grid-area: item5; height: 351px; } /* 새로운 높이 설정 */
+.newGridItem6 { grid-area: item6; height: 351px; } /* 새로운 높이 설정 */
+.newGridItem7 { grid-area: item7; height: 351px; } /* 새로운 높이 설정 */
+.asymmetricGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, 250px);
+  gap: 12px;
+  grid-template-areas:
+    "item1 item1 item2"
+    "item1 item1 item2"
+    "item1 item1 item3";
+  margin: auto;
+}
+
+.asymmetricGridItem {
+    background-color: #ddd;
+    padding: 0px 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 20px;
+    color: #fff;
+    white-space: pre-line;
+}
+
+.gridItem1 { grid-area: item1; }
+.gridItem2 { grid-area: item2; }
+.gridItem3 { grid-area: item3; }
+
+.sliderContainer {
+  margin: 0 auto;
+}
+
+.symmetricGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: auto;
+}
+
+.symmetricGridItem {
+  height: 576px; 
+  position: relative;
+  margin-bottom: 34px;
+}
+
+.profilePlaceholder {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.profileIcon {
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  margin-right: 10px;
+}
+
+.itemText {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.textContainer p {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.moreText {
+  left: 48%;
+  position: relative;
+  color: gray;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding-bottom: 20px;
+}
+
+.originalGridContainer {
+  display: none; /* 기본적으로 숨김 처리 */
+}
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  section{
+    width: 100%;
+    padding-bottom: 0px;
+  }
+  .bestSection{
+    order: 2;
+  }
+  .newGridSection{
+    order: 3;
+  }
+  .sliderContainer {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .homeGridMobile {
+    width: 95% !important;
+    display: grid !important;
+    margin: 0 15px;
+    justify-content: center;
+    gap: 5px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 133px);
+    grid-template-areas:
+      "large"
+      "large"
+      "large"
+      "small-right1"
+      "small-right2"
+      "small-right3";
+  }
+
+  .homeGridMobile .largeItem,
+  .homeGridMobile .smallItemRight1,
+  .homeGridMobile .smallItemRight2,
+  .homeGridMobile .smallItemRight3 {
+    display: flex;
+  }
+
+  .homeGridMobile .smallItemRight1,
+  .homeGridMobile .smallItemRight2,
+  .homeGridMobile .smallItemRight3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+  .homeGridMobile .smallItemRight1 .text,
+  .homeGridMobile .smallItemRight2 .text,
+  .homeGridMobile .smallItemRight3 .text {
+    width: 100px;
+  }
+
+  .homeGridMobile .smallGreyBox {
+    width: 30%;
+  }
+
+  .largeItem {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0px;
+  }
+
+  .largeItem .text {
+    white-space: wrap;
+  }
+
+  .largeItem .text p:first-child {
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 20px;
+  }
+
+  .largeItem .text p:last-child {
+    display: none;
+  }
+  .bestGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bestItem {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    padding-right: 0px
+  }
+
+  .bestGreyBox {
+    width: 95%;
+  }
+
+  
+
+  .middleText {
+    display: flex;
+    margin: 0;
+  }
+
+  .priceCart {
+    margin-left: 10px;
+  }
+  
+  .newGridSection h2{
+    font-size: 18px;
+  }
+  .newGridContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .newGridItem {
+    background-color: #eee;
+  }
+
+  .newGridItem1 {
+    height: 200px;
+  }
+
+  .newGridItem2 {
+    height: 300px;
+  }
+
+  .newGridItem3 {
+    height: 400px;
+  }
+
+  .newGridItem4 {
+    height: 250px;
+  }
+
+  .newGridItem5 {
+    height: 350px;
+  }
+
+  .newGridItem6 {
+    height: 450px;
+  }
+
+  .newGridItem7 {
+    height: 300px;
+  }
+
+  .newGridItem8 {
+    height: 200px;
+  }
+
+  .newGridItem p {
+    display: none;
+  }
+  .asymmetricGridSection{
+    font-size: 16px;
+  }
+  .asymmetricGrid {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .asymmetricGrid p {
+    display: none;
+  }
+
+  .gridItem1,
+  .gridItem2,
+  .gridItem3 {
+    height: 300px;
+  }
+
+  .textContainer {
+    display: none;
+  }
+
+  .originalGridContainer {
+    display: grid; /* 모바일에서만 보이도록 설정 */
+    margin-bottom: 40px;
+  }
+
+  .originalGrid {
+    display: flex;
+    gap: 20px;
+  }
+
+  .originalGridItem {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .originalGreyBox {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+  }
+
+  .originalText {
+    text-align: left;
+  }
+
+  .symmetricGridContainer {
+    grid-template-columns: repeat(1,1fr);
+    font-size: 12px;
+  }
+
+  .symmetricGridItem {
+    width: auto !important;
+    padding: 0 20px;
+  }
+  
+  .moreText{
+    display: none;
+  }
+}

@@ -1,0 +1,115 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+}
+
+
+.loginContainer h2 {
+  font-size: 45px;
+  margin-top: 213px;
+  margin-bottom: 20px;
+}
+
+.loginForm {
+  margin-top: 100px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.loginForm input[type="text"],
+.loginForm input[type="password"] {
+  width: 100%;
+  height: 60px;
+  padding: 0 30px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: 100;
+}
+.loginForm input::placeholder{
+  font-weight: bold;
+}
+.rememberMe {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.checkboxIcon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff6b6b;
+  color: white;
+  border: 1px solid #222;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 100;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 100;
+}
+
+.links a {
+  text-decoration: none;
+  color: #333;
+}
+
+.socialLogin {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 100px;
+}
+
+.socialLogin button {
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  border: none;
+}
+
+.kakao {
+  background-color: #ffeb3b;
+}
+
+.naver {
+  background-color: #2db400;
+}
+
+.google {
+  background-color: white;
+  border: 1px solid #000 !important;
+}

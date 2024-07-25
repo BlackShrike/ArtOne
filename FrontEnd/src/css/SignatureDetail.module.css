@@ -1,0 +1,498 @@
+.detailPage {
+  padding: 20px;
+}
+
+.detailContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.imageSection {
+  flex: 6;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 400px;
+  background-color: #ddd;
+}
+
+.imageThumbnails {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.thumbnailPlaceholder {
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+}
+
+.details {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+}
+
+.details h2 {
+  margin: 10px 0;
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+}
+
+.details p {
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 16px;
+}
+.detailsRow{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding-bottom:  10px;
+}
+.greyText {
+  color: #bbb;
+}
+
+.selectionRow {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.colorSelection p,
+.sizeSelection p,
+.quantity,
+.totalPrice,
+.purchaseRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.totalPrice{
+  padding: 0px 0px;
+}
+.totalPrice p {
+  margin: 0
+}
+.colors {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 5px;
+}
+
+.color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+
+.color:nth-child(5)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 122px;
+  width: 1px;
+  height: 50px;
+  background-color: #ccc;
+}
+
+.sizeSelection select {
+  width: 80%;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  color: #666;
+}
+
+.quantity span {
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.totalPrice .price {
+  font-size: 24px;
+  font-weight: bold;
+}
+.purchaseRow {
+  margin-top: 30px;
+  height: 50px;
+  display: flex;
+  width: 100%;
+  border-bottom: none; /* Border-bottom 제거 */
+}
+.warningText{
+  font-weight: normal !important ;
+  font-size: 12px !important;
+  color: #ccc;
+  margin-left: 20%;
+  text-align: center;
+}
+.purchaseInfoRow {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  color: #999;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+.extraImagePlaceholder {
+  width: 100%;
+  height: 800px;
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #ccc;
+}
+
+.innerImagePlaceholder {
+  width: 80%;
+  height: 80%;
+  background-color: #ccc;
+}
+.reviews {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.reviewsHead {
+  text-align: center;
+}
+
+.reviewsTitle {
+  text-align: left;
+  color: gray;
+  width: 100%; /* 왼쪽 정렬을 위해 너비를 100%로 설정 */
+}
+
+.reviewNotice {
+  width: 100%;
+  font-size: 16px;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #000;
+  padding: 5px;
+}
+
+.writeReviewButton {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.reviewList {
+  width: 100%;
+  margin-top: 10px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+.reviewImages{
+  display: flex;
+  gap: 10px;
+}
+.reviewItem {
+  padding: 10px 0;
+  order: 0; /* 기본 순서 */
+}
+
+.reviewImagePlaceholder {
+  width: 15%;
+  height: 120px;
+  background-color: #ddd;
+}
+
+.reviewer {
+  font-weight: bold;
+}
+
+.reviewTitle {
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.reviewHead {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.reviewHead option:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.reviewContent {
+  width: 100%;
+  padding: 0px 10px;
+  resize: none;
+}
+
+.reviewSeparator {
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.similarWorks {
+  margin-top: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.gridItem {
+  background-color: #fff;
+  padding: 10px;
+}
+
+.gridImagePlaceholder {
+  width: 100%;
+  height: 150px;
+  background-color: #ddd;
+}
+
+.itemDetails {
+  margin-top: 10px;
+}
+
+.itemTitle {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  flex-direction: row;
+}
+
+.cartIcon {
+  margin-left: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewmodalContent {
+  width: 100%;
+  height: 200px;
+  resize: none;
+  font-weight: bold;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  width: 600px;
+  
+}
+
+.modalHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.modalTitle {
+  flex: 1;
+  text-align: center;
+}
+.modalTitle p{
+  margin: 5px 0;
+  font-weight: bold;
+}
+.closeIcon {
+  cursor: pointer;
+  justify-self: flex-end;
+}
+.basketButton {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 40px;
+}
+
+.purchaseButton {
+  width: 80%;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 14px;
+}
+.imageUpload {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.uploadIcon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.imageUploadPlaceholder {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #E95762;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.inputField {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.textArea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  height: 100px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tab {
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s;
+}
+.dot {
+  margin: 0 5px;
+  align-self: center; /* 가운데 점을 중앙에 위치하게 설정 */
+}
+
+.activeTab {
+  color: #000;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+}
+
+@media (max-width: 768px) {
+  .detailContainer {
+    flex-direction: column;
+  }
+
+  .imagePlaceholder {
+    height: 200px;
+  }
+
+  .details h2 {
+    font-size: 16px;
+  }
+
+  .details p {
+    font-size: 12px;
+  }
+  .sizeSelection p{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sizeSelection select{
+    margin-top: 20px;
+    width: 100%;
+  }
+  .reviewImagePlaceholder {
+    width: 100%;
+    height: 100px;
+  }
+
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modalContent {
+    width: 90%;
+  }
+
+  .reviewmodalContent {
+    width: 100%;
+  }
+
+  .tab {
+    width: 100%;
+    text-align: center;
+  }
+
+  .writeReviewButtonContainer {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .reviewList {
+    order: 0;
+  }
+}

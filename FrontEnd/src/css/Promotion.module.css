@@ -1,0 +1,91 @@
+.gridPage {
+  padding: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 424px);
+  gap: 10px;
+  margin-bottom: 220px;
+  justify-content: center;
+}
+
+.gridItem {
+  padding: 10px;
+  text-align: left;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 509px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+  position: relative; /* 상대 위치 설정 */
+  padding-bottom: 100%; /* 높이를 너비의 100%로 설정 (정사각형) */
+}
+
+
+.headtext {
+  font-weight: bold;
+}
+
+.itemDetails p {
+  font-size: 16px;
+}
+/* 페이지네이션 관련 CSS 추가 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap:30px;
+  font-size: 20px;
+  margin-bottom: 275px;
+}
+
+.pageNumber,
+.pageArrow {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pageNumber:hover,
+.pageArrow:hover {
+  background-color: #f1f1f1;
+}
+
+/* 추가할 CSS */
+.activePage {
+  color: red;
+  text-decoration: underline;
+}
+@media (max-width: 767px) {
+  .gridPage {
+    padding: 0px;
+  }
+  
+  .gridContainer {
+    grid-template-columns: 1fr; /* 한 줄 배치 */
+    padding: 0px;
+  }
+  
+  .gridItem {
+    padding: 0px;
+    text-align: left;
+  }
+  .itemDetails{
+    margin: 0 2 0px;
+  }
+  .itemDetails p {
+    font-size: 12px; /* 글자 크기 조정 */
+  }
+
+  .imagePlaceholder {
+    width: 90%;
+    padding-bottom: 90%; /* 높이를 너비의 100%로 설정 (정사각형) */
+    margin: auto;
+  }
+
+}

@@ -1,0 +1,152 @@
+
+.signature {
+  width: 100%;
+  padding: 10px;
+}
+
+.signature-back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.signature-header-submenu {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  padding: 0;
+  border-bottom: 2px solid #ccc;
+  white-space: nowrap;
+}
+
+.signature-header-submenu-item {
+  cursor: pointer;
+  padding: 5px 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.signature-header-submenu-item-selected {
+  color: red;
+}
+
+.signature-sort {
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  position: relative; /* For dropdown positioning */
+}
+
+.signature-sort select {
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 5px;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-appearance: none; /* Remove default arrow in WebKit browsers */
+  -moz-appearance: none; /* Remove default arrow in Firefox */
+  appearance: none; /* Remove default arrow in other browsers */
+}
+
+.signature-sort select::-ms-expand {
+  display: none; /* Remove default arrow in Internet Explorer */
+}
+
+.signature-sort::after {
+  content: '▾';
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.signature-sort select option {
+  font-family: inherit; /* Apply font family to options */
+}
+.gridPage {
+  padding: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.gridItem {
+  padding: 10px;
+  text-align: left;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 200px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+}
+
+.headtext {
+  font-weight: bold;
+}
+.itemDetails {
+  font-size: 14px;
+  position: relative;
+  padding-right: 20px; /* Ensure space for the cart icon */
+}
+
+.itemDetails p {
+  margin: 0;
+}
+.itemDetails svg {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.pageArrow {
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.pageNumber {
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.signature-page-number-selected {
+  font-weight: bold;
+}
+/* 공통 CSS */
+.pageNumber.activePage {
+  color: red;
+}
+@media (max-width: 767px) {
+  .signature{
+    padding: 0px;
+  }
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .signature-sort select{
+    width: 20%;
+  }
+  .signature-sort{
+    padding: 0px;
+  }
+  .gridPage {
+    padding: 0px;
+  }
+  
+}

@@ -1,0 +1,523 @@
+.mypageContainer,
+.mypageContainer::before,
+.mypageContainer::after {
+  box-sizing: border-box;
+}
+
+.mypageContainer {
+  width: 80%; /* Make the container narrower */
+  display: flex;
+  padding: 20px;
+  margin: auto;
+  flex-direction: column;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding-bottom: 440px;
+}
+.sidebar {
+  min-width: 200px;
+  width: 200px;
+  flex: 1;
+  margin-right: 20px;
+  border-right: 1px solid #ccc;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 25px; /* Increase spacing between items */
+  cursor: pointer;
+  font-size: 18px;
+}
+.sidebarSeparator {
+  width: 80%; /* Adjust as needed */
+  margin: 15px 0; /* Add some spacing around the separator */
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.mainContent {
+  flex: 3;
+  margin-left: 100px;
+  padding: 20px;
+}
+
+.userInfo {
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.userInfoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background-color: white;
+}
+
+.userInfoCards {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.userInfoCard {
+  width: 188px; /* Set the width for each card */
+  padding: 18px; /* Adjust the padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.userInfoCard:last-child {
+  margin-right: 0;
+}
+
+.userInfoCard span:first-child {
+  font-weight: bold;
+  margin-bottom: 5px; /* Add some space between the lines */
+}
+
+.orderStatus {
+  margin-bottom: 20px;
+}
+
+.orderStatus h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.orderItem {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  height: 130px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.orderItem h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.orderItem p {
+  margin: 5px 0;
+}
+
+.orderItem .imagePlaceholder {
+  width: 15%;
+  min-width: 100px;
+  height: 100%;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  margin-right: 20px;
+}
+
+.price {
+  text-align: right;
+  padding-right: 30px;
+  font-weight: bold;
+}
+
+.recentViewedContainerDesktop,
+.recentViewedContainerMobile {
+  width: 100%;
+}
+
+.recentViewedContainerMobile {
+  display: none;
+  padding: 0;
+}
+
+.recentViewedTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.recentViewedTable th,
+.recentViewedTable td {
+  padding: 10px;
+  height: auto;
+}
+
+.recentViewedTable th {
+  background-color: #f9f9f9;
+  text-align: center;
+}
+.recentViewedTable td{
+  text-align: left;
+}
+.recentViewedTable .rightAlign {
+  text-align: right;
+  padding-right: 50px;
+}
+
+.imagePlaceholder {
+  width: 100px;
+  height: 116px;
+  background-color: #eee;
+}
+
+.productTitle {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #999;
+  margin-bottom: 5px;
+}
+
+.newPrice {
+  font-weight: bold;
+  color: #333;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.orderButton {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.cartButton,
+.deleteButton {
+  background-color: transparent;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.deleteButton {
+  border: 1px solid #ccc;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pageNumber {
+  cursor: pointer;
+}
+.updateInfoContainer {
+  width: 50%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.updateInfoContainer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.updateInfoForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateInfoForm label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.updateInfoForm label span {
+  margin-bottom: 8px;
+}
+
+.updateInfoForm input,
+.updateInfoForm .phoneNumber input,
+.updateInfoForm .birthday input,
+.updateInfoForm .address input,
+.updateInfoForm .zipCodeRow input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.updateInfoForm .phoneNumber,
+.updateInfoForm .birthday,
+.updateInfoForm .address {
+  display: flex;
+  flex-direction: column;
+}
+
+.updateInfoForm .phoneNumber {
+  display: flex;
+  justify-content: space-between;
+}
+
+.updateInfoForm .phoneNumber input {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.updateInfoForm .phoneNumber input:last-child {
+  margin-right: 0;
+}
+
+.updateInfoForm .birthday {
+  display: flex;
+  justify-content: space-between;
+}
+
+.updateInfoForm .birthday input {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.updateInfoForm .birthday input:last-child {
+  margin-right: 0;
+}
+
+.updateInfoForm .address .zipCodeRow {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.updateInfoForm .address input {
+  margin-bottom: 8px;
+}
+
+.updateInfoForm .address .zipCodeRow input {
+  flex: 1;
+}
+
+.updateInfoForm .address .searchAddressButton {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.updateInfoForm .submitButton {
+  padding: 10px;
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.updateInfoForm .submitButton:hover {
+  background-color: #e04a4e;
+}
+
+.noOrders {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.toggleButton {
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+  display: block;
+}
+
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .userInfoCards{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+  .userInfoCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px;
+    margin-bottom: 5px;
+    align-items: center;
+  }
+  .userInfoCard span{
+    padding: 0px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .userInfoCard:last-child{
+    margin-right: 10px;
+  }
+  .mainContent {
+    width: 100%;
+  }
+  .orderItem p{
+    font-size: 12px;
+  }
+  .recentViewedContainerDesktop{
+    display: none ;
+  }
+  .recentViewedContainerMobile{
+    display: block;
+  }
+  .recentViewedTable {
+    display: none;
+  }
+  
+  .mobileRecentViewedGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    align-items: center;
+  }
+
+  .imagePlaceholder {
+    width: 100%;
+    min-width: 100px;
+    height: 90px;
+    background-color: #eee;
+    justify-content: center;
+  }
+
+  .card .productDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .card .productTitle {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .card .oldPrice {
+    text-decoration: line-through;
+    color: #999;
+    margin-bottom: 5px;
+  }
+
+  .card .newPrice {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .card .buttonGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .card .orderButton {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .card .cartButton,
+  .card .deleteButton {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .membershipContainer {
+    width: 100%;
+    padding: 0px;
+  }
+  .benefit {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+  }
+  .benefit h3 {
+    text-align: left;
+    padding: 0 10px;
+  }
+  .headSection{
+    left: 0;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    align-self: flex-start;
+  }
+  
+  .contentSection{
+    width: 90%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

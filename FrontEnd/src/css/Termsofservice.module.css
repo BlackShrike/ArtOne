@@ -1,0 +1,68 @@
+.tosContainer {
+    display: flex;
+    width: 85%;
+    margin: 0 auto;
+  }
+  
+  .tosSidebar {
+    padding: 40px;
+    border-right: 1px solid #ccc;
+  }
+  
+  .tosSidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .tosSidebar ul li {
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  
+  .tosSidebar ul li.active {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .tosContent {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .tosHeader {
+    text-align: center;
+    padding-bottom: 75px;
+  }
+  
+  .tosSection {
+    padding-left: 150px;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .tosSection h2 {
+    font-size: 1.2em;
+  }
+
+@media (max-width: 768px) {
+  .tosContainer {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tosSidebar {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+  }
+
+  .tosContent {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .tosSection {
+    padding-left: 0;
+    width: 100%;
+  }
+}

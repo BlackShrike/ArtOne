@@ -1,0 +1,96 @@
+.detailPage {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .imagePlaceholder {
+    width: 90%;
+    height: 400px;
+    background-color: #ddd;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .itemsContainer {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px; /* Increase the gap for better spacing */
+  }
+  
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .itemImagePlaceholder {
+    width: 100%;
+    height: 150px;
+    background-color: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .itemDetails {
+    width: 150px; /* Ensure this matches the width of the image placeholder for alignment */
+    text-align: left; /* Left-align the item details */
+  }
+  
+  .itemDetails p {
+    font-size: 12px;
+    margin: 5px 0; /* Add some margin for spacing */
+  }
+  
+  .priceCart {
+    display: flex;
+    justify-content: space-between; /* Add space between text and icon */
+    align-items: center;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pageNumber,
+  .pageArrow {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .pageNumber:hover,
+  .pageArrow:hover {
+    background-color: #f1f1f1;
+  }
+.activePage {
+  color: red;
+  text-decoration: underline;
+}
+
+  @media (max-width : 768px){
+    .detailPage{
+      padding: 0px;
+    }
+    .itemsContainer {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .imagePlaceholder{
+      position: relative;
+      left: 11px;
+    }
+  }

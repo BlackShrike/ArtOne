@@ -1,0 +1,165 @@
+.faqContainer {
+  display: flex;
+  width: 85%;
+  margin: 20px auto;
+  white-space: pre-wrap;
+}
+
+.faqSidebar {
+  padding: 40px;
+  border-right: 1px solid #ccc;
+}
+
+.faqSidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.faqSidebar ul li {
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.faqSidebar ul li.active {
+  color: red;
+  font-weight: bold;
+}
+
+.faqContent {
+  flex: 1;
+  padding: 20px;
+}
+
+.shippingHeader {
+  text-align: center;
+  padding-bottom: 75px;
+}
+
+.shippingContent {
+  padding-left: 150px;
+  width: 100%;
+  text-align: left;
+}
+.shippingContent h2{
+  font-size: 1.2em;
+}
+.shippingContent p{
+  padding-bottom: 30px;
+}
+.explainList{
+  padding: 10px 10px;
+  margin: 16px 10px;
+}
+.customerServiceContent {
+  text-align: center;
+  font-size: 0.8em;
+}
+.customerServiceContent h1{
+  margin-bottom: 50px;
+}
+.faqList {
+  text-align: left;
+  padding-left: 150px;
+}
+
+.faqList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.faqList ul li {
+  margin-bottom: 20px;
+}
+
+.faqList ul li strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.faqList h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.faqList span {
+  display: block;
+  margin-left: 20px;
+}
+
+.contactSection {
+  text-align: center;
+}
+
+.contactHeader {
+  text-align: center;
+}
+
+.contactWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.contactLeftColumn,
+.contactRightColumn {
+  width: 50%;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.contactWrapper + .contactWrapper {
+  margin-top: 20px;
+}
+
+.contactLeftColumn {
+  padding-left: 200px;
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.contactRightColumn {
+  font-weight: bold;
+  border-left: 1px solid #ccc;
+  padding-left: 75px;
+}
+@media (max-width: 768px) {
+  .faqContainer {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .faqSidebar {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+  }
+
+  .faqContent {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .shippingContent,
+  .faqList {
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .contactWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contactLeftColumn,
+  .contactRightColumn {
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .contactRightColumn {
+    border-left: none;
+    margin-top: 20px;
+  }
+}
