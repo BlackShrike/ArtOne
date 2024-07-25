@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../css/Login.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
-// import { login } from "../components/apiClient"; // 로그인 API 제거
+import axios from "axios";
 
 const translations = {
   KR: {
@@ -36,7 +36,6 @@ const translations = {
     loginFailed: "Login failed. Please try again.",
   },
 };
-
 function Login({ onLogin }) {
   const [remember, setRemember] = useState(false);
   const [username, setUsername] = useState("");
@@ -52,15 +51,21 @@ function Login({ onLogin }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // 로그인 API 호출 부분 제거
     try {
-      // const response = await login({ username, password });
-      // if (response.code !== 200) {
-      //   throw new Error(response.msg || "Login failed");
-      // }
-      // localStorage.setItem("access_token", response.access_token);
-      onLogin();
-      navigate("/mypage");
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          username,
+          password,
+        }
+      );
+      if (response.data.token) {
+        localStorage.setItem("access_token", response.data.token);
+        onLogin();
+        navigate("/mypage");
+      } else {
+        setError(t.loginFailed);
+      }
     } catch (error) {
       console.error(error);
       setError(t.loginFailed);
@@ -98,7 +103,7 @@ function Login({ onLogin }) {
         </button>
         <div className={styles.links}>
           <span onClick={() => navigate("/FindAccount")}>{t.findAccount}</span>
-          <span onClick={() => navigate("/")}>{t.signUp}</span>
+          <span onClick={() => navigate("/signup")}>{t.signUp}</span>
         </div>
       </form>
       <div className={styles.socialLogin}>

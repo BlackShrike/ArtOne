@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../components/LanguageContext";
 import BackButton from "../components/BackButton";
 import styles from "../css/Signup.module.css";
+import axios from "axios";
 
 const translations = {
   KR: {
@@ -52,7 +53,6 @@ const translations = {
     privacyText: "The privacy policy will be displayed here.",
   },
 };
-
 function Signup() {
   const { language } = useLanguage();
   const t = translations[language];
@@ -173,8 +173,11 @@ function Signup() {
     };
 
     try {
-      const user = await signUp(payload.email, payload.password, payload);
-      if (user) {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        payload
+      );
+      if (response.data) {
         alert("회원가입 성공!");
         navigate("/"); // 회원가입 성공 후 기본 페이지로 이동
       }
