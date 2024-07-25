@@ -3,10 +3,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_API_KEY
-);
+const supabaseUrl = "https://hfpmfazzmqoybupgeuww.supabase.co";
+const supabaseKey = process.env.SUPABASE_API_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const register = async (req, res) => {
   const {
@@ -27,26 +26,33 @@ const register = async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const { data, error } = await supabase.from("Users").insert([
-    {
-      username,
-      password: hashedPassword,
-      email,
-      name,
-      phone_number: phoneNumber,
-      birthdate,
-      address,
-      address_detail: addressDetail,
-      zonecode,
-      marketing_agree_sms: marketing_agree_sms === "Y",
-      marketing_agree_email: marketing_agree_email === "Y",
-      third_party_agree: third_party_agree === "Y",
-      send_alarm: send_alarm === "Y",
-    },
-  ]);
+  const { data, error } = await supabase
+    .from("users")
+    .insert([
+      {
+        username,
+        password: hashedPassword,
+        email,
+        name,
+        phone_number: phoneNumber,
+        birthdate,
+        address,
+        address_detail: addressDetail,
+        zonecode,
+        marketing_agree_sms: marketing_agree_sms === "Y",
+        marketing_agree_email: marketing_agree_email === "Y",
+        third_party_agree: third_party_agree === "Y",
+        send_alarm: send_alarm === "Y",
+      },
+    ])
+    .select();
 
-  if (error) return res.status(400).json({ error: error.message });
+  if (error) {
+    console.error("Error inserting user:", error);
+    return res.status(400).json({ error: error.message });
+  }
 
+  console.log("Inserted user data:", data);
   res.json({ message: "User registered successfully!" });
 };
 
@@ -54,7 +60,7 @@ const login = async (req, res) => {
   const { username, password } = req.body;
 
   const { data: user, error } = await supabase
-    .from("Users")
+    .from("users")
     .select("*")
     .eq("username", username)
     .single();

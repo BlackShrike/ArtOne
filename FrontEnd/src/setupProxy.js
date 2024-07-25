@@ -4,21 +4,8 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://api.imweb.me",
+      target: "http://localhost:5000",
       changeOrigin: true,
-      pathRewrite: {
-        "^/api": "/v2",
-      },
-      onProxyReq: (proxyReq) => {
-        proxyReq.setHeader(
-          "Access-Control-Allow-Headers",
-          "access-token, Content-Type"
-        );
-      },
-      onProxyRes: (proxyRes) => {
-        proxyRes.headers["Access-Control-Allow-Headers"] =
-          "access-token, Content-Type";
-      },
     })
   );
 };

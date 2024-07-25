@@ -1,80 +1,96 @@
 import axios from "axios";
 
-const clientId = "e1cb5da70827d8e06a60e291279a0b1547f7628bec";
-const clientSecret = "17bd397f1e711b4899a990";
-const apiBaseURL = "/api/v2"; // 프록시를 통해 API 엔드포인트로 라우팅
-
-const baseImageURL = "https://cdn.imweb.me/upload";
-
 const apiClient = axios.create({
-  baseURL: apiBaseURL,
+  baseURL: "http://localhost:5000/api", // 백엔드 API의 기본 URL
   headers: {
     "Content-Type": "application/json",
   },
 });
-
-let accessToken = null;
-
-export async function getAccessToken() {
-  try {
-    const params = {
-      key: clientId,
-      secret: clientSecret,
-    };
-
-    console.log("Sending request to /auth with params:", params);
-
-    const response = await apiClient.get("/auth", { params });
-
-    console.log("Request Details:");
-    console.log("URL: ", apiClient.defaults.baseURL + "/auth");
-    console.log("Params: ", params);
-
-    console.log("Access Token Response:", response.data);
-
-    accessToken = response.data.access_token;
-    return accessToken;
-  } catch (error) {
-    console.error(
-      "Error fetching access token:",
-      error.response ? error.response.data : error.message
-    );
-    throw error;
-  }
-}
-
-export function setAccessToken(token) {
-  accessToken = token;
-}
-
 export async function getProducts() {
   try {
-    if (!accessToken) {
-      await getAccessToken();
-    }
-    const requestConfig = {
-      headers: {
-        "access-token": `${accessToken}`,
-      },
-    };
-    const response = await apiClient.get("/shop/products", requestConfig);
-
-    console.log("Request Details:");
-    console.log("URL: ", apiClient.defaults.baseURL + "/shop/products");
-    console.log("Headers: ", requestConfig.headers);
-
-    console.log("Products Response:", response.data);
-    return response.data.data.list.map((product) => ({
-      image: `${baseImageURL}/${product.image_url[product.images[0]]}`,
-      title: product.name,
-      description: product.simple_content,
-      artist: product.origin,
-    }));
+    console.log("Sending GET request to /products/fetch-products");
+    const response = await apiClient.get("/products/fetch-products");
+    console.log("Response data:", response.data);
+    return response.data;
   } catch (error) {
-    console.error(
-      "Error fetching products:",
-      error.response ? error.response.data : error.message
-    );
+    console.error("Error fetching products:", error);
     throw error;
   }
 }
+
+export const addToCart = async (userId, productId, quantity) => {
+  try {
+    const response = await apiClient.post("/cart/add", {
+      userId,
+      productId,
+      quantity,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getCartItems = async (userId) => {
+  try {
+    const response = await apiClient.get(`/cart/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const removeFromCart = async (userId, productId) => {
+  try {
+    const response = await apiClient.delete("/cart/remove", {
+      data: { userId, productId },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createOrder = async (userId, items, totalAmount) => {
+  try {
+    console.log("Sending POST request to /order/create with data:", {
+      userId,
+      items,
+      totalAmount,
+    });
+    const response = await apiClient.post("/order/create", {
+      userId,
+      items,
+      totalAmount,
+    });
+    console.log("Response data:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating order:", error);
+    throw error;
+  }
+};
+
+export const getOrder = async (orderId) => {
+  try {
+    console.log(`Sending GET request to /order/${orderId}`);
+    const response = await apiClient.get(`/order/${orderId}`);
+    console.log("Response data:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching order:", error);
+    throw error;
+  }
+};
+
+export const getOrders = async (userId) => {
+  try {
+    console.log(`Sending GET request to /order/user/${userId}`);
+    const response = await apiClient.get(`/order/user/${userId}`);
+    console.log("Response data:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    throw error;
+  }
+};

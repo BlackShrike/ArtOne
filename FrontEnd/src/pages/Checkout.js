@@ -1,9 +1,11 @@
-//Checkout.js
-import React, { useState } from "react";
+// Checkout.js
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../css/Checkout.module.css"; // Ensure the path is correct
+import styles from "../css/Checkout.module.css";
 import BackButton from "../components/BackButton";
 import { useLanguage } from "../components/LanguageContext";
+import { getCartItems, removeFromCart } from "../components/apiClient";
+import { useUser } from "../components/UserContext"; // UserContext 사용
 
 const translations = {
   KR: {
@@ -39,33 +41,29 @@ function Checkout() {
   const { language } = useLanguage();
   const t = translations[language];
   const navigate = useNavigate();
+  const { user } = useUser(); // 유저 정보 가져오기
+  const [cartItems, setCartItems] = useState([]);
 
-  const items = [
-    {
-      id: 1,
-      name: "상품명 예시(상세정보)",
-      price: "120,000원",
-      options: [
-        "옵션 1: 40 x 50 cm",
-        "옵션 2: 포스터(액자) 별도 열람(매장 표시)",
-      ],
-    },
-    {
-      id: 2,
-      name: "상품명 예시(상세정보)",
-      price: "120,000원",
-      options: [
-        "옵션 1: 40 x 50 cm",
-        "옵션 2: 포스터(액자) 별도 열람(매장 표시)",
-      ],
-    },
-  ];
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      if (user) {
+        try {
+          const data = await getCartItems(user.id); // 유저 ID 사용
+          setCartItems(data);
+        } catch (error) {
+          console.error("Error fetching cart items:", error);
+        }
+      }
+    };
+
+    fetchCartItems();
+  }, [user]);
 
   const handleSelectAll = () => {
-    if (selectedItems.length === items.length) {
+    if (selectedItems.length === cartItems.length) {
       setSelectedItems([]);
     } else {
-      setSelectedItems(items.map((item) => item.id));
+      setSelectedItems(cartItems.map((item) => item.id));
     }
   };
 
@@ -77,6 +75,26 @@ function Checkout() {
     }
   };
 
+  const handleRemoveSelectedItems = async () => {
+    try {
+      for (const itemId of selectedItems) {
+        await removeFromCart(user.id, itemId); // 유저 ID 사용
+      }
+      setCartItems(
+        cartItems.filter((item) => !selectedItems.includes(item.id))
+      );
+      setSelectedItems([]);
+    } catch (error) {
+      console.error("Error removing items from cart:", error);
+    }
+  };
+
+  const calculateTotalAmount = () => {
+    return cartItems
+      .reduce((acc, item) => acc + item.price * item.quantity, 0)
+      .toLocaleString();
+  };
+
   return (
     <div className={styles.checkoutContainer}>
       <BackButton />
@@ -86,20 +104,22 @@ function Checkout() {
             <label>
               <input
                 type="checkbox"
-                checked={selectedItems.length === items.length}
+                checked={selectedItems.length === cartItems.length}
                 onChange={handleSelectAll}
               />
               <span>
-                {t.selectAll} ({selectedItems.length}/{items.length})
+                {t.selectAll} ({selectedItems.length}/{cartItems.length})
               </span>
             </label>
-            <label className={styles.chooseDelete}>
-              <input type="checkbox" />
-              <span>{t.deleteSelected}</span>
-            </label>
+            <button
+              className={styles.chooseDelete}
+              onClick={handleRemoveSelectedItems}
+            >
+              {t.deleteSelected}
+            </button>
           </div>
           <section className={styles.checkoutItemsSection}>
-            {items.map((item) => (
+            {cartItems.map((item) => (
               <div className={styles.checkoutItemContainer} key={item.id}>
                 <input
                   type="checkbox"
@@ -110,7 +130,9 @@ function Checkout() {
                 <div className={styles.checkoutItem}>
                   <div className={styles.itemDetails}>
                     <p className={styles.itemName}>{item.name}</p>
-                    <p className={styles.itemPrice}>{item.price}</p>
+                    <p className={styles.itemPrice}>
+                      {item.price.toLocaleString()}원
+                    </p>
                     {item.options.map((option, index) => (
                       <p key={index} className={styles.itemOption}>
                         {option}
@@ -134,15 +156,7 @@ function Checkout() {
             <h2>{t.expectedOrderAmount}</h2>
             <div className={styles.amountContainer}>
               <p>{t.totalAmount}</p>
-              <p>
-                {items
-                  .reduce(
-                    (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
-                    0
-                  )
-                  .toLocaleString()}
-                원
-              </p>
+              <p>{calculateTotalAmount()}원</p>
             </div>
             <div className={styles.amountContainer}>
               <p>{t.totalDiscount}</p>
@@ -156,14 +170,7 @@ function Checkout() {
               className={`${styles.amountContainer} ${styles.lastAmountContainer}`}
             >
               <h3>
-                {t.total}:{" "}
-                {items
-                  .reduce(
-                    (acc, item) => acc + parseInt(item.price.replace(/,/g, "")),
-                    0
-                  )
-                  .toLocaleString()}
-                원
+                {t.total}: {calculateTotalAmount()}원
               </h3>
             </div>
             <button

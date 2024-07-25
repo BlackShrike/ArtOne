@@ -1,29 +1,47 @@
 const { createClient } = require("@supabase/supabase-js");
-const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_API_KEY
-);
+const supabaseUrl = "https://hfpmfazzmqoybupgeuww.supabase.co";
+const supabaseKey = process.env.SUPABASE_API_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const addToCart = async (req, res) => {
-  const token = req.headers["authorization"];
-  if (!token) return res.status(401).json({ error: "Access denied" });
+  const { userId, productId, quantity } = req.body;
 
-  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-    if (err) return res.status(401).json({ error: "Invalid token" });
+  const { data, error } = await supabase
+    .from("Cart")
+    .insert([{ user_id: userId, product_id: productId, quantity }]);
 
-    const { product_id, quantity } = req.body;
+  if (error) return res.status(500).json({ error: error.message });
 
-    const { data, error } = await supabase
-      .from("Cart")
-      .insert([{ user_id: decoded.userId, product_id, quantity }]);
-
-    if (error) return res.status(400).json({ error: error.message });
-
-    res.json({ message: "Item added to cart" });
-  });
+  res.status(200).json(data);
 };
 
-module.exports = { addToCart };
+const getCartItems = async (req, res) => {
+  const { userId } = req.params;
+
+  const { data, error } = await supabase
+    .from("Cart")
+    .select("*, product:Products(*)")
+    .eq("user_id", userId);
+
+  if (error) return res.status(500).json({ error: error.message });
+
+  res.status(200).json(data);
+};
+
+const removeFromCart = async (req, res) => {
+  const { userId, productId } = req.body;
+
+  const { data, error } = await supabase
+    .from("Cart")
+    .delete()
+    .eq("user_id", userId)
+    .eq("product_id", productId);
+
+  if (error) return res.status(500).json({ error: error.message });
+
+  res.status(200).json(data);
+};
+
+module.exports = { addToCart, getCartItems, removeFromCart };

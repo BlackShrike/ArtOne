@@ -1,42 +1,47 @@
 const { createClient } = require("@supabase/supabase-js");
-const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_API_KEY
-);
+const supabaseUrl = "https://hfpmfazzmqoybupgeuww.supabase.co";
+const supabaseKey = process.env.SUPABASE_API_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-const placeOrder = async (req, res) => {
-  const token = req.headers["authorization"];
-  if (!token) return res.status(401).json({ error: "Access denied" });
+const createOrder = async (req, res) => {
+  const { userId, items, totalAmount } = req.body;
 
-  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-    if (err) return res.status(401).json({ error: "Invalid token" });
+  const { data, error } = await supabase
+    .from("Orders")
+    .insert([{ user_id: userId, items, total_amount: totalAmount }]);
 
-    const { total_amount, items } = req.body;
+  if (error) return res.status(500).json({ error: error.message });
 
-    const { data: order, error: orderError } = await supabase
-      .from("Orders")
-      .insert([{ user_id: decoded.userId, total_amount, status: "pending" }]);
-
-    if (orderError) return res.status(400).json({ error: orderError.message });
-
-    const orderItems = items.map((item) => ({
-      order_id: order.id,
-      product_id: item.product_id,
-      quantity: item.quantity,
-      price: item.price,
-    }));
-
-    const { error: itemsError } = await supabase
-      .from("OrderItems")
-      .insert(orderItems);
-
-    if (itemsError) return res.status(400).json({ error: itemsError.message });
-
-    res.json({ message: "Order placed successfully!" });
-  });
+  res.status(200).json(data);
 };
 
-module.exports = { placeOrder };
+const getOrder = async (req, res) => {
+  const { orderId } = req.params;
+
+  const { data, error } = await supabase
+    .from("Orders")
+    .select("*")
+    .eq("id", orderId)
+    .single();
+
+  if (error) return res.status(500).json({ error: error.message });
+
+  res.status(200).json(data);
+};
+
+const getOrders = async (req, res) => {
+  const { userId } = req.params;
+
+  const { data, error } = await supabase
+    .from("Orders")
+    .select("*")
+    .eq("user_id", userId);
+
+  if (error) return res.status(500).json({ error: error.message });
+
+  res.status(200).json(data);
+};
+
+module.exports = { createOrder, getOrder, getOrders };
